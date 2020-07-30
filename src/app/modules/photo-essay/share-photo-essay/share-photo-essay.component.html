@@ -1,0 +1,15 @@
+<div *ngIf="essay.private == 0;">
+    <app-photo-essay-details [shareEssay]="'true'" [inputShareId]='shareId' ></app-photo-essay-details>
+</div>
+<ng-container *ngIf="essay.private == 1;">
+<div  class="content-cntr innerpage">
+
+    <section class="private-collection">
+        <h3>Private Photo Essay</h3>
+        <p>This photo essay has been marked as ‘private’ by the creator. </p>
+        <ul>
+            <li><a [routerLink]="['/home']" class="btn btn-secondary">Home</a></li>
+        </ul>
+    </section>
+</div>
+</ng-container>

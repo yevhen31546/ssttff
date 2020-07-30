@@ -1,0 +1,116 @@
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="inner-modal">
+      <div class="modal-header">
+        <h3 class="modal-title text-center" *ngIf="type=='overall_impact'">Overall impact</h3>
+        <h3 class="modal-title text-center" *ngIf="type=='composition'">Composition</h3>
+        <h3 class="modal-title text-center" *ngIf="type=='emotion'">Emotion</h3>
+        <h3 class="modal-title text-center" *ngIf="type=='lighting'">Lighting / Exposure</h3>
+        <h3 class="modal-title text-center" *ngIf="type=='originality'">Originality / Creativity</h3>
+        <h3 class="modal-title text-center" *ngIf="type=='difficulty'">Difficulty</h3>
+        <h3 class="modal-title text-center" *ngIf="type=='technical'">Technical execution</h3>
+        <h3 class="modal-title text-center" *ngIf="type=='color'">Color / Tone</h3>
+        <h3 class="modal-title text-center" *ngIf="type=='subject'">Subject matter</h3>
+        <h3 class="modal-title text-center" *ngIf="type=='story'">Storytelling</h3>
+        <button type="button" (click)="closeModal()" class="close" data-dismiss="modal" aria-label="Close">
+          <img src="assets/images/temp/ui-cross.svg" alt="">
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <div *ngIf="type=='overall_impact'">
+          <p>
+            The overall impact of a photo relates to your reaction to the image.
+          </p>
+          <p> Does it hold your attention? Are you bored? Is it shocking, beautiful or sensational?
+          </p>
+        </div>
+        <div *ngIf="type=='composition'">
+          <p>
+            Composition is the placement or arrangement of visual elements within the frame of the photograph.
+          </p>
+          <p>
+            Is the composition pleasing to the eye? Has the photographer broken the composition rule, and if so, was it
+            justified?
+          </p>
+          <p>
+            The term composition means 'putting together'. </p>
+        </div>
+
+        <div *ngIf="type=='emotion'">
+          <p>
+            Emotion relates to the emotional impact the photography has on you. Positive and negative emotions should
+            be considered, including; anger, contempt, fear, disgust, happiness, love, sadness and surprise.
+          </p>
+          <p>
+            Does the photography stir any emotion in you? </p>
+        </div>
+
+        <div *ngIf="type=='lighting'">
+          <p>
+            Light is everything in photography, the way a photographer captures light is very important.
+          </p>
+          <p>
+            Is the photo overexposed? Underexposed? Is the photo well balanced, or creative in exposure? Has the
+            photographer used a special exposure technique and executed it well? Eg. Long exposure, studio lighting,
+            high-key or low-key lighting. </p>
+        </div>
+
+        <div *ngIf="type=='originality'">
+          <p>
+            Originality and creativity go hand in hand, and they relate to the photographer’s ability to create an
+            image that is not the same as every other photograph we see.
+          </p>
+          <p>
+            Does this photo seem original and creative? </p>
+        </div>
+
+        <div *ngIf="type=='difficulty'">
+          <p>
+            Difficulty relates to the effort, talent, skill, location and timing that went into capturing the image.
+            The difficulty may relate to the nuances in the studio lighting of a portrait, the ability to capture a
+            wild animal in their habitat, or the hike it takes to shoot a landscape from a mountain.
+          </p>
+          <p>
+            How difficult was it to create this image? </p>
+        </div>
+
+        <div *ngIf="type=='technical'">
+          <p>
+            Some photographs are easier to capture than others. Technical execution is an overall term which relates to
+            attributes such as focus, lighting, depth of field and exposure.
+          </p>
+          <p> Has the photograph been captured with technical excellence? </p>
+        </div>
+
+        <div *ngIf="type=='color'">
+          <p>
+            There are many ways to influence the color and tone of a photograph. Color and Tone can be influence by the
+            light available when shooting, and the setting on a camera, it can also be manipulated in post production.
+            Tone is also relevant when no color is present, such as monochrome or black and white photos.
+          </p>
+          <p> Are the colors and tones in this photo well balanced and pleasing to the eye?</p>
+        </div>
+
+        <div *ngIf="type=='subject'">
+          <p>
+            The subject matter refers to the actual elements within the photo. Is the subject a person, a mountain, an
+            animal, a tree or a building?</p>
+
+          <p> Is the subject interesting, curious, difficult to find or rare?</p>
+        </div>
+
+        <div *ngIf="type=='story'">
+          <p>
+            Storytelling with photography helps us connect with a the subject and photographer. Photojournalism as a
+            discipline is known for storytelling, however a story can be told in all sorts of photographs.
+          </p>
+          <p> Does this photo tell a story? Do you want to learn more? </p>
+        </div>
+
+        <div class="btn-cntr text-center">
+          <a class="btn btn-secondary" (click)="closeModal()">Okay</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

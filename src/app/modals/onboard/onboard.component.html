@@ -1,0 +1,41 @@
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+
+    <div class="modal-body">
+      <button type="button" class="close" data-dismiss="modal" (click)="closeModal()" aria-label="Close">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
+          <path fill="#2C2C2C" fill-rule="nonzero" d="M7.982 7.5L14.9.582A.34.34 0 1 0 14.418.1L7.5 7.018.582.1A.34.34 0 1 0 .1.582L7.018 7.5.1 14.418a.34.34 0 1 0 .482.482L7.5 7.982l6.918 6.918a.34.34 0 0 0 .482 0 .34.34 0 0 0 0-.482L7.982 7.5z" />
+        </svg>
+      </button>
+      <div class="left-img-cntr" [style.backgroundImage]="'url('+ currentElement.image +')'" style="background: url(images/temp/onboarding.jpg) no-repeat center/cover;">
+        <div class="award-info">
+          <img src="assets/images/temp/logo.svg" width="20" alt="">
+          <span>STF</span>
+          <span class="type">{{currentElement.result}}</span>
+          <div class="date">{{currentElement.month}} {{currentElement.year}} {{currentElement.result}}
+            {{currentElement.name}}</div>
+        </div>
+
+      </div>
+      <div class="right-cnt-cntr">
+        <div class="inner">
+          <h3>{{currentElement.title}}</h3>
+          <div [innerHtml]="currentElement.description"></div>
+
+          <ul>
+            <li *ngIf="currentCount>0"><a (click)="previousElement()" class="text-black underline">Back</a></li>
+            <li *ngIf="currentCount>0 &&  currentCount!=imageSlides.length-1"><a (click)="nextElement()" class="btn btn-secondary">Next</a></li>
+
+            <li *ngIf="currentCount==0"><a (click)="closeModal()" class="text-black underline">Skip</a></li>
+            <li *ngIf="currentCount==0"><a (click)="nextElement()" class="btn btn-primary">Let’s go!</a></li>
+
+            <li><a *ngIf="currentCount==imageSlides.length-1" (click)="closeModal()" class="btn btn-primary">Profile</a></li>
+
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

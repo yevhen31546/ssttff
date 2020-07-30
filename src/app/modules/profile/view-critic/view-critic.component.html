@@ -1,0 +1,312 @@
+<button type="button" class="popclose-mb close-critic"  [hidden]="!mobile" aria-describedby="modal-title"
+(click)="closeModal()">
+<img src="assets/images/temp/close.svg" alt="">
+</button>
+<section class="tab-cnt clearfix">
+  <div class="critique-tab-content" [ngClass]="{'critique-loggedout-cntr': userDetails.length ==0 || subPlan==1}">
+    <!-- <ng-scrollbar> -->
+    <p-scrollPanel [style]="{width: '100%', height: '400px'}">
+
+      <!-- <ng-container > -->
+      <ul *ngIf="showPaginationLoader">
+        <li>
+          <div class="row">
+            <div class="col-sm-6 col-6">
+              <div class="pro-info-cntr">
+                <div class="img shine"><img alt=""></div>
+                <div class="shine shine-txt"></div>
+              </div>
+            </div>
+            <div class="col-sm-4 col-4">
+              <div class="score">
+                <div class="shine"></div>
+              </div>
+            </div>
+            <div class="col-sm-2 col-2">
+              <div class="arrow">
+                <div class="shine"></div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <ul *ngIf="!showPaginationLoader && criticDatas.length>0">
+
+        <ng-container *ngFor="let criticData of criticDatas">
+          <li [ngClass]="{'active': users[criticData.user_id] == true}"  class="cursor">
+            <div class="row" (click)="showInfo(criticData.user_id)">
+              <div class="col-sm-6 col-6">
+                <div class="pro-info-cntr">
+                  <div class="img" (click)="showProfile(criticData.username)"><img src="{{criticData.user_photo}}" alt=""></div>
+                  <div class="txt">
+                    <h6><a (click)="showProfile(criticData.username)">{{(userDetails.length ==0 || subPlan
+                        ==1)?"ANONYMOUS": criticData.name}}</a></h6>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-4">
+                <div class="score"><strong>Score:</strong> &nbsp; {{criticData.individual_score}}</div>
+              </div>
+              <div class="col-sm-2 col-2">
+                <div class="arrow"><img src="assets/images/temp/down.svg" width="16px" alt=""></div>
+              </div>
+
+
+            </div>
+            <div class="inner-cnt" *ngIf="userDetails && subPlan !=1 && users[criticData.user_id] == true">
+              <ul>
+                <li>
+                  <div class="row">
+                    <div class="col-sm-8">
+                      <div class="impact row">
+                        <div class="col-10"><strong>Overall impact</strong></div>
+                        <div class="col-2 text-right">{{criticData.impact_value==0?'NA':criticData.impact_value}}</div>
+                      </div>
+                      <div class="impact-slide">
+                        <div class="slide">
+                          <ngb-progressbar type="success" [value]="criticData.impact_value" height=".2rem"></ngb-progressbar>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="whats-this cursor" (click)="infoModal('overall_impact')">what’s this?</div>
+                    </div>
+                  </div>
+                  <div class="txt" [innerHtml]="criticData.impact_comment">
+                    <!-- {{criticData.impact_comment}} -->
+                  </div>
+                </li>
+                <li>
+                  <div class="row">
+                    <div class="col-sm-8">
+                      <div class="impact row">
+                        <div class="col-10"><strong>Composition:</strong></div>
+                        <div class="col-2 text-right">{{criticData.composition_value==0?'NA':criticData.composition_value}}</div>
+                      </div>
+                      <div class="impact-slide">
+                        <div class="slide">
+                          <ngb-progressbar type="success" [value]="criticData.composition_value" height=".2rem"></ngb-progressbar>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="whats-this cursor" (click)="infoModal('composition')">what’s this?</div>
+                    </div>
+                  </div>
+                                    <div class="txt" [innerHtml]="criticData.composition_comment">
+                    <!-- {{criticData.composition_comment}} -->
+                  </div>
+                </li>
+                <li>
+                  <div class="row">
+                    <div class="col-sm-8">
+                      <div class="impact row">
+                        <div class="col-10"><strong>Emotion:</strong></div>
+                        <div class="col-2 text-right">{{criticData.emotion_value==0?'NA':criticData.emotion_value}}</div>
+                      </div>
+                      <div class="impact-slide">
+                        <div class="slide">
+                          <ngb-progressbar type="success" [value]="criticData.emotion_value" height=".2rem"></ngb-progressbar>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="whats-this cursor" (click)="infoModal('emotion')">what’s this?</div>
+                    </div>
+                  </div>
+                                    <div class="txt" [innerHtml]="criticData.emotion_comment">
+                    {{criticData.emotion_comment}}
+                  </div>
+                </li>
+                <li>
+                  <div class="row">
+                    <div class="col-sm-8">
+                      <div class="impact row">
+                        <div class="col-10"><strong>Lighting / Exposure:</strong></div>
+                        <div class="col-2 text-right">{{criticData.exposure_value==0?'NA':criticData.exposure_value}}</div>
+                      </div>
+                      <div class="impact-slide">
+                        <div class="slide">
+                          <ngb-progressbar type="success" [value]="criticData.exposure_value" height=".2rem"></ngb-progressbar>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="whats-this cursor" (click)="infoModal('lighting')">what’s this?</div>
+                    </div>
+                  </div>
+                                    <div class="txt" [innerHtml]="criticData.exposure_comment">
+                    {{criticData.exposure_comment}}
+                  </div>
+                </li>
+                <li>
+                  <div class="row">
+                    <div class="col-sm-8">
+                      <div class="impact row">
+                        <div class="col-10"><strong>Originality / Creativity:</strong></div>
+                        <div class="col-2 text-right">{{criticData.creativity_value==0?'NA':criticData.creativity_value}}</div>
+                      </div>
+                      <div class="impact-slide">
+                        <div class="slide">
+                          <ngb-progressbar type="success" [value]="criticData.creativity_value" height=".2rem"></ngb-progressbar>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="whats-this cursor" (click)="infoModal('originality')">what’s this?</div>
+                    </div>
+                  </div>
+                                    <div class="txt" [innerHtml]="criticData.creativity_comment">
+                    {{criticData.creativity_comment}}
+                  </div>
+                </li>
+                <li>
+                  <div class="row">
+                    <div class="col-sm-8">
+                      <div class="impact row">
+                        <div class="col-10"><strong>Difficulty:</strong></div>
+                        <div class="col-2 text-right">{{criticData.difficulty_value==0?'NA':criticData.difficulty_value}}</div>
+                      </div>
+                      <div class="impact-slide">
+                        <div class="slide">
+                          <ngb-progressbar type="success" [value]="criticData.difficulty_value" height=".2rem"></ngb-progressbar>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="whats-this cursor" (click)="infoModal('difficulty')">what’s this?</div>
+                    </div>
+                  </div>
+                                    <div class="txt" [innerHtml]="criticData.difficulty_comment">
+                    {{criticData.difficulty_comment}}
+                  </div>
+                </li>
+                <li>
+                  <div class="row">
+                    <div class="col-sm-8">
+                      <div class="impact row">
+                        <div class="col-10"><strong>Technical execution:</strong></div>
+                        <div class="col-2 text-right">{{criticData.technical_execution_value==0?'NA':criticData.technical_execution_value}}</div>
+                      </div>
+                      <div class="impact-slide">
+                        <div class="slide">
+                          <ngb-progressbar type="success" [value]="criticData.technical_execution_value" height=".2rem"></ngb-progressbar>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="whats-this cursor" (click)="infoModal('technical')">what’s this?</div>
+                    </div>
+                  </div>
+                                    <div class="txt" [innerHtml]="criticData.technical_execution_comment">
+                    {{criticData.technical_execution_comment}}
+                  </div>
+                </li>
+                <li>
+                  <div class="row">
+                    <div class="col-sm-8">
+                      <div class="impact row">
+                        <div class="col-10"><strong>Color / Tone:</strong></div>
+                        <div class="col-2 text-right">{{criticData.color_value==0?'NA':criticData.color_value}}</div>
+                      </div>
+                      <div class="impact-slide">
+                        <div class="slide">
+                          <ngb-progressbar type="success" [value]="criticData.color_value" height=".2rem"></ngb-progressbar>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="whats-this cursor" (click)="infoModal('color')">what’s this?</div>
+                    </div>
+                  </div>
+                                    <div class="txt" [innerHtml]="criticData.color_comment">
+                    {{criticData.color_comment}}
+                  </div>
+                </li>
+                <li>
+                  <div class="row">
+                    <div class="col-sm-8">
+                      <div class="impact row">
+                        <div class="col-10"><strong>Subject matter:</strong></div>
+                        <div class="col-2 text-right">{{criticData.subject_value==0?'NA':criticData.subject_value}}</div>
+                      </div>
+                      <div class="impact-slide">
+                        <div class="slide">
+                          <ngb-progressbar type="success" [value]="criticData.subject_value" height=".2rem"></ngb-progressbar>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="whats-this cursor" (click)="infoModal('subject')">what’s this?</div>
+                    </div>
+                  </div>
+                                    <div class="txt" [innerHtml]="criticData.subject_comment">
+                    {{criticData.subject_comment}}
+                  </div>
+                </li>
+                <li>
+                  <div class="row">
+                    <div class="col-sm-8">
+                      <div class="impact row">
+                        <div class="col-10"><strong>Storytelling:</strong></div>
+                        <div class="col-2 text-right">{{criticData.story_value==0?'NA':criticData.story_value}}</div>
+                      </div>
+                      <div class="impact-slide">
+                        <div class="slide">
+                          <ngb-progressbar type="success" [value]="criticData.story_value" height=".2rem"></ngb-progressbar>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="whats-this cursor" (click)="infoModal('story')">what’s this?</div>
+                    </div>
+                  </div>
+                                    <div class="txt" [innerHtml]="criticData.story_comment">
+                    {{criticData.story_comment}}
+                  </div>
+                </li>
+              </ul>
+
+
+            </div>
+
+          </li>
+          <li *ngIf="showJoinInfo[criticData.user_id] == true">
+            <div class="signin-msg">
+              <h4>CRITIQUES ARE AVAILABLE TO ALL MEMBERS</h4>
+
+              Sign up or <a [routerLink]="['/sign-in']" class="text-black underline">sign in</a> to give, recieve and and
+              view details of critiques.
+              <div class="clearfix"></div>
+              <a (click)="signIn()" class="btn btn-primary">Join Free</a>
+            </div>
+          </li>
+
+          <li *ngIf="showUpgradeInfo[criticData.user_id] == true">
+            <div class="signin-msg">
+              <h4>FULL DETAILS OF CRITIQUES ARE AVAILABLE TO <span class="text-green">PRO</span> AND <span class="text-green">PREMIUM</span>
+                MEMBERS</h4>
+
+              Upgrade to <span class="text-green">Pro</span> or <span class="text-green">Premium</span> to veiw the
+              details of all your critiques.
+              <div class="clearfix"></div>
+              <a (click)="upgradePlan()" class="btn btn-primary">Upgrade</a>
+            </div>
+          </li>
+
+        </ng-container>
+
+
+        <!-- </ng-scrollbar> -->
+      </ul>
+      <!-- </ng-container> -->
+
+      <div *ngIf="!showPaginationLoader && criticDatas.length==0" class="no-critique-msg text-center">
+        No critiques on this photo yet 😬<br><br>
+
+        <span *ngIf="data.user_id!==userId">You can <a (click)="addCritics()" class="text-black underline">be the
+            first!</a></span>
+      </div>
+    </p-scrollPanel>
+  </div>
+</section>

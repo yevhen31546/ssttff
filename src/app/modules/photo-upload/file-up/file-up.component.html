@@ -1,0 +1,56 @@
+<section class="upload-cnt-area">
+
+
+  <div class="upload-option-cntr" >
+    <app-loader></app-loader>
+    <h2 class="title" *ngIf="!photoUploader.isUploading">Upload Photo</h2>
+    <ul class="option-list" *ngIf="!photoUploader.isUploading">
+      <app-alert></app-alert>
+      <li>
+        <div class="inner">
+          <h3><span>UPLOAD PHOTO</span> TO SHOOT THE FRAME</h3>
+          <p>If you wish, you can submit your photo into this month’s STF Awards in the last step of the upload
+            process.
+            Currently, you have <span class="text-green"><a (click)="infoModal()">{{stf_submission_limit}} STF
+                submissions </a></span> available, you
+            can <span><a [routerLink]="['/subscription/plans']"> upgrade,
+                or
+                purchase STF submissions </a></span> at any time.
+
+            <span style="text-decoration:none" *ngIf="daily_upload_limit!='unlimited'">
+              Currently you have
+              <span class="cursor" (click)="infoUploadModal()" [ngClass]="{'red': (daily_upload_limit === 0)}">{{daily_upload_limit}} daily uploads</span>
+              remaining,
+              upgrade to
+              <span class="cursor"  [routerLink]="['/subscription/plans']">access unlimited daily
+                uploads.</span></span>
+
+
+            <span style="text-decoration:none" *ngIf="daily_upload_limit=='unlimited'">
+              Currently you have
+              <span class="cursor" (click)="infoUploadModal()" [ngClass]="{'red': (daily_upload_limit === 0)}">{{daily_upload_limit}} daily uploads.</span> </span>
+          </p>
+
+          <button [ngClass]="{'disabled': (daily_upload_limit === 0)}" [disabled]="daily_upload_limit === 0" class="btn btn-secondary"
+            (click)="photoSelect.click()">Choose
+            Photo</button>
+          <input #photoSelect class="show-not" type="file" ng2FileSelect [uploader]="photoUploader" (onFileSelected)="onPhotoSelect($event)">
+          <div class="upload-info">JPG files between 1mb and 5mb accepted.</div>
+        </div>
+      </li>
+      <li class="time-left">
+        <div class="inner">
+          <h3>TIME LEFT TO SUBMIT ENTIRES INTO <span>{{this.current_month | uppercase}} {{this.current_year}}</span>
+            SHOOT THE
+            FRAME
+            AWARDS</h3>
+          <ul>
+            <li>{{_days}}<span>DAYS</span></li>
+            <li>{{_hours}}<span>HOURS</span></li>
+            <li>{{_minutes}}<span>MINUTES</span></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>

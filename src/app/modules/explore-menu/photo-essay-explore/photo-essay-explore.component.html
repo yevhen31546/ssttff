@@ -1,0 +1,24 @@
+<app-collection-loader *ngIf="showCollectionLoader==0"></app-collection-loader>
+<div class="content-cntr innerpage" [ngStyle]="{'opacity':showCollectionLoader}">
+  <section class="heading-top-cntr">
+    <h1 class="title">Photo essays</h1>
+    <h3>Explore photo essays created by photographers from the STF community. Sometimes a story needs more than one
+      photograph. </h3>
+  </section>
+  <div class="clearfix"></div>
+  <app-alert></app-alert>
+  <ngb-tabset (tabChange)="tabChange($event)" class="common-tab profile-tab-area">
+    <ngb-tab id='featured' title="FEATURED">
+      <ng-template ngbTabContent>
+        <app-photo-essay-tab [categoryType]='categoryType' (loaderClose)="loaderClose()">
+        </app-photo-essay-tab>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab id='new' title="NEW">
+      <ng-template ngbTabContent>
+        <app-photo-essay-tab [categoryType]='categoryType'>
+        </app-photo-essay-tab>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>

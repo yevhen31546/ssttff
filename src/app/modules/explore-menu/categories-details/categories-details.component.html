@@ -1,0 +1,37 @@
+<div class="content-cntr innerpage">
+  <div [hidden]="!expire">
+    <app-alert></app-alert>
+  </div>
+  <app-alert [hidden]='!success'></app-alert>
+
+  <section class="heading-top-cntr" *ngIf="category">
+    <h2 class="title">{{ category.category }}</h2>
+    <h3 class="mb-4">All of the following photos have been placed in the catagory of ‘{{ category.category }}’
+      by the photographer
+      who uploaded the image. </h3>
+  </section>
+
+
+
+  <!-- (tabChange)="tabChange($event)" -->
+  <ngb-tabset class="common-tab profile-tab-area" (tabChange)="tabChange($event)">
+    <!-- <ngb-tab id='featured' title="FEATURED">
+      <ng-template ngbTabContent>
+        <app-categories-image-grid [categoryDetails]="categoryDetails" [categoryType]='categoryType'>
+        </app-categories-image-grid>
+      </ng-template>
+    </ngb-tab> -->
+    <ngb-tab id='new' title="NEW">
+      <ng-template ngbTabContent>
+        <app-categories-image-grid [categoryDetails]="categoryDetails" [categoryType]='categoryType'>
+        </app-categories-image-grid>
+      </ng-template>
+    </ngb-tab>
+    <!-- <ngb-tab id='score' title="COLLECTIVE SCORE">
+      <ng-template ngbTabContent>
+        <app-categories-image-grid [categoryDetails]="categoryDetails" [categoryType]='categoryType'>
+        </app-categories-image-grid>
+      </ng-template>
+    </ngb-tab> -->
+  </ngb-tabset>
+</div>

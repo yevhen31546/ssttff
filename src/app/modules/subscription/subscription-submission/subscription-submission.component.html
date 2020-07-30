@@ -1,0 +1,51 @@
+<main class="main">
+  <div class="content-cntr innerpage">
+
+
+    <section class="ac-cnt-area">
+      <div class="row">
+        <!--=========================Left=========================-->
+        <div class="col-sm-8 ">
+
+          <section class="pricing-msg-cnt-area">
+            <h2 class="title">{{type}} new STF Awards Submission </h2>
+            <h3 class="sub-heading mb-32">
+              You have purchased {{type}} STF Awards submission which need to be used this month
+              {{current_month}} {{current_year}}. You can upload and submit a new photo into the STF Awards, or you
+              can submit photos you have already uploaded.
+            </h3>
+            <h3 class="sub-heading">We can’t wait to see your work! 🙂</h3>
+            <a (click)="goToUploadPhotos()" class="btn btn-primary">Upload Photos</a>
+            <a (click)="showProfile()" class="text-black underline ml-32">Profile</a>
+          </section>
+
+        </div>
+        <!--=========================End Left=========================-->
+
+        <!--=========================Right=========================-->
+        <div class="col-sm-4" *ngIf="userDetails">
+          <section class="ac-subscription-info daily-uplds">
+            <div class="pro-pic-cntr">
+              <figure><img width="48" src="{{userDetails.photo_url}}" alt=""></figure>
+              <h4>
+                {{userDetails.first_name+" "+userDetails.last_name}}
+                <div class="location">{{userDetails.location}}</div>
+              </h4>
+
+            </div>
+            <ul class="daily-uplds">
+              <li *ngIf="userDetails.subscription_plan==1">
+                <h4><span>DAILY UPLOADS</span> REMAINING : {{userDetails.dailyUploads}}</h4>
+              </li>
+              <li>
+                <h4><span>STF AWARDS SUBMISSIONS</span> AVAILABLE : {{userDetails.submission_count}} </h4>
+              </li>
+            </ul>
+          </section>
+        </div>
+        <!--=========================End Right=========================-->
+
+      </div>
+    </section>
+  </div>
+</main>

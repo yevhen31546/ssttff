@@ -1,0 +1,71 @@
+<section *ngIf="banner" class="banner-full-screen" [ngStyle]="{'background-image': 'url(&quot;' + banner.media +  '&quot;)'}"  style="background: url('banner.media') center center; background-size: cover;">
+  <div class="content-cntr banner-content">
+    <h1>Shoot The Frame</h1>
+    <h5>
+      A collective of photographers from around the globe. <a (click)="infoModal()"  class="text-white underline cursor">Monthly STF Awards</a>, genuine feedback and constructive critiques. We can’t wait to see your photos. 
+    </h5>
+    <a  [routerLink]="['user/upload-photo']" class="btn btn-light">
+      Submit Entry into STF Awards
+    </a>
+    <div class="winner-info-sc">
+      <div class="left">
+
+
+          <img  width="23" tooltipClass="tooltip-custom" ngbTooltip="STF Awards Winner" #stfWinner="ngbTooltip"
+            *ngIf="banner.result=='Winner'" src="assets/images/temp/logo.svg" alt="">
+          <img  width="23" tooltipClass="tooltip-custom" ngbTooltip="STF Awards Finalist" #stfFinalist="ngbTooltip"
+            *ngIf="banner.result=='Finalist'" src="assets/images/temp/logo.svg" alt="">
+          <span>STF </span>
+          <span class="type"> {{banner.result}}</span>
+         
+
+        <!-- <img src="images/temp/logo-01.svg" alt="" width="23"> STF <span>Winner</span> -->
+      </div>
+      <div class="right" (click)="showProfile(banner.username)" >
+        <div>
+          <div  class="name cursor">
+           {{banner.name}}
+          </div>
+          <div class="month">{{banner.category}} {{banner.result}}; {{banner.award_date}}</div>
+          
+        </div>
+        <div class="img cursor">
+          <img src="{{banner.user_photo}}" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="content-cntr innerpage mt-0">
+  <div [hidden]="!expire">
+    <app-alert></app-alert>
+  </div>
+  <app-alert [hidden]='!success'></app-alert>
+
+  <!-- <section class="heading-top-cntr">
+    <h2 class="title">Shoot The Frame</h2>
+    <h3 class="mb-4">A collective of photographers from around the globe. Monthly awards, genuine feedback and
+      constructive critiques. We can’t wait to see your photos. </h3>
+    <div class="mb-5"><a (click)="redirectEntry()" class="btn btn-secondary">Submit Entry</a></div>
+  </section> -->
+
+ 
+
+
+
+  <!-- (tabChange)="tabChange($event)" -->
+  <ngb-tabset (tabChange)="tabChange($event)" class="common-tab profile-tab-area" #tabs>
+    <ngb-tab id='' title="STF AWARDS">
+      <ng-template ngbTabContent>
+        <app-home-stf-award-entries>
+        </app-home-stf-award-entries>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab id='daily-feed'  title="DAILY FEED">
+      <ng-template ngbTabContent>
+        <app-home-daily-feeds [redirectUrl]="'daily-feed'">
+        </app-home-daily-feeds>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>

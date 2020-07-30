@@ -1,0 +1,38 @@
+<div class="content-cntr innerpage">
+  <section class="heading-top-cntr">
+    <h1 class="title">Photos</h1>
+    <h3>Get lost in the stunning imagery of the STF community. If you have a spare minute, perhaps you would like to
+      <span (click)="openInfoModal()" class="underline cursor">critique</span> a few photos... genuine feedback is super valuable. </h3>
+  </section>
+  <div class="clearfix"></div>
+
+  <ngb-tabset (tabChange)="tabChange($event)" class="common-tab profile-tab-area">
+    <ngb-tab id='new'   title="NEW" *ngIf="role=='admin_user'">
+      <ng-template ngbTabContent>
+        <app-categories-image-grid [categoryDetails]="categoryDetails" [selectType]="selectType" [categoryType]='categoryType'>
+        </app-categories-image-grid>
+      </ng-template>
+    </ngb-tab>
+    
+    <ngb-tab id='featured' title="FEATURED">
+      <ng-template ngbTabContent>
+        <app-categories-image-grid [categoryDetails]="categoryDetails" [selectType]="selectType" [categoryType]='categoryType'>
+        </app-categories-image-grid>
+      </ng-template>
+    </ngb-tab>
+
+    
+    <!-- <ngb-tab  *ngIf="role=='admin_user'"  id='score' title="COLLECTIVE SCORE">
+      <ng-template ngbTabContent>
+        <app-categories-image-grid [categoryDetails]="categoryDetails" [selectType]="selectType" [categoryType]='categoryType'>
+        </app-categories-image-grid>
+      </ng-template>
+    </ngb-tab> -->
+  <ngb-tab id='trending' title="TRENDING">
+    <ng-template ngbTabContent>
+      <app-categories-image-grid [categoryDetails]="categoryDetails" [selectType]="selectType" [categoryType]='categoryType'>
+      </app-categories-image-grid>
+    </ng-template>
+  </ngb-tab>
+</ngb-tabset>
+</div>

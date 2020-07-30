@@ -1,0 +1,127 @@
+<ng-scrollbar>
+  <!-- <ng-scrollbar *ngIf="isBrowser"> -->
+  <div class="inner">
+    <h1 class="text-center">Sign up</h1>
+    <h2 class="text-center">Join the Shoot The Frame community. It’s free, its awesome.</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <ul class="row">
+        <li class="col-md-12">
+          <app-alert></app-alert>
+        </li>
+        <li class="col-md-6">
+          <div class="form-group">
+            <label for="exampleInputEmail1">FIRST NAME</label>
+            <input type="text" formControlName="first_name" class="form-control" id="exampleInputEmail1"
+              aria-describedby="emailHelp" placeholder="First name" [ngClass]="{ 'is-invalid': submitted && f.first_name.errors,'text-valid':registerForm.value.first_name!=null && registerForm.value.first_name.length>0 }"
+              #first_name>
+            <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
+              <div *ngIf="f.first_name.errors.required">Please type first name</div>
+              <div *ngIf="f.first_name.errors.pattern">Please type valid first name</div>
+            </div>
+          </div>
+        </li>
+        <li class="col-md-6">
+          <div class="form-group">
+            <label for="exampleInputEmail1">LAST NAME</label>
+            <input type="text" formControlName="last_name" class="form-control" id="exampleInputEmail1"
+              aria-describedby="emailHelp" placeholder="Last name" [ngClass]="{ 'is-invalid': submitted && f.last_name.errors,'text-valid':registerForm.value.last_name!=null && registerForm.value.last_name.length>0 }"
+              #last_name>
+            <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
+              <div *ngIf="f.last_name.errors.required">Please type last name</div>
+              <div *ngIf="f.last_name.errors.pattern">Please type valid last name</div>
+            </div>
+          </div>
+        </li>
+        <li class="col-md-12">
+          <div class="form-group">
+            <label for="exampleInputEmail1">EMAIL</label>
+            <input type="email" formControlName="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+              placeholder="Which email address shall we use?" [ngClass]="{ 'is-invalid': submitted && (f.email.errors || this.validationErrors['email']) ,'text-valid':registerForm.value.email!=null && registerForm.value.email.length>0 }">
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+              <div *ngIf="f.email.errors.required">Please type email</div>
+              <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+            </div>
+            <div class="invalid-feedback" *ngIf="this.validationErrors['email']">{{
+              this.validationErrors['email'][0] }}</div>
+
+          </div>
+        </li>
+        <li class="col-md-12">
+          <div class="form-group">
+            <label for="exampleInputEmail1">USERNAME <span>(only letters, numbers and underscores. No spaces, max 15 characters)</span></label>
+            <input type="email" formControlName="username" class="form-control" id="exampleInputEmail1" [ngClass]="{ 'is-invalid': submitted && (f.username.errors || this.validationErrors['username']),'text-valid':registerForm.value.username!=null && registerForm.value.username.length>0}"
+              aria-describedby="emailHelp" placeholder="Create a username">
+            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+              <div *ngIf="f.username.errors.required">Please type username</div>
+              <div *ngIf="f.username.errors.pattern">Invalid username, please only use only letters, numbers and
+                underscores</div>
+            </div>
+            <div class="invalid-feedback" *ngIf="this.validationErrors['username']">{{
+              this.validationErrors['username'][0] }}</div>
+          </div>
+        </li>
+        <li class="col-md-12">
+          <div class="form-group paswrd-cntr">
+            <label for="exampleInputEmail1">PASSWORD <span>(at least 6 characters)</span></label>
+            <input type="password" formControlName="password" class="form-control" id="exampleInputEmail1"
+              aria-describedby="emailHelp" placeholder="Create a Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors,'text-valid':registerForm.value.password!=null && registerForm.value.password.length>0 }"
+              #password>
+            <div class="shw-pswd">
+              <label class="checkbox"> Show
+                <input type="checkbox" (click)="changeInput(password)">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+              <div *ngIf="f.password.errors.required">Please type password</div>
+              <div *ngIf="f.password.errors.minLength">Please use at least 6 characters</div>
+
+            </div>
+          </div>
+        </li>
+        <!-- <li class="col-md-6">
+          <a href="#" *ngIf="!socialAfterSignup" (click)="socialSignIn('google')" class="gpls-btn"><img src="assets/images/temp/google.svg"
+              alt="" width="16"> Sign up with Google</a>
+        </li>
+        <li class="col-md-6">
+          <a href="#" *ngIf="!socialAfterSignup" (click)="socialSignIn('facebook')" class="fb-btn"><i class="fa fa-facebook-official"
+              aria-hidden="true"></i>
+            Sign up with Facebook</a>
+        </li> -->
+
+        <li class="col-md-12 coupon-code cursor" (click)="enableCoupon()">
+          Coupon code ?
+        </li>
+        <li class="col-md-6 " *ngIf="couponTextShow==true">
+          <div class="form-group mb-0">
+            <label for="exampleInputEmail1">COUPON (optional)</label>
+            <input type="text"  class="form-control" formControlName='voucher_code'  placeholder="Enter coupon code">
+          </div>
+        </li>
+        <!-- <li class="col-md-6 ">
+          <a (click)="checkCoupon()" class="btn btn-secondary apply-btn">Apply</a>
+        </li> -->
+        <li class="col-md-12 mt-32">
+          <app-alert></app-alert>
+          </li>
+        <li class="col-md-12">
+          <div class="privacy-txt">
+            By signing up, I understand and agree to Shoot The Frame <a target="_blank" href="https://about.shoottheframe.com/terms">Terms
+              and Conditions</a> and <a target="_blank" href="https://about.shoottheframe.com/privacy/">Privacy
+              Statement</a>. We <span>♥</span> and respect your photos, you will always own them.
+          </div>
+        </li>
+        <li class="col-md-12 text-center btn-wrp">
+          <div class="form-group">
+            <button class="btn btn-primary" [disabled]="registerForm.invalid" [ngClass]="{'disabled': registerForm.invalid}">Sign
+              up</button>
+          </div>
+        </li>
+        <li class="col-md-12 text-center">
+          <a [routerLink]="['/sign-in']" class="sign-in-btn underline">Sign in</a>
+        </li>
+      </ul>
+    </form>
+  </div>
+ </ng-scrollbar>
+  

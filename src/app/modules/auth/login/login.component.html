@@ -1,0 +1,75 @@
+<ng-scrollbar>
+  <!-- <p-scrollPanel [style]="{height: screenHeight}"> -->
+  <div class="inner">
+    <h1 class="text-center">Sign in</h1>
+    <h2 class="text-center">Welcome back. We can’t wait to see more of your photos. </h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <ul class="row">
+        <li class="col-md-12">
+          <app-alert></app-alert>
+        </li>
+        <li class="col-md-12">
+          <div class="form-group">
+            <label for="exampleInputEmail1">EMAIL</label>
+            <input type="email" autocomplete="off" class="form-control" formControlName="email" id="exampleInputEmail1"
+              aria-describedby="emailHelp" placeholder="Which email address shall we use?" [ngClass]="{ 'is-invalid': submitted && f.email.errors,'text-valid':loginForm.value.email.length }"
+              #email>
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+              <div *ngIf="f.email.errors.required">Please type email</div>
+              <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+            </div>
+
+          </div>
+        </li>
+
+        <li class="col-md-12">
+          <div class="form-group paswrd-cntr">
+            <label for="exampleInputEmail1">PASSWORD</label>
+            <input formControlName="password" type="password" class="form-control" id="exampleInputEmail1"
+              aria-describedby="emailHelp" placeholder="Enter Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors,'text-valid':loginForm.value.password.length }"
+              #password>
+            <div class="shw-pswd">
+              <label class="checkbox"> Show
+                <input type="checkbox" (click)="changeInput(password)">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+              <div *ngIf="f.password.errors.required">Please type password</div>
+              <div *ngIf="f.password.errors.minLength">Please use at least 6 characters</div>
+
+            </div>
+          </div>
+        </li>
+        <!-- <li class="col-md-6">
+            <a href="#" (click)="socialSignIn('google')" class="gpls-btn"><img src="assets/images/temp/google.svg" alt=""
+                width="16"> Sign in with
+              Google</a>
+        </li>
+        <li class="col-md-6">
+            <a href="#" (click)="socialSignIn('facebook')" class="fb-btn"><i class="fa fa-facebook-official"
+                aria-hidden="true"></i>
+              Sign in with
+              Facebook</a>
+        </li> -->
+        <li class="col-md-12 stay">
+          <label class="checkbox"> Stay signed in
+            <input type="checkbox" checked="checked">
+            <span class="checkmark"></span>
+          </label>
+        </li>
+        <li class="col-md-12 text-center btn-wrp">
+          <div class="form-group">
+            <a href="#" [routerLink]="['/sign-up']" class="sign-in-btn signup-btn underline">Sign up</a>
+            <button class="btn btn-primary">Sign
+              in</button>
+          </div>
+        </li>
+        <li class="col-md-12 text-center">
+          <a href="#" [routerLink]="['/forgot-password']" class="sign-in-btn underline">Forgot password</a>
+        </li>
+      </ul>
+    </form>
+  </div>
+<!-- </p-scrollPanel> -->
+</ng-scrollbar>

@@ -1,0 +1,72 @@
+<main class="main">
+  <div class="content-cntr innerpage">
+    <ng-container *ngIf="stfSuccess==false && awardsuccess == false">
+    <section class="upload-cnt-area">
+      <h2 class="title">Upload complete</h2>
+      <div class="upload-option-cntr">
+        <ul class="option-list complete">
+          <li>
+            <div class="inner">
+              <h3>UPLOAD COMPLETE</h3>
+              <p>Photo has been published on your <span><a class="underline-drk" (click)=showProfile()>profile.</a> </span></p>
+
+              <p>You have {{dailyUploads}} daily uploads remaining.</p>
+
+              <p>Want some feedback on this photo? Invite someone to critque it. </p>
+              <a   (click)="share(imageDetails,'critic')" class="btn btn-secondary">Invite Critique</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </ng-container>
+
+  <ng-container *ngIf="stfSuccess==true">
+      <section class="upload-cnt-area">
+        <h2 class="title">Upload complete</h2>
+        <div class="upload-option-cntr">
+          <ul class="option-list complete">
+            <li>
+              <div class="inner">
+                <h3><span> UPLOAD AND SUBMISSION </span>COMPLETE </h3>
+                <p>Photo has been published on your <span><a class="underline-drk" (click)=showProfile()>profile </a> </span>and submitted into STF Awards.</p>
+
+                <p>Stay tuned for the results of the STF awards, the finalists and winners will be publised in the <a target="_blank" href="https://shoottheframe.com/" class="underline-drk">STF Awards gallery</a>
+                  on or around the 6th day of next month. </p>
+
+                  <p>You have <span><a (click)="infoModal()"> {{stf_submission_limit}} STF submissions remaining</a></span> for this month. </p>
+                <p>Want some feedback on this photo? Invite someone to critque it. </p>
+                <a  (click)="share(imageDetails,'critic')" class="btn btn-secondary">Invite Critique</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </ng-container>
+
+    <ng-container *ngIf="awardsuccess==true">
+      <section class="upload-cnt-area">
+        <h2 class="title">STF Awards submission complete</h2>
+        <div class="upload-option-cntr">
+          <ul class="option-list complete">
+            <li>
+              <div class="inner">
+                <h3><span>SUBMISSION </span>COMPLETE </h3>
+                <p>Photo has been submitted into STF Awards.</p>
+
+                <p>Stay tuned for the results of the STF awards, the finalists and winners will be publised in the <a target="_blank" href="https://shoottheframe.com/" class="underline-drk">STF Awards gallery</a>
+                  on or around the 6th day of next month. </p>
+
+                  <p>You have <span><a (click)="infoModal()"> {{stf_submission_limit}} STF submissions remaining</a></span> for this month. </p>
+                <p>Want some feedback on this photo? Invite someone to critque it. </p>
+                <a  (click)="share(imageDetails,'critic')" class="btn btn-secondary">Invite Critique</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </ng-container>
+
+
+  </div>
+</main>

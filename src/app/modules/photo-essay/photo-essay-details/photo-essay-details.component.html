@@ -1,0 +1,390 @@
+<!-- <app-essay-collection-loader [hidden]="!showLoader"></app-essay-collection-loader> -->
+<button
+  type="button"
+  class="popclose-mb close-critic"
+  [hidden]="!closeButton"
+  aria-describedby="modal-title"
+  (click)="closeModal()"
+>
+  <img src="assets/images/temp/close.svg" alt="" />
+</button>
+<div *ngIf="essayDet" class="content-cntr innerpage">
+  <section class="heading-top-cntr">
+    <h1 class="title">{{ essayDet.title }}</h1>
+    <h3 class="mb-4">
+      {{
+        essayDet.story && essayDet.story.length > 100
+          ? (essayDet.story | slice: 0:100) + ".."
+          : essayDet.story
+      }}
+      <a
+        (click)="openModal(readMoreContent)"
+        *ngIf="essayDet.story && essayDet.story.length > 100"
+        class="readmore text-black"
+        >read more</a
+      >
+    </h3>
+  </section>
+  <div class="grid-top row">
+    <div class="col-12 col-sm-8">
+      <div class="prof-view d-flex align-items-center">
+        <div (click)="showProfile(essayDet.username)" class="img-wrp cursor">
+          <img src="{{ essayDet.user_photo }}" alt="" />
+        </div>
+        <span class="pl-3 cursor" (click)="showProfile(essayDet.username)"
+          ><span class="text-muted">Essay by</span> {{ essayDet.name }}</span
+        >
+        <span class="pl-3 text-muted"
+          >{{ essayDet.photo_count }}
+          {{ essayDet.photo_count == "1" ? "photo" : "photos" }}</span
+        >
+      </div>
+    </div>
+    <div class="col-12 col-sm-4 pt-3 pt-sm-0">
+      <div class="float-right">
+        <div
+          class="dropdown option-dropdown free-position"
+          [hidden]="
+            !authUserDetails ||
+            authUserDetails.id !== essayDet.user_id ||
+            shareEssay
+          "
+        >
+          <button
+            class="btn dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <span></span>
+          </button>
+          <div
+            class="dropdown-menu dropdown-menu-right"
+            aria-labelledby="dropdownMenuButton"
+          >
+            <div class="inner-wrp">
+              <a class="dropdown-item" (click)="share()">Share photo essay</a>
+              <a
+                class="dropdown-item"
+                *ngIf="isOwnPhotoEssay"
+                (click)="editPhotoEssay()"
+                >Edit photo essay</a
+              >
+              <a
+                class="dropdown-item delete"
+                *ngIf="isOwnPhotoEssay"
+                (click)="deletePhotoEssay()"
+                >Delete photo essay</a
+              >
+            </div>
+          </div>
+        </div>
+        <span
+          class="shre-btn-top cursor"
+          *ngIf="
+            shareEssay ||
+            !authUserDetails ||
+            authUserDetails.id !== essayDet.user_id
+          "
+          (click)="share()"
+          >Share</span
+        >
+      </div>
+    </div>
+  </div>
+  <app-alert></app-alert>
+  <section class="profile-cnt-area">
+    <div *ngIf="userPhotos" class="photo-cnt">
+      <div
+        class="image-items"
+        infiniteScroll
+        [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="50"
+        (scrolled)="pageChanged()"
+        [scrollWindow]="true"
+      >
+        <ng-masonry-grid
+          class="grid"
+          (onNgMasonryInit)="onNgMasonryInit($event)"
+          (layoutComplete)="completeLayout($event)"
+          *ngIf="userPhotos.length != 0"
+          [masonryOptions]="{
+            itemSelector: grid - item,
+            initLayout: false,
+            gutter: 30,
+            horizontalOrder: false,
+            percentPosition: true,
+            transitionDuration: 0.5,
+            transitionDelay: 0.5
+          }"
+          [useAnimation]="false"
+          [useImagesLoaded]="false"
+        >
+          <!-- Masonry Grid Item -->
+          <ng-masonry-grid-item
+            #container
+            class="grid-item"
+            id="{{ 'masonry-item-' + i }}"
+            *ngFor="let item of userPhotos; let i = index"
+          >
+            <!-- Grid Content  -->
+            <!-- [ngStyle]="{'height':addPixel(item.height,item.width)}" -->
+            <div
+              class="inner-grid"
+              [ngStyle]="{ opacity: showOpacity[item.page] }"
+            >
+              <div class="top-area">
+                <app-stf-award-logo
+                  [item]="item"
+                  [type]="'web'"
+                ></app-stf-award-logo>
+
+                <ul>
+                  <li
+                    [hidden]="
+                      (authUserDetails && authUserDetails.id == item.user_id) ||
+                      item.critique_status !== 0 ||
+                      removeCriticBtn == item.id
+                    "
+                  >
+                    <a
+                      (click)="crticPopup(imageDetails, item, i)"
+                      [ngbTooltip]="critique"
+                      >Critique</a
+                    >
+                  </li>
+
+                  <li
+                    [hidden]="
+                      authUserDetails && authUserDetails.id == item.user_id
+                    "
+                  >
+                    <a (click)="addCollections(item)" [ngbTooltip]="collection"
+                      >Collect</a
+                    >
+                  </li>
+
+                  <li
+                    [hidden]="
+                      (authUserDetails &&
+                        authUserDetails.id !== item.user_id) ||
+                      shareEssay ||
+                      !authUserDetails
+                    "
+                  >
+                    <div class="dropdown option-dropdown">
+                      <button
+                        class="btn dropdown-toggle"
+                        type="button"
+                        id="dropdownMenuButton"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                        [ngbTooltip]="moreoptions"
+                      >
+                        <span></span>
+                      </button>
+                      <div
+                        class="dropdown-menu dropdown-menu-right"
+                        aria-labelledby="dropdownMenuButton"
+                      >
+                        <div class="inner-wrp">
+                          <a
+                            class="dropdown-item"
+                            [ngClass]="{ disabled: item.is_cover != '0' }"
+                            (click)="
+                              item.is_cover == '0'
+                                ? setCollectionCover(item.id)
+                                : ''
+                            "
+                            >Set to essay cover</a
+                          >
+                          <a
+                            class="dropdown-item"
+                            (click)="removeItem(item.id, i)"
+                            >Remove from essay</a
+                          >
+                          <a class="dropdown-item" (click)="editPhoto(item.id)"
+                            >Edit photo</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+                <div
+                  class="likes"
+                  [ngbTooltip]="
+                    item.like_status === 1 ? likeContent : unlikeContent
+                  "
+                  [ngClass]="item.like_status === 1 ? 'active' : ''"
+                  (click)="likePhotos(item)"
+                >
+                  <i class="fa fa-heart" aria-hidden="true"></i>
+                  <span class="cnt"> {{ nFormatter(item.like_count) }} </span>
+                </div>
+              </div>
+              <div class="bottom-area cursor">
+                <div (click)="showProfile(item.username)" class="left">
+                  <div class="img cursor">
+                    <img
+                      src="{{
+                        item.user_photo
+                          ? item.user_photo
+                          : 'assets/images/temp/user-icon.svg'
+                      }}"
+                      alt=""
+                    />
+                  </div>
+                  {{ item.name }}
+                </div>
+                <div class="right">
+                  <!-- *ngIf="((item.adult_content=='0' && item.own_photo=='0')
+                   || (item.adult_content=='1' &&  item.own_photo=='1'))" -->
+                  <div
+                    class="likes"
+                    *ngIf="
+                      item.adult_content == '0' ||
+                      (item.adult_content == '1' && item.own_photo == '1')
+                    "
+                    [ngbTooltip]="
+                      item.like_status === 1 ? likeContent : unlikeContent
+                    "
+                    [ngClass]="item.like_status === 1 ? 'active' : ''"
+                    (click)="likePhotos(item)"
+                  >
+                    <i class="fa fa-heart" aria-hidden="true"></i>
+                    <span class="cnt"> {{ nFormatter(item.like_count) }} </span>
+                  </div>
+                  <div
+                    *ngIf="item.adult_content == '1' && !isOwnPhotoEssay"
+                    class="likes cursor"
+                    (click)="updateAdultContent(item)"
+                  >
+                    See adult content
+                  </div>
+                  <app-stf-award-logo
+                    [item]="item"
+                    [type]="'mobile'"
+                  ></app-stf-award-logo>
+                </div>
+              </div>
+              <!-- <img (click)="openModal(imageDetails,item,i)" [defaultImage]="defaultImage" [lazyLoad]="item.media" [useSrcset]="false"
+          [offset]="item.height"> -->
+              <!-- <div [defaultImage]="defaultImage" [lazyLoad]="item.media" [offset]="offset"></div> -->
+              <!-- src="{{ item.localmedia}}--glide?q=50" -->
+              <!-- <img (click)=openMasonryModal(userPhotos,item,i) src="{{ item.localmedia}}--glide?q=30" alt="No image" /> -->
+              <div
+                class="grid-image-outer"
+                [ngClass]="{
+                  ad_cnt: item.adult_content == '1' && !isOwnPhotoEssay
+                }"
+                [ngStyle]="{
+                  'padding-bottom': addPixel(item),
+                  position: 'relative'
+                }"
+              >
+                <img
+                  (click)="openMasonryModal(imageDetails, item, i)"
+                  style="background-color:#E0E3E5"
+                  sizes="(min-width: 1335px) 416px, (min-width: 992px) calc(calc(100vw - 72px) / 3), (min-width: 768px) calc(calc(100vw - 48px) / 2), 100vw"
+                  src="{{ item.localmedia }}--glide?w=360&q=80"
+                  srcset="{{ item.localmedia}}--glide?w=360&fit=crop&q=80 100w,
+                {{ item.localmedia}}--glide?w=360&fit=crop&q=80 200w,
+                {{ item.localmedia}}--glide?w=360&fit=crop&q=80 300w,
+                {{ item.localmedia}}--glide?w=400&fit=crop&q=80 400w,
+                {{ item.localmedia}}--glide?w=500&fit=crop&q=80 500w,
+                {{ item.localmedia}}--glide?w=1000&fit=crop&q=80 600w,
+                {{ item.localmedia}}--glide?w=700&fit=crop&q=80 700w,
+                {{ item.localmedia}}--glide?w=1000&fit=crop&q=80 800w,
+                {{ item.localmedia}}--glide?w=1200&fit=crop&q=80 900w,
+                {{ item.localmedia}}--glide?w=1200&fit=crop&q=80 1000w,
+                {{ item.localmedia}}--glide?w=1200&fit=crop&q=80 1100w,
+                {{ item.localmedia}}--glide?w=1200&fit=crop&q=80 1200w,
+                {{ item.localmedia}}--glide?w=1296&fit=crop&q=80 1296w,
+                {{ item.localmedia}}--glide?w=1800&fit=crop&q=80 1400w,
+                {{ item.localmedia}}--glide?w=360&fit=crop&q=80 1600w,
+                {{ item.localmedia}}--glide?w=360&fit=crop&q=80 1800w,
+                {{ item.localmedia}}--glide?w=360&fit=crop&q=80 2000w,
+                {{ item.localmedia}}--glide?w=360&fit=crop&q=80 2200w,
+                {{ item.localmedia}}--glide?w=360&fit=crop&q=80 2400w,
+                {{ item.localmedia}}--glide?w=360&fit=crop&q=80 2592w
+                "
+                />
+              </div>
+            </div>
+          </ng-masonry-grid-item>
+        </ng-masonry-grid>
+      </div>
+    </div>
+    <app-pagination-loader *ngIf="showPaginationLoader"></app-pagination-loader>
+
+    <div
+      *ngIf="userPhotos.length == 0 && isOwnPhotoEssay && !showPaginationLoader"
+      class="photo-eassays-cnt"
+    >
+      <div class="empty-msg text-center">
+        You don't have any photos in this essay. &nbsp;😕
+      </div>
+    </div>
+    <div
+      *ngIf="
+        userPhotos.length == 0 && !isOwnPhotoEssay && !showPaginationLoader
+      "
+      class="photo-eassays-cnt"
+    >
+      <div class="empty-msg text-center">
+        There aren't photos in this essay. &nbsp;😕
+      </div>
+    </div>
+    <div
+      *ngIf="emptyStatus == true && !showPaginationLoader"
+      class="empty-msg text-center"
+    >
+      <p>No more results 🙃</p>
+    </div>
+  </section>
+  <ng-template #likeContent>Liked by you</ng-template>
+  <ng-template #unlikeContent>Give a little love</ng-template>
+  <ng-template #moreoptions>More options</ng-template>
+  <ng-template #collection>Add to collection</ng-template>
+  <ng-template #critique>Critique Photo</ng-template>
+</div>
+
+<ng-template #readMoreContent class="modal-md" let-modal>
+  <div class="modal-content">
+    <div class="inner-modal">
+      <div class="modal-header">
+        <h3 class="modal-title text-center">{{ essayDet.title }}</h3>
+        <button
+          type="button"
+          class="close"
+          (click)="closeModal()"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <img src="assets/images/temp/ui-cross.svg" alt="" />
+        </button>
+      </div>
+      <div class="modal-body">
+        <div
+          class="d-flex align-items-center justify-content-center mb-5 prof-view"
+        >
+          <div class="img-wrp cursor" (click)="showProfile(essayDet.username)">
+            <img src="{{ essayDet.user_photo }}" alt="" />
+          </div>
+          <span class="pl-2"
+            ><span class="text-muted">Essay by </span
+            ><span class="cursor" (click)="showProfile(essayDet.username)">
+              {{ essayDet.name }}</span
+            ></span
+          >
+          <span class="pl-3 text-muted">{{ essayDet.photo_count }} photos</span>
+        </div>
+        <pre class="text-center">{{ essayDet.story }}</pre>
+      </div>
+    </div>
+  </div>
+</ng-template>

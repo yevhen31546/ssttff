@@ -1,0 +1,42 @@
+<div class="content-cntr innerpage">
+  <!-- <div [hidden]="!expire">
+    <app-alert></app-alert>
+  </div> -->
+  <app-alert></app-alert>
+
+  <section class="heading-top-cntr">
+    <h2 class="title">{{tag_name}}</h2>
+
+    <h3 *ngIf="identifyType=='camera' || identifyType=='location'" class="">The following photo have all been shot
+      with a ‘{{tag_name}}’. </h3>
+    <h3 *ngIf="identifyType=='tags'" class="">The following photos have been tagged with the word `{{tag_name}}` by
+      the
+      member who uploaded the
+      image. </h3>
+
+  </section>
+
+
+
+  <!-- (tabChange)="tabChange($event)" -->
+  <ngb-tabset class="common-tab profile-tab-area" (tabChange)="tabChange($event)">
+    <ngb-tab id='trending' title="TRENDING">
+      <ng-template ngbTabContent>
+        <app-image-grid [identifyType]="identifyType" [selectedTab]="selectedTab" [searchTermVal]="tag_name">
+        </app-image-grid>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab id='new' title="NEW">
+      <ng-template ngbTabContent>
+        <app-image-grid [identifyType]="identifyType" [selectedTab]="selectedTab" [searchTermVal]="tag_name">
+        </app-image-grid>
+      </ng-template>
+    </ngb-tab>
+    <!-- <ngb-tab id='collective_score' title="COLLECTIVE SCORE">
+      <ng-template ngbTabContent>
+        <app-image-grid [identifyType]="identifyType" [selectedTab]="selectedTab" [searchTermVal]="tag_name">
+        </app-image-grid>
+      </ng-template>
+    </ngb-tab> -->
+  </ngb-tabset>
+</div>

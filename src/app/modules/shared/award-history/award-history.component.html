@@ -1,0 +1,48 @@
+      <div class="inner-modal">
+        <div class="modal-header">
+          <h3 class="modal-title text-center">STF Awards history</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
+            <img src="assets/images/temp/ui-cross.svg" alt="">
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <h5 class="mb-5">{{awardHistory.title}}</h5>
+
+          <ul class="list-unstyled">
+            <li class="mb-4">
+              <p class="mb-0"><strong>Published</strong></p>
+              <p>{{getDates(awardHistory.created_at)}}</p>
+            </li>
+            <li class="">
+              <div class="row mb-4 mb-sm-0">
+                <div class="col-12 col-sm-6">
+                  <p class="mb-0"><strong>STF Awards Submissions</strong></p>
+                </div>
+                <div class="col-12 col-sm-6" *ngIf="awardHistory.award_history?.length > 0">
+                  <p class="mb-0"><strong>Result</strong></p>
+                </div>
+              </div>
+            </li>
+            <ng-container *ngIf="awardHistory.award_history?.length > 0">
+              <li class="row mb-4" *ngFor="let item of awardHistory.award_history">
+                  <div class="col-12 col-sm-6">
+                    <p class="mb-0 contest-name">{{item.award_category}} {{getDates(item.created_at,'year')}}</p>
+                  </div>
+                  <div class="col-12 col-sm-6">
+                    <p class="mb-0 contest-reesult">{{item.result}} <a *ngIf="item.resubmit===1" (click)="submitStfAwards(item.upload_id)" class="text-black underline">Resubmit photo.</a></p>
+                  </div>
+                </li>
+           </ng-container>
+           <li class="row mb-4" *ngIf="awardHistory.award_history?.length == 0">
+              <div class="col-12">
+                <p class="mb-0 contest-name">The photo has not been submitted into the STF Awards. <a  (click)="submitStfAwards(awardHistory.id)" class="text-black underline">Submit now.</a></p>
+              </div>
+            </li>
+
+            <li class="text-center pt-2">
+              <a (click)="close()" class="btn btn-secondary">Okay</a>
+            </li>
+          </ul>
+        </div>
+      </div>

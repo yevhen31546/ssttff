@@ -1,0 +1,81 @@
+<app-grid-loader *ngIf="activepopup===true"></app-grid-loader>
+<button type="button" class="popclose-mb close-critic" [hidden]="!mobile" aria-describedby="modal-title" (click)="closeModal()">
+  <img src="assets/images/temp/close.svg" alt="">
+</button>
+<div [hidden]="!fromModal">
+  <app-critics (hideCritic)="hideCritic()" (removeCritic)="removeCriticData($event)"  [modalData]="data" [imgDetails]="imgDetails"
+    [currentItemKey]="currentItemKey" [fromModal]="'true'"></app-critics>
+</div>
+<div [ngStyle]="{'opacity':showImageModal }" class="custom-popup-wrp">
+
+
+  <div class="popup-cntr" [hidden]="fromModal">
+    <div>
+      <app-modal-top [data]="data" [imgDetails]="imgDetails" [addCritic]="criticStatus" [catType]="catType" [currentItemKey]="currentItemKey"
+        (dataChange)="dataChangeEvent($event)"   (criticPopup)="showCriticPopup($event)"></app-modal-top>
+    </div>
+
+    <section class="critique-pop-cnt" [hidden]="fromModal">
+      <div class="critique-tab-cntr">
+        <ngb-tabset class="common-tab critique-popup-tab-area" #tabs>
+          <ngb-tab title="COMMENTS" id="comment-tab">
+            <ng-template ngbTabContent>
+               <p-scrollPanel [style]="{width: '100%', height: '400px'}">
+                <app-comments [imgDetails]="data"></app-comments>
+              </p-scrollPanel>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="THE STORY" id="story-tab">
+            <ng-template ngbTabContent>
+              <section class="tab-cnt">
+                <div class="critique-tab-content story">
+                    <ul *ngIf="showPaginationLoader">
+                        <li>
+                          <div class="row">
+                            <div class="col-sm-6 col-6">
+                              <div class="pro-info-cntr">
+                                <div class="img shine"><img alt=""></div>
+                                <div class="shine shine-txt"></div>
+                              </div>
+                            </div>
+                            <div class="col-sm-4 col-4">
+                              <div class="score">
+                                <div class="shine"></div>
+                              </div>
+                            </div>
+                            <div class="col-sm-2 col-2">
+                              <div class="arrow">
+                                <div class="shine"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                  <p-scrollPanel [style]="{width: '100%', height: '400px'}"
+                   *ngIf="!showPaginationLoader && data.title.length != 0">
+                    <h3 *ngIf="data.title!=null">{{ data.title }}</h3>
+                    <pre><p *ngIf="data.story!=null">{{ data.story.trim() }}</p></pre>
+
+                  </p-scrollPanel>
+                  <div *ngIf="data.title.length === 0" class="nocomment text-center">
+                    <p>No story for this photo. 😐</p>
+                  </div>
+                </div>
+              </section>
+            </ng-template>
+          </ngb-tab>
+          <!-- <ngb-tab title="CRITIQUES" id="critic-tab">
+            <ng-template ngbTabContent>
+              <p-scrollPanel [style]="{width: '100%', height: '400px'}">
+                <app-view-critic (criticPopup)="showCriticPopup()" [criticDatas]="criticDatas" (upgrade)="upgradePlan()" [data]="data" [imgDetails]="imgDetails"
+                  [currentItemKey]="currentItemKey" (profile)="showProfile($event)" [uploadId]="data.id"></app-view-critic>
+              </p-scrollPanel>
+            </ng-template>
+          </ngb-tab> -->
+         
+        </ngb-tabset>
+      </div>
+    </section>
+
+  </div>
+</div>

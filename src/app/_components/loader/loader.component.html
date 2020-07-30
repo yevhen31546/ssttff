@@ -1,0 +1,7 @@
+<div *ngIf="showLoader" class="loader-wrp full-scr">
+  <div class="spinner"></div>
+  <!-- <div class="loader-text" *ngIf="percentage && !isPublish">Uploading your photo… {{percentage}}%</div>
+  <div class="loader-text" *ngIf="percentage && isPublish">Publishing your photo… {{percentage}}%</div> -->
+  <div class="loader-text" *ngIf="percentage && isPublish">{{text}} {{percentage}}%</div>
+  <div class="loader-text" *ngIf="!percentage && !isPublish" style="color:white">Loading…</div>
+</div>

@@ -1,0 +1,74 @@
+
+<div class="inner-modal">
+<ng-container *ngIf="type !== 'critic'">
+  <div class="inner-modal">
+    <div class="modal-header">
+            <h3 class="modal-title text-center">Share {{showText}}</h3>
+            <button type="button" class="close" data-dismiss="modal" (click)="closeModal()" aria-label="Close">
+              <img src="assets/images/temp/ui-cross.svg" alt="">
+            </button>
+          </div>
+          <div class="modal-body">
+            <p class="text-center">Share photo on social media, or copy the link and paste it whereever you like!</p>
+            <ul class="list-unstyled share-icons">
+              <li>
+                <share-buttons [theme]="'modern-dark'"
+                [include]="['facebook','twitter']"
+                [show]="2"
+                [size]="-3"
+                [url]="url"
+                [title]="item.title"
+                [description]="item.story"
+                [tags]="item.tags"
+                [image]="item.media"
+                via="facebook"
+               ></share-buttons>
+              </li>
+
+        <!-- <tweet url={{content}} text={{text}}  [attr.data-text]="text" [attr.data-url]="url" [attr.data-href]="content"></tweet> -->
+        <!-- <a [attr.data-text]="shoottheframe" [attr.data-url]="content" class="twitter-share-button"></a> -->
+      </ul>
+      <div class="pt-4 pb-5">
+        <!-- <div class="shared-link">{{domainUrl}}{{shareText}}</div> -->
+        <input readonly type="text" #shareContent class="shared-link border-0" value="{{content}}" placeholder="content will be copy after click the copy button">
+      </div>
+      <div class="text-center btn-wrp">
+        <div class="form-group">
+          <a (click)="closeModal()" class="btn btn-link text-black underline">Cancel</a>
+          <button class="btn btn-primary"  (click)="onCopySuccess(content)">Copy Link</button>
+        </div>
+      </div>
+      <app-alert></app-alert>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="type === 'critic'">
+  <div class="inner-modal">
+
+    <div class="modal-header">
+      <h3 class="modal-title text-center">Invite critique</h3>
+      <button type="button" class="close" data-dismiss="modal" (click)="closeModal()" aria-label="Close">
+        <img src="assets/images/temp/ui-cross.svg" alt="">
+      </button>
+    </div>
+    <div class="modal-body">
+      <p class="text-center">Copy and share link below to invite people to critique this photo. You can send to another
+        Shoot The Frame member, or to anyone in the world.</p>
+      <div class="pt-4 pb-5">
+          <input readonly type="text" #shareContent class="shared-link border-0" value="{{url}}" placeholder="content will be copy after click the copy button">
+
+        <!-- <div class="shared-link"  #shareContent>{{url}}</div> -->
+      </div>
+      <div class="text-center btn-wrp">
+        <div class="form-group">
+          <a (click)="closeModal()" class="btn btn-link text-black underline">Cancel</a>
+          <button class="btn btn-primary" (click)="onCopySuccess(content)">Copy Link</button>
+        </div>
+      </div>
+      <app-alert></app-alert>
+    </div>
+  </div>
+
+</ng-container>
+</div>

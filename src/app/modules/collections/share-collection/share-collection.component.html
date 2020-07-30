@@ -1,0 +1,17 @@
+
+
+<div *ngIf="collection.private == 0;">
+    <app-collections-details [shareCollection]="'true'" [shareCollectionId]='collectionId' ></app-collections-details>
+</div>
+<ng-container *ngIf="collection.private == 1;">
+<div  class="content-cntr innerpage">
+
+    <section class="private-collection">
+        <h3>Private Collection</h3>
+        <p>This collection has been marked as ‘private’ by the creator. </p>
+        <ul>
+            <li><a [routerLink]="['/home']" class="btn btn-secondary">Home</a></li>
+        </ul>
+    </section>
+</div>
+</ng-container>

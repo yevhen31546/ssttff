@@ -1,0 +1,177 @@
+<div class="content-cntr innerpage">
+  <div [hidden]="!expire || reload">
+    <app-alert></app-alert>
+  </div>
+  <app-alert [hidden]='success==false || reload'></app-alert>
+  <app-profile-loader *ngIf="showProfileLoader==true"></app-profile-loader>
+  <section class="profile-info-top clearfix" *ngIf="showProfileLoader==false && profileDetails">
+    <div class="img"><img src="{{ profileDetails.photo_url }}" alt=""></div>
+    <div class="txt">
+      <h2 class="title">{{ profileDetails.first_name }} {{ profileDetails.last_name }}</h2>
+      <div class="web-id">
+        <span>@{{ profileDetails.username }}</span>
+        <span><a href="{{profileDetails.web_link_http}}" target="_blank"> {{ profileDetails.web_link }} </a></span>
+      </div>
+    </div>
+    <div class="profile-info-cnt">
+      <h5>
+        {{ (profileDetails.description && profileDetails.description.length>200)? (profileDetails.description |
+        slice:0:200)+'..':(profileDetails.description) }}
+        <a (click)="openModal(userdetails)" *ngIf="(profileDetails.description && profileDetails.description.length>200)"
+          class="readmore text-black">read more</a>
+      </h5>
+      <ul class="btn-cntr">
+        <li *ngIf="isAuthUser">
+          <a class="btn btn-secondary" [routerLink]="['//user/account-settings/profile']">Edit Profile</a></li>
+        <!-- <li *ngIf="!isAuthUser && authUserDetails"><a class="btn btn-primary">Follow</a></li>
+        <li *ngIf="!isAuthUser && authUserDetails"><a class="btn btn-secondary">Message</a></li> -->
+        <!-- <li *ngIf="!isAuthUser && authUserDetails"><a class="btn btn-secondary bookmark-btn"><img src="assets/images/temp/bookmark.svg"
+              alt=""></a></li> -->
+        <!-- <li *ngIf="authUserDetails">
+          <a [ngbPopover]="popContent" placement="bottom" class="dots">
+            <i class="fa fa-circle" aria-hidden="true"></i>
+            <i class="fa fa-circle" aria-hidden="true"></i>
+            <i class="fa fa-circle" aria-hidden="true"></i>
+          </a>
+        </li> -->
+
+        <li *ngIf="!isAuthUser && profileDetails.is_follow==0"><a (click)="followUser(profileDetails)" class="btn btn-primary">Follow</a></li>
+        <li *ngIf="!isAuthUser && profileDetails.is_follow==1"><a (click)="followUser(profileDetails)" class="btn btn-secondary">Following</a></li>
+        <li *ngIf="!isAuthUser && profileDetails.is_follow==1"><a (click)="chatUser(profileDetails.id)" class="btn btn-secondary">Message</a></li>
+        <li>
+          <div class="dropdown">
+            <button class="btn dropdown-toggle dots" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false" placement="bottom" [ngbTooltip]="moreoptions">
+               <i class="fa fa-circle" aria-hidden="true"></i>
+                  <i class="fa fa-circle" aria-hidden="true"></i>
+                  <i class="fa fa-circle" aria-hidden="true"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+              <div class="inner-wrp">
+                <a class="dropdown-item" *ngIf="isAuthUser" (click)="openModal(userdetails)">View Details</a>
+                <a class="dropdown-item" *ngIf="!isAuthUser" (click)="openModal(userdetails)">View Member Details</a>
+                <a class="dropdown-item" *ngIf="!isAuthUser" (click)="openReportModal()">Report Member</a>
+              </div>
+            </div>
+          </div>
+        </li>
+        <!-- <li><a class="btn btn-secondary bookmark-btn"><img src="assets/images/temp/bookmark.svg" alt=""></a></li> -->
+      </ul>
+    </div>
+  </section>
+  <app-alert [hidden]='!modal'></app-alert>
+  <div [hidden]="reload=='reload'">
+    <app-alert></app-alert>
+  </div>
+
+  <!-- (tabChange)="afterChange($event)" -->
+  <!-- //*ngIf="showLoader==true && profileDetails" -->
+  <ngb-tabset (tabChange)="tabChange($event)" [ngStyle]="{'opacity':showOpacity}" class="common-tab profile-tab-area"
+    #tabs >
+    <ngb-tab id='' title="PHOTOS">
+      <ng-template ngbTabContent>
+        <app-photos *ngIf="userId"  [userId]="userId" [name]='name'></app-photos>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab id='photo-essays' title="PHOTO ESSAYS">
+      <ng-template ngbTabContent>
+        <app-photo-essay-list *ngIf="userId" [userId]="userId" [name]='name'></app-photo-essay-list>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab id='collections' title="COLLECTIONS">
+      <ng-template ngbTabContent>
+        <app-collection-list *ngIf="userId" [userId]="userId" [name]='name'></app-collection-list>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab id='followers' title="FOLLOWERS">
+      <ng-template ngbTabContent>
+        <app-followers *ngIf="userId" [userId]="userId" [profileDetails]="profileDetails"></app-followers>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab id='following' title="FOLLOWING">
+      <ng-template ngbTabContent>
+        <app-followings *ngIf="userId" [userId]="userId" [profileDetails]="profileDetails"></app-followings>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+  <!-- <section class="profile-cnt-area">
+      <div class="photo-eassays-cnt">
+        <div class="empty-msg text-center">Zoe hasn’t uploaded any photos yet. &nbsp; <img src="assets/images/temp/smiley.png"
+            alt=""></div>
+      </div>
+    </section> -->
+</div>
+
+<ng-template #userdetails let-modal>
+    <button type="button" class="popclose-mb close-critic"  aria-describedby="modal-title"
+    (click)="closeModal()">
+    <img src="assets/images/temp/close.svg" alt="">
+    </button>
+  <div class="modal-header">
+    <div class="user-cntr">
+      <div class="img"><img src="{{ profileDetails.photo_url }}" alt=""></div>
+      <div class="txt">
+        <h3 class="sub-title">{{ profileDetails.name }}</h3>
+        @{{ profileDetails.username }}
+      </div>
+    </div>
+    <div class="avl-frl" *ngIf="profileDetails.availability!=0">
+      <span></span>Available for freelance
+    </div>
+    <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+      <img src="assets/images/temp/ui-cross.svg" alt="">
+    </button>
+  </div>
+  <div class="modal-body">
+    <div *ngIf="!isAuthUser && profileDetails.collective_score!=0 || isAuthUser" class="popup-score-count-cntr">
+      <div>
+        <ngb-progressbar type="success" [value]="profileDetails.master_collective_score"></ngb-progressbar>
+        <!-- <div class="grap-slide">
+        <span></span>
+      </div> -->
+        <div class="count "><strong>Master Collective Score:</strong> {{profileDetails.master_collective_score}} <div
+           (click)="masterInfoModal()" class="cursor whats-this">what’s
+            this?</div>
+        </div>
+      </div>
+      Critiques: {{profileDetails.critique}}
+    </div>
+    <h3 class="sub-title-md">Description</h3>
+    <p class="mb-32">
+      {{profileDetails.description}}
+    </p>
+    <div class="row info">
+      <div class="col-sm-5">
+        <h3 class="sub-title-md">Portfolio / website</h3>
+        <a class="text-black" href="{{profileDetails.web_link_http}}" target="_blank"> {{ profileDetails.web_link }}
+        </a>
+      </div>
+      <div class="col-sm-5">
+        <h3 class="sub-title-md">Location</h3>
+        {{profileDetails.location}}
+      </div>
+    </div>
+    <div *ngIf="profileDetails.facebook_link || profileDetails.instagram_link || profileDetails.twitter_link " class="find-else mt-32">
+      <h3 class="sub-title-md">Find me elsewhere…</h3>
+      <ul>
+        <li>
+          <a *ngIf="profileDetails.facebook_link" target="_blank" href="{{ profileDetails.facebook_link }}"><i class="fa fa-facebook"
+              aria-hidden="true"></i></a>
+        </li>
+        <li>
+          <a *ngIf="profileDetails.instagram_link" target="_blank" href="{{ profileDetails.instagram_link }}"><i class="fa fa-instagram"
+              aria-hidden="true"></i></a>
+        </li>
+        <li>
+          <a *ngIf="profileDetails.twitter_link" target="_blank" href="{{ profileDetails.twitter_link }}"><i class="fa fa-twitter"
+              aria-hidden="true"></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</ng-template>
+
+<!--
+<ng-template #popContent>
+  <a (click)="logout()">Logout</a>
+</ng-template> -->

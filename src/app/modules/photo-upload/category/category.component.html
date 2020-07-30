@@ -1,0 +1,69 @@
+<div class='mt-32'>
+  <app-alert></app-alert>
+</div>
+
+<form *ngIf="imageDetails" #categForm="ngForm" (ngSubmit)="submitCategory(categForm)" novalidate>
+  <li>
+    <div class="form-group">
+      <label>CATEGORY</label>
+      <ng-select name="photoCategs" [ngClass]="{'text-valid':categs.valid}" #categs="ngModel"
+        class="form-control select-web" [items]="photoCategs" [closeOnSelect]="true"
+        [(ngModel)]="imageDetails.category_id" bindLabel="category" bindValue="id"
+        placeholder="Select category for this photo" required #categs="ngModel"></ng-select>
+
+      <select name="category" class="form-control select-box select-mob"
+        [ngClass]="{'text-valid': imageDetails.category_id}" [(ngModel)]="imageDetails.category_id">
+        <option disabled selected value=null>Select category for this photo</option>
+        <option *ngFor="let photo of photoCategs" [value]="photo.id">{{photo.category}}</option>
+      </select>
+
+
+
+      <div class="invalid-feedback" [ngClass]="{'disp-blk': (categForm.submitted && categs.invalid)}">
+        You need to add at least one tag
+      </div>
+    </div>
+  </li>
+  <li>
+    <div class="form-group">
+      <label>PHOTO ESSAY (optional)</label>
+      <label class="underline pull-right cursor font-weight-normal" (click)="createPhotoEssay()">Create New Photo Essay</label>
+      <ng-select #myselect [multiple]="true" name="essays" bindLabel="title" [items]="photoEssays"
+        [ngClass]="{'text-valid':imageDetails.photo_essay != ''}" class="form-control select-web tag-photo-essay" [closeOnSelect]="true"
+        [(ngModel)]="imageDetails.photo_essay" #photoEssay="ngModel" (add) = onAddEssay($event) 
+        (remove) = onRemoveEssay($event.value) 
+        placeholder="Add this photo to one of your photo essays"></ng-select>
+
+      <select name="essays" class="form-control select-box select-mob"
+        [ngClass]="{'text-valid':imageDetails.photo_essay != ''}" [(ngModel)]="imageDetails.photo_essay">
+        <option disabled selected="selected" value="">Add this photo to one of your photo essays</option>
+        <option *ngFor="let essay of photoEssays" [value]="essay.id">{{essay.title}}</option>
+      </select>
+
+    </div>
+  </li>
+  <li>
+    <div class="form-group">
+      <label>ADULT CONTENT (optional)</label>
+      <div class="chkbx-cntr" [ngClass]="{'text-valid':(imageDetails.adult_content==true)}">
+        <label class="checkbox">
+          <input type="checkbox" [checked]="imageDetails.adult_content==true" (change)="checkboxChange($event)">
+          <span>Photo contains adult content. Eg. Nudity, violance. </span>
+          <span class="checkmark"></span>
+        </label>
+      </div>
+      <small class="small">Checking this box will create a blurred filter in the grid view of the image, it can
+        still
+        be viewed.</small>
+    </div>
+  </li>
+  <li class="btn-wrp">
+    <button *ngIf="isEdit" type="submit" class="btn btn-primary"
+      [ngClass]="{'disabled': categForm.invalid}">Save</button>
+    <button *ngIf="!isEdit" type="submit" class="btn btn-primary"
+      [ngClass]="{'disabled': categForm.invalid}">Continue</button>
+  </li>
+</form>
+
+<!-- <app-photo-essay-add-modal [modalData]="modalData" (cancelParams)="cancelModal()" (closeParams)="closeButton()"
+  *ngIf="showCreateModal"></app-photo-essay-add-modal> -->

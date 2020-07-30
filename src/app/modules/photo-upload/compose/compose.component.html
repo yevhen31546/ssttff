@@ -1,0 +1,40 @@
+<section class="common-tab-box">
+  <ul>
+    <li class="tab-title" [ngClass]="{'active': (curPath === tab.navUrl)}" *ngFor="let tab of tabs; index as tabIndex;"
+      (click)="goToSection(tabIndex)">
+      <a>{{tab.title}}</a>
+    </li>
+  </ul>
+</section>
+<div class="story-cntr">
+  <ul class="story inner">
+    <li class="image-cntr">
+      <figure><img [src]="subjectImg" alt="Uploaded Image"></figure>
+    </li>
+    <router-outlet (publishClick)='actionPublish($event)'></router-outlet>
+  </ul>
+</div>
+
+<ng-template #deletealert class="change-email" let-modal>
+  <div class="change-email">
+    <div class="modal-header">
+      <h3 class="sub-title-md text-center">Abandon upload photo</h3>
+      <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+        <img src="assets/images/temp/ui-cross.svg" alt="">
+      </button>
+    </div>
+    <div class="modal-body">
+      <p class="mb-32">
+        Are you sure you want to abandon this photo upload?
+        You will lose all of the information which you have added so far.
+
+        Keep in mind, if you complete the upload, you can come back and edit the details at
+        any stage.
+      </p>
+      <div class="btn-cntr text-center">
+        <a class="cancel" (click)="modal.dismiss('cancel click')">Stay</a>
+        <a class="btn btn-primary" (click)="modal.close('Ok click')">Yes, abandon</a>
+      </div>
+    </div>
+  </div>
+</ng-template>

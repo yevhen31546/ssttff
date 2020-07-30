@@ -1,0 +1,57 @@
+<main class="main">
+  <div class="content-cntr innerpage">
+    <section class="ac-cnt-area">
+      <div class="row">
+
+        <!--=========================Left=========================-->
+        <div class="col-sm-8 ">
+
+          <section class="pricing-msg-cnt-area">
+            <h2 class="title">Downgrade confirmation </h2>
+            <h3 class="sub-heading mb-32">
+              You have successfully downgraded to a {{ plan_type }} Member. Your next payment will reflect your new
+              membership.
+            </h3>
+          </section>
+          <section class="survey-cntr">
+            <h4>Super quick survey</h4>
+            <p>
+              Do you have time for a super quick survey? We would love to know why you have chosen to downgrade, we
+              want to
+              make this community as good as it possibly can be. It won’t take a minute.
+            </p>
+            <div class="btn-cntr">
+              <a class="btn btn-primary"   href="https://shoottheframe.typeform.com/to/UeHGgO" target="_blank" >Yep, quick survey</a>
+              <a (click)="showProfile()" class="go-prfl">Nope, go to profile</a>
+            </div>
+
+          </section>
+        </div>
+        <!--=========================End Left=========================-->
+
+        <!--=========================Right=========================-->
+        <div class="col-sm-4" *ngIf="userDetails">
+          <section class="ac-subscription-info daily-uplds">
+            <div class="pro-pic-cntr">
+              <figure><img width="48"src="{{userDetails.photo_url==null||userDetails.photo_url==''?'assets/images/temp/user-icon.svg':userDetails.photo_url}}" alt=""></figure>
+              <h4>
+                {{userDetails.first_name+" "+userDetails.last_name}}
+                <div class="location">{{userDetails.location}}</div>
+              </h4>
+
+            </div>
+            <ul class="daily-uplds">
+              <li *ngIf="userDetails.subscription_plan==1">
+                <h4><span>DAILY UPLOADS</span> REMAINING : {{userDetails.dailyUploads}}</h4>
+              </li>
+              <li>
+                <h4><span>STF AWARDS SUBMISSIONS</span> AVAILABLE : {{userDetails.submission_count}} </h4>
+              </li>
+            </ul>
+          </section>
+        </div>
+        <!--=========================End Right=========================-->
+      </div>
+    </section>
+  </div>
+</main>

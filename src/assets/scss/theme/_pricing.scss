@@ -1,0 +1,191 @@
+.pricing-cnt-area{
+	.title{
+		margin-bottom: 10px;
+		@include media-breakpoint-up(md) {
+			margin-bottom: 13px;
+		}
+	}
+	.sub-heading{
+		font-size: $font-size-sm;
+		max-width: 730px;
+		margin-bottom: 0;
+		line-height: normal;
+		@include media-breakpoint-up(md) {
+				font-size: 18px;
+		}
+	}
+	.common-tab{
+		margin-top:32px;
+		@include media-breakpoint-up(md) {
+			margin-top: 64px;
+		}
+	}
+}
+.plan-details{
+	.plan-bx{
+		border: 1px solid #eef0f0;
+		padding: 47px 0px;
+		margin-bottom: 10px;
+		@include media-breakpoint-up(md) {
+			margin-bottom: 0;	
+			height: 100%;
+		}
+		.sub-title{
+			margin-bottom: 7px;
+			padding: 0 42px;
+		}
+		.planlist{
+			margin-top: 37px;
+			padding: 0 18px;
+			li{
+				padding-left: 24px;
+				background: url(../images/temp/tick.svg) left 4px no-repeat;
+				margin-bottom: 10px;
+				font-size: $font-size-xsm;
+			}
+		}
+		.plansublist{
+			font-size: $font-size-xsm;
+			color: #707070;
+			padding: 0 0 0 18px;
+			li{
+				margin-bottom: 10px;
+				padding: 0 24px;
+				&:last-child{
+					margin-bottom: 0;
+				}
+			}
+		}
+		
+		.btn-cntr{
+			margin: 32px 11px 0;
+			@include media-breakpoint-up(md) {
+				margin-left: 42px;
+			}
+			.btn{
+				width: 100%; 
+				@include media-breakpoint-up(md) {
+						width: auto;
+				}
+			}
+		}
+		.price{
+			font-size: 18px;
+			font-weight: $font-weight-medium;
+			padding: 0 42px;
+			font-family: $font-family-nunito; 
+			span{
+				font-size: $font-size-xsm;
+				font-weight: $font-weight-normal;
+			}
+		}
+	}
+}
+.award-submission-details{
+	padding-top: 32px;
+	@include media-breakpoint-up(md) {
+		padding-top: 64px;
+	}
+	.purchace-cntr{
+		margin-top: 32px;
+		.inner{
+			margin-bottom: 30px;	
+			@include media-breakpoint-up(md) {
+				margin-bottom: 20px;	
+			}
+			.btn-cntr{
+				margin-left: -35px;
+				margin-right: -35px;
+				padding: 0 11px;
+				.btn{
+					width: 100%; 
+					@include media-breakpoint-up(md) {
+							width: auto;
+					}
+				}
+			}
+		}
+	}
+	.sub-heading{
+		
+	}
+}
+.have-question{
+	padding-top: 44px;
+	@include media-breakpoint-up(md) {
+		padding-top: 118px;
+	}
+	
+	.question-list{
+		margin-top: 32px;
+		@include media-breakpoint-up(md) {
+			margin-top: 66px;
+		}
+		.box{
+			border: 1px solid #eef0f0;
+			margin-bottom: 10px;
+			padding: 20px;
+			@include transition();
+			cursor: pointer;
+			@include media-breakpoint-up(md) {
+				margin-bottom: 32px;
+			}
+			&:hover{
+				@include box-shadow(1px 1px 8px 0 rgba(0, 0, 0, 0.16)); 
+			}
+			h5{
+				font-size: 18px;
+				margin-bottom: 0;
+			}
+			p{
+				color: #707070;
+				margin-top: 10px;
+				display: none;
+			}
+			&.active{
+				@include box-shadow(1px 1px 8px 0 rgba(0, 0, 0, 0.16)); 
+				p{
+					display: block;
+				}
+			}
+		}
+	}
+}
+.pricing-msg-cnt-area{
+	.title{
+		margin-bottom: 10px;
+		@include media-breakpoint-up(md) {
+			margin-bottom: 13px;
+		}
+	}
+	.sub-heading{
+		font-size: $font-size-sm;
+		max-width: 730px;
+		margin-bottom: 32px;
+		line-height: normal;
+		@include media-breakpoint-up(md) {
+				font-size: 18px;
+		}
+	}
+}
+.survey-cntr{
+	padding-top: 32px;
+	h4{
+		font-size: 18px;
+		font-weight: $font-weight-normal;
+		margin-bottom: 13px;
+		font-family: $font-family-base;
+	}
+	p{
+		margin-bottom: 32px;
+		max-width: 730px;
+	}
+	.go-prfl{
+		margin-left: 40px;
+		color: $body-color;
+		text-decoration: underline;
+		&:hover{
+			opacity: 0.6;
+		}
+	}
+}

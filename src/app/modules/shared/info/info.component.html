@@ -1,0 +1,33 @@
+<button type="button" class="popclose-mb close-critic" [hidden]="!mobile" aria-describedby="modal-title"
+(click)="activeModal.dismiss('Cross click')">
+<img src="assets/images/temp/close.svg" alt="">
+</button>
+<div class="inner-modal">
+  <div class="modal-header">
+    <h3 class="modal-title text-center">STF Awards Submissions</h3>
+    <button type="button" class="close" aria-describedby="modal-title" (click)="activeModal.dismiss('Cross click')">
+      <img src="assets/images/temp/ui-cross.svg" alt="">
+    </button>
+  </div>
+  <div class="modal-body text-center">
+    <p>
+      Shoot The Frame Awards submissions are used to submit your photos into our monthly international photography
+      awards.
+    </p>
+    <p>
+      The STF Awards have the same 3 categories every month. Shoot The Face (portrait), Shoot The Land (landscape) and
+      Shoot The Wild (wildlife).
+    </p>
+    <p>
+      You can use your available submissions across all STF Awards categories. All
+      available submissions expire on the last day of of every month.
+    </p>
+    <p>
+      You can purchase STF Awards submissions on a one off basis, or you can upgrade to <span class="text-green">Premium</span> to unlock 7 submissions
+      every month. We can’t wait to see your work!
+    </p>
+    <div class="btn-cntr text-center">
+      <a class="btn btn-secondary" (click)="activeModal.dismiss('Cross click')">Okay</a>
+    </div>
+  </div>
+</div>

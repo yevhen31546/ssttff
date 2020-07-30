@@ -1,0 +1,35 @@
+<form #detailsForm="ngForm" (ngSubmit)="submitDetails(detailsForm)" novalidate>
+  <li>
+    <div class="form-group">
+      <label for="photoLoc">LOCATION (optional)</label>
+      <input autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search [(ngModel)]="imageDetails.location"
+      [ngClass]="{'text-valid':(selected_location!=null || imageDetails.location!=null)}"
+        name="phLoc" class="form-control" id="photoLoc" aria-describedby="photo-location"
+         placeholder="{{mobile?'Add a location for this photo...':'Add a location for this photo... where did you shoot it?'}}">
+
+      <!-- <div class="invalid-feedback" [ngClass]="{'disp-blk': (detailsForm.submitted && location.invalid)}">
+        Story field is required
+      </div> -->
+    </div>
+  </li>
+  <li>
+    <div class="form-group">
+      <label for="tags">TAGS</label>
+      <ng-select class="tag-select" [items]="tags"  name="photoTags" [ngClass]="{'text-valid':phTags.valid}"  [addTag]="true" [maxSelectedItems]="11"
+        (input)="searchFilterData($event.target.value)"  (selected)="addTag($event)" (keydown.enter)="getTag($event, $event.target.value)" [virtualScroll]=true
+         [(ngModel)]="imageDetails.tags" [multiple]="true"
+         #phTags="ngModel" placeholder="Add tags so people can find it. Eg. portrait, ocean, bear"
+        required></ng-select>
+      <div class="invalid-feedback" [ngClass]="{'disp-blk': (detailsForm.submitted && phTags.invalid)}">
+        You need to add at least one tag
+      </div>
+      <div class="invalid-feedback" [ngClass]="{'disp-blk': ( imageDetails.tags?.length >= maxTags)}">
+        Maximum amount of tags is 10. Please remove extra tags.
+      </div>
+      <small class="small">Type and press enter to add each tag - minimum of 1 tag. </small>
+    </div>
+  </li>
+  <li class="btn-wrp">
+    <button type="submit" class="btn btn-primary" [disabled]="detailsForm.invalid || imageDetails.tags?.length >= maxTags" [ngClass]="{'disabled': detailsForm.invalid}">Continue</button>
+  </li>
+</form>

@@ -1,0 +1,784 @@
+
+<!-- <button type="button" class="popclose-mb close-critic" aria-describedby="modal-title" (click)="closeModal()">
+  <img src="assets/images/temp/close.svg" alt="">
+</button> -->
+ <div class="custom-popup-wrp" [ngStyle]="{'opacity':activepopup==true?0:1}" data-backdrop="static">
+
+  <div class="popup-cntr">
+    <section class="pophead">
+      <!-- <div class="popclose" (click)="closeModal()">
+        <img src="assets/images/temp/close.svg" width="17" alt="">
+      </div>
+      <div class="row">
+        <div class="col">
+          <div (click)="showProfile(userData.username)" class="left">
+            <div class="img">
+              <img src="{{ userData.user_photo }}" alt="">
+            </div>
+            <div class="txt">
+              <h6><a>{{ userData.name }}</a></h6>
+              @{{ userData.username }}
+            </div>
+          </div>
+        </div>
+
+        <div class="col right align-items-center text-right" [hidden]="!isAuthUser">
+          <a (click)="share(userData,'critic')" class="btn btn-primary">Invite Critique</a>
+        </div>
+      </div> -->
+    </section>
+
+
+    <div #uploadMedia></div>
+    <section class="popup-banner" [ngClass]="{'no-sticky': addCritic === false}">
+      <!-- <div class="popup-slider-nav left">
+        <a *ngIf="isShowPre && !addCritic" (click)="imagePreFn()" class="nav"><img src="assets/images/temp/prv-arw.svg"
+            alt=""></a>
+      </div> -->
+      <!-- <div class="popup-slider-nav right">
+        <a *ngIf="isShowNext && !addCritic" (click)="imageNextFn()" class="nav"><img
+            src="assets/images/temp/next-arw.svg" alt=""></a>
+      </div> -->
+      <img (load)="showImageFunction(userData)" src="{{ userData.localmedia}}--glide?fit=crop&q=80" alt="">
+      <div class="subtitle-cntr hide-wb" *ngIf="addCritic">
+        <h3>CRITIQUE PHOTO <a (click)="canDeactivate()" class="underline text-black cancel">Cancel</a></h3>
+      </div>
+    </section>
+
+
+
+
+    <section class="critique-score">
+      <div class="row">
+        <div class="col-md-6 score-count-cntr">
+          <div *ngIf="!isAuthUser && userData.collective_score_status!=0 || isAuthUser">
+            <ngb-progressbar type="success" ></ngb-progressbar>
+            <div class="count "><strong>Collective Score:</strong> {{ userData.collective_score }}
+              <div (click)="infoCollectiveModal()" class="whats-this cursor">what’s
+                this?</div>
+            </div>
+          </div>
+          <div *ngIf="!isAuthUser && userData.collective_score_status!=0 || isAuthUser">
+            Critiques: {{ userData.critiques }}
+          </div>
+        </div>
+        <div class="col-md-6">
+          <ul class="info-bxs float-right">
+
+            <li (click)="openModal(contentCamDetails)"><img src="assets/images/temp/gen-information.svg" alt=""
+                width="12px">
+              Info</li>
+            <li><a (click)="addCollections(userData)">Collect</a></li>
+            <li (click)="share(userData,'photo')">Share</li>
+            <li class="likes" [ngbTooltip]="userData.like_status === 1 ? likeContent : unlikeContent"
+              [ngClass]="userData.like_status == 1 ? 'active' : ''" (click)="likePhotos(userData)"><i class="fa fa-heart"
+                aria-hidden="true"></i>{{userData.like_count}}</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="critique-pop-cnt" #scrollMe>
+
+      <div class="subtitle-cntr hide-mb">
+        <h3>CRITIQUE PHOTO <a (click)="canDeactivate()" class="underline text-black cancel">Cancel</a></h3>
+      </div>
+
+      <div class="cnt-cntr">
+        <div class="left-cntr hide-mb">
+          <div class="inner">
+            <div class="image-cntr">
+              <img src="{{ userData.localmedia}}--glide?w=360&fit=crop&q=80" alt="">
+            </div>
+            <a target="_blank" href="https://about.shoottheframe.com/tips/critiquing-photos/">
+              <div class="tips cursor">
+                <div class="img">
+                  <img src="assets/images/temp/hou-light-ceiling.svg" width="30px" alt="">
+                </div>
+                <div class="txt">
+                  <h5><span class="text-green">TIP:</span> CRITIQUING PHOTOS</h5>
+                  We are creating a community of positivity and genuine feedback… <a class="text-black underline">learn
+                    more</a>
+                </div>
+
+              </div>
+            </a>
+          </div>
+
+        </div>
+
+
+        <div class="right-cntr">
+
+          <div class="hide-wb">
+            <a target="_blank" href="https://about.shoottheframe.com/tips/critiquing-photos/">
+              <div class="tips cursor">
+                <div class="img">
+                  <img src="assets/images/temp/hou-light-ceiling.svg" width="30px" alt="">
+                </div>
+                <div class="txt">
+                  <h5><span class="text-green">TIP:</span> CRITIQUING PHOTOS</h5>
+                  We are creating a community of positivity and genuine feedback… <a href="#"
+                    class="text-black underline">learn
+                    more</a>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div [hidden]="userDetails">
+            <app-alert></app-alert>
+          </div>
+          <div class="signin-msg" *ngIf="!userDetails">
+            <h4>CRITIQUES ARE AVAILABLE TO ALL MEMBERS</h4>
+            Sign up or <a href="#" class="text-black underline">sign in</a> to give and recieve of critiques.
+            <a href="#" class="btn btn-primary">Join Free</a>
+          </div>
+
+
+          <form [formGroup]="criticInsForm" (ngSubmit)="onSubmitCritics()">
+
+            <ul>
+              <li>
+                <div class="impact row">
+                  <div class="col-10">Overall impact</div>
+                  <div class="col-2 text-rigt">{{impact_value.value == 0 ? 'NA' : impact_value.value}}</div>
+
+                </div>
+                <div class="impact-slide">
+
+                  <p-slider (onChange)="setCounter($event,'impact_value')" #impact_value formControlName="impact_value"
+                    [animate]="true"></p-slider>
+
+                </div>
+
+                <div class="form-group cmt-bx-cntr">
+                  <div *ngIf="commentValue['impact_comment']" [innerHTML]="commentValue['impact_comment']"> </div>
+                  <span class="inner" [ngClass]="{'active': showCls==='impact_comment'}">
+                    <textarea (selectedTerm)="setUser($event,'impact_comment')" [mentions]="mention[0].impact_comment"
+                      (click)="showInfo('impact_comment')" (searchTerm)="searchPeople($event, 'impact_comment')"
+                      (ngModelChange)="isText($event,'impact_comment')"
+                      class="form-control comment-input" #impact_comment formControlName="impact_comment"
+                      placeholder="Comment on the Overall impact"></textarea>
+                  </span>
+                  <div class="whats-this  cursor" (click)="infoModal('overall_impact')">what’s this?</div>
+                </div>
+              </li>
+              <li>
+                <div class="impact row">
+                  <div class="col-10">Composition</div>
+                  <div class="col-2 text-rigt">{{composition_value.value == 0 ? 'NA' : composition_value.value}}</div>
+                </div>
+                <div class="impact-slide">
+                  <p-slider (onChange)="setCounter($event,'composition_value')" #composition_value
+                    formControlName="composition_value" [animate]="true"></p-slider>
+                </div>
+                <div class="form-group cmt-bx-cntr">
+                  <div *ngIf="commentValue['composition_comment']" [innerHTML]="commentValue['composition_comment']">
+                  </div>
+                  <span class="inner" [ngClass]="{'active': showCls==='composition_comment'}">
+                    <textarea id="composition_comment" (selectedTerm)="setUser($event,'composition_comment')"
+                      [mentions]="mention[0].composition_comment" (click)="showInfo('composition_comment')"
+                      (ngModelChange)="isText($event,'composition_comment')"
+                      (searchTerm)="searchPeople($event, 'composition_comment')"
+                       class="form-control  comment-input"
+                      #composition_comment formControlName="composition_comment"
+                      placeholder="Comment on the Composition"></textarea>
+                  </span>
+                  <div class="whats-this  cursor" (click)="infoModal('composition')">what’s this?</div>
+                </div>
+              </li>
+              <li>
+                <div class="impact row">
+                  <div class="col-10">Emotion</div>
+                  <div class="col-2 text-rigt">{{emotion_value.value == 0 ? 'NA' : emotion_value.value}}</div>
+                </div>
+                <div class="impact-slide">
+                  <p-slider (onChange)="setCounter($event,'emotion_value')" #emotion_value
+                    formControlName="emotion_value" [animate]="true"></p-slider>
+                </div>
+                <div class="form-group cmt-bx-cntr">
+                  <div *ngIf="commentValue['emotion_comment']" [innerHTML]="commentValue['emotion_comment']"> </div>
+                  <span class="inner" [ngClass]="{'active': showCls==='emotion_comment'}">
+                    <textarea id="emotion_comment" (selectedTerm)="setUser($event,'emotion_comment')"
+                      [mentions]="mention[0].emotion_comment" (click)="showInfo('emotion_comment')"
+                      (ngModelChange)="isText($event,'emotion_comment')"
+                      (searchTerm)="searchPeople($event, 'emotion_comment')" class="form-control  comment-input"
+                      #emotion_comment formControlName="emotion_comment"
+                      placeholder="Comment on the Emotion"></textarea>
+                  </span>
+                  <div class="whats-this cursor" (click)="infoModal('emotion')">what’s this?</div>
+                </div>
+              </li>
+              <li>
+                <div class="impact row">
+                  <div class="col-10">Lighting / Exposure</div>
+                  <div class="col-2 text-rigt">{{exposure_value.value == 0 ? 'NA' : exposure_value.value}}</div>
+                </div>
+                <div class="impact-slide">
+                  <p-slider (onChange)="setCounter($event,'exposure_value')" #exposure_value
+                    formControlName="exposure_value" [animate]="true"></p-slider>
+                </div>
+                <div class="form-group cmt-bx-cntr">
+                  <div *ngIf="commentValue['exposure_comment']" [innerHTML]="commentValue['exposure_comment']"> </div>
+                  <span class="inner" [ngClass]="{'active': showCls==='exposure_comment'}">
+                    <textarea (selectedTerm)="setUser($event,'exposure_comment')" [mentions]="exposureItems"
+                      (click)="showInfo('exposure_comment')" (searchTerm)="searchPeople($event, 'exposure_comment')"
+                      (ngModelChange)="isText($event,'exposure_comment')"
+                      class="form-control  comment-input" #exposure_comment formControlName="exposure_comment"
+                      placeholder="Comment on the Lighting / Exposure"></textarea>
+                  </span>
+                  <div class="whats-this cursor" (click)="infoModal('lighting')">what’s this?</div>
+                </div>
+              </li>
+              <li>
+                <div class="impact row">
+                  <div class="col-10">Originality / Creativity</div>
+                  <div class="col-2 text-rigt">{{creativity_value.value == 0 ? 'NA' : creativity_value.value}}</div>
+                </div>
+                <div class="impact-slide">
+                  <p-slider (onChange)="setCounter($event,'creativity_value')" #creativity_value
+                    formControlName="creativity_value" [animate]="true"></p-slider>
+                </div>
+                <div class="form-group cmt-bx-cntr">
+                  <div *ngIf="commentValue['creativity_comment']" [innerHTML]="commentValue['creativity_comment']">
+                  </div>
+                  <span class="inner" [ngClass]="{'active': showCls==='creativity_comment'}">
+                    <textarea (selectedTerm)="setUser($event,'creativity_comment')" [mentions]="creativityItems"
+                      (click)="showInfo('creativity_comment')" (searchTerm)="searchPeople($event, 'creativity_comment')"
+                      (ngModelChange)="isText($event,'creativity_comment')"
+                       class="form-control  comment-input"
+                      #creativity_comment formControlName="creativity_comment"
+                      placeholder="Comment on the Originality / Creativity"></textarea>
+                  </span>
+                  <div class="whats-this cursor" (click)="infoModal('originality')">what’s this?</div>
+                </div>
+              </li>
+              <li>
+                <div class="impact row">
+                  <div class="col-10">Difficulty</div>
+                  <div class="col-2 text-rigt">{{difficulty_value.value == 0 ? 'NA' : difficulty_value.value}}</div>
+                </div>
+                <div class="impact-slide">
+                  <p-slider (onChange)="setCounter($event,'difficulty_value')" #difficulty_value
+                    formControlName="difficulty_value" [animate]="true"></p-slider>
+                </div>
+                <div class="form-group cmt-bx-cntr">
+                  <div *ngIf="commentValue['difficulty_comment']" [innerHTML]="commentValue['difficulty_comment']">
+                  </div>
+                  <span class="inner" [ngClass]="{'active': showCls==='difficulty_comment'}">
+                    <textarea (selectedTerm)="setUser($event,'difficulty_comment')" [mentions]="difficultyItems"
+                      (click)="showInfo('difficulty_comment')" (searchTerm)="searchPeople($event, 'difficulty_comment')"
+                      (ngModelChange)="isText($event,'difficulty_comment')" class="form-control  comment-input"
+                       #difficulty_comment
+                      formControlName="difficulty_comment" placeholder="Comment on the Difficulty"></textarea>
+                  </span>
+                  <div class="whats-this cursor" (click)="infoModal('difficulty')">what’s this?</div>
+                </div>
+              </li>
+              <li>
+                <div class="impact row">
+                  <div class="col-10">Technical execution</div>
+                  <div class="col-2 text-rigt">{{te_value.value == 0 ? 'NA' : te_value.value}}</div>
+                </div>
+                <div class="impact-slide">
+                  <p-slider (onChange)="setCounter($event,'te_value')" #te_value formControlName="te_value"
+                    [animate]="true"></p-slider>
+                </div>
+                <div class="form-group cmt-bx-cntr">
+                  <div *ngIf="commentValue['te_comment']" [innerHTML]="commentValue['te_comment']"> </div>
+                  <span class="inner" [ngClass]="{'active': showCls==='te_comment'}">
+                    <textarea (selectedTerm)="setUser($event,'te_comment')" [mentions]="technicalItems"
+                      (click)="showInfo('te_comment')" (searchTerm)="searchPeople($event, 'te_comment')"
+                      (ngModelChange)="isText($event,'te_comment')" class="form-control  comment-input" #te_comment
+                       formControlName="te_comment"
+                      placeholder="Comment on the Technical execution"></textarea>
+                  </span>
+                  <div class="whats-this cursor" (click)="infoModal('technical')">what’s this?</div>
+                </div>
+              </li>
+              <li>
+                <div class="impact row">
+                  <div class="col-10">Color / Tone</div>
+                  <div class="col-2 text-rigt">{{color_value.value == 0 ? 'NA' : color_value.value}}</div>
+                </div>
+                <div class="impact-slide">
+                  <p-slider (onChange)="setCounter($event,'color_value')" #color_value formControlName="color_value"
+                    [animate]="true"></p-slider>
+                </div>
+                <div class="form-group cmt-bx-cntr">
+                  <div *ngIf="commentValue['color_comment']" [innerHTML]="commentValue['color_comment']"> </div>
+                  <span class="inner" [ngClass]="{'active': showCls==='color_comment'}">
+                    <textarea (selectedTerm)="setUser($event,'color_comment')" [mentions]="colorItems"
+                      (click)="showInfo('color_comment')" (searchTerm)="searchPeople($event, 'color_comment')"
+                      (ngModelChange)="isText($event,'color_comment')" class="form-control  comment-input"
+                      #color_comment  formControlName="color_comment"
+                      placeholder="Comment on the Color / Tone"></textarea>
+                  </span>
+                  <div class="whats-this cursor" (click)="infoModal('color')">what’s this?</div>
+                </div>
+              </li>
+              <li>
+                <div class="impact row">
+                  <div class="col-10">Subject matter</div>
+                  <div class="col-2 text-rigt">{{subject_value.value == 0 ? 'NA' : subject_value.value}} </div>
+                </div>
+                <div class="impact-slide">
+                  <p-slider (onChange)="setCounter($event,'subject_value')" #subject_value
+                    formControlName="subject_value" [animate]="true"></p-slider>
+                </div>
+                <div class="form-group cmt-bx-cntr">
+                  <div *ngIf="commentValue['subject_comment']" [innerHTML]="commentValue['subject_comment']"> </div>
+                  <span class="inner" [ngClass]="{'active': showCls==='subject_comment'}">
+                    <textarea (selectedTerm)="setUser($event,'subject_comment')" [mentions]="subjectItems"
+                      (click)="showInfo('subject_comment')" (searchTerm)="searchPeople($event, 'subject_comment')"
+                      (ngModelChange)="isText($event,'subject_comment')" class="form-control  comment-input"
+                      #subject_comment  formControlName="subject_comment"
+                      placeholder="Comment on the Subject matter"></textarea>
+                  </span>
+                  <div class="whats-this cursor" (click)="infoModal('subject')">what’s this?</div>
+                </div>
+              </li>
+              <li>
+                <div class="impact row">
+                  <div class="col-10">Storytelling</div>
+                  <div class="col-2 text-rigt">{{story_value.value == 0 ? 'NA' : story_value.value}}</div>
+                </div>
+                <div class="impact-slide">
+                  <p-slider (onChange)="setCounter($event,'story_value')" #story_value formControlName="story_value"
+                    [animate]="true"></p-slider>
+                </div>
+                <div class="form-group cmt-bx-cntr">
+                  <div *ngIf="commentValue['story_comment']" [innerHTML]="commentValue['story_comment']"> </div>
+                  <span class="inner" [ngClass]="{'active': showCls==='story_comment'}">
+                    <textarea (selectedTerm)="setUser($event,'story_comment')" [mentions]="storyItems"
+                      (click)="showInfo('story_comment')" (searchTerm)="searchPeople($event, 'story_comment')"
+                      (ngModelChange)="isText($event,'story_comment')" class="form-control  comment-input"
+                      #story_comment  formControlName="story_comment"
+                      placeholder="Comment on the Storytelling"></textarea>
+                  </span>
+                  <div class="whats-this  cursor" (click)="infoModal('story')">what’s this?</div>
+                </div>
+              </li>
+            </ul>
+            <div class="btn-wrp text-right">
+              <button type="submit" class="btn btn-primary" [disabled]='counter < 5 || disable || userData.critique_status != 0'>
+                Publish critique</button>
+            </div>
+          </form>
+
+
+          <div class="wrng text-right">
+            You will need to complete at least 5 criteria sliders to be able to publish a critique.
+          </div>
+
+        </div>
+
+      </div>
+      <div class="mt-32" [hidden]="!success">
+        <app-alert></app-alert>
+      </div>
+
+    </section>
+
+  </div>
+</div>
+
+
+<ng-template #abandonContent class="change-email" let-modal>
+  <div class="inner-modal">
+    <div class="modal-header">
+      <h3 class="modal-title text-center">Abandon photo critique</h3>
+      <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+        <img src="assets/images/temp/ui-cross.svg" alt="">
+      </button>
+    </div>
+    <div class="modal-body text-center">
+      <p>
+        Are you sure you want to abandon this photo critique? You will lose all of the information which you have
+        added
+        so far.
+      </p>
+
+      <div class="btn-cntr text-center">
+        <a class="cancel" (click)="modal.dismiss('Close click')">Stay</a>
+        <a class="btn btn-danger" (click)="modal.close('Ok click')">Yes, abandon</a>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #contentDelete class="change-email" let-modal>
+  <div class="inner-modal">
+    <div class="modal-header">
+      <h3 class="modal-title">Delete photo</h3>
+      <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+        <img src="assets/images/temp/ui-cross.svg" alt="">
+      </button>
+    </div>
+    <div class="modal-body text-center">
+      <p>
+        Are you sure you want to delete this photo?
+      </p>
+      <div class="btn-cntr text-center">
+        <a class="cancel" (click)="modal.dismiss('Close click')">Cancel</a>
+        <a class="btn btn-danger" (click)="modal.close('Ok click')">Yes, delete</a>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #contentCamDetails class="modal-md" let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="user-cntr">
+        <div class="img"><img src="{{userData.user_photo}}" alt=""></div>
+        <div class="txt">
+          <h3 class="sub-title">{{ userData.name }}</h3>
+          @{{ userData.username }}
+        </div>
+      </div>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+        (click)="modal.dismiss('Cross click')">
+        <img src="assets/images/temp/ui-cross.svg" alt="">
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="photo-details-pop-cnt">
+        <h3>{{ userData.title }}</h3>
+        <ul>
+          <li class="row">
+            <div class="col-md-4 col-6 mb-32">
+              <h4>Published</h4>
+              {{ getDates(userData.created_at) }}
+            </div>
+            <div class="col-md-4 col-6 mb-32">
+              <h4>Camera</h4>
+              {{ userData.camera }}
+            </div>
+            <div class="col-md-4 col-6 mb-32">
+              <h4>Focal length</h4>
+              {{ userData.focal_length }}
+            </div>
+            <div class="col-md-4 col-6">
+              <h4>Shutter speed</h4>
+              {{ userData.shutter_speed }}
+            </div>
+            <div class="col-md-4 col-6">
+              <h4>ISO</h4>
+              {{ userData.iso }}
+            </div>
+            <div class="col-md-4 col-6">
+              <h4>Aperture</h4>
+              {{ userData.aperture }}
+            </div>
+          </li>
+          <li class="row">
+            <div class="col-md-12">
+              <h4>Location</h4>
+              {{ userData.location }}
+            </div>
+          </li>
+          <li class="row">
+            <div class="col-md-12">
+              <h4>Color pallete</h4>
+              <ul class="color-list">
+                <li *ngFor="let color of colorPalate"
+                  [style.background-color]="'rgb(' + color.r + ','+ color.g+','+ color.b+')'"></li>
+              </ul>
+            </div>
+          </li>
+          <li class="row">
+            <div class="col-md-12">
+              <h4>Tags</h4>
+              <ul class="tags-list">
+                <li class="cursor" (click)=routeTags(tag) *ngFor="let tag of userData.tags">
+                  {{ tag }}</li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #likeContent>Liked by you</ng-template>
+<ng-template #unlikeContent>Give a little love</ng-template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="custom-popup-wrp">
+  <div class="popup-cntr" >
+
+       <app-modal-top (criticClose)="alertCtitic($event)" [change]="change"  [addCritic]="'true'" [data]="userData" [imgDetails]="imgDetails" [currentItemKey]="currentItemKey"></app-modal-top>
+
+
+
+    <section class="critique-pop-cnt"  #scrollMe>
+
+      <div class="subtitle-cntr hide-mb">
+        <h3>CRITIQUE PHOTO <a (click)="canDeactivate()"  class="underline text-black cancel">Cancel</a></h3>
+      </div>
+
+      <div class="cnt-cntr">
+        <div class="left-cntr hide-mb">
+          <div class="inner"  >
+            <div class="image-cntr">
+              <img src="{{userData.media}}" alt="">
+            </div>
+            <div class="tips cursor" (click)="openInfoModal()">
+              <div class="img">
+                <img src="assets/images/temp/hou-light-ceiling.svg" width="30px" alt="">
+              </div>
+              <div class="txt">
+                <h5><span class="text-green">TIP:</span> CRITIQUING PHOTOS</h5>
+                We are creating a community of positivity and genuine feedback… <a href="#" class="text-black underline">learn more</a>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="right-cntr">
+
+          <div class="hide-wb">
+            <div class="tips cursor" (click)="openInfoModal()">
+              <div class="img">
+                <img src="assets/images/temp/hou-light-ceiling.svg" width="30px" alt="">
+              </div>
+              <div class="txt">
+                <h5><span class="text-green">TIP:</span> CRITIQUING PHOTOS</h5>
+                We are creating a community of positivity and genuine feedback… <a href="#" class="text-black underline">learn more</a>
+              </div>
+            </div>
+          </div>
+
+          <div [hidden]="userDetails">
+            <app-alert></app-alert>
+          </div>
+          <div class="signin-msg" *ngIf="!userDetails">
+            <h4>CRITIQUES ARE AVAILABLE TO ALL MEMBERS</h4>
+            Sign up or <a href="#" class="text-black underline">sign in</a> to give and recieve of critiques.
+            <a href="#" class="btn btn-primary">Join Free</a>
+          </div>
+
+
+          <form [formGroup]="criticForm" (ngSubmit)="onSubmitCritics()">
+
+            <ul>
+              <li>
+                <div class="impact row">
+                  <div class="col">Overall impact</div>
+                  <div class="col text-rigt">{{impact_value.value == 0 ? 'NA' : impact_value.value}}</div>
+
+                </div>
+                <div class="impact-slide">
+                  <p-slider   (onChange)="setCounter($event,'impact_value')" #impact_value formControlName="impact_value"
+                       [animate]="true"></p-slider>
+
+                </div>
+                <div class="form-group">
+
+
+                  <textarea (click)="showInfo('impact_comment')"     (searchTerm)="searchPeople($event, 'impact_users_list')"
+                    class="form-control" #impact_comment formControlName="impact_comment" placeholder="Comment on the Overall impact"></textarea>
+                    <div class="whats-this  cursor" (click)="infoModal('overall_impact')">what’s this?</div>
+                  </div>
+              </li>
+              <li>
+                <div class="impact row">
+                  <div class="col">Composition</div>
+                  <div class="col text-rigt">{{composition_value.value == 0 ? 'NA' : composition_value.value}}</div>
+                </div>
+                <div class="impact-slide">
+                  <p-slider  (onChange)="setCounter($event,'composition_value')" #composition_value formControlName="composition_value"
+                       [animate]="true"></p-slider>
+                </div>
+                <div class="form-group">
+                  <textarea  (click)="showInfo('composition_comment')"     (searchTerm)="searchPeople($event, 'composition_users_list')"
+                  class="form-control" #composition_comment formControlName="composition_comment" placeholder="Comment on the Composition"></textarea>
+                  <div class="whats-this  cursor" (click)="infoModal('composition')">what’s this?</div>
+                </div>
+              </li>
+              <li>
+                <div class="impact row">
+                  <div class="col">Emotion</div>
+                  <div class="col text-rigt">{{emotion_value.value == 0 ? 'NA' : emotion_value.value}}</div>
+                </div>
+                <div class="impact-slide">
+                  <p-slider  (onChange)="setCounter($event,'emotion_value')" #emotion_value formControlName="emotion_value"
+                       [animate]="true"></p-slider>
+                </div>
+                <div class="form-group">
+                  <textarea  (click)="showInfo('emotion_comment')"      (searchTerm)="searchPeople($event, 'emotion_users_list')"
+                  class="form-control" #emotion_comment formControlName="emotion_comment" placeholder="Comment on the Emotion"></textarea>
+                  <div class="whats-this cursor" (click)="infoModal('emotion')">what’s this?</div>
+                </div>
+              </li>
+              <li>
+                <div class="impact row">
+                  <div class="col">Lighting / Exposure</div>
+                  <div class="col text-rigt">{{exposure_value.value == 0 ? 'NA' : exposure_value.value}}</div>
+                </div>
+                <div class="impact-slide">
+                  <p-slider  (onChange)="setCounter($event,'exposure_value')" #exposure_value formControlName="exposure_value"
+                       [animate]="true"></p-slider>
+                </div>
+                <div class="form-group">
+                  <textarea  (click)="showInfo('exposure_comment')"       (searchTerm)="searchPeople($event, 'exposure_users_list')"   class="form-control"
+                   #exposure_comment formControlName="exposure_comment" placeholder="Comment on the Lighting / Exposure"></textarea>
+                   <div class="whats-this cursor" (click)="infoModal('lighting')">what’s this?</div>
+                  </div>
+              </li>
+              <li>
+                <div class="impact row">
+                  <div class="col">Originality / Creativity</div>
+                  <div class="col text-rigt">{{creativity_value.value == 0 ? 'NA' : creativity_value.value}}</div>
+                </div>
+                <div class="impact-slide">
+                  <p-slider  (onChange)="setCounter($event,'creativity_value')" #creativity_value formControlName="creativity_value"
+                       [animate]="true"></p-slider>
+                </div>
+                <div class="form-group">
+                  <textarea    (click)="showInfo('creativity_comment')"    (searchTerm)="searchPeople($event, 'creativity_users_list')"   class="form-control"
+                   #creativity_comment formControlName="creativity_comment" placeholder="Comment on the Originality / Creativity"></textarea>
+                   <div class="whats-this cursor" (click)="infoModal('originality')">what’s this?</div>
+                  </div>
+              </li>
+              <li>
+                <div class="impact row">
+                  <div class="col">Difficulty</div>
+                  <div class="col text-rigt">{{difficulty_value.value == 0 ? 'NA' : difficulty_value.value}}</div>
+                </div>
+                <div class="impact-slide">
+                  <p-slider  (onChange)="setCounter($event,'difficulty_value')" #difficulty_value formControlName="difficulty_value"
+                       [animate]="true"></p-slider>
+                </div>
+                <div class="form-group">
+                  <textarea   (click)="showInfo('difficulty_comment')"     (searchTerm)="searchPeople($event, 'difficulty_users_list')"
+                    class="form-control" #difficulty_comment formControlName="difficulty_comment" placeholder="Comment on the Difficulty"></textarea>
+                    <div class="whats-this cursor" (click)="infoModal('difficulty')">what’s this?</div>
+                  </div>
+              </li>
+              <li>
+                <div class="impact row">
+                  <div class="col">Technical execution</div>
+                  <div class="col text-rigt">{{te_value.value == 0 ? 'NA' : te_value.value}}</div>
+                </div>
+                <div class="impact-slide">
+                  <p-slider (onChange)="setCounter($event,'te_value')" #te_value formControlName="te_value"
+                    [animate]="true"></p-slider>
+                </div>
+                <div class="form-group">
+                  <textarea    (click)="showInfo('te_comment')"    (searchTerm)="searchPeople($event, 'technical_execution_users_list')"   class="form-control" #te_comment
+                  formControlName="te_comment" placeholder="Comment on the Technical execution"></textarea>
+                  <div class="whats-this cursor" (click)="infoModal('technical')">what’s this?</div>
+                </div>
+              </li>
+              <li>
+                <div class="impact row">
+                  <div class="col">Color / Tone</div>
+                  <div class="col text-rigt">{{color_value.value == 0 ? 'NA' : color_value.value}}</div>
+                </div>
+                <div class="impact-slide">
+                  <p-slider  (onChange)="setCounter($event,'color_value')" #color_value formControlName="color_value"
+                       [animate]="true"></p-slider>
+                </div>
+                <div class="form-group">
+                  <textarea    (click)="showInfo('color_comment')"    (searchTerm)="searchPeople($event, 'color_users_list')"   class="form-control" #color_comment formControlName="color_comment"
+                   placeholder="Comment on the Color / Tone"></textarea>
+                   <div class="whats-this cursor" (click)="infoModal('color')">what’s this?</div>
+                  </div>
+              </li>
+              <li>
+                <div class="impact row">
+                  <div class="col">Subject matter</div>
+                  <div class="col text-rigt">{{subject_value.value == 0 ? 'NA' : subject_value.value}} </div>
+                </div>
+                <div class="impact-slide">
+                  <p-slider (onChange)="setCounter($event,'subject_value')" #subject_value formControlName="subject_value"
+                       [animate]="true"></p-slider>
+                </div>
+                <div class="form-group">
+                  <textarea   (click)="showInfo('subject_comment')"    (searchTerm)="searchPeople($event, 'subject_users_list')"   class="form-control" #subject_comment formControlName="subject_comment"
+                   placeholder="Comment on the Subject matter"></textarea>
+                   <div class="whats-this cursor" (click)="infoModal('subject')">what’s this?</div>
+                  </div>
+              </li>
+              <li>
+                <div class="impact row">
+                  <div class="col">Storytelling</div>
+                  <div class="col text-rigt">{{story_value.value == 0 ? 'NA' : story_value.value}}</div>
+                </div>
+                <div class="impact-slide">
+                  <p-slider (onChange)="setCounter($event,'story_value')" #story_value formControlName="story_value"
+                       [animate]="true"></p-slider>
+                </div>
+                <div class="form-group">
+                  <textarea  (click)="showInfo('story_comment')"     (searchTerm)="searchPeople($event, 'story_users_list')"   class="form-control" #story_comment formControlName="story_comment" placeholder="Comment on the Storytelling"></textarea>
+                  <div class="whats-this  cursor" (click)="infoModal('story')">what’s this?</div>
+                </div>
+              </li>
+            </ul>
+            <div class="btn-wrp text-right">
+              <button type="submit" class="btn btn-primary" [disabled]='counter < 5 || disable == true'>Publish critique</button>
+            </div>
+          </form>
+
+
+          <div class="wrng text-right">
+            You will need to complete at least 5 criteria sliders to be able to publish a critique.
+          </div>
+
+        </div>
+
+      </div>
+      <div class="mt-32" [hidden]="!success">
+            <app-alert></app-alert>
+      </div>
+
+    </section>
+
+  </div>
+</div> -->
+
+ <!-- <ng-template #abandonContent class="change-email" let-modal>
+  <div class="inner-modal">
+    <div class="modal-header">
+      <h3 class="modal-title text-center">Abandon photo critique</h3>
+      <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+        <img src="assets/images/temp/ui-cross.svg" alt="">
+      </button>
+    </div>
+    <div class="modal-body text-center">
+    <p>
+        Are you sure you want to abandon this photo critique? You will lose all of the information which you have added so far.
+   </p>
+
+      <div class="btn-cntr text-center">
+        <a class="cancel" (click)="modal.dismiss('Close click')">Stay</a>
+        <a class="btn btn-danger" (click)="modal.close('Ok click')">Yes, abandon</a>
+      </div>
+    </div>
+  </div>
+</ng-template> -->

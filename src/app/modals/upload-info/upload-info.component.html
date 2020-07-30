@@ -1,0 +1,30 @@
+<button type="button" class="popclose-mb close-critic" [hidden]="!mobile" aria-describedby="modal-title"
+(click)="closeModal()">
+<img src="assets/images/temp/close.svg" alt="">
+</button>
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="inner-modal">
+      <div class="modal-header">
+        <h3 class="modal-title text-center">Daily uploads</h3>
+        <button type="button" (click)="closeModal()" class="close" data-dismiss="modal" aria-label="Close">
+          <img src="assets/images/temp/ui-cross.svg" alt="">
+        </button>
+      </div>
+      <div class="modal-body text-center">
+
+        <p>Daily upload refers to how many photos you are able to upload to Shoot The Frame everyday. <span class="text-green">Basic</span>
+          members are
+          only allowed to upload 3 photos per day, <span class="text-green">Pro</span> and <span class="text-green">Premium</span>
+          members can upload unlimited photos.</p>
+
+        <p> If you are submitting photos into the STF Awards, the daily upload limit is ignored, so you can submit as
+          many as you like.
+        </p>
+        <div class="btn-cntr text-center">
+          <a class="btn btn-secondary" (click)="closeModal()">Okay</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

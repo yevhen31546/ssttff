@@ -1,0 +1,49 @@
+<div class="inner-modal show-full-text">
+  <div class="modal-header">
+    <h3 class="modal-title text-center">Edit collection</h3>
+    <button type="button" class="close" (click)="cancelButton()" data-dismiss="modal" aria-label="Close">
+      <img src="assets/images/temp/ui-cross.svg" alt="" />
+    </button>
+  </div>
+  <div class="modal-body">
+    <p class="text-center">
+      Edit your collection.
+    </p>
+    <ul *ngIf="collectionDet" class="list-unstyled pt-4">
+      <form [formGroup]="collectionForm" (ngSubmit)="edit()" novalidate>
+        <li class="form-group mb-4">
+          <label class="form-control-label">COLLECTION TITLE</label>
+          <input type="text" name="title" #title formControlName="title" placeholder="Give your collection a title"
+            class="form-control" [ngClass]="{
+                  'text-valid': collectionForm.controls['title'].valid
+                }" required />
+        </li>
+        <li class="form-group mb-4">
+          <label class="form-control-label">COLLECTION STORY(optional)</label>
+          <textarea name="story" cols="30" rows="4" #story formControlName="story" class="form-control" [ngClass]="{
+                  'text-valid': collectionForm.controls['story'].value!=''
+                }"
+            placeholder="Give your collection a description"></textarea>
+        </li>
+        <li class="form-group stay mb-5">
+          <label class="checkbox">
+            <input type="checkbox" (change)="checkboxChange($event)" [checked]="collectionDet.private" formControlName="private" />
+            <span>Make this collection private (only you can see it)</span>
+            <span class="checkmark"></span>
+          </label>
+        </li>
+        <li class="text-right form-group mb-5">
+          <a (click)="deleteCollection()" class="text-danger underline">Delete Collection</a>
+        </li>
+        <li class="text-center btn-wrp">
+          <div class="form-group">
+            <a (click)="cancelButton()" class="btn btn-link text-black underline">Cancel</a>
+            <button type="submit" class="btn btn-primary" [disabled]="collectionForm.invalid" [ngClass]="{ disabled: collectionForm.invalid }">
+              Save
+            </button>
+          </div>
+        </li>
+      </form>
+    </ul>
+  </div>
+</div>

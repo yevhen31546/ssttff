@@ -1,0 +1,30 @@
+<form #storyForm="ngForm" (ngSubmit)="submitStory(storyForm)" novalidate>
+  <li>
+    <div class="form-group">
+      <label for="exampleInputEmail1">THE TITLE</label>
+      <input type="text" name="storyTitle" [(ngModel)]="imageDetails.title" (change)="trimTitle('title')" #storyTitle="ngModel" class="form-control"
+        id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Give your photo a title…" [ngClass]="{'is-invalid': (storyForm.submitted && storyTitle.invalid),
+        'text-valid':storyTitle.valid}"
+        required>
+      <div class="invalid-feedback" [ngClass]="{'disp-blk': (storyForm.submitted && storyTitle.invalid)}">
+        Title field is required
+      </div>
+    </div>
+  </li>
+  <li>
+    <div class="form-group">
+      <label for="exampleInputEmail1">THE STORY</label>
+      <textarea name="storyDesc" #storyDesc="ngModel" (change)="trimTitle('story')" [(ngModel)]="imageDetails.story" class="form-control" rows="6"
+        placeholder="Write the story of this photograph. Take your time, people love a good story, it helps us understand the image."
+        [ngClass]="{'is-invalid': (storyForm.submitted && storyDesc.invalid),'text-valid':storyDesc.valid}"
+        required></textarea>
+      <div class="invalid-feedback" [ngClass]="{'disp-blk': (storyForm.submitted && storyDesc.invalid)}">
+        Story field is required
+      </div>
+    </div>
+  </li>
+  <li class="btn-wrp">
+    <!-- <input name="upload_id" hidden [(ngModel)]="imageDetails.id" #upload_id> -->
+    <button type="submit" class="btn btn-primary" [disabled]="storyForm.invalid" [ngClass]="{'disabled': storyForm.invalid}">Continue</button>
+  </li>
+</form>

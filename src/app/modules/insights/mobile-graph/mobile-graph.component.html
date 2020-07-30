@@ -1,0 +1,18 @@
+<section class="graph-bx">
+  <h6 class="ttl">{{section}} / {{period}}</h6>
+  <div class="col-md-12">
+    <div style="display:block" class="graph-mob">
+    <canvas  baseChart
+    height="400vw" width="800vw"
+      [datasets]="datasets"
+      [labels]="labels"
+      [options]="options"
+      [colors]="colors"
+      [legend]="false"
+      [chartType]="chartType"
+      (chartHover)="chartHovered($event)"
+      (chartClick)="chartClicked($event)">
+  </canvas>
+   </div>
+  </div>
+</section>

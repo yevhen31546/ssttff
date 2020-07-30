@@ -1,0 +1,118 @@
+<!--============= Header Mob =============-->
+<div class="content-cntr header-mb">
+  <div class="row">
+    <div class="col-sm-12 left">
+
+      <div class="header-nav">
+        <ul class="">
+          <li>
+            <div [routerLink]="['/']" class="logo">
+              <img src="assets/images/temp/logo-black.svg" class="logo-mb">
+            </div>
+          </li>
+          <li><a class="cursor" (click)=showSearchIcon(true)><i><img src="assets/images/temp/search-icn.svg" alt=""></i></a></li>
+          <!-- <li *ngIf="isLogin"  class="notification-icn"><a><i class="fa fa-bell" aria-hidden="true"></i></a></li> -->
+          <li *ngIf="isLogin" class="notification-icn"><a (click)="readMessages()"><i class="fa fa-bell"
+            [ngClass]="{'notification-active': isUnreadMsg}" aria-hidden="true"></i></a></li>
+          <li *ngIf="isLogin" class="user-img"><a title="View Profile" (click)="enableMenu('Profile')">
+              <img  src="{{userDetails.photo_url?userDetails.photo_url:'assets/images/temp/user-default-header.png'}}"></a></li>
+          <li>
+            <a class="dots" (click)=showMainMenuFn()>
+              <i class="fa fa-circle" aria-hidden="true"></i>
+              <i class="fa fa-circle" aria-hidden="true"></i>
+              <i class="fa fa-circle" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li *ngIf="!isLogin"><a [routerLink]="['/sign-up']" class="btn btn-primary">Join Free</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <section class="mob-search" *ngIf="showSearch">
+    <span class="search-close cursor">
+      <img (click)="showSearchIcon(false)" src="assets/images/temp/ui-cross.svg" alt="">
+    </span>
+    <h4 class="search-label">Search</h4>
+    <div class="search-cntr ml-0" [ngClass]="{'focused': isFocused==true}">
+      <i></i>
+      <form >
+      <input type="text" class="form-control" name="search" (click)="addFocus()" [(ngModel)]='search' (keydown)="keyDownFunction($event)">
+      </form>
+    </div>
+  </section>
+
+  <section class="mob-inner-nav main " *ngIf="showMainMenu" [ngClass]="{'sub-hide': selectedMobileMenu}">
+    <div class="top-head-wrp">
+      <div class="cls"><a (click)="hideMainMenuFn()"><img src="assets/images/temp/ui-cross.svg" alt=""></a></div>
+    </div>
+    <ul class="menu-list">
+      <li>
+        <!-- <a (click)="goToUploadPhotos()" class="btn btn-primary upload-btn">Upload Photo</a> -->
+        <div *ngIf="isLogin" class="btn-group upload-button-grroup" role="group" aria-label="Upload Photo Button group with nested dropdown">
+            <button (click)="goToUploadPhotos()" type="button" class="btn btn-primary ">Upload Photo</button>
+            <div class="btn-group" role="group">
+              <button id="btnGroupDrop1" type="button" class="drop-arrow btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              </button>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
+                  <a class="dropdown-item" (click)="createPhotoEssay()" >Create Photo Essay</a>
+                      <a class="dropdown-item" (click)="createCollection()" >Create Collection</a>
+              </div>
+            </div>
+            </div>
+      </li>
+      <li><a *ngIf="!isLogin" [routerLink]="['/sign-in']">Sign in</a></li>
+      <li (click)="enableMenu('Explore')"><a>Explore <i><img src="assets/images/temp/next-arw-blk.svg" alt=""></i></a></li>
+      <li (click)="enableMenu('STF Awards')"><a>STF Awards <i><img src="assets/images/temp/next-arw-blk.svg" alt=""></i></a></li>
+      <li (click)="enableMenu('Shoot The Frame')"><a>Shoot The Frame <i><img src="assets/images/temp/next-arw-blk.svg"
+              alt=""></i></a></li>
+    </ul>
+  </section>
+
+  <section class="mob-inner-nav sub" *ngIf="showMainMenu" [ngClass]="{'sub-active':selectedMobileMenu}">
+
+    <div class="top-head-wrp">
+      <div class="back"><a *ngIf="selectedMobileMenu !='Profile'" (click)="showMainMenuFn()"><img src="assets/images/temp/prv-arw-blk.svg"
+            alt=""></a></div>
+      <div *ngIf="selectedMobileMenu !='Profile'" class="menu-title">{{selectedMobileMenu}}</div>
+      <div class="cls"><a (click)="hideMainMenuFn()"><img src="assets/images/temp/ui-cross.svg" alt=""></a></div>
+    </div>
+
+    <!-- SubMenues -->
+    <ul *ngIf="selectedMobileMenu==='Explore'" class="menu-list">
+      <li><a [routerLink]="['/explore/photos']">Photos</a></li>
+      <li><a [routerLink]="['/explore/photo-essays']">Photo essays</a></li>
+      <li><a [routerLink]="['/explore/collections']">Collections</a></li>
+      <li><a [routerLink]="['/explore/categories']">Categories</a></li>
+      <li><a [routerLink]="['/explore/members']">Members</a></li>
+    </ul>
+    <ul *ngIf="selectedMobileMenu==='STF Awards'" class="menu-list">
+      <li><a href="https://about.shoottheframe.com/">Finalists and Winners</a></li>
+      <li><a href="https://about.shoottheframe.com/stf-awards">About STF Awards</a></li>
+      <li><a href="https://about.shoottheframe.com/prizes-and-partners/">Prizes and Partners</a></li>
+      <li><a href="https://about.shoottheframe.com/annual-book">The Annual Book</a></li>
+      <li><a href="https://about.shoottheframe.com/rules-and-faqs">Rules and FAQs</a></li>
+    </ul>
+    <ul *ngIf="selectedMobileMenu==='Shoot The Frame'" class="menu-list">
+      <li><a href='https://about.shoottheframe.com/'>About Shoot The Frame</a></li>
+      <li><a [routerLink]="['/pricing']">Pricing</a></li>
+      <li><a href="https://help.shoottheframe.com/">Help</a></li>
+      <li><a href="https://about.shoottheframe.com/contact">Contact</a></li>
+      <!-- <li><a href="https://about.shoottheframe.com/blog">Blog</a></li> -->
+    </ul>
+    <ul *ngIf="selectedMobileMenu==='Profile'" class="menu-list">
+      <li><a (click)="showProfile()">Profile</a></li>
+      <li><a [routerLink]="['/user/account-settings/profile']">Account settings</a></li>
+      <li><a [routerLink]="['/stf-award-entries']">STF Awards Entries</a></li>
+      <li><a [routerLink]="['/messages']">Messages</a></li>
+      <li><a [routerLink]="['/insights']">Insights</a></li>
+      <li><a [routerLink]="['/likes']">Likes</a></li>
+      <li><a [routerLink]="['/critiques']">Critiques</a></li>
+      <li><a (click)="logout()">Sign out</a></li>
+      <li><a *ngIf="role=='admin_user'" [routerLink]="['/all-stf-entries']" class="upgrade">All STF Entries</a></li>
+      <li><a *ngIf="role=='user'" [routerLink]="['/subscription/plans']" class="upgrade">Upgrade</a></li>
+      <!-- <li><a [routerLink]="['/subscription/plans']">Upgrade</a></li> -->
+    </ul>
+  </section>
+</div>
+
+<!--============= Header Mob =============-->

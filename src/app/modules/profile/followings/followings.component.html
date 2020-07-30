@@ -1,0 +1,38 @@
+<section class="profile-cnt-area">
+  <div class="profile-followers-cnt" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+    (scrolled)="pageChanged()" [scrollWindow]="true">
+    <ul *ngIf="listData" class="followers-list row">
+      <li class="col-sm-6" *ngFor="let item of listData; let i = index;">
+        <div class=" box">
+          <div class="left cursor" (click)="showProfile(item.username)">
+            <div class="img"><img src="{{ item.photo_url }}" alt=""></div>
+            <div class="txt">
+              <h6><a>{{item.name}}</a></h6>
+              {{ getLocation( item.location)}}
+            </div>
+          </div>
+          <div class="right" *ngIf="userDetails.id==profileDetails.id">
+            <a (click)="unFollowUser(item.to_user_id)" class="btn btn-secondary">Following</a>
+          </div>
+          <div class="right" *ngIf="userDetails.id!=profileDetails.id">
+            <a *ngIf="item.is_follow==0" (click)="unFollowUser(item,i)" class="btn btn-primary">Follow</a>
+            <a (click)="unFollowUser(item,i)" *ngIf="item.is_follow==1" class="btn
+              btn-secondary">Following</a>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <app-pagination-loader *ngIf="showPaginationLoader==true"></app-pagination-loader>
+  </div>
+  <div *ngIf="listData.length==0 && isOwnFollowings==false && showPaginationLoader==false" class="empty-msg text-center">
+    <p>{{ profileDetails.first_name }} is not following anyone yet. 😳</p>
+  </div>
+  <div *ngIf="listData.length==0 && isOwnFollowings==true && showPaginationLoader==false" class="empty-msg text-center">
+    <p>Your not following anyone yet.</p>
+    <p>Take a look a some of our <span class="underline cursor" (click)="featuredMembersNavigate()">featured members</span>, their work is killer.&nbsp; 😜</p>
+  </div>
+
+  <div *ngIf="emptyStatus==true && !showPaginationLoader" class="empty-msg text-center">
+    <p>No more results 🙃</p>
+  </div>
+</section>

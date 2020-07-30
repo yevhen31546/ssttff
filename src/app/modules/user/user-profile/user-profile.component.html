@@ -1,0 +1,260 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit($event)" (keydown.enter)="$event.preventDefault()">
+  <ul class="my-ac-form form-style row">
+    <li class="col-md-12 profile-pic-cntr">
+      <div class="image-upload-cntr">
+        <div class="img-cntr" *ngIf="!cropMode && url!=null">
+          <img [src]="url">
+        </div>
+        <div class="croppie-section" *ngIf="cropMode && isBrowser">
+          <ngx-croppie *ngIf="croppieImage" #ngxCroppie [croppieOptions]="croppieOptions" [imageUrl]="croppieImage"
+            [points]="[0, 0, 400, 400]" [zoomLevel]='zoomLevel' (result)="newImgFromCroppie($event)"></ngx-croppie>
+        </div>
+        <div class="text" *ngIf="clientPhotoUpload">
+          <div class="cnt">
+            <label>UPLOAD PROFILE IMAGE</label>
+            <a (click)="saveImageFromCroppie()" class="btn btn-primary">Save</a>
+            <span *ngIf="!progressBarShow"><u>{{ image_name }}</u></span>
+            <span *ngIf="progressBarShow"> Progress {{ uploader.progress }}%</span>
+          </div>
+          <a (click)="cancelUploadFile()" class="cancel">Cancel upload</a>
+        </div>
+        <div class="text" *ngIf="!clientPhotoUpload">
+          <div class="cnt">
+            <label>UPLOAD PROFILE IMAGE</label>
+
+            <a (click)="profileImg.click()" class="btn btn-secondary form-control img-upload-btn">Browse</a>
+
+            <span> You can upload jpg, gif and png files.</span>
+          </div>
+          <a *ngIf="this.url" (click)="removeCurrentFile()" class="cancel">Remove Image</a>
+        </div>
+        <!-- <input #selectedFile hidden type="file" ng2FileSelect [uploader]="uploader" (onFileSelected)="onFileSelected($event)" /> -->
+        <input type="file" hidden #profileImg (change)="imageUploadEvent($event)" accept="image/jpeg, image/png, image/gif" />
+      </div>
+    </li>
+    <!-- <li>
+      <div class="impact-slide">
+        <p-slider (onChange)="setCounter($event)" [animate]="true"></p-slider>
+      </div>
+    </li> -->
+    <li class="col-md-12">
+      <app-alert [hidden]='!submitted' [ngStyle]="{'width':'100%'}"></app-alert>
+    </li>
+    <li class="col-md-3 label"><label for="exampleInputEmail1">FIRST NAME</label></li>
+    <li class="col-md-9">
+      <div class="form-group">
+        <input class="form-control" formControlName="first_name" [ngClass]="{ 'is-invalid': submitted && f.first_name.errors,'text-valid':profileForm.value.first_name.length  }">
+        <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
+          <div *ngIf="f.first_name.errors.required">First Name is required</div>
+          <div *ngIf="f.first_name.errors.pattern">Please type valid first name</div>
+
+        </div>
+      </div>
+    </li>
+    <li class="col-md-3 label"><label for="exampleInputEmail1">LAST NAME</label></li>
+    <li class="col-md-9">
+      <div class="form-group">
+        <input class="form-control" formControlName="last_name" [ngClass]="{ 'is-invalid': submitted && f.last_name.errors,'text-valid':profileForm.value.last_name.length  }">
+        <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
+          <div *ngIf="f.last_name.errors.required">Last Name is required</div>
+          <div *ngIf="f.last_name.errors.pattern">Please type valid last name</div>
+
+        </div>
+      </div>
+    </li>
+    <li class="col-md-3 label"><label for="exampleInputEmail1">EMAIL</label></li>
+    <li class="col-md-9">
+      <div class="form-group">
+        <input class="form-control" (blur)="checkEmailChanges()" formControlName="email" [ngClass]="{ 'is-invalid': submitted && (f.email.errors  ),'text-valid':profileForm.value.email.length  }">
+        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+          <div *ngIf="f.email.errors.required">Email is required</div>
+          <div *ngIf="f.email.errors.pattern">Please type valid email</div>
+        </div>
+        <div class="invalid-feedback" *ngIf="this.validationErrors['email']">{{
+          this.validationErrors['email'][0] }}
+        </div>
+      </div>
+    </li>
+    <li class="col-md-3 label"><label for="exampleInputEmail1">USERNAME</label></li>
+    <li class="col-md-9">
+      <div class="form-group">
+        <input class="form-control" formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors,'text-valid':profileForm.value.username.length  }">
+        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+          <div *ngIf="f.username.errors.required">Username is required</div>
+        </div>
+      </div>
+    </li>
+    <li class="col-md-3 label"><label for="exampleInputEmail1">LOCATION</label></li>
+    <li class="col-md-9">
+      <div class="form-group">
+        <input autocorrect="off" autocapitalize="off" spellcheck="off" placeholder="search for location" type="text"
+          class="form-control" #search formControlName="location" [ngClass]="{'text-valid':profileForm.value.location!=null && profileForm.value.location.length}">
+      </div>
+    </li>
+    <li class="col-md-3 label"><label for="exampleInputEmail1">WEBSITE</label></li>
+    <li class="col-md-9">
+      <div class="form-group">
+        <input class="form-control" placeholder="www.yourwebsite.com" formControlName="web_link" [ngClass]="{ 'is-invalid': submitted && f.web_link.errors,'text-valid':profileForm.value.web_link!=null && profileForm.value.web_link.length }">
+        <div *ngIf="submitted && f.web_link.errors" class="invalid-feedback">
+          <div *ngIf="f.web_link.errors.pattern">Please type valid web link</div>
+        </div>
+      </div>
+    </li>
+    <li class="col-md-3 label"><label for="exampleInputEmail1">FACEBOOK</label></li>
+    <li class="col-md-9">
+      <div class="form-group">
+        <input class="form-control" placeholder="https://www.facebook.com/username" formControlName="facebook_link"
+          [ngClass]="{ 'is-invalid': submitted && f.facebook_link.errors,'text-valid':profileForm.value.facebook_link!=null && profileForm.value.facebook_link.length }">
+        <div *ngIf="submitted && f.facebook_link.errors" class="invalid-feedback">
+          <div *ngIf="f.facebook_link.errors.pattern">Please type valid facebook link</div>
+        </div>
+      </div>
+    </li>
+    <li class="col-md-3 label"><label for="exampleInputEmail1">INSTRAGRAM</label></li>
+    <li class="col-md-9">
+      <div class="form-group">
+        <input class="form-control" placeholder="https://www.instagram.com/username" formControlName="instagram_link"
+          [ngClass]="{ 'is-invalid': submitted && f.instagram_link.errors,'text-valid':profileForm.value.instagram_link!=null && profileForm.value.instagram_link.length }">
+        <div *ngIf="submitted && f.instagram_link.errors" class="invalid-feedback">
+          <div *ngIf="f.instagram_link.errors.pattern">Please type valid instagram link</div>
+        </div>
+      </div>
+    </li>
+    <li class="col-md-3 label"><label for="exampleInputEmail1">TWITTER</label></li>
+    <li class="col-md-9">
+      <div class="form-group">
+        <input class="form-control" placeholder="https://www.twitter.com/username" formControlName="twitter_link"
+          [ngClass]="{ 'is-invalid': submitted && f.twitter_link.errors,'text-valid':profileForm.value.twitter_link!=null && profileForm.value.twitter_link.length}">
+        <div *ngIf="submitted && f.twitter_link.errors" class="invalid-feedback">
+          <div *ngIf="f.twitter_link.errors.pattern">Please type valid twitter link</div>
+        </div>
+      </div>
+    </li>
+    <li class="col-md-3 label description-cntr"><label for="exampleInputEmail1">DESCRIPTION</label></li>
+    <li class="col-md-9">
+      <div class="form-group">
+        <textarea class="form-control" rows="4" placeholder="Profile description" [ngClass]="{'text-valid':profileForm.value.description!=null && profileForm.value.description.length}"
+          formControlName="description" #description></textarea>
+      </div>
+    </li>
+    <li class="col-md-3 label"><label for="exampleInputEmail1">AVAILABILITY</label></li>
+    <li class="col-md-9">
+      <label class="checkbox">
+        <input type="checkbox" (change)="checkboxChange($event,'availability')" formControlName="availability_d">
+        <span>Available for freelance</span>
+        <span class="checkmark"></span>
+      </label>
+    </li>
+    <li class="col-md-3 label"><label for="exampleInputEmail1">COLLECTIVE SCORE</label></li>
+    <li class="col-md-9">
+      <label class="checkbox">
+        <input type="checkbox" (change)="checkboxChange($event,'collective_score')" formControlName="collective_score_d">
+        <span>Show Collective and Master Collective Score</span>
+        <span class="checkmark"></span>
+      </label>
+    </li>
+    <li class="col-md-12 justify-content-end">
+      <button class="btn btn-primary">Save</button>
+    </li>
+
+    <li class="col-md-12 delete-ac" (click)="deleteAccount()">
+      <a>Delete account</a>
+    </li>
+  </ul>
+</form>
+<!--=========================End Left=========================-->
+<ng-template #emailalert class="change-email" let-modal>
+  <div class="change-email">
+    <div class="modal-header">
+      <h3 class="sub-title-md text-center">Change email address</h3>
+      <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+        <img src="assets/images/temp/ui-cross.svg" alt="">
+      </button>
+    </div>
+    <div class="modal-body">
+      <p class="mb-32">
+        Are you sure you want to change your email address to {{ profileForm.value.email }}?
+        If yes, you will be required to confirm this new email address immediately.
+      </p>
+      <div class="btn-cntr text-center">
+        <a class="cancel" (click)="modal.dismiss('cancel click')">Cancel</a>
+        <a class="btn btn-primary" (click)="modal.close('Ok click')">Yes, change it</a>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #firstDeleteAlert class="change-email" let-modal>
+  <div class="inner-modal">
+    <div class="modal-header">
+      <h3 class="modal-title text-danger">Delete Account</h3>
+      <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+        <img src="assets/images/temp/ui-cross.svg" alt="">
+      </button>
+    </div>
+    <div class="modal-body text-center">
+      <p>
+        Are you sure you want to delete your account?
+      </p>
+      <p>
+        This decision is final, the account cannot be re-activated.
+      </p>
+      <p><strong> You will lose access to all of your photos, critiques, comments and messages.
+        </strong>
+      </p>
+      <div class="btn-cntr text-center">
+        <a class="cancel" (click)="modal.dismiss('Close click')">Cancel</a>
+        <a class="btn btn-danger" (click)="modal.close('Ok click')">Delete everything</a>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #secondDeleteAlert class="change-email" let-modal>
+  <div class="inner-modal">
+    <div class="modal-header">
+      <h3 class="modal-title text-danger">Delete Account - Last Chance</h3>
+      <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+        <img src="assets/images/temp/ui-cross.svg" alt="">
+      </button>
+    </div>
+    <div class="modal-body text-center">
+      <p><strong>
+          Last chance. You cannot undo this action. The decision is final.
+        </strong>
+      </p>
+      <p>
+        If you need help, please <span class=""><a class="text-black underline" target="_blank" href="https://support.shoottheframe.com">ask
+            support.</a></span>
+      </p>
+      <div class="btn-cntr text-center">
+        <a class="cancel delete-acc-cancel" (click)="modal.dismiss('Close click')">Cancel</a>
+        <a class="text-danger underline" (click)="modal.close('Ok click')">I understand, delete everything</a>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #unableDeleteAlert class="change-email" let-modal>
+  <div class="inner-modal">
+    <div class="modal-header">
+      <h3 class="modal-title text-black">Unable to delete account</h3>
+      <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+        <img src="assets/images/temp/ui-cross.svg" alt="">
+      </button>
+    </div>
+    <div class="modal-body text-center">
+      <p>
+        Currently you are not able to delete account. This could be for a couple of reasons, mostly in relation to the
+        STF Awards.
+      </p>
+      <p>
+        Please <span><a class="underline text-black" target="_blank" href="https://support.shoottheframe.com">contact
+            support</a></span>
+        to discuss.
+      </p>
+      <div class="btn-cntr text-center">
+        <a (click)="modal.dismiss('Close click')" class="btn btn-secondary">Okay</a>
+      </div>
+    </div>
+  </div>
+</ng-template>

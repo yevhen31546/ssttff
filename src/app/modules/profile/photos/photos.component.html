@@ -1,0 +1,192 @@
+<!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+  <img src="assets/images/temp/ui-cross.svg" alt="">
+</button> -->
+<button type="button" class="popclose-mb close-critic" [hidden]="!closeButton" aria-describedby="modal-title"
+  (click)="closeModal()">
+  <img src="assets/images/temp/close.svg" alt="">
+</button>
+<div class="photo-cnt" *ngIf="userPhotos">
+  <div class="image-items" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+    (scrolled)="pageChanged()" [scrollWindow]="true">
+    <ng-masonry-grid class="grid" (onNgMasonryInit)="onNgMasonryInit($event)" (layoutComplete)="completeLayout($event)"
+      [masonryOptions]="
+      {itemSelector: grid-item,initLayout:false,
+        gutter: 30,horizontalOrder: false,
+        percentPosition: true,
+        transitionDuration: 0.50,
+        transitionDelay:0.50}" [useAnimation]="false" [useImagesLoaded]="false">
+      <!-- Masonry Grid Item -->
+      <ng-masonry-grid-item #container class="grid-item" id="{{'masonry-item-'+i}}"
+        *ngFor="let item of userPhotos; let i = index;">
+        <!-- Grid Content  -->
+        <!-- [ngStyle]="{'height':addPixel(item.height,item.width)}" -->
+
+        <div class="inner-grid" [ngStyle]="{'opacity':showOpacity[item.page]}">
+          <!-- [ngStyle]="{'height':addPixel(item.height,item.width)}"> -->
+          <div class="top-area">
+            <app-stf-award-logo [item]='item' [type]="'web'"></app-stf-award-logo>
+
+            <ul>
+              <li [hidden]="(authUserDetails && authUserDetails.id == item.user_id)">
+                <a (click)="addCollections(item)" placement="bottom" tooltipClass="tooltip-custom"
+                  [ngbTooltip]="collection">Collect</a>
+              </li>
+              <li [hidden]="(authUserDetails && authUserDetails.id == item.user_id ) || item.critique_status !== 0 || removeCritic == item.id">
+                <a (click)="crticPopup(imageDetails,item,i)" placement="bottom" tooltipClass="tooltip-custom"
+                  [ngbTooltip]="critique">Critique</a>
+              </li>
+
+              <li [hidden]="authUserDetails && authUserDetails.id !== item.user_id ||  !authUserDetails">
+                <div class="dropdown option-dropdown">
+                  <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false" placement="bottom" tooltipClass="tooltip-custom"
+                    [ngbTooltip]="moreoptions">
+                    <span></span>
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                    <div class="inner-wrp">
+                      <a class="dropdown-item" (click)="submitStfAwards(item)">Submit photo into STF Awards</a>
+                      <a class="dropdown-item" (click)=awardHistoryModal(item)>STF Awards history</a>
+                      <a class="dropdown-item" (click)="addPhotoEssay(item)">Add to photo essay</a>
+                      <a class="dropdown-item" (click)="addCollections(item)">Add to collection</a>
+                      <a class="dropdown-item" (click)="share(imageDetails,item,i,'photo')">Share photo</a>
+                      <a class="dropdown-item" (click)="share(imageDetails,item,i,'critic')">Invite critique</a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <!-- <li *ngIf="identifyType=='photo_essay_details'">
+                <div class="dropdown option-dropdown">
+                  <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false" [ngbTooltip]="moreoptions">
+                    <span></span>
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                    <div class="inner-wrp">
+                      <a class="dropdown-item" (click)="setEssayCover(item.id)">Set to essay cover</a>
+                      <a class="dropdown-item" (click)="removeEssayPhoto(item.id)">Remove from essay</a>
+                      <a class="dropdown-item" (click)="addPhotoEssay(item)">Edit photo</a>
+                    </div>
+                  </div>
+                </div>
+              </li> -->
+              <!-- <li *ngIf="identifyType=='collection_details'">
+                <div class="dropdown option-dropdown">
+                  <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false" [ngbTooltip]="moreoptions">
+                    <span></span>
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                    <div class="inner-wrp">
+                      <a class="dropdown-item" (click)="setCollectionCover(item.id)">Set to collection cover</a>
+                      <a class="dropdown-item" (click)="removeCollectionPhoto(item.id)">Remove from collection</a>
+                      <a class="dropdown-item">Edit photo</a>
+                    </div>
+                  </div>
+                </div>
+              </li> -->
+            </ul>
+            <div class="likes" tooltipClass="tooltip-custom"
+              [ngbTooltip]="item.like_status === 1 ? likeContent : unlikeContent"
+              [ngClass]="item.like_status === 1 ? 'active' : ''" (click)="likePhotos(item)"><i class="fa fa-heart"
+                aria-hidden="true"></i>
+              <span class="cnt"> {{nFormatter(item.like_count)}} </span></div>
+          </div>
+          <div class="bottom-area">
+            <div (click)="showProfile(item.username)" class="left cursor">
+              <div class="img"><img class="cursor" (click)="showProfile(item.username)" src="{{item.user_photo?item.user_photo:'assets/images/temp/user-icon.svg'}}" alt="">
+              </div>
+              {{item.name}}
+            </div>
+            <div class="right">
+              <div class="likes" *ngIf="((item.adult_content=='0')
+               || (item.adult_content=='1' &&  OwnPhotos))" container="body" tooltipClass="tooltip-custom"
+                [ngbTooltip]="item.like_status === 1 ? likeContent : unlikeContent"
+                [ngClass]="item.like_status === 1 ? 'active' : ''" (click)="likePhotos(item)"><i class="fa fa-heart"
+                  aria-hidden="true"></i>
+                <span class="cnt"> {{nFormatter(item.like_count)}} </span></div>
+              <div *ngIf="item.adult_content=='1'  && !OwnPhotos" class="likes cursor adult-btn"
+                (click)="updateAdultContent(item)">
+                See adult content
+              </div>
+              <app-stf-award-logo [item]='item' [type]="'mobile'"></app-stf-award-logo>
+
+            </div>
+          </div>
+          <!-- <img (click)="openModal(imageDetails,item,i)" [defaultImage]="defaultImage" [lazyLoad]="item.media" [useSrcset]="false"
+          [offset]="item.height"> -->
+          <!-- <div [defaultImage]="defaultImage" [lazyLoad]="item.media" [offset]="offset"></div> -->
+          <!-- src="{{ item.localmedia}}--glide?q=50" -->
+          <!-- <img (click)=openModal(imageDetails,item,i) src="{{ item.localmedia}}--glide?q={{glideLength}}" alt="No image" /> -->
+          <div class="grid-image-outer" [ngClass]="{'ad_cnt': item.adult_content=='1' && !OwnPhotos}"
+            [ngStyle]="{'padding-bottom':addPixel(item),'position':'relative'}">
+            <img (click)="openModal(imageDetails,item,i)" style="background-color:#E0E3E5"
+            sizes="(min-width: 992px)  {{ratioVal}}, (min-width: 768px) and (max-width:991px) calc((100vw - 48px) / 2), 100vw"
+            src="{{ item.localmedia}}--glide?w=360&q=80"
+             srcset="{{ item.localmedia}}--glide?w=360&fit=crop&q=80 100w,
+        {{ item.localmedia}}--glide?w=360&fit=crop&q=80 200w,
+        {{ item.localmedia}}--glide?w=360&fit=crop&q=80 300w,
+        {{ item.localmedia}}--glide?w=400&fit=crop&q=80 400w,
+        {{ item.localmedia}}--glide?w=500&fit=crop&q=80 500w,
+        {{ item.localmedia}}--glide?w=600&fit=crop&q=80 600w,
+        {{ item.localmedia}}--glide?w=700&fit=crop&q=80 700w,
+        {{ item.localmedia}}--glide?w=800&fit=crop&q=80 800w,
+        {{ item.localmedia}}--glide?w=900&fit=crop&q=80 900w,
+        {{ item.localmedia}}--glide?w=1000&fit=crop&q=80 1000w,
+        {{ item.localmedia}}--glide?w=1100&fit=crop&q=80 1100w,
+        {{ item.localmedia}}--glide?w=1200&fit=crop&q=80 1200w,
+        {{ item.localmedia}}--glide?w=1296&fit=crop&q=80 1296w,
+        {{ item.localmedia}}--glide?w=1400&fit=crop&q=80 1400w,
+        {{ item.localmedia}}--glide?w=1600&fit=crop&q=80 1600w,
+        {{ item.localmedia}}--glide?w=1800&fit=crop&q=80 1800w,
+        {{ item.localmedia}}--glide?w=2000&fit=crop&q=80 2000w,
+        {{ item.localmedia}}--glide?w=2200&fit=crop&q=80 2200w,
+        {{ item.localmedia}}--glide?w=2400&fit=crop&q=80 2400w,
+        {{ item.localmedia}}--glide?w=2592&fit=crop&q=80 2592w
+        ">
+          </div>
+        </div>
+
+        <div class="dropdown option-dropdown">
+          <!-- <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false"  placement="bottom" [ngbTooltip]="moreoptions">
+            <span></span>
+          </button> -->
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+            <div class="inner-wrp">
+              <a class="dropdown-item" (click)="submitStfAwards(item)">Submit photo into STF Awards</a>
+              <a class="dropdown-item" (click)=awardHistoryModal(item)>STF Awards history</a>
+              <a class="dropdown-item" (click)="addPhotoEssay(item)">Add to photo essay</a>
+              <a class="dropdown-item" (click)="addCollections(item)">Add to collection</a>
+              <a class="dropdown-item">Share photo</a>
+              <a class="dropdown-item" (click)="share(imageDetails,item,i)">Invite critique</a>
+            </div>
+          </div>
+        </div>
+      </ng-masonry-grid-item>
+    </ng-masonry-grid>
+
+  </div>
+</div>
+<app-pagination-loader *ngIf="showPaginationLoader==true"></app-pagination-loader>
+<div *ngIf="userPhotos.length==0 && !showPaginationLoader && this.OwnPhotos==false && !searchTerm"
+  class="empty-msg text-center">{{name}}
+  hasn’t uploaded any
+  photos yet. &nbsp; <img src="assets/images/temp/smiley.png" alt=""></div>
+<div *ngIf="userPhotos.length==0 && !showPaginationLoader && this.OwnPhotos==true && !searchTerm"
+  class="empty-msg text-center">
+  <p>You haven’t uploaded any photos yet.</p>
+  <p>Perhaps you can <span class="underline cursor" (click)="uploadSection()">upload your first one now!</span> 😀</p>
+</div>
+<div *ngIf="userPhotos.length==0 && !showPaginationLoader && searchTerm" class="empty-msg text-center">
+  <p>Oops, no results in ‘photos’. 🙃</p>
+</div>
+<div *ngIf="emptyStatus==true && !showPaginationLoader" class="empty-msg text-center">
+  <p>No more results 🙃</p>
+</div>
+
+<ng-template #likeContent>Liked by you</ng-template>
+<ng-template #unlikeContent>Give a little love</ng-template>
+<ng-template #moreoptions>More options</ng-template>
+<ng-template #collection>Add to collection</ng-template>
+<ng-template #critique>Critique Photo</ng-template>

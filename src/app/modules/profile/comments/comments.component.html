@@ -1,0 +1,88 @@
+<section class="tab-cnt">
+  <div class="comment-tab-content clearfix">
+    <app-alert></app-alert>
+    <div class="comment-box" [ngClass]="{'focus-in': focusInBox}" >
+
+
+
+
+
+      <form class="comment-boxWrp" #commentForm="ngForm" (ngSubmit)="onSubmitComment(commentForm)">
+        <div [hidden]="isloggedIn" class="comment-input"><span class="asksignIn"><a (click)="login()">Sign in</a> to
+            comment…</span></div>
+        <div class="cmt-bx-cntr">
+          <div [innerHTML]="commentValue"> </div>
+          <textarea #textareaHeight  (searchTerm)="searchUser($event)" (focus)="inFocus(true)" (focusout)="inFocus(false)" [mentions]="mentionItems"
+           (keyup)="autosize($event)" name="comment" id="comment"
+           (ngModelChange)="isText($event)" (selectedTerm)="selectedTerm($event)" [value]="commentVal"
+            [(ngModel)]="comment" [hidden]="!isloggedIn" class="comment-input" cols="30" rows="1" placeholder="Comment…">
+            </textarea>
+        </div>
+        <!-- <ngx-emoji (click)="smiley()" [emoji]="{ id: 'slightly_smiling_face', skin: 3 }" size="16"></ngx-emoji> -->
+        <div class="cursor" [style.padding.px]="10" (click)="smiley()">🙂</div>
+        <!-- <img class="cursor" (click)="smiley()" src="assets/images/temp/image.svg" alt=""> -->
+        <input type="submit" class="comment-submit btn btn-primary" [disabled]="!isloggedIn || !comment || submit" value="Comment">
+      </form>
+    </div>
+    <div [hidden]="!show">
+      <emoji-mart autoFocus=false hideObsolete=true set="google" size="16" showPreview=false (emojiClick)="addEmoji($event)"></emoji-mart>
+    </div>
+    <ngx-emoji #emojiContent [emoji]="emojiItem" size="16"></ngx-emoji>
+    <ul class="comment-list list-unstyled" *ngIf="showPaginationLoader">
+
+      <li class="comment-item clearfix">
+        <div class="imgBox shine"></div>
+        <div class="dtlCol">
+          <h3 class="comment-authName mb-3 shine"></h3>
+          <p class="comment-authComment mb-3 shine"></p>
+          <span class="comment-date shine"></span>
+        </div>
+      </li>
+    </ul>
+    <ul class="comment-list list-unstyled" *ngIf="!showPaginationLoader">
+
+      <li class="comment-item clearfix" *ngFor="let comment of comments">
+        <div (click)="showProfile(comment.username)" class="imgBox cursor">
+          <img src="{{comment.user_photo}}" alt="">
+        </div>
+        <div class="dtlCol">
+          <h3 class="comment-authName cursor" (click)="showProfile(comment.username)">{{comment.name}}</h3>
+          <p class="comment-authComment mb-2" [innerHtml]="comment.comment"></p>
+          <!-- <p class="comment-authComment mb-2">{{comment.comment}}</p> -->
+          <div class="d-flex justify-content-between">
+            <span class="comment-date">{{timeSince(comment.created_at)}}</span>
+            <span [hidden]="user.id!==comment.from_user_id" class="comment-delete">
+              <a (click)="deleteComment(comment.id)" class="text-danger">Delete</a>
+            </span>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <div *ngIf="comments.length === 0 && !showPaginationLoader" class="nocomment text-center">
+      <p>No comments on this photo yet 🙃</p>
+      <br><br>
+      <p>What do you think?</p>
+    </div>
+  </div>
+</section>
+
+
+<ng-template #contentDelete class="change-email" let-modal>
+  <div class="inner-modal">
+    <div class="modal-header">
+      <h3 class="modal-title text-center">Delete Comment</h3>
+      <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+        <img src="assets/images/temp/ui-cross.svg" alt="">
+      </button>
+    </div>
+    <div class="modal-body text-center">
+      <p>
+        Are you sure you want to delete this comment?
+      </p>
+      <div class="btn-cntr text-center">
+        <a class="cancel" (click)="modal.dismiss('Close click')">Cancel</a>
+        <a class="btn btn-danger" (click)="modal.close('Ok click')">Yes, delete</a>
+      </div>
+    </div>
+  </div>
+</ng-template>

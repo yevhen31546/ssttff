@@ -1,0 +1,625 @@
+<main class="main">
+  <div class="content-cntr innerpage">
+    <app-loader></app-loader>
+    <app-alert></app-alert>
+    <section class="pricing-cnt-area">
+      <h2 class="title">STF membership pricing</h2>
+      <h3 class="sub-heading">
+        You can become a member of the STF community, and you can also purchase
+        individual <span class="underline cursor" (click)="scrollToElement(target)">STF Awards submissions</span> for
+        the
+        monthly STF Awards.
+      </h3>
+      <section class="common-tab">
+        <ul class="nav-tabs">
+          <li>
+            <a [ngClass]="{ active: activetab === 'monthly' }" (click)="changeTab('monthly')">MONTHLY</a>
+          </li>
+          <li>
+            <a [ngClass]="{ active: activetab === 'yearly' }" (click)="changeTab('yearly')">YEARLY</a>
+          </li>
+        </ul>
+      </section>
+      <div class="plan-details">
+        <section class="row" *ngIf="activetab == 'monthly'">
+          <!-- monthly basic -->
+          <div class="col-md-4">
+            <div class="plan-bx">
+              <h4 class="sub-title">
+                <span>BASIC</span> SHOOT THE FRAME MEMBER
+              </h4>
+              <div class="price">Free</div>
+              <ul class="planlist">
+                <li>3 daily uploads to the community</li>
+                <li>Option to submit photos into STF Awards</li>
+                <li>Give and recieive photo critiques</li>
+                <li>Collective Score / Master Collective Score</li>
+                <li>Create Collections</li>
+                <li>Create Photo Essays</li>
+                <li>Like photos</li>
+                <li>History of liked photos</li>
+                <li>Direct message members</li>
+                <li>Follow / unfollow</li>
+              </ul>
+              <ul class="plansublist">
+                <li>Access details of received critiqeus</li>
+                <li>Access Insights for profile and photos</li>
+                <li>Helping make this community sustainable</li>
+                <li>
+                  7 submissions every month into the International STF Awards
+                  (valued at $19). Submit your photos into the portrait,
+                  landscape or wildlife categories.
+                  <span class="underline">Learn more about STF Awards past winners and prizes…</span>
+                </li>
+              </ul>
+              <div class="btn-cntr" *ngIf="isLogin === false">
+                <button (click)="redirect('basic', 'monthly')" class="btn btn-primary">
+                  Sign up
+                </button>
+              </div>
+              <div class="btn-cntr" *ngIf="isLogin === true && this.activePlan != 1">
+                <button *ngIf="isDownGrade && this.activePlan > 1" (click)="openModal(contentDelete,'basic', 'monthly')"
+                  class="btn btn-secondary">
+                  Downgrade
+                </button>
+                <button *ngIf="this.activePlan < 1" (click)="upgradeStripeAccount('basic', 'monthly')"
+                  class="btn btn-primary">
+                  Upgrade
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- monthly basic -->
+          <!-- monthly pro -->
+          <div class="col-md-4">
+            <div class="plan-bx">
+              <h4 class="sub-title"><span>PRO</span> SHOOT THE FRAME MEMBER</h4>
+              <div class="price">$ 2.99 <span>/ per month</span></div>
+              <ul class="planlist">
+                <li>
+                  <strong>Unlimited</strong> daily uploads to the community
+                </li>
+                <li>Option to submit photos into STF Awards</li>
+                <li>Give and recieive photo critiques</li>
+                <li>Collective Score / Master Collective Score</li>
+                <li>Create Collections</li>
+                <li>Create Photo Essays</li>
+                <li>Like photos</li>
+                <li>History of liked photos</li>
+                <li>Direct message members</li>
+                <li>Follow / unfollow</li>
+                <li>Access details of received critiqeus</li>
+                <li>Access Insights for profile and photos</li>
+                <li>Helping make this community sustainable</li>
+              </ul>
+              <ul class="plansublist">
+                <li>
+                  7 submissions every month into the International STF Awards
+                  (valued at $19). Submit your photos into the portrait,
+                  landscape or wildlife categories.
+                  <span class="underline">Learn more about STF Awards past winners and prizes…</span>
+                </li>
+              </ul>
+              <div class="btn-cntr" *ngIf="isLogin === false">
+                <button (click)="redirect('pro', 'monthly', '299.00')" class="btn btn-primary">
+                  Sign up
+                </button>
+              </div>
+              <div class="btn-cntr" *ngIf="isLogin === true && this.activePlan != 2">
+                <button *ngIf="isDownGrade && this.activePlan > 2"
+                  (click)="openModal(contentDelete,'pro', 'monthly', 299.0)" class="btn btn-secondary">
+                  Downgrade
+                </button>
+                <button *ngIf="this.activePlan < 2" (click)="upgradeStripeAccount('pro', 'monthly', 299.0)"
+                  class="btn btn-primary">
+                  Upgrade
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- monthly pro -->
+          <!-- monthly premium -->
+          <div class="col-md-4">
+            <div class="plan-bx">
+              <h4 class="sub-title">
+                <span>PREMIUM</span> SHOOT THE FRAME MEMBER
+              </h4>
+              <div class="price">$ 13.99 <span>/ per month</span></div>
+              <ul class="planlist">
+                <li>
+                  <strong>Unlimited</strong> daily uploads to the community
+                </li>
+                <li>Option to submit photos into STF Awards</li>
+                <li>Give and recieive photo critiques</li>
+                <li>Collective Score / Master Collective Score</li>
+                <li>Create Collections</li>
+                <li>Create Photo Essays</li>
+                <li>Like photos</li>
+                <li>History of liked photos</li>
+                <li>Direct message members</li>
+                <li>Follow / unfollow</li>
+                <li>Access details of received critiqeus</li>
+                <li>Access Insights for profile and photos</li>
+                <li>Helping make this community sustainable</li>
+                <li>
+                  7 submissions every month into the International STF Awards
+                  (valued at $19). Submit your photos into the portrait,
+                  landscape or wildlife categories.
+                  <span class="underline">Learn more about STF Awards past winners and prizes…</span>
+                </li>
+              </ul>
+              <div class="btn-cntr" *ngIf="isLogin === false">
+                <button (click)="redirect('premium', 'monthly', '1399.00')" class="btn btn-primary">
+                  Sign up
+                </button>
+              </div>
+              <div class="btn-cntr" *ngIf="isLogin === true && this.activePlan != 3">
+                <button *ngIf="isDownGrade && this.activePlan > 3"
+                  (click)="openModal(contentDelete,'premium', 'monthly', 1399.0)" class="btn btn-secondary">
+                  Downgrade
+                </button>
+                <button *ngIf="this.activePlan < 3" (click)="upgradeStripeAccount('premium', 'monthly', 1399.0)"
+                  class="btn btn-primary">
+                  Upgrade
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- monthly premium -->
+        </section>
+
+        <section class="row" *ngIf="activetab == 'yearly'">
+          <!-- yearly basic -->
+          <div class="col-md-4">
+            <div class="plan-bx">
+              <h4 class="sub-title">
+                <span>BASIC</span> SHOOT THE FRAME MEMBER
+              </h4>
+              <div class="price">Free</div>
+              <ul class="planlist">
+                <li>3 daily uploads to the community</li>
+                <li>Option to submit photos into STF Awards</li>
+                <li>Give and recieive photo critiques</li>
+                <li>Collective Score / Master Collective Score</li>
+                <li>Create Collections</li>
+                <li>Create Photo Essays</li>
+                <li>Like photos</li>
+                <li>History of liked photos</li>
+                <li>Direct message members</li>
+                <li>Follow / unfollow</li>
+              </ul>
+              <ul class="plansublist">
+                <li>Access details of received critiqeus</li>
+                <li>Access Insights for profile and photos</li>
+                <li>Helping make this community sustainable</li>
+                <li>
+                  7 submissions every month into the International STF Awards
+                  (valued at $19). Submit your photos into the portrait,
+                  landscape or wildlife categories.
+                  <span class="underline">Learn more about STF Awards past winners and prizes…</span>
+                </li>
+              </ul>
+
+              <div class="btn-cntr" *ngIf="isLogin === false">
+                <button (click)="redirect('basic', 'yearly')" class="btn btn-primary">
+                  Sign up
+                </button>
+              </div>
+              <div class="btn-cntr" *ngIf="isLogin === true && this.activePlan != 1">
+                <button *ngIf="isDownGrade && this.activePlan > 1" (click)="openModal(contentDelete,'basic', 'yearly')"
+                  class="btn btn-secondary">
+                  Downgrade
+                </button>
+                <button *ngIf="this.activePlan < 1" (click)="upgradeStripeAccount('basic', 'yearly')"
+                  class="btn btn-primary">
+                  Upgrade
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- yearly basic -->
+          <!-- yearly pro -->
+
+          <div class="col-md-4">
+            <div class="plan-bx">
+              <h4 class="sub-title"><span>PRO</span> SHOOT THE FRAME MEMBER</h4>
+              <div class="price">$ 27 <span>/ per year</span></div>
+              <ul class="planlist">
+                <li>
+                  <strong>Unlimited</strong> daily uploads to the community
+                </li>
+                <li>Option to submit photos into STF Awards</li>
+                <li>Give and recieive photo critiques</li>
+                <li>Collective Score / Master Collective Score</li>
+                <li>Create Collections</li>
+                <li>Create Photo Essays</li>
+                <li>Like photos</li>
+                <li>History of liked photos</li>
+                <li>Direct message members</li>
+                <li>Follow / unfollow</li>
+                <li>Access details of received critiqeus</li>
+                <li>Access Insights for profile and photos</li>
+                <li>Helping make this community sustainable</li>
+              </ul>
+              <ul class="plansublist">
+                <li>
+                  7 submissions every month into the International STF Awards
+                  (valued at $19). Submit your photos into the portrait,
+                  landscape or wildlife categories.
+                  <span class="underline">Learn more about STF Awards past winners and prizes…</span>
+                </li>
+              </ul>
+              <div class="btn-cntr" *ngIf="isLogin === false">
+                <button (click)="redirect('pro', 'yearly', 2700)" class="btn btn-primary">
+                  Sign up
+                </button>
+              </div>
+              <div class="btn-cntr" *ngIf="isLogin === true && this.activePlan != 5">
+                <button *ngIf="isDownGrade && this.activePlan > 5"
+                  (click)="openModal(contentDelete,'pro', 'yearly', 2700)" class="btn btn-secondary">
+                  Downgrade
+                </button>
+                <button *ngIf="this.activePlan < 5" (click)="upgradeStripeAccount('pro', 'yearly', 2700)"
+                  class="btn btn-primary">
+                  Upgrade
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- yearly pro -->
+          <!-- yearly premium -->
+          <div class="col-md-4">
+            <div class="plan-bx">
+              <h4 class="sub-title">
+                <span>PREMIUM</span> SHOOT THE FRAME MEMBER
+              </h4>
+              <div class="price">$ 135 <span>/ per year</span></div>
+              <ul class="planlist">
+                <li>
+                  <strong>Unlimited</strong> daily uploads to the community
+                </li>
+                <li>Option to submit photos into STF Awards</li>
+                <li>Give and recieive photo critiques</li>
+                <li>Collective Score / Master Collective Score</li>
+                <li>Create Collections</li>
+                <li>Create Photo Essays</li>
+                <li>Like photos</li>
+                <li>History of liked photos</li>
+                <li>Direct message members</li>
+                <li>Follow / unfollow</li>
+                <li>Access details of received critiqeus</li>
+                <li>Access Insights for profile and photos</li>
+                <li>Helping make this community sustainable</li>
+                <li>
+                  7 submissions every month into the International STF Awards
+                  (valued at $19). Submit your photos into the portrait,
+                  landscape or wildlife categories.
+                  <span class="underline">Learn more about STF Awards past winners and prizes…</span>
+                </li>
+              </ul>
+              <div class="btn-cntr" *ngIf="isLogin === false">
+                <button (click)="redirect('premium', 'yearly', 13500)" class="btn btn-primary">
+                  Sign up
+                </button>
+              </div>
+              <div class="btn-cntr" *ngIf="isLogin === true && this.activePlan != 6">
+                <button *ngIf="isDownGrade && this.activePlan > 6"
+                  (click)="openModal(contentDelete,'premium', 'yearly', 13500)" class="btn btn-secondary">
+                  Downgrade
+                </button>
+                <button *ngIf="this.activePlan < 6" (click)="upgradeStripeAccount('premium', 'yearly', 13500)"
+                  class="btn btn-primary">
+                  Upgrade
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- yearly premium -->
+        </section>
+
+        <section class="award-submission-details" #target>
+          <h2 class="title">STF Awards submissions</h2>
+          <h3 class="sub-heading">
+            Submit your photos into our monthly international photography
+            awards. <span class="underline cursor" (click)="stfModal()">The STF Awards</span> have the same
+            3 categories every month; portrait, landscape and wildlife.
+          </h3>
+          <div class="purchace-cntr">
+            <ul class="row">
+              <li class="col-md-4 text-center">
+                <div class="inner">
+                  <h3 class="sub-title text-center">
+                    <span class="text-green">ONE</span> STF AWARDS SUBMISSION
+                  </h3>
+                  <p>
+                    Allows you to enter 1 photo into the
+                    <strong>STF Awards</strong> this month. Submissions expire
+                    at the end of every month.
+                  </p>
+                  <div class="price">$ 10</div>
+                  <div class="btn-cntr" *ngIf="isLogin === false">
+                    <button (click)="redirect('one', '', 1000)" class="btn btn-primary">
+                      Purchase
+                    </button>
+                  </div>
+                  <div class="btn-cntr" *ngIf="isLogin === true">
+                    <a (click)="purchaseAwardSubmission('one', 1000)" class="btn btn-primary">Purchase</a>
+                  </div>
+                  <div (click)="infoModal()" class="whats-this underline cursor">what’s this?</div>
+                </div>
+              </li>
+              <li class="col-md-4 text-center">
+                <div class="inner">
+                  <h3 class="sub-title text-center">
+                    <span class="text-green">THREE</span> STF AWARDS SUBMISSION
+                  </h3>
+                  <p>
+                    Allows you to enter 3 photo into the
+                    <strong>STF Awards</strong> this month. Submissions expire
+                    at the end of every month.
+                  </p>
+                  <div class="price">$ 15</div>
+                  <div class="btn-cntr" *ngIf="isLogin === false">
+                    <button (click)="redirect('three', '', 1500)" class="btn btn-primary">
+                      Purchase
+                    </button>
+                  </div>
+                  <div class="btn-cntr" *ngIf="isLogin === true">
+                    <a (click)="purchaseAwardSubmission('three', 1500)" class="btn btn-primary">Purchase</a>
+                  </div>
+                  <div (click)="infoModal()" class="whats-this underline cursor">what’s this?</div>
+                </div>
+              </li>
+              <li class="col-md-4 text-center">
+                <div class="inner">
+                  <h3 class="sub-title text-center">
+                    <span class="text-green">SEVEN</span> STF AWARDS SUBMISSION
+                  </h3>
+                  <p>
+                    Allows you to enter 7 photo into the
+                    <strong>STF Awards</strong> this month. Submissions expire
+                    at the end of every month.
+                  </p>
+                  <div class="price">$ 19</div>
+                  <div class="btn-cntr" *ngIf="isLogin === false">
+                    <button (click)="redirect('seven', '', 1900)" class="btn btn-primary">
+                      Purchase
+                    </button>
+                  </div>
+                  <div class="btn-cntr" *ngIf="isLogin === true">
+                    <a (click)="purchaseAwardSubmission('seven', 1900)" class="btn btn-primary">Purchase</a>
+                  </div>
+                  <div (click)="infoModal()" class="whats-this underline cursor">what’s this?</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section class="have-question">
+          <h3 class="sub-heading">
+            <span class="text-green">Have a question?</span> Hopefully we have
+            answered it below, if not,
+            <span class="underline"><a class="text-black" target="_blank" href="https://about.shoottheframe.com/contact/">get in
+                touch with us.</a>
+            </span>
+          </h3>
+          <div class="question-list row">
+            <div class="col-md-4">
+              <ul class="clearfix">
+                <li (click)="showActive('que1')" class="box" [ngClass]="{ active: selectedItem === 'que1' }">
+                  <h5>
+                    Why does this cost money?
+                  </h5>
+                  <p>
+                    Great question! We created the STF Awards in 2012 for of the
+                    sheer love of photography, and to allow you to gain exposure
+                    and feedback on your work. The community is self-sustaining,
+                    but only because we charge for STF submissions, as well as
+                    Pro and Premium STF memberships. Without your support, we
+                    wouldn’t be able to keep the lights on. If you can afford to
+                    become a Pro or Premium member, it goes a long way to
+                    helping us stay sustainable - it also unlocks some pretty
+                    sweet features, which we will continue to improve. 😀
+                  </p>
+                  <p>
+                    If you can’t afford the Pro or Premium membership, the Basic
+                    membership option is completely free.
+                  </p>
+                </li>
+                <li (click)="showActive('que2')" class="box" [ngClass]="{ active: selectedItem === 'que2' }">
+                  <h5>
+                    Do I need a STF membership to submit photos into STF Awards?
+                  </h5>
+                  <p>
+                    Yes. At the very least, you need to be a Basic STF member to submit entires into the STF Awards.
+                  </p>
+                </li>
+                <li (click)="showActive('que3')" class="box" [ngClass]="{ active: selectedItem === 'que3' }">
+                  <h5>
+                    What are the prizes for the STF Awards?
+                  </h5>
+                  <p>
+                    You can read all about the STF Awards prizes and our amazing
+                    partners <a href="https://about.shoottheframe.com/prizes-and-partners/" target="_blank"
+                      class="underline">here</a>.
+                  </p>
+                </li>
+                <li (click)="showActive('que5')" class="box" [ngClass]="{ active: selectedItem === 'que5' }">
+                  <h5>
+                    How do I submit a photo into the STF Awards?
+                  </h5>
+                  <p>
+                    There are two ways of doing this. Firstly, you can submit a
+                    photo during the uploading process, it is the optional last
+                    step.
+                  </p>
+                  <p>
+                    Secondly, you can submit a previouly uploaded photo by
+                    selecting it from your profile, and hitting the ‘Submit
+                    Photo’ button.
+                  </p>
+                </li>
+                <li (click)="showActive('que6')" class="box" [ngClass]="{ active: selectedItem === 'que6' }">
+                  <h5>
+                    Can I use my STF submissions across the 3 STF Awards
+                    categories?
+                  </h5>
+                  <p>
+                    Sure can. For example, if you purchase 7 STF submissions for
+                    this month, you can submit 1 photo into Shoot The Face, 3
+                    photos into Shoot The Land and 3 photos into Shoot The Wild,
+                    totalling 7 submissions for the month.
+                  </p>
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <ul class="clearfix">
+                <li (click)="showActive('que7')" class="box" [ngClass]="{ active: selectedItem === 'que7' }">
+                  <h5>
+                    Do I need a STF membership to receive feedback and critiques
+                    on my photos?
+                  </h5>
+                  <p>
+                    Yes. At the very least, you need to be a Basic member to
+                    give and receive critiques and feedback. Pro and Premium
+                    members are able to see more detail on critiques which they
+                    have received from the community.
+                  </p>
+                </li>
+                <li (click)="showActive('que8')" class="box" [ngClass]="{ active: selectedItem === 'que8' }">
+                  <h5>
+                    Can I upload as many photos as I like?
+                  </h5>
+                  <p>
+                    Basic members can upload 3 photos per day, Pro and Premium
+                    members can upload an unlimited amount photos, although we
+                    encourage everyone to share only their best work to keep the
+                    community clean and beautiful.
+                  </p>
+                </li>
+                <li (click)="showActive('que9')" class="box" [ngClass]="{ active: selectedItem === 'que9' }">
+                  <h5>
+                    Do my STF submissions expire?
+                  </h5>
+                  <p>
+                    They do. All purchased or available STF submissions expire at the end of each month. This is the
+                    case for Basic, Pro and Premium members. If you are a Premium member, your available STF
+                    submissions will reset to 7 at the start of every month.
+                  </p>
+                </li>
+                <li (click)="showActive('que10')" class="box" [ngClass]="{ active: selectedItem === 'que10' }">
+                  <h5>
+                    Whats the difference between daily uploads, and STF
+                    submissions?
+                  </h5>
+                  <p>
+                    Daily uploads refers to the amount of photo a member can
+                    upload to the STF community on a daily basis.
+                  </p>
+                  <p>
+                    Basic members have a daily upload limit of 3 photos, meaning
+                    they can only upload 3 photos to the STF community everyday.
+                    Pro and Premium members are able to upload an unlimited
+                    amount of photos to the STF community everyday.
+                  </p>
+                  <p>
+                    STF submissions allow you to submit photos into the STF
+                    Awards. One STF submission allows you to submit one photo
+                    within the current month.
+                  </p>
+                  <p>
+                    If you are a Basic member and you have purchased STF
+                    submissions, we will increase your daily upload limit to
+                    accommodate the STF submissions available.
+                  </p>
+                </li>
+                <li (click)="showActive('que11')" class="box" [ngClass]="{ active: selectedItem === 'que11' }">
+                  <h5>
+                    I’m a Basic member, what happens to daily upoads limit if I
+                    purchase STF submissions?
+                  </h5>
+                  <p>
+                    Basic members have a daily upload limit of 3, however when a
+                    Basic member purchases STF submissions, their daily photo
+                    upload limit will increase to accomodate the number of STF
+                    submissions available, so you can get all of your STF
+                    submissions in on the same day.
+                  </p>
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <ul class="clearfix">
+                <li (click)="showActive('que12')" class="box" [ngClass]="{ active: selectedItem === 'que12' }">
+                  <h5>
+                    Can I submit photos which I uploaded to Shoot The Frame a
+                    long time ago?
+                  </h5>
+                  <p>
+                    Yes. You can submit any photo which you have in your
+                    profile, as long as it has not already been a STF Awards
+                    finalist, or winner. You can also submit a photo into the
+                    STF Awards during the upload process.
+                  </p>
+                </li>
+                <li (click)="showActive('que13')" class="box" [ngClass]="{ active: selectedItem === 'que13' }">
+                  <h5>
+                    Can I resubmit a photo into the STF Awards?
+                  </h5>
+                  <p>
+                    Yes. You can resubmit a photo as many times as you like, as
+                    long as it has not already been a STF Awards finalist, or
+                    winner. Once it has a STF finalist or STF winner badge on
+                    it, it cannot be resubmitted.
+                  </p>
+                </li>
+                <li (click)="showActive('que14')" class="box" [ngClass]="{ active: selectedItem === 'que14' }">
+                  <h5>
+                    I have some feedback for Shoot The Frame, where do I send
+                    it?
+                  </h5>
+                  <p>
+                    Amazing, we love hearing your feedback. Please fill out <span class="underline"> 
+                      <a  rel="noopener noreferrer" class="text-black" target="_blank" href="https://shoottheframe.typeform.com/to/Upy2iI">this
+                    form</a></span>, we read every one. We are creating this community for
+                    you, so tell us what you need.
+                  </p>
+                </li>
+                <li (click)="showActive('que15')" class="box" [ngClass]="{ active: selectedItem === 'que15' }">
+                  <h5>
+                    Can I cancel my subscription?
+                  </h5>
+                  <p>
+                    You can. You are able to cancel at any time, and the next
+                    scheduled payment will not be taken. You will not be
+                    refunded for any time remaining on the membership.
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+  </div>
+</main>
+<ng-template #contentDelete class="change-email" let-modal>
+  <div class="inner-modal">
+    <div class="modal-header">
+      <h3 class="modal-title text-danger">{{modalTitle}}</h3>
+      <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+        <img src="assets/images/temp/ui-cross.svg" alt="">
+      </button>
+    </div>
+    <div class="modal-body text-center">
+      <p>
+        {{modalBody}}
+      </p>
+      <div class="btn-cntr text-center">
+        <a class="cancel" (click)="modal.dismiss('Close click')">Cancel</a>
+        <a class="btn btn-danger" (click)="modal.close('Ok click')">Yes, downgrade</a>
+      </div>
+    </div>
+  </div>
+</ng-template>

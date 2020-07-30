@@ -1,0 +1,317 @@
+<!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+  <img src="assets/images/temp/ui-cross.svg" alt="">
+</button> -->
+<button type="button" class="popclose-mb close-critic" [hidden]="!closeButton || identifyType == 'critique-given'" aria-describedby="modal-title"
+  (click)="closeModal()">
+  <img src="assets/images/temp/close.svg" alt="">
+</button>
+<div *ngIf="imgDetails && imgDetails.length!=0" class="photo-cnt">
+  <div class="image-items" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+    (scrolled)="appendItems()" [scrollWindow]="true">
+    <ng-masonry-grid class="grid"
+    (onNgMasonryInit)="onNgMasonryInit($event)" 
+    (layoutComplete)="completeLayout($event,imgDetails)"
+      *ngIf="imgDetails.length!=0" [masonryOptions]="{itemSelector: grid-item,initLayout:false,
+        gutter: 30,horizontalOrder: false,
+        percentPosition: true,
+        transitionDuration: 0.50,
+        transitionDelay:0.50}" [useAnimation]="false" [useImagesLoaded]="false">
+      <!-- Masonry Grid Item -->
+      <ng-masonry-grid-item #container class="grid-item" id="{{'masonry-item-'+i}}"
+        *ngFor="let item of imgDetails; let i = index;">
+        <!-- Grid Content  -->
+        <!-- [ngStyle]="{'height':addPixel(item.height,item.width)}" -->
+        <!-- *ngIf="(identifyType=='tags' && item.collective_score > 0 && selectedTab=='collective_score') || selectedTab!='collective_score'" -->
+        <div class="inner-grid" [ngStyle]="{'opacity':showOpacity[item.page]}">
+          <div class="learn-section" *ngIf="item.type=='learn'">
+            <a target="_blank" href="https://about.shoottheframe.com/stf-awards">
+              <div class="top-area">
+                <app-stf-award-logo [item]='item' [type]="'web'"></app-stf-award-logo>
+                <ul>
+                  <li>
+                    <div class="learn-more cursor">
+                      Learn more
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="grid-image-outer" [ngStyle]="{'padding-bottom':addPixel(item),'position':'relative'}">
+                <img src="{{ item.photo}}">
+              </div>
+            </a>
+          </div>
+          <div *ngIf="item.localmedia">
+            <div class="top-area">
+              <app-stf-award-logo [item]='item' [type]="'web'"></app-stf-award-logo>
+              <ul>
+                <li *ngIf="identifyType=='admin-award-entries' && selectedType !='all'">
+                  <a (click)="addWinner(item,i)" placement="bottom" container="body"
+                    [ngbTooltip]="item.winner=='1'?winnerRemove:winnerAdd" [ngClass]="{'active': item.winner=='1',
+                 'disabled':item.winner!='1' && ((item.award_category_id==1 && !isStfWinner) || (item.award_category_id==2 && !isStlWinner)
+                   || (item.award_category_id==3 && !isStwWinner))}" class="primary-btn cursor"
+                    tooltipClass="tooltip-custom">Winner</a>
+                </li>
+                <li *ngIf="identifyType=='admin-award-entries' && selectedType!='all'">
+                  <a (click)="addFinalist(item,i)" placement="bottom" container="body" tooltipClass="tooltip-custom"
+                    [ngbTooltip]="item.finalist=='1'?finalistRemove:finalistAdd" [ngClass]="{'active': item.finalist=='1','disabled':item.finalist!='1' && ((item.award_category_id==1 && !isStfFinalist) || (item.award_category_id==2 && !isStlFinalist)
+                  || (item.award_category_id==3 && !isStwFinalist))}" class="primary-btn cursor"
+                    tooltipClass="tooltip-custom">Finalist</a>
+                </li>
+
+                <li *ngIf="identifyType=='profile' || identifyType=='award-entries' || identifyType=='tags' || identifyType=='location'"
+                  [hidden]="(authUserDetails && authUserDetails.id == item.user_id )">
+                  <a (click)="addCollections(item)" placement="bottom" container="body" [ngbTooltip]="collection"
+                    tooltipClass="tooltip-custom">Collect</a>
+                </li>
+                <!-- <li *ngIf="authUserDetails.id != item.user_id"> -->
+                <li [hidden]="identifyType=='admin-award-entries'  ||
+              authUserDetails &&
+               (authUserDetails.id == item.user_id )">
+                  <a *ngIf="identifyType !== 'critique-given'" placement="bottom" tooltipClass="tooltip-custom" (click)="crticPopup(imageDetails,item,i)" [ngbTooltip]="critique">Critique</a>
+
+                  <div class="dropdown option-dropdown" *ngIf="identifyType == 'critique-given'">
+                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false" placement="bottom" [ngbTooltip]="moreoptions">
+                      <span></span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                      <div class="inner-wrp">
+                        <a class="dropdown-item" (click)="viewCritique(imageDetails,item,i,'view')">View critique</a>
+                        <a class="dropdown-item" [ngClass]="{'disabled':item._hrs==0 && item._minutes==0}"
+                          (click)="viewCritique(imageDetails,item,i,'edit')">Edit
+                          critique <span
+                            [ngClass]="{'text-danger':item._hrs==0 && item._minutes < 10}">{{item.time_remaining}}</span></a>
+                        <a class="dropdown-item" (click)="removeCritique(item, i)">Remove critique</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- (authUserDetails.id == item.user_id || item.critique_status !== 0)">
+                <a (click)="crticPopup(imageDetails,item,i)" container="body" placement="bottom" tooltipClass="tooltip-custom" [ngbTooltip]="critique">Critique</a> -->
+                </li>
+
+                <li *ngIf="(identifyType=='profile' || identifyType=='award-entries' || identifyType=='own-award-entries' || identifyType=='tags' || identifyType=='location'
+                )" [hidden]="authUserDetails && authUserDetails.id !== item.user_id ||  !authUserDetails">
+                  <div class="dropdown option-dropdown">
+                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false" tooltipClass="tooltip-custom"
+                      [ngbTooltip]="moreoptions">
+                      <span></span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                      <div class="inner-wrp">
+                        <a class="dropdown-item" (click)="submitStfAwards(item)">Submit photo into STF Awards</a>
+                        <a class="dropdown-item" (click)="awardHistoryModal(item)">STF Awards history</a>
+                        <a class="dropdown-item" (click)="addPhotoEssay(item)">Add to photo essay</a>
+                        <a class="dropdown-item" (click)="addCollections(item)">Add to collection</a>
+                        <a class="dropdown-item">Share photo</a>
+                        <a class="dropdown-item">Invite critique</a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li *ngIf="identifyType=='photo_essay_details'">
+                  <div class="dropdown option-dropdown">
+                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false" tooltipClass="tooltip-custom"
+                      [ngbTooltip]="moreoptions">
+                      <span></span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                      <div class="inner-wrp">
+                        <a class="dropdown-item" (click)="setEssayCover(item.id)">Set to essay cover</a>
+                        <a class="dropdown-item" (click)="removeEssayPhoto(item.id)">Remove from essay</a>
+                        <a class="dropdown-item" (click)="addPhotoEssay(item)">Edit photo</a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li *ngIf="identifyType=='collection_details'">
+                  <div class="dropdown option-dropdown">
+                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false" container="body" tooltipClass="tooltip-custom"
+                      [ngbTooltip]="moreoptions">
+                      <span></span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                      <div class="inner-wrp">
+                        <a class="dropdown-item" (click)="setCollectionCover(item.id)">Set to collection cover</a>
+                        <a class="dropdown-item" (click)="removeCollectionPhoto(item.id)">Remove from collection</a>
+                        <a class="dropdown-item">Edit photo</a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+
+
+                <div class="right">
+
+                  <a *ngIf="identifyType=='admin-award-entries'" [ngClass]="{'disabled': item.finalist=='1' || item.winner=='1',
+                  'active':item.shortlist=='1'}" (click)="(item.finalist=='1' || item.winner=='1')?'':addShortList(item,i)"
+                      class="btn-shortlist cursor" container="body" tooltipClass="tooltip-custom"
+                      [ngbTooltip]="item.shortlist=='1'?shortlistRemove:shortlistAdd"
+                      [ngClass]="{'active': item.shortlist=='1'}">
+                      <i class="fa fa-star"></i>
+                      <span>Shortlist</span>
+                    </a>
+                  </div>
+            </div>
+            <div class="bottom-area">
+              <div (click)="showProfile(item.username)" class="left cursor">
+                <div class="img"><img src="{{item.user_photo==''?'assets/images/temp/user-icon.svg':item.user_photo}}"
+                    alt=""></div>
+                {{item.name}}
+              </div>
+                  <!-- <div *ngIf="identifyType!=='admin-award-entries' && !mobile" class="likes" container="body" tooltipClass="tooltip-custom"
+                  [ngbTooltip]="item.like_status === 1 ? likeContent : unlikeContent"
+                  [ngClass]="item.like_status === 1 ? 'active' : ''" (click)="likePhotos(item)"><i class="fa fa-heart"
+                    aria-hidden="true"></i>
+                  <span class="cnt"> {{nFormatter(item.like_count)}} </span></div> -->
+
+
+                <!-- <div *ngIf="item.adult_content=='1' && identifyType!='admin-award-entries'  && item.own_photo=='0'"
+                  class="likes cursor adult-btn" (click)="updateAdultContent(item)">
+                  See adult content
+                </div> -->
+                <!-- <app-stf-award-logo [item]='item' *ngIf="item.adult_content=='0'" [type]="'mobile'"></app-stf-award-logo> -->
+
+                <div class="right" >
+
+                    <a *ngIf="identifyType=='admin-award-entries' && !mobile" [ngClass]="{'disabled': item.finalist=='1' || item.winner=='1',
+                    'active':item.shortlist=='1'}" (click)="(item.finalist=='1' || item.winner=='1')?'':addShortList(item,i)"
+                        class="btn-shortlist cursor" container="body" tooltipClass="tooltip-custom"
+                        [ngbTooltip]="item.shortlist=='1'?shortlistRemove:shortlistAdd"
+                        [ngClass]="{'active': item.shortlist=='1'}">
+                        <i class="fa fa-star"></i>
+                        <span>Shortlist</span>
+                      </a>
+
+                  <div *ngIf="((item.adult_content=='0')
+                 || (item.adult_content=='1' &&  item.own_photo=='1')) && identifyType!=='admin-award-entries' && !mobile" class="likes" container="body"
+                    tooltipClass="tooltip-custom" [ngbTooltip]="item.like_status === 1 ? likeContent : unlikeContent"
+                    [ngClass]="item.like_status === 1 ? 'active' : ''" (click)="likePhotos(item)"><i class="fa fa-heart"
+                      aria-hidden="true"></i>
+                    <span class="cnt"> {{nFormatter(item.like_count)}} </span></div>
+                  <div *ngIf="item.adult_content=='1' && item.own_photo=='0' && identifyType!=='admin-award-entries'" class="likes cursor adult-btn"
+                    (click)="updateAdultContent(item)">
+                    See adult content
+                  </div>
+                <app-stf-award-logo [item]='item' *ngIf="item.adult_content=='0'" [type]="'mobile'"></app-stf-award-logo>
+
+
+                </div>
+
+            </div>
+            <div class="grid-image-outer"
+              [ngClass]="{'ad_cnt': item.adult_content=='1' && item.own_photo=='0' && identifyType!='admin-award-entries'}"
+              [ngStyle]="{'padding-bottom':addPixel(item),'position':'relative'}">
+              <img (click)="openModal(imageDetails,item,i)" style="background-color:#E0E3E5"
+                sizes="(min-width: 992px) {{ratioVal}}, (min-width: 768px) and (max-width:991px) calc((100vw - 48px) / 2), 100vw"
+                src="{{ item.localmedia}}--glide?w=360&q=80" srcset="{{ item.localmedia}}--glide?w=360&fit=crop&q=80 100w,
+            {{ item.localmedia}}--glide?w=360&fit=crop&q=80 200w,
+            {{ item.localmedia}}--glide?w=360&fit=crop&q=80 300w,
+            {{ item.localmedia}}--glide?w=400&fit=crop&q=80 400w,
+            {{ item.localmedia}}--glide?w=500&fit=crop&q=80 500w,
+            {{ item.localmedia}}--glide?w=600&fit=crop&q=80 600w,
+            {{ item.localmedia}}--glide?w=700&fit=crop&q=80 700w,
+            {{ item.localmedia}}--glide?w=800&fit=crop&q=80 800w,
+            {{ item.localmedia}}--glide?w=900&fit=crop&q=80 900w,
+            {{ item.localmedia}}--glide?w=1000&fit=crop&q=80 1000w,
+            {{ item.localmedia}}--glide?w=1100&fit=crop&q=80 1100w,
+            {{ item.localmedia}}--glide?w=1200&fit=crop&q=80 1200w,
+            {{ item.localmedia}}--glide?w=1296&fit=crop&q=80 1296w,
+            {{ item.localmedia}}--glide?w=1400&fit=crop&q=80 1400w,
+            {{ item.localmedia}}--glide?w=1600&fit=crop&q=80 1600w,
+            {{ item.localmedia}}--glide?w=1800&fit=crop&q=80 1800w,
+            {{ item.localmedia}}--glide?w=2000&fit=crop&q=80 2000w,
+            {{ item.localmedia}}--glide?w=2200&fit=crop&q=80 2200w,
+            {{ item.localmedia}}--glide?w=2400&fit=crop&q=80 2400w,
+            {{ item.localmedia}}--glide?w=2592&fit=crop&q=80 2592w
+            ">
+            </div>
+          </div>
+        </div>
+      </ng-masonry-grid-item>
+    </ng-masonry-grid>
+  </div>
+</div>
+<app-pagination-loader *ngIf="showPaginationLoader"></app-pagination-loader>
+
+<!-- Empty States-->
+<div *ngIf="identifyType=='critique-received' && imgDetails.length==0 && !showPaginationLoader"
+  class="empty-msg text-center">
+  You haven’t received any photo critiques yet.
+
+  <p>You can invite people to critique from the large view of your photos.</p>
+</div>
+
+<div *ngIf="identifyType=='critique-given' && imgDetails.length==0 && !showPaginationLoader"
+  class="empty-msg text-center">
+  You haven’t given any photo critiques yet.
+
+  <p>The best way to give valuable feedback on another members work is to critique a photo.</p>
+</div>
+
+<div *ngIf="imgDetails.length==0 && awards==false && identifyType=='profile' && !showPaginationLoader"
+  class="empty-msg text-center">
+  {{profileDetails?profileDetails.first_name:authUserDetails.first_name}} hasn’t uploaded any photos yet. &nbsp;
+  <img src="assets/images/temp/smiley.png" alt="">
+</div>
+
+<div *ngIf="awards && imgDetails.length==0 && !showPaginationLoader" class="empty-msg text-center">
+  There aren’t any photos to show. 😕
+
+  <p>Double check the year, month, category and winner filters.</p>
+</div>
+
+
+<div *ngIf="(identifyType=='tags' || identifyType=='camera' || identifyType=='location') &&
+ selectedTab!='collective_score' &&
+imgDetails.length==0 && !showPaginationLoader" class="empty-msg text-center">
+  There aren’t any photos to show. 😕
+</div>
+<div *ngIf="(identifyType=='tags' || identifyType=='camera' || identifyType=='location')
+&& selectedTab=='collective_score' && imgDetails.length==0 && !showPaginationLoader" class="empty-msg text-center">
+  Oops, no results in ‘Collective Score’. 🙃
+</div>
+
+<div *ngIf="emptyStatus==true && !showPaginationLoader " class="empty-msg text-center">
+  <p>No more results 🙃</p>
+</div>
+
+
+<ng-template #likeContent>Liked by you</ng-template>
+<ng-template #moreoptions>More options</ng-template>
+<ng-template #collection>Add to collection</ng-template>
+<ng-template #unlikeContent>Give a little love</ng-template>
+<ng-template #shortlistRemove>Remove photo from shortlist</ng-template>
+<ng-template #shortlistAdd>Shortlist photo</ng-template>
+<ng-template #finalistAdd>Award photo as monthly finalist</ng-template>
+<ng-template #finalistRemove>Remove photo as monthly finalist</ng-template>
+<ng-template #winnerAdd>Award photo as monthly winner</ng-template>
+<ng-template #winnerRemove>Remove photo as monthly winner</ng-template>
+<ng-template #stfFinalist>STF Awards Finalist</ng-template>
+<ng-template #critique>Critique Photo</ng-template>
+
+
+<ng-template #delereCritique let-modal>
+  <div class="inner-modal">
+    <div class="modal-header">
+      <h3 class="modal-title text-center">Remove critique</h3>
+      <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+        <img src="assets/images/temp/ui-cross.svg" alt="">
+      </button>
+    </div>
+    <div class="modal-body text-center">
+      <p>
+        Are you sure you want to delete this critique?
+      </p>
+
+      <div class="btn-cntr text-center">
+        <a class="cancel" (click)="modal.dismiss('Close click')">Cancel</a>
+        <a class="btn btn-danger" (click)="deleteCritique(deleteId)">Yes, delete</a>
+      </div>
+    </div>
+  </div>
+</ng-template>

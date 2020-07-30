@@ -1,0 +1,11 @@
+<div *ngIf="item.winner=='1' || item.finalist=='1'"
+  [ngClass]="{'photo-badge': type=='web','mobile-photo-badge':type=='mobile'}">
+  <img placement="bottom" tooltipClass="tooltip-custom" ngbTooltip="STF Awards Winner" #stfWinner="ngbTooltip"
+    *ngIf="item.winner=='1'" src="{{type=='mobile'?'assets/images/temp/logo-black.png':'assets/images/temp/logo.svg'}}" alt="">
+  <img placement="bottom" tooltipClass="tooltip-custom" ngbTooltip="STF Awards Finalist" #stfFinalist="ngbTooltip"
+    *ngIf="item.winner!='1' && item.finalist=='1'" src="{{type=='mobile'?'assets/images/temp/logo-black.png':'assets/images/temp/logo.svg'}}" alt="">
+  <span>STF </span>
+  <span class="type" *ngIf="item.winner=='1'" (mouseover)="toggleWinner()" (mouseout)="toggleWinner()">Winner</span>
+  <span class="type" *ngIf="item.winner!='1' && item.finalist=='1'" (mouseover)="toggleFinalist()"
+    (mouseout)="toggleFinalist()">Finalist</span>
+</div>

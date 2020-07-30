@@ -1,0 +1,38 @@
+<div class="inner-modal" *ngIf="!showCreateModal">
+  <div class="modal-header">
+    <h3 class="modal-title text-center">Add to photo essay</h3>
+    <button type="button" class="close" (click)="closeButton()" data-dismiss="modal" aria-label="Close">
+      <img src="assets/images/temp/ui-cross.svg" alt="">
+    </button>
+  </div>
+  <div class="modal-body">
+    <p class="text-center">Select photo to add or remove photo; or create a new photo essay.</p>
+    
+    <!-- <div style="max-height: 300px; overflow-x:auto; "> -->
+    <p-scrollPanel   [style]="{width: '100%', height: essayHeight}"  >
+
+
+      <ul class="essay-collections chk-list list-unstyled pt-4 mb-4">
+        <li *ngFor=" let item of essayList; let i=index;">
+          <input id="ec-{{i}}" type="checkbox" name="essayname[]" [checked]="item.is_selected=='1'"
+            (change)="checkboxChange($event,item.id)">
+          <label for="ec-{{i}}">
+            <span>{{ item.title }}</span>
+            <span class="checkmark"></span>
+          </label>
+        </li>
+      </ul>
+    </p-scrollPanel>
+  <!-- </div> -->
+    <p class="text-right">
+      <a (click)="createModal()" class="text-black underline">Create New Photo Essay</a>
+    </p>
+
+    <div class="btn-cntr text-center">
+      <a class="btn btn-secondary" (click)="modalActiveService.dismiss('Cross click')">Done</a>
+    </div>
+  </div>
+</div>
+
+<app-photo-essay-add-modal [modalData]="modalData" (cancelParams)="cancelModal()" (closeParams)="closeButton()"
+  *ngIf="showCreateModal"></app-photo-essay-add-modal>

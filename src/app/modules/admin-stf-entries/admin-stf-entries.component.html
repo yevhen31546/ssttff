@@ -1,0 +1,36 @@
+<div class="content-cntr innerpage">
+  <!-- <div [hidden]="!expire">
+    <app-alert></app-alert>
+  </div> -->
+  <app-alert></app-alert>
+  <section class="heading-top-cntr">
+    <h2 class="title">Monthly entires for judging</h2>
+    <h3 class="mb-4">A place for admin users to view, shortlist and select the monthly finalists and winners. </h3>
+  </section>
+  <div class="clearfix mb-32"></div>
+  <!-- (tabChange)="tabChange($event)" -->
+  <!-- (tabChange)="tabChange($event)" -->
+  <ngb-tabset (tabChange)="tabChange($event)" class="common-tab profile-tab-area">
+    <ngb-tab id='all' title="ALL ENTRIES">
+      <ng-template ngbTabContent>
+        <app-admin-stf-tabs [selectedType]="selectedTab" [selectedCategory]="selectedCategory" [selectedYear]="selectedYear"
+          [selectedMonth]="selectedMonth" [selectedWinner]="selectedWinner" [selectedTab]='selectedTab' (filters)='selectedItems($event)'>
+        </app-admin-stf-tabs>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab id='shortlist' title="SHORTLIST">
+      <ng-template ngbTabContent>
+        <app-admin-stf-tabs [selectedType]="selectedTab" [selectedCategory]="selectedCategory" [selectedYear]="selectedYear"
+          [selectedMonth]="selectedMonth" [selectedWinner]="selectedWinner" [selectedTab]='selectedTab' (filters)='selectedItems($event)'>
+        </app-admin-stf-tabs>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab id='finalist' title="FINALISTS">
+      <ng-template ngbTabContent>
+        <app-admin-stf-tabs [selectedType]="selectedTab" [selectedCategory]="selectedCategory" [selectedYear]="selectedYear"
+          [selectedMonth]="selectedMonth" [selectedWinner]="selectedWinner" [selectedTab]='selectedTab' (filters)='selectedItems($event)'>
+        </app-admin-stf-tabs>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>

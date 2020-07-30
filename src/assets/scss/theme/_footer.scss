@@ -1,0 +1,78 @@
+.footer{
+	background: #252525;
+	color: color("white");
+	padding: 30px 0;
+	overflow: hidden;
+	font-size: $font-size-sm;
+	
+	a{
+		color: #d1d1d1;
+	}
+	.footer-logo{
+		margin-bottom: 30px;
+		img{
+			height: 50px;
+		}
+	}
+	.menu-footer{
+		i{
+			margin-right: 22px;
+		}
+		ul{
+			li{
+				margin-bottom: 20px;
+				@include media-breakpoint-down(sm) {
+						margin-bottom: 18px;
+				}
+				&:last-child{
+					margin-bottom: 0;
+					@include media-breakpoint-down(sm) {
+							margin-bottom: 18px;
+					}
+				}
+			}
+		}
+	}
+	h5{
+		margin-bottom: 22px;
+		margin-top: 0px;
+		@include media-breakpoint-down(sm) {
+			margin-bottom: 15px;
+		}
+	}
+	.links-footer{
+		@include media-breakpoint-down(sm) {
+			margin-left: 32px;	
+		}
+		@include media-breakpoint-down(xs) {
+			margin-top: 30px;	
+			margin-left: 42px;	
+		}
+		li{
+			margin-bottom: 16px;
+			&:last-child{
+				margin-bottom: 0;
+			}
+			@include media-breakpoint-down(sm) {
+					margin-bottom: 10px;
+			}
+		}
+	}
+	.location{
+		i{
+			float: left;
+		}
+		span{
+			float: left;
+			background: url(../images/temp/location-icn.png) left top no-repeat;
+			padding-left: 32px;
+			@include media-breakpoint-down(sm) {
+					padding-left: 42px;
+			}
+		}
+	}
+	ul{
+		margin-bottom: 0;
+	}
+}
+	

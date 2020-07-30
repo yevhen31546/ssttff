@@ -1,0 +1,75 @@
+<section class="my-stf-filter-cntr admin mb-5">
+
+  <ul class="left admin-entries-filter">
+    <li>
+      <div class="form-group">
+        <select [(ngModel)]="selectedYear" class="form-control select-box select-mob">
+          <option value="">Year</option>
+          <option *ngFor="let yr of year; let i = index;" value="{{yr}}">{{yr}}</option>
+        </select>
+        <ng-select name="year" [clearable]="true" [searchable]="false" [(ngModel)]="selectedYear" class="form-control select-web">
+          <ng-option value=''>Year</ng-option>
+          <ng-option *ngFor="let yr of year; let i = index;" [value]="yr">{{yr}}</ng-option>
+
+        </ng-select>
+
+      </div>
+    </li>
+    <li>
+      <div class="form-group">
+        <select [(ngModel)]="selectedMonth" class="form-control select-box select-mob">
+          <option *ngFor="let mnth of month; let i = index;" value="{{i}}">{{mnth}}</option>
+        </select>
+
+
+        <ng-select name="month" class="form-control select-web" [searchable]="false" [(ngModel)]="selectedMonth">
+          <ng-option *ngFor="let mnth of month; let i = index;" [value]="i">{{mnth}}</ng-option>
+        </ng-select>
+      </div>
+    </li>
+    <li>
+      <div [hidden]="!showCategory">Category</div>
+      <div class="form-group">
+        <select [(ngModel)]="selectedCategory" class="form-control select-box select-mob" #select>
+          <option value="">Category</option>
+          <option *ngFor="let cat of categories; let i = index;" value="{{cat.id}}">{{cat.category}}</option>
+        </select>
+
+        <ng-select  name="category" class="form-control select-web" [searchable]="false" [(ngModel)]="selectedCategory">
+          <ng-option value="">Category</ng-option>
+          <ng-option *ngFor="let cat of categories;" [value]="cat.id">{{cat.category}}</ng-option>
+
+        </ng-select>
+
+      </div>
+    </li>
+    <li>
+      <a (click)="filterEntries()" class="btn btn-secondary">Filter</a>
+      <div class="right">
+          <div class="img" placement="bottom" container="body" tooltipClass="tooltip-custom" [ngbTooltip]="winner" [ngClass]="{'active': winnerListTab==1}" (click)="getWinners(winnerListTab)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="18" viewBox="0 0 17 18">
+              <path fill="#42C299" fill-rule="nonzero" d="M13.762 5.7V1.636h2.42c-.057 1.586-.491 3.795-2.42 4.064M.816 1.636h2.422V5.7C1.383 5.45.878 3.465.816 1.636M17 1.227a.407.407 0 0 0-.405-.409h-2.833V.41A.407.407 0 0 0 13.357 0H3.643a.407.407 0 0 0-.405.41v.408H.405a.407.407 0 0 0-.405.41c0 3.177 1.174 5.079 3.238 5.296v.43c0 2.795 2.145 5.088 4.857 5.298v4.93H5.262a.407.407 0 0 0-.405.409c0 .226.181.409.405.409h6.476a.407.407 0 0 0 .405-.41.407.407 0 0 0-.405-.408H8.905v-4.93c2.712-.21 4.857-2.503 4.857-5.297v-.431C15.826 6.307 17 4.404 17 1.227" />
+            </svg>
+          </div>
+        </div>
+    </li>
+  </ul>
+
+  <div class="right">
+    <div class="img" placement="top" container="body" tooltipClass="tooltip-custom" [ngbTooltip]="winner" [ngClass]="{'active': winnerListTab==1}" (click)="getWinners(winnerListTab)">
+      <svg xmlns="http://www.w3.org/2000/svg" width="17" height="18" viewBox="0 0 17 18">
+        <path fill="#42C299" fill-rule="nonzero" d="M13.762 5.7V1.636h2.42c-.057 1.586-.491 3.795-2.42 4.064M.816 1.636h2.422V5.7C1.383 5.45.878 3.465.816 1.636M17 1.227a.407.407 0 0 0-.405-.409h-2.833V.41A.407.407 0 0 0 13.357 0H3.643a.407.407 0 0 0-.405.41v.408H.405a.407.407 0 0 0-.405.41c0 3.177 1.174 5.079 3.238 5.296v.43c0 2.795 2.145 5.088 4.857 5.298v4.93H5.262a.407.407 0 0 0-.405.409c0 .226.181.409.405.409h6.476a.407.407 0 0 0 .405-.41.407.407 0 0 0-.405-.408H8.905v-4.93c2.712-.21 4.857-2.503 4.857-5.297v-.431C15.826 6.307 17 4.404 17 1.227" />
+      </svg>
+    </div>
+  </div>
+</section>
+<div class="clearfix mb-32"></div>
+<!-- (tabChange)="tabChange($event)" -->
+<section class="profile-cnt-area">
+  <app-image-grid [awards]="true" [selectedType]="selectedTab" [identifyType]="identifyType" [selectedCategory]="paramCategories"
+    [selectedYear]="paramYear" [selectedMonth]="paramMonth" [selectedWinner]="winnerListTab"></app-image-grid>
+  <!-- <app-home-image-grid [identifyType]="identifyType" [selectedCategory]="selectedCategory" [selectedYear]="selectedYear"
+    [selectedMonth]="selectedMonth"></app-home-image-grid> -->
+</section>
+<ng-template  #winner>Winners</ng-template>
+

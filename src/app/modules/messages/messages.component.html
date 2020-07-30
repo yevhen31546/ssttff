@@ -1,0 +1,106 @@
+<div class="content-cntr innerpage">
+  <app-loader></app-loader>
+  <section class="pricing-msg-cnt-area" *ngIf="!mobile">
+    <h2 class="title">Messages</h2>
+    <h3 class="sub-heading mb-32">Reach out to your peers. You are more likely to receive a reply if you are polite,
+      and ask a great question. 🙂</h3>
+  </section>
+
+  <section class="stf-msg-window" [ngClass]="{'chatwindow-open': mobile && mobileview}" *ngIf="inboxData.length!=0">
+    <aside class="msg-sidebar" *ngIf='!showNewChat'>
+      <header class="msg-window-header">
+        <h5 class="ttl">MESSAGES</h5>
+        <button (click)="newChatStatus(true)" class="btn btn-secondary btn-new-chat">New</button>
+      </header>
+      <!-- infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="pageChanged()"
+        [scrollWindow]="false" -->
+      <div class="chatrooms">
+        <p-scrollPanel [style]="{width: '100%'}">
+
+          <ul class="chatroom-list list-unstyled">
+            <li [hidden]="hideinbox[item.id]==false" *ngFor="let item of inboxData; let i=index; " class="chatroom"
+              [ngClass]='{"active":selectedId==item.id}'>
+              <a (click)="showProfile(item.userDetails.username)" class="avatar">
+                <img src="{{item.userDetails.photo_url}}" alt="">
+              </a>
+              <div class="cnt-wrp" (click)="selectUser(item)">
+                <h5 class="name-label"><span
+                    (click)="showProfile(item.userDetails.username)">{{item.userDetails.first_name}}</span></h5>
+                <span class="last-msg-preview" [innerHTML]="(item.recent_message && item.recent_message.length>25)? (item.recent_message |
+                  slice:0:25)+'..':(item.recent_message) ">
+                </span>
+              </div>
+              <div class="rgt-wrp" (click)="selectUser(item)">
+                <span class="date-stamp">{{getDateFormat(item.recent_message_created_at)}}</span>
+                <span *ngIf="item.unreadCount>0" class="unread-count">{{item.unreadCount}}</span>
+              </div>
+              <button class="chatroom-delete" (click)="deleteInbox(item,contentDelete)" title="Delete"><img
+                  src="assets/images/temp/ios-trash.svg" alt=""></button>
+            </li>
+          </ul>
+        </p-scrollPanel>
+      </div>
+    </aside>
+
+    <aside class="msg-sidebar" *ngIf='showNewChat'>
+      <header class="msg-window-header">
+        <h5 class="ttl">New Messages</h5>
+        <button class="btn btn-new-chat btn-cancel" (click)="newChatStatus(false)">Cancel</button>
+
+      </header>
+      <div class="chatrooms" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+        (scrolled)="pageFollowingsChanged()" [scrollWindow]="false">
+        <ul class="chatroom-list list-unstyled">
+          <li class="chatroom" *ngFor=" let item of followingsList; let i=index;">
+            <a class="avatar">
+              <img src="{{item.photo_url}}" alt="">
+            </a>
+            <div class="cnt-wrp">
+              <h5 class="name-label">{{item.name}}</h5>
+              <p class="last-msg-preview">{{getLocation(item.location)}}</p>
+            </div>
+            <div class="rgt-wrp">
+              <button class="btn btn-secondary" (click)="selectNewUser(item,i)">Message</button>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </aside>
+
+    <div class="msg-chat-window" *ngIf="inboxData">
+      <app-message-list [data]="data" [index]='index' [mobile]='mobile' (messageEvent)="updateInboxData()"
+        (changeDetect)="changeDetect()"></app-message-list>
+    </div>
+
+  </section>
+
+  <div *ngIf="inboxData.length==0" class="empty-msg text-center">
+    <p>You don’t have any messages.</p>
+    <p>
+      You can message a member of the Shoot The Frame community from their profile page,
+      when they reply, you will see it in here.
+    </p>
+  </div>
+
+</div>
+
+<ng-template #contentDelete class="change-email" let-modal>
+  <div class="inner-modal">
+    <div class="modal-header">
+      <h3 class="modal-title">Delete inbox</h3>
+      <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+        <img src="assets/images/temp/ui-cross.svg" alt="">
+      </button>
+    </div>
+    <div class="modal-body text-center">
+      <p>
+        Are you sure you want to delete this inbox?
+      </p>
+      <div class="btn-cntr text-center">
+        <a class="cancel" (click)="modal.dismiss('Close click')">Cancel</a>
+        <a class="btn btn-danger" (click)="modal.close('Ok click')">Yes, delete</a>
+      </div>
+    </div>
+  </div>
+</ng-template>

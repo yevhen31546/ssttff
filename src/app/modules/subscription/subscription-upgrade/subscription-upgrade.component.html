@@ -1,0 +1,51 @@
+<div class="content-cntr innerpage">
+
+  <section class="ac-cnt-area">
+    <div class="row">
+      <!--=========================Left=========================-->
+      <div class="col-sm-8 ">
+        <section class="pricing-msg-cnt-area">
+          <h2 class="title">Upgrade successful! </h2>
+          <h3 class="sub-heading mb-32">
+            You are now a {{ plan_type }} member of Shoot The Frame. You have unlocked some sweet features, and are
+            helping
+            make this
+            community sustainable.
+          </h3>
+          <h3 *ngIf='plan_type=="Premium"' class="sub-heading">Thank you for your support, we can’t wait to see your
+            STF Awards submissions. 🙂</h3>
+          <h3 *ngIf='plan_type=="Pro"' class="sub-heading">Thank you for your support. 🙂</h3>
+          <a (click)="showProfile()" class="btn btn-secondary">Profile</a>
+        </section>
+      </div>
+      <!--=========================End Left=========================-->
+
+      <!--=========================Right=========================-->
+      <div class="col-sm-4" *ngIf="userDetails">
+        <section class="ac-subscription-info daily-uplds">
+          <div class="pro-pic-cntr">
+            <figure><img width="48" src="{{userDetails.photo_url==null||userDetails.photo_url==''?'assets/images/temp/user-icon.svg':userDetails.photo_url}}"
+                alt=""></figure>
+            <h4>
+              {{userDetails.first_name+" "+userDetails.last_name}}
+              <div class="location">{{userDetails.location}}</div>
+            </h4>
+
+          </div>
+          <ul class="daily-uplds">
+            <li *ngIf="userDetails.subscription_plan==1">
+              <h4><span>DAILY UPLOADS</span> REMAINING : {{userDetails.dailyUploads}}</h4>
+            </li>
+            <li>
+              <h4><span>STF AWARDS SUBMISSIONS</span> AVAILABLE : {{userDetails.submission_count}} </h4>
+            </li>
+          </ul>
+        </section>
+        <div class="text-right">
+          <a (click)="infoModal()"  class="text-muted qt underline cursor whats-this">whats this?</a>
+        </div>
+      </div>
+      <!--=========================End Right=========================-->
+    </div>
+  </section>
+</div>

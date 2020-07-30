@@ -1,0 +1,73 @@
+<section class="profile-cnt-area">
+  <div class="photo-eassays-cnt" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+    (scrolled)="paginationItems()" [scrollWindow]="true">
+    <ul class="row" *ngIf="collectionList">
+      <li *ngFor=" let item of collectionList; let i=index;" class="col-md-4 img-box">
+        <div class="learn-section inner-grid" *ngIf="item.type=='learn'">
+          <a target="_blank" href="https://about.shoottheframe.com/stf-awards">
+            <div class="top-area">
+              <app-stf-award-logo [item]='item' [type]="'web'"></app-stf-award-logo>
+
+              <ul>
+                <li>
+                  <div class="learn-more cursor">
+                    Learn more
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="grid-image-outer" [ngStyle]="{'position':'relative'}">
+              <img src="{{ item.photo}}">
+            </div>
+          </a>
+        </div>
+
+        <div class="inner" *ngIf="item.type!='learn'">
+          <div class="dropdown option-dropdown">
+            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" container="body"
+              aria-haspopup="true" aria-expanded="false" container="body"  tooltipClass="tooltip-custom" [ngbTooltip]="moreContent">
+              <span></span>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+              <div class="inner-wrp">
+                <a class="dropdown-item" (click)='share(item)'>Share collection</a>
+                <a class="dropdown-item" *ngIf="authUserDetails && authUserDetails.id == item.user_id"
+                  (click)="editCollection(item)">Edit
+                  collection</a>
+                <a class="dropdown-item delete" *ngIf="authUserDetails && authUserDetails.id == item.user_id"
+                  (click)="deleteCollectionModal(item)">Delete
+                  collection</a>
+              </div>
+            </div>
+          </div>
+          <div container="body" [ngbTooltip]="private" *ngIf="item.private=='1'" class="private-eye"><img
+              src="assets/images/temp/pho-redeye-off.svg" alt=""></div>
+          <div class="main-img cursor" (click)="getDetails(item.share_id)"
+            [style.backgroundImage]="'url('+  item.localmedia + '--glide?w=360&fit=crop&q=80' +')'"></div>
+
+          <div class="content">
+            <figure class="user" (click)="showProfile(item.username)"><img src="{{item.user_photo}}" alt=""></figure>
+            <div class="txt">
+              <h3><a>{{item.title}}</a></h3>
+              <div class="row">
+                <div class="left col-sm-8 col-8"><span>Collected by </span> <a (click)="showProfile(item.username)">{{ item.name }}</a></div>
+                <div class="right col-sm-4 col-4">{{item.photo_count}} photos</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <app-pagination-loader *ngIf="showPaginationLoader==true"></app-pagination-loader>
+
+    <div class="empty-msg text-center" *ngIf="collectionList.length==0 && !showPaginationLoader">
+      <p>There aren't any photos in this collection.</p>
+    </div>
+    <div *ngIf="emptyStatus==true && !showPaginationLoader" class="empty-msg text-center">
+      <p>No more results 🙃</p>
+    </div>
+
+  </div>
+</section>
+<ng-template #moreContent>More actions</ng-template>
+<ng-template #private>Private</ng-template>

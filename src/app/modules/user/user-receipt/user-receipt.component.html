@@ -1,0 +1,72 @@
+<main class="main">
+  <div class="content-cntr innerpage">
+    <app-alert></app-alert>
+
+    <h2 class="receipt-title">Receipt</h2>
+    <h3 class="receipt-sub-title">Thank you for your support, we couldn’t do this without you.</h3>
+
+    <section class="ac-cnt-area" *ngIf="receiptDetails">
+      <div class="receipt-top clearfix row">
+        <div class="col-6"><a (click)="backToBilling()" class="underline text-black">Back to billing</a></div>
+        <div class="col-6 text-right"><a (click)="captureScreen()" class="underline text-black">Download PDF</a>
+          <a (click)="print()" class="underline text-black print ml-32">Print</a></div>
+      </div>
+      <div class="receipt-cntr" #myId id="contentToConvert">
+        <div class="receipt-bx">
+          <ul>
+            <li class="bill-title semi-bold">
+              <div class="row">
+                <div class="col-6">RECEIPT</div>
+                <div class="col-6 text-right">ORDER / INVOICE ID: {{ receiptDetails.invoice_id }}</div>
+              </div>
+
+            </li>
+            <li class="">
+              <div class="row">
+                <div class="col-6">
+                  <ul>
+                    <li class="semi-bold">{{ receiptDetails.name }}</li>
+                    <li>{{ receiptDetails.email }}</li>
+                  </ul>
+                </div>
+                <div class="col-6">
+                  <ul>
+                    <li class="semi-bold">Shoot The Frame</li>
+                    <li>{{ receiptDetails.address }}</li>
+                    <!-- <li>Northcote, Victoria, Australia, 3070</li> -->
+                  </ul>
+                </div>
+              </div>
+
+            </li>
+            <li class="semi-bold">
+              <div class="row">
+                <div class="col-6">Item</div>
+                <div class="col-2">Date Purchased</div>
+                <div class="col-2">Expired</div>
+                <div class="col-2 text-right">Amount</div>
+              </div>
+
+            </li>
+            <li class="">
+              <div class="row">
+                <div class="col-6">{{ receiptDetails.item }}</div>
+                <div class="col-2">{{getDate(receiptDetails.created_at)}}</div>
+                <div class="col-2">{{getDate(receiptDetails.expiry_date) }}</div>
+                <div class="col-2 text-right">${{ receiptDetails.amount }}</div>
+              </div>
+
+            </li>
+            <li class="semi-bold">
+              <div class="row">
+                <div class="col-6">Thank you.</div>
+                <div class="col-6 text-right"><img src="/assets/images/temp/logo-with-text.png" alt="" width="150px"></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+  </div>
+</main>

@@ -1,0 +1,111 @@
+<section class="upload-cnt-area">
+  <app-loader></app-loader>
+  <!-- <h2 class="title">Upload Photo</h2> -->
+  <!-- <section class="common-tab-box"> -->
+  <!-- <a (click)="open(content)">OPen Modal</a> -->
+  <ngb-tabset class="common-tab-box" #tabs>
+    <ngb-tab (tabChange)="afterChange($event)" class="test" id="tab-selectbyid1" title="THE STORY">
+      <!-- <ng-template ngbTabContent>
+        <div class="story-cntr">
+          <ul class="story inner">
+            <app-story [imageDetails]="imageDetails" (deactivateGuard)="allowDeactivate($event)" [isEdit]="isEdit"
+              (active)="activeTabs($event,'detailsActive')"></app-story>
+          </ul>
+        </div>
+
+      </ng-template> -->
+      <ng-template ngbTabContent>
+        <div class="story-cntr">
+          <ul class="story inner">
+            <li class="image-cntr" *ngIf="subjectImg">
+              <figure><img (load)="imageLoaded()" [src]="subjectImg" alt="Uploaded Image"></figure>
+            </li>
+            <app-story [imageDetails]="imageDetails" (active)="activeTabs($event,'detailsActive')"></app-story>
+          </ul>
+        </div>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab (tabChange)="afterChange($event)" id="tab-details" (deactivateGuard)="allowDeactivate($event)" title="DETAILS"
+      [disabled]="detailsactive">
+      <ng-template ngbTabContent>
+        <div class="story-cntr">
+          <ul class="story inner">
+            <li class="image-cntr" *ngIf="subjectImg">
+              <figure><img [src]="subjectImg" alt="Uploaded Image"></figure>
+            </li>
+            <app-details [imageDetails]="imageDetails" [isEdit]="isEdit" (deactivateGuard)="allowDeactivate($event)"
+              (active)="activeTabs($event,'categoryActive')"></app-details>
+          </ul>
+        </div>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab id="tab-category" title="CATEGORY" [disabled]="categoryactive">
+      <ng-template ngbTabContent>
+        <div class="story-cntr">
+          <ul class="story inner">
+            <li class="image-cntr" *ngIf="subjectImg">
+              <figure><img [src]="subjectImg" alt="Uploaded Image"></figure>
+            </li>
+            <app-category [imageDetails]="imageDetails" [isEdit]="isEdit" (active)="activeTabs($event,'awardActive')"
+              (deactivateGuard)="allowDeactivate($event)"></app-category>
+          </ul>
+        </div>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab id="tab-award" title="STF AWARDS" *ngIf="isEdit===false" [disabled]="awardactive">
+      <ng-template ngbTabContent>
+        <div class="story-cntr">
+          <app-awards (load)="imageLoaded()" [imageDetails]="imageDetails" [subjectImg]="subjectImg" (deactivateGuard)="allowDeactivate($event)">
+          </app-awards>
+        </div>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</section>
+
+<ng-template #content class="change-email" let-modal>
+  <div class="inner-modal">
+    <div class="modal-header">
+      <h3 class="modal-title text-center">Abandon upload photo</h3>
+      <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+        <img src="assets/images/temp/ui-cross.svg" alt="">
+      </button>
+    </div>
+    <div class="modal-body text-center">
+      <p>
+        Are you sure you want to abandon this photo upload?
+        You will lose all of the information which you have added so far.
+      </p>
+      <p>
+
+        Keep in mind, if you complete the upload, you can come back and edit the details at
+        any stage.
+      </p>
+      <div class="btn-cntr text-center">
+        <a class="cancel" (click)="modal.dismiss('Close click')">Stay</a>
+        <a class="btn btn-danger" (click)="modal.close('Ok click')">Yes, abandon</a>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #contentEdit class="change-email" let-modal>
+  <div class="inner-modal">
+    <div class="modal-header">
+      <h3 class="modal-title text-center">Are you sure?</h3>
+      <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+        <img src="assets/images/temp/ui-cross.svg" alt="">
+      </button>
+    </div>
+    <div class="modal-body text-center">
+      <p>
+        Are you sure you want leave and stop editing your photo?
+        You will lose any information which you have changed.
+      </p>
+      <div class="btn-cntr text-center">
+        <a class="cancel" (click)="modal.dismiss('Close click')">Cancel</a>
+        <a class="btn btn-danger" (click)="modal.close('Ok click')">Yes, leave</a>
+      </div>
+    </div>
+  </div>
+</ng-template>

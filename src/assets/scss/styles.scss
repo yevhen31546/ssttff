@@ -1,0 +1,27 @@
+//Bootstrp files included
+@import "functions";
+@import "variables";
+@import "mixins";
+@import "theme/mixins";
+
+//Included for Theme
+@import "theme/variables"; 
+
+//Theme Styles
+@import "theme/header";
+/*@import "theme/footer";
+
+@import "theme/home";
+@import "theme/banner";
+@import "theme/innerpages";*/
+@import "theme/helpers";
+@import "theme/common";
+@import "theme/login";
+@import "theme/myaccount";
+@import "theme/profile";
+@import "theme/upload";
+@import "theme/alert";
+@import "theme/pricing"; 
+@import "theme/critique"; 
+
+  

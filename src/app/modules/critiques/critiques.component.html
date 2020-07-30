@@ -1,0 +1,20 @@
+<div class="content-cntr innerpage">
+<app-alert></app-alert>
+  <section class="heading-top-cntr">
+    <h2 class="title">Critiques</h2>
+    <h3>This is a place to find the photo critiques you have received and given within the STF community.</h3>
+  </section>
+  <ngb-tabset (tabChange)="tabChange($event)" class="common-tab profile-tab-area">
+
+    <ngb-tab id='tab-recieved' title="RECEIVED">
+      <ng-template ngbTabContent>
+        <app-image-grid  (appendAlert)='appendItems($event)' [identifyType] = 'identifyType'></app-image-grid>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab id='tab-given' title="GIVEN">
+      <ng-template ngbTabContent>
+        <app-image-grid (showMessage)="displayAlert($event)" (appendAlert)='appendItems($event)'  [identifyType] = 'identifyType'></app-image-grid>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>

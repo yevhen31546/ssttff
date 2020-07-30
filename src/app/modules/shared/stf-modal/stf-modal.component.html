@@ -1,0 +1,29 @@
+<button type="button" class="popclose-mb close-critic" [hidden]="!mobile" aria-describedby="modal-title"
+(click)="activeModal.dismiss('Cross click')">
+<img src="assets/images/temp/close.svg" alt="">
+</button>
+<div class="inner-modal">
+  <div class="modal-header">
+    <h3 class="modal-title text-center">STF Awards</h3>
+    <button type="button" class="close" aria-describedby="modal-title" (click)="activeModal.dismiss('Cross click')">
+      <img src="assets/images/temp/ui-cross.svg" alt="">
+    </button>
+  </div>
+  <div class="modal-body text-center">
+    <p>
+      The STF Awards were created in 2012. While the Shoot The Frame community has grown and morphed a little, the STF Awards are still at the centre of our mission.
+    </p>
+    <p>
+      Every month there are 3 awards, the categories remain the same. Shoot The Face (portrait), Shoot The Land (landscape) and Shoot The Wild (wildlife).
+    </p>
+    <p>
+      Entries close on the last day of every month. 
+    </p>
+    <p>
+     <a class="text-black underline" rel="noopener noreferrer"  target="_blank" href="https://about.shoottheframe.com/"> Learn more about the STF Awards. </a>
+    </p>
+    <div class="btn-cntr text-center">
+      <a class="btn btn-secondary" (click)="activeModal.dismiss('Cross click')">Okay</a>
+    </div>
+  </div>
+</div>

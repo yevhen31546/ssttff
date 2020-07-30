@@ -1,0 +1,50 @@
+<div class="inner-modal show-full-text">
+  <div class="modal-header">
+    <h3 class="modal-title text-center">Edit photo essay</h3>
+    <button type="button" class="close" (click)="closeButton()" data-dismiss="modal" aria-label="Close">
+      <img src="assets/images/temp/ui-cross.svg" alt="" />
+    </button>
+  </div>
+  <div class="modal-body">
+    <p class="text-center">
+        Edit your photo essay
+    </p>
+    <ul *ngIf="essayDet" class="list-unstyled pt-4">
+      <form [formGroup]="photoEssayForm" (ngSubmit)="edit()" novalidate>
+        <li class="form-group mb-4">
+          <label class="form-control-label">PHOTO ESSAY TITLE</label>
+          <input type="text" name="title" #title formControlName="title" placeholder="Give your collection a title"
+            class="form-control" [ngClass]="{
+                'text-valid': photoEssayForm.controls['title'].valid
+              }"
+            required />
+        </li>
+        <li class="form-group mb-4">
+          <label class="form-control-label">PHOTO ESSAY STORY(optional)</label>
+          <textarea name="story" cols="30" rows="4" #story formControlName="story" class="form-control" [ngClass]="{
+                'text-valid': photoEssayForm.controls['story'].value!=''
+              }"
+            placeholder="Tell us the story of your photo essay..."></textarea>
+        </li>
+        <li class="form-group stay mb-5">
+          <label class="checkbox">
+            <input type="checkbox" (change)="checkboxChange($event)" [checked]="essayDet.private" formControlName="private" />
+            <span>Make this photo essay private (only you can see it)</span>
+            <span class="checkmark"></span>
+          </label>
+        </li>
+        <li class="text-right form-group mb-5">
+          <a (click)="deletePhotoEssay()" class="text-danger underline">Delete Photo essay</a>
+        </li>
+        <li class="text-center btn-wrp">
+          <div class="form-group">
+            <a (click)="closeButton()" class="btn btn-link text-black underline">Cancel</a>
+            <button type="submit" class="btn btn-primary" [disabled]="photoEssayForm.invalid" [ngClass]="{ disabled: photoEssayForm.invalid }">
+              Save
+            </button>
+          </div>
+        </li>
+      </form>
+    </ul>
+  </div>
+</div>

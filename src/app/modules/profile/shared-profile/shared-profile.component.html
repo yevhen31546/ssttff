@@ -1,0 +1,63 @@
+<div *ngIf="activepopup===true" class="modal-header">
+  <div class="avtar-view">
+    <div class="img-wrp shine"></div>
+    <div class="dtl-wrp">
+      <div class="line shine"></div>
+      <div class="line shine"></div>
+    </div>
+  </div>
+  <div class="btn-wrp shine"></div>
+</div>
+<div *ngIf="activepopup===true" class="modal-body">
+  <div class="img-box shine"></div>
+  <div class="cnt-box">
+    <div class="sc-left d-none d-md-block">
+      <div class="line shine"></div>
+      <div class="box-cntr">
+        <div class="box shine"></div>
+        <div class="box-sm shine"></div>
+      </div>
+    </div>
+    <div class="sc-right">
+      <div class="lnk-btn shine"></div>
+      <div class="lnk-btn shine"></div>
+      <div class="lnk-btn shine"></div>
+      <div class="lnk-btn shine"></div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="activepopup===false" class="custom-popup-wrp share-cls">
+  <div class="popup-cntr">
+    <app-modal-top [addCritic]="addCritic" [data]="data"></app-modal-top>
+    <section class="critique-pop-cnt">
+      <div class="critique-tab-cntr">
+        <ngb-tabset class="common-tab critique-popup-tab-area" #tabs>
+          <ngb-tab title="THE STORY" id="story-tab">
+            <ng-template ngbTabContent>
+              <section class="tab-cnt">
+                <div class="critique-tab-content story">
+                  <h3>{{ data.title }}</h3>
+                  
+                    <pre><p>{{ data.story.trim() }}</p></pre>
+                  
+                </div>
+              </section>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="CRITIQUES" id="critic-tab">
+            <ng-template ngbTabContent>
+              <app-view-critic (upgrade)="upgradePlan()" [data]="data" (profile)="showProfile($event)" [uploadId]="data.id"></app-view-critic>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="COMMENTS" id="comment-tab">
+            <ng-template ngbTabContent>
+              <app-comments [imgDetails]="data"></app-comments>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+      </div>
+    </section>
+
+  </div>
+</div>

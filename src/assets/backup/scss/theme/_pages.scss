@@ -1,0 +1,195 @@
+.table-responsive{
+	.chk-switch{
+		display: inline-block;
+	}
+}
+
+.fc-timeline{
+    .fc-head {
+        .fc-cell-content{
+            padding: 3px 0;
+        }  
+    } 
+    .fc-nonbusiness{
+        background-color: $white;
+    }
+}
+.fc-unthemed .fc-divider{
+    background-color: #f0f0f0;
+}
+.fc-timeline-event{
+    color: $white !important;
+}
+.fc-unthemed {
+    td,th,.fc-content,.fc-divider,.fc-list-heading td,.fc-list-view,.fc-popover,fc-row,tbody,thead{
+       border-color: #dedede;
+    }
+    td{
+        font-size: 13px;
+    }
+    th{
+        font-size: 13px;
+        &.fc-widget-header{
+           font-size: 13px; 
+          font-weight: normal;
+        }
+    }
+}
+
+.fc-scroller-canvas{
+    background-color: #ececec;
+}
+.fc-unthemed th.fc-widget-header{
+    background: #eee;
+    background: -webkit-gradient(linear,left top,left bottom,from(#f3f3f3),to(#e9e9e9));
+    background: -webkit-linear-gradient(top,#f3f3f3 0,#e9e9e9);
+    background: -moz-linear-gradient(top,#f3f3f3 0,#e9e9e9);
+    background: -ms-linear-gradient(top,#f3f3f3 0,#e9e9e9);
+    background: -o-linear-gradient(top,#f3f3f3 0,#e9e9e9);
+    background: linear-gradient(top,#f3f3f3 0,#e9e9e9);
+    filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr="#f3f3f3", endColorStr="#e9e9e9");
+}
+    
+
+.selected-list{
+    .c-btn{
+        box-shadow: none!important;
+        -webkit-box-shadow: none!important;
+        .c-token{
+              padding: 2px 8px!important;
+              line-height: 20px;
+              background: $green!important;
+        }
+    }
+    .c-list .c-token .fa-remove{
+        margin-left: 4px!important;
+    }
+} 
+
+.form-control,select.form-control:not([size]):not([multiple]){
+    height: 40px;
+    border-radius: 3px;
+}
+.owl-dialog-container{
+    overflow: hidden !important;
+}
+.owl-dt-calendar-control{
+    padding:1.5em .5em !important;
+}
+.owl-dt-container-buttons{
+    height: 3.5em!important;
+    color: $green !important;
+    .owl-dt-container-control-button{
+        &:last-child{
+            background-color: $green;
+            color: $white;
+        }
+    }
+}
+.owl-dt-calendar-table .owl-dt-calendar-cell-selected{
+    background-color: $green !important;
+}
+.drop-inline{
+    .dropdown-menu{
+        min-width: 300px;
+    }
+    .dropdown-item{
+        padding: 0.45rem 1rem;
+        &:active,&:hover{
+            background-color: transparent;
+            color:$gray-900; 
+        }
+        .card-header{
+            font-size: .813rem;
+           border-bottom: 0;   
+            .fa-angle-down{
+                float: right;
+                font-size: 1.125rem;
+            }
+        }
+    }
+    .add-project-users-list{
+        margin-top: 15px;
+		input[type="checkbox"]{
+			position: relative;
+    		top: 3px;
+		}
+    }
+}
+.swal2-popup .swal2-actions{
+    margin: 1.45em auto 1.25rem !important;
+    .btn{
+        margin: 0 5px;
+        color: $white;
+    }
+}
+.fc-cell-content{
+    a{
+        color: $gray-900;
+        margin-left: 4px;
+    }   
+}
+.top-quick-view{
+    li{
+       .btn-white{
+           padding: 2px 10px;
+           border-color: #ddd;
+		   height: 26px;
+		   line-height: 20px;
+        } 
+    }
+    .pagination-sm .page-link{
+        padding: 3px 12px;
+        border-color: #ddd;
+    }
+    .dropdown-toggle::after{
+        margin-left: 8px;
+        vertical-align: middle;
+    }
+}
+.teammates-popup{
+	background: $white;
+	position: fixed;
+	z-index: 2;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	.logo-blk {
+		max-width: 160px;
+		padding: 20px;
+	}
+	.contet-cntr{
+		max-width: 500px;
+		width: 100%;
+		margin: 0 auto;
+		.flex-form{
+			justify-content: center;
+		}
+		h2{
+			margin-bottom: 20px;
+			text-align: center;
+		}
+		h5{
+			margin-bottom: 40px;
+    		color: #8c8c8c;
+		}
+		.sub-txt{
+			color: #989898;
+		}
+	}
+	.bottom-area{
+		margin-top: 20px;
+		.btn-wrp{
+			margin-top: 15px;
+			input{
+				min-width: 120px;	
+			}
+		}
+		.chkw-wrp{
+			input{
+				position: relative;
+    			top: 3px;
+			}
+		}
+	}
+}

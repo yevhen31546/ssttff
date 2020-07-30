@@ -1,0 +1,33 @@
+<section class="profile-cnt-area">
+  <div class="profile-followers-cnt">
+    <ul class="followers-list members-list row" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="pageChanged()"
+    [scrollWindow]="true">
+      <li class="col-md-4" *ngFor="let memberinfo of memberData">
+        <div class=" box">
+          <div class="left" (click)="showProfile(memberinfo.username)">
+            <div class="img">
+              <img *ngIf="memberinfo.photo_url!=''" src="{{memberinfo.photo_url}}" alt=""></div>
+            <div class="txt">
+              <h6><a (click)="showProfile(memberinfo.username)">{{ memberinfo.name }}</a></h6>
+              {{ getLocation( memberinfo.location)}}
+              <!-- {{ memberinfo.location ? memberinfo.location : 'The World' }} -->
+            </div>
+          </div>
+          <div class="right">
+            <a *ngIf="memberinfo.is_follow==0" (click)="followUser(memberinfo)" class="btn btn-primary">Follow</a>
+            <a (click)="followUser(memberinfo)" *ngIf="memberinfo.is_follow==1" class="btn
+                  btn-secondary">Following</a>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <app-pagination-loader *ngIf="showPaginationLoader==true"></app-pagination-loader>
+  <div *ngIf="memberData.length==0 && !showPaginationLoader && searchTerm" class="empty-msg text-center">
+    <p>Oops, no results in ‘members’. 🙃</p>
+  </div>
+  <div *ngIf="emptyStatus==true && !showPaginationLoader" class="empty-msg text-center">
+    <p>No more results 🙃</p>
+  </div>
+
+</section>

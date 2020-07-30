@@ -1,0 +1,70 @@
+<!-- <div class="modal fade modal-md" id="InviteCritique" tabindex="-1" role="dialog" aria-labelledby="InviteCritique"
+  aria-hidden="true"> -->
+<!-- <app-loader></app-loader> -->
+<div class="modal-dialog" role="document" >
+  <div class="modal-content">
+    <div class="inner-modal">
+      <div class="modal-header">
+        <h3 class="modal-title text-center">Notifications</h3>
+        <button type="button" class="close" (click)="closeModal()" data-dismiss="modal" aria-label="Close">
+          <img src="assets/images/temp/ui-cross.svg" alt="">
+        </button>
+      </div>
+      <div class="modal-body" >
+
+
+        <div *ngIf="notificationData.length==0 && !showPaginationLoader" class="no-noti-msg">There are no notifications at the moment.</div>
+        <p-scrollPanel [style]="{height: '200px'}" >
+            <app-pagination-loader class="d-flex align-items-center notification-loader" *ngIf="showPaginationLoader"></app-pagination-loader>
+
+          <ul class="noti-pop-list" *ngIf="notificationData.length!=0 && !showPaginationLoader">
+            <li *ngFor="let item of notificationData">
+              <div class="noti-info-cntr">
+                <div class="user-img cursor" (click)="showProfile(item)"><img width="48" height="48"
+                  src="{{item.from_user_photo_url=='' || item.from_user_photo_url==null?'assets/images/temp/user-icon.svg':item.from_user_photo_url}}"
+                    alt=""></div>
+                <div class="txt">
+                  <h6><strong class="cursor" (click)="showProfile(item)">{{item.from_user_first_name | uppercase}} {{item.from_user_last_name | uppercase}}</strong>
+                    {{item.appendText}} <a class="text-black" (click)="openImageModal(item)">{{item.type_name}}</a>
+                    <a *ngIf="item.type=='message'" class="underline text-black cursor" (click)="openMessageModal(item)">message</a>
+                  </h6>
+                  <span>{{ timeSince(item.created_at) }}</span>
+                </div>
+              </div>
+              <div (click)="openImageModal(item)" [style.backgroundImage]="'url('+ item.type_image + '--glide?fit=crop&q=60' +')'" class="img cursor" *ngIf="item.type_image">
+                <!-- <img (click)="openImageModal(item)" width="48"  src="{{ item.type_image}}--glide?width=48&fit=crop&q=20"
+                  alt=""> -->
+              </div>
+            </li>
+          </ul>
+        </p-scrollPanel>
+        <div class="clear-noti" *ngIf="notificationData.length!=0 && !showPaginationLoader">
+          <a (click)="clearNotification()" class="text-black underline">Clear notifications </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #deleteModal class="change-email" let-modal>
+  <div class="inner-modal">
+    <div class="modal-header">
+      <h3 class="modal-title">Delete notifications</h3>
+      <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+        <img src="assets/images/temp/ui-cross.svg" alt="">
+      </button>
+    </div>
+    <div class="modal-body text-center">
+      <p>
+        Are you sure you want to delete all notifications?
+      </p>
+
+      <div class="btn-cntr text-center">
+        <a class="cancel" (click)="modal.dismiss('Close click')">Cancel</a>
+        <a class="btn btn-secondary" (click)="modal.close('Ok click')">Yes, delete</a>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<!-- </div> -->

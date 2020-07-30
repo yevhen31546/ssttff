@@ -1,0 +1,61 @@
+<section class="profile-cnt-area">
+  <div class="photo-eassays-cnt">
+    <ul class="row" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="pageChanged()"
+    [scrollWindow]="true">
+      <li *ngFor=" let item of collectionList; let i=index;" class="col-md-4 img-box">
+        <div class="inner">
+          <div class="dropdown option-dropdown">
+            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false" container="body" placement="bottom" tooltipClass="tooltip-custom"
+            [ngbTooltip]="moreContent">
+            <span></span>
+          </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+              <div class="inner-wrp">
+                <a class="dropdown-item" (click)="share(item)">Share collection</a>
+                <a [hidden]="!authUserDetails || authUserDetails && authUserDetails.id !== item.user_id" class="dropdown-item"
+                  (click)="editCollection(item)">Edit collection</a>
+                <a [hidden]="!authUserDetails || authUserDetails && authUserDetails.id !== item.user_id" class="dropdown-item delete"
+                  (click)="deleteCollectionModal(item)">Delete collection</a>
+              </div>
+            </div>
+          </div>
+          <!-- <figure (click)="getDetails(item.id)"><img src="{{item.media}}" alt=""></figure> -->
+          <div container="body" [ngbTooltip]="private" *ngIf="item.private=='1'" class="private-eye"><img src="assets/images/temp/pho-redeye-off.svg"
+              alt=""></div>
+          <div class="main-img cursor" (click)="getDetails(item.share_id)"  [ngStyle]="{'background-image': 'url(&quot;' + item.localmedia + '--glide?w=360&fit=crop&q=80' +  '&quot;)'}"  ></div>
+
+          <div class="content">
+            <figure class="user"><img (click)="showProfile(item.username)" src="{{item.user_photo==''?'assets/images/temp/user-icon.svg':item.user_photo}}"
+                alt=""></figure>
+            <div class="txt">
+              <h3><a>{{item.title}}</a></h3>
+              <div class="row">
+                <div class="left col-sm-8 col-8"><span>Collected by </span> <a (click)="showProfile(item.username)">{{ item.name }}</a></div>
+                <div class="right col-sm-4 col-4">{{item.photo_count}} {{item.photo_count=='1'?'photo':'photos'}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <app-pagination-loader *ngIf="showPaginationLoader"></app-pagination-loader>
+    <div class="empty-msg text-center" *ngIf="collectionList.length==0 && isOwnCollection==true && showPaginationLoader==false && !searchTerm">
+      <p>You haven't created any collections yet.</p>
+      <p>Perhaps you can <span (click)="createModal()" class="underline cursor">create one now!</span>&nbsp;😀</p>
+    </div>
+    <div class="empty-msg text-center" *ngIf="collectionList.length==0 && isOwnCollection==false && showPaginationLoader==false && !searchTerm">
+      <p>{{name}} hasn’t created any collections yet.&nbsp;😳</p>
+      <!-- <p>There aren't any photos in this collection.&nbsp; <img src="assets/images/temp/smiley.png" alt=""></p> -->
+    </div>
+    <div class="empty-msg text-center" *ngIf="collectionList.length==0 && showPaginationLoader==false && searchTerm">
+      <p>Oops, no results in ‘collections’. 🙃</p>
+      <!-- <p>There aren't any photos in this collection.&nbsp; <img src="assets/images/temp/smiley.png" alt=""></p> -->
+    </div>
+    <div *ngIf="emptyStatus==true && !showPaginationLoader" class="empty-msg text-center">
+      <p>No more results 🙃</p>
+    </div>
+  </div>
+</section>
+<ng-template #private>Private</ng-template>
+<ng-template #moreContent>More actions</ng-template>

@@ -1,0 +1,47 @@
+<div class="inner-modal show-full-text">
+  <div class="modal-header">
+    <h3 class="modal-title text-center">Create new photo essay</h3>
+    <button type="button" (click)="closeButton()" class="close" data-dismiss="modal" aria-label="Close">
+      <img src="assets/images/temp/ui-cross.svg" alt="" />
+    </button>
+  </div>
+  <div class="modal-body">
+    <p class="text-center">
+      Give your new photo essay a title and a description.
+    </p>
+    <ul class="list-unstyled pt-4">
+      <form [formGroup]="photoEssayForm" (ngSubmit)="create()" novalidate>
+        <li class="form-group mb-4">
+          <label class="form-control-label">PHOTO ESSAY TITLE</label>
+          <input type="text" name="title" #title formControlName="title" placeholder="Give your photo essay a title"
+            class="form-control" [ngClass]="{
+              'text-valid': photoEssayForm.controls['title'].valid
+            }"
+            required />
+        </li>
+        <li class="form-group mb-4">
+          <label class="form-control-label">PHOTO ESSAY STORY(optional)</label>
+          <textarea name="story" cols="30" rows="4" #story formControlName="story" class="form-control" [ngClass]="{
+              'text-valid': photoEssayForm.controls['story'].value!=''
+            }"
+            placeholder="Tell us the story of your photo essay..."></textarea>
+        </li>
+        <li class="form-group stay mb-5">
+          <label class="checkbox">
+            <input type="checkbox" (change)="checkboxChange($event)" formControlName="private" />
+            <span>Make this photo essay private (only you can see it)</span>
+            <span class="checkmark"></span>
+          </label>
+        </li>
+        <li class="text-center btn-wrp">
+          <div class="form-group">
+            <a (click)="cancelButton()" class="btn btn-link text-black underline">Cancel</a>
+            <button type="submit" class="btn btn-primary" [disabled]="photoEssayForm.invalid || submitted" [ngClass]="{ disabled: photoEssayForm.invalid }">
+              Create
+            </button>
+          </div>
+        </li>
+      </form>
+    </ul>
+  </div>
+</div>

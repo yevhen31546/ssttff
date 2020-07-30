@@ -1,0 +1,133 @@
+<button type="button" class="popclose-mb close-critic" [hidden]="!closeButton" aria-describedby="modal-title"
+  (click)="closeModal()">
+  <img src="assets/images/temp/close.svg" alt="">
+</button>
+<div class="photo-cnt" *ngIf="userPhotos.length!=0">
+  <div class="image-items" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="150"
+    (scrolled)="pageChanged()" [scrollWindow]="true">
+    <ng-masonry-grid class="grid" (onNgMasonryInit)="onNgMasonryInit($event)" (layoutComplete)="completeLayout($event)"
+      *ngIf="userPhotos.length!=0" [masonryOptions]="{itemSelector: grid-item,initLayout:false,
+      gutter: 30,
+      percentPosition: true,
+      horizontalOrder: false, transitionDuration: 0.50,
+      transitionDelay:0.50}" [useAnimation]="false" [useImagesLoaded]="false">
+      <!-- Masonry Grid Item -->
+
+      <ng-masonry-grid-item #container class="grid-item" id="{{'masonry-item-'+i}}"
+        *ngFor="let item of userPhotos; let i = index;">
+        <!-- Grid Content  -->
+        <!-- [ngStyle]="{'height':addPixel(item.height,item.width)}" -->
+        <div class="inner-grid" [ngStyle]="{'opacity':showOpacity[item.page]}">
+          <div class="learn-section" *ngIf="item.type=='learn'">
+            <a target="_blank" href="https://about.shoottheframe.com/stf-awards">
+              <div class="top-area">
+                <app-stf-award-logo [item]='item' [type]="'web'"></app-stf-award-logo>
+
+                <ul>
+                  <li>
+                    <div class="learn-more cursor">
+                      Learn more
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="grid-image-outer" [ngStyle]="{'padding-bottom':addPixel(item),'position':'relative'}">
+                <img src="{{ item.photo}}">
+              </div>
+            </a>
+          </div>
+          <div *ngIf="item.localmedia">
+            <div class="top-area">
+              <app-stf-award-logo [item]='item' [type]="'web'"></app-stf-award-logo>
+
+              <ul>
+                <li>
+                  <a (click)="addCollections(item)" container="body" placement="bottom" container="body"
+                    tooltipClass="tooltip-custom" [ngbTooltip]="collection">Collect</a>
+                </li>
+                <li [hidden]=" (isAuthUser && (authUserDetails.id == item.user_id))  || item.critique_status !== 0 || removeCriticBtn == item.id">
+                  <a (click)="crticPopup(imageDetails,item,i)" placement="bottom" container="body"
+                    tooltipClass="tooltip-custom" [ngbTooltip]="critique">Critique</a>
+                </li>
+              </ul>
+              <div class="likes" container="body" container="body" tooltipClass="tooltip-custom"
+                [ngbTooltip]="item.like_status === 1 ? likeContent : unlikeContent"
+                [ngClass]="item.like_status === 1 ? 'active' : ''" (click)="likePhotos(item)"><i class="fa fa-heart"
+                  aria-hidden="true"></i>
+                <span class="cnt"> {{nFormatter(item.like_count)}} </span></div>
+            </div>
+            <div class="bottom-area">
+              <div (click)="showProfile(item.username)" class="left cursor">
+                <div class="img"><img src="{{item.user_photo}}" alt=""></div>
+                {{item.name}}
+              </div>
+              <div class="right">
+                <div *ngIf="((item.adult_content=='0')
+               || (item.adult_content=='1' &&  item.own_photo=='1'))" class="likes" container="body"
+                  tooltipClass="tooltip-custom" [ngbTooltip]="item.like_status === 1 ? likeContent : unlikeContent"
+                  [ngClass]="item.like_status === 1 ? 'active' : ''" (click)="likePhotos(item)"><i class="fa fa-heart"
+                    aria-hidden="true"></i>
+                  <span class="cnt"> {{nFormatter(item.like_count)}} </span></div>
+                <div *ngIf="item.adult_content=='1' && item.own_photo=='0'" class="likes cursor adult-btn"
+                  (click)="updateAdultContent(item)">
+                  See adult content
+                </div>
+                <app-stf-award-logo [item]='item' [type]="'mobile'"></app-stf-award-logo>
+
+
+              </div>
+            </div>
+
+            <div class="grid-image-outer" [ngClass]="{'ad_cnt': item.adult_content=='1' && item.own_photo=='0'}"
+              [ngStyle]="{'padding-bottom':addPixel(item),'position':'relative'}">
+              <img (click)="openMasonryModal(imageDetails,item,i)" style="background-color:#E0E3E5"
+                sizes="(min-width: 1335px) 416px, (min-width: 992px) calc(calc(100vw - 72px) / 3), (min-width: 768px) calc(calc(100vw - 48px) / 2), 100vw"
+                src="{{ item.localmedia}}--glide?w=360&q=80" srcset="{{ item.localmedia}}--glide?w=360&fit=crop&q=80 100w,
+            {{ item.localmedia}}--glide?w=360&fit=crop&q=80 200w,
+            {{ item.localmedia}}--glide?w=360&fit=crop&q=80 300w,
+            {{ item.localmedia}}--glide?w=400&fit=crop&q=80 400w,
+            {{ item.localmedia}}--glide?w=500&fit=crop&q=80 500w,
+            {{ item.localmedia}}--glide?w=1000&fit=crop&q=80 600w,
+            {{ item.localmedia}}--glide?w=700&fit=crop&q=80 700w,
+            {{ item.localmedia}}--glide?w=1000&fit=crop&q=80 800w,
+            {{ item.localmedia}}--glide?w=1200&fit=crop&q=80 900w,
+            {{ item.localmedia}}--glide?w=1200&fit=crop&q=80 1000w,
+            {{ item.localmedia}}--glide?w=1200&fit=crop&q=80 1100w,
+            {{ item.localmedia}}--glide?w=1200&fit=crop&q=80 1200w,
+            {{ item.localmedia}}--glide?w=1296&fit=crop&q=80 1296w,
+            {{ item.localmedia}}--glide?w=1800&fit=crop&q=80 1400w,
+            {{ item.localmedia}}--glide?w=360&fit=crop&q=80 1600w,
+            {{ item.localmedia}}--glide?w=360&fit=crop&q=80 1800w,
+            {{ item.localmedia}}--glide?w=360&fit=crop&q=80 2000w,
+            {{ item.localmedia}}--glide?w=360&fit=crop&q=80 2200w,
+            {{ item.localmedia}}--glide?w=360&fit=crop&q=80 2400w,
+            {{ item.localmedia}}--glide?w=360&fit=crop&q=80 2592w
+            ">
+            </div>
+          </div>
+          <!-- <img (load)="dosomething(item)" (click)=openMasonryModal(imageDetails,item,i) src="{{ item.localmedia}}--glide?w=360&h={{item.current_image_height}}&fit=crop&q={{glideLength}}" /> -->
+        </div>
+      </ng-masonry-grid-item>
+    </ng-masonry-grid>
+  </div>
+</div>
+<app-pagination-loader *ngIf="showPaginationLoader"></app-pagination-loader>
+
+<ng-template #likeContent>Liked by you</ng-template>
+<ng-template #unlikeContent>Give a little love</ng-template>
+<ng-template #moreoptions>More options</ng-template>
+<ng-template #collection>Add to collection</ng-template>
+<ng-template #critique>Critique Photo</ng-template>
+
+<div *ngIf='userPhotos.length==0 && categoryType!="score" && !showPaginationLoader && !isOwnCollection'
+  class="photo-eassays-cnt">
+  <div class="empty-msg text-center">There aren't photos in this category yet.</div>
+</div>
+
+<div *ngIf="categoryType=='score' && userPhotos.length==0 && !showPaginationLoader" class="empty-msg text-center">
+  Oops, no results in ‘Collective Score’. 🙃
+</div>
+
+<div *ngIf="emptyStatus==true && !showPaginationLoader" class="empty-msg text-center">
+  <p>No more results 🙃</p>
+</div>

@@ -1,0 +1,383 @@
+<app-loader></app-loader>
+<div class="content-cntr innerpage">
+  <section class="heading-top-cntr">
+    <h1 class="title">Insights</h1>
+    <h3 class="mb-4 mb-sm-5">Insights allow you to understand the numbers around your account, profile and photos. </h3>
+  </section>
+  <div class="insight-container">
+    <div class="insight-tips row mb-4">
+      <div class="col-12 col-sm-6 col-md-4">
+        <a target="_blank" href="https://about.shoottheframe.com/tips/increase-number-of-critiques/">
+          <div class="tip">
+            <img class="tip-icn" src="assets/images/temp/hou-light-ceiling.svg" alt="">
+            <h5 class="tip-ttl"><span class="text-primary">TIP:</span> INCREASE YOUR NO. OF CRITIQUES</h5>
+            <p class="tip-desc">Learn more about how to <a target="_blank" href="https://about.shoottheframe.com/tips/increase-number-of-critiques/">increase the number of critiques you are
+                receiving</a></p>
+          </div>
+        </a>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4">
+        <a target="_blank" href="https://about.shoottheframe.com/tips/gain-exposure/">
+          <div class="tip">
+            <img class="tip-icn" src="assets/images/temp/hou-light-ceiling.svg" alt="">
+            <h5 class="tip-ttl"><span class="text-primary">TIP:</span> GAIN MORE EXPOSURE </h5>
+            <p class="tip-desc">Learn more about how to <a target="_blank" href="https://about.shoottheframe.com/tips/gain-exposure/">gain more exposure</a> on Shoot The Frame</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4">
+        <a target="_blank" href="https://about.shoottheframe.com/tips/become-a-finalist-or-winner-in-stf-awards/">
+          <div class="tip">
+            <img class="tip-icn" src="assets/images/temp/hou-light-ceiling.svg" alt="">
+            <h5 class="tip-ttl"><span class="text-primary">TIP:</span> BECOME A FINALIST IN STF AWARDS </h5>
+            <p class="tip-desc">Learn more about how to <a target="_blank" href="https://about.shoottheframe.com/tips/become-a-finalist-or-winner-in-stf-awards/">become a finalist in STF AWARDS</a> on Shoot The Frame</p>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="insight-note text-center" [hidden]="checkSubscription && !loaderEnable">
+      <h5 class="ttl"><span class="text-primary">INSIGHTS</span> ARE AVAILABLE TO <span class="text-primary">PRO</span>
+        AND <span class="text-primary">PREMIUM</span> MEMBERS</h5>
+      <p class="desc">Upgrade to <span class="text-primary">Pro</span> or <span class="text-primary">Premium</span> to
+        unlock insights around your account, profile and photos.</p>
+      <a class="btn btn-primary" [routerLink]="['/subscription/plans']">Unlock Insights</a>
+    </div>
+    <div class="insight-numbers">
+      <div class="insight-sc-hd clearfix">
+        <div class="insight-sort float-right">
+          <select [(ngModel)]='filterVal' (change)="selectFilter()" class="form-control select-box select-mob">
+            <!-- <option disabled selected value="">Year</option> -->
+            <option selected value='week'>Week</option>
+            <option value="month">Month</option>
+            <option value="year">Year</option>
+          </select>
+          <ng-select name="year" [clearable]="true" [searchable]="false" [(ngModel)]='filterVal'
+            (change)="selectFilter()" class="form-control select-web">
+            <!-- <ng-option value="0">Year</ng-option> -->
+            <ng-option selected value='week'>Week</ng-option>
+            <ng-option value="month">Month</ng-option>
+            <ng-option value="year">Year</ng-option>
+          </ng-select>
+
+
+          <!-- <select class="form-control select-box" [(ngModel)]='filterVal' (change)="selectFilter()">
+            <option selected value='week'>Week</option>
+            <option value="month">Month</option>
+            <option value="year">Year</option>
+          </select> -->
+        </div>
+      </div>
+      <div class="row" *ngIf="insights">
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="insight-bx cursor" (click)="addSection('photo_upload')"
+            [ngClass]="{'selected':currentSelectionVal==='photo_upload'}">
+            <p class="d-flex justify-content-between mb-2">
+              <span class="bx-ttl">PHOTOS UPLOADED</span>
+              <a (click)="infoModal('photos_uploaded')" class="text-muted qt underline cursor">whats this?</a>
+            </p>
+            <span *ngIf="checkSubscription" class="num">{{insights.photo_upload.value}}</span>
+            <span *ngIf="!checkSubscription" class="num">
+              <span class="dot">
+                <i class="fa fa-circle"></i>
+                <i class="fa fa-circle"></i>
+                <i class="fa fa-circle"></i>
+              </span>
+            </span>
+
+            <span *ngIf="!checkSubscription" class="percentage text-success"> 0% vs last week</span>
+            <span *ngIf="checkSubscription" class="percentage "
+              [ngClass]="{'text-danger':insights.photo_upload.trending < 0,'text-success': insights.photo_upload.trending >= 0}">{{insights.photo_upload.trending}}
+              % vs
+              last {{filterVal}}</span>
+
+          </div>
+
+          <ng-container *ngIf="mobile && currentSelectionVal==='photo_upload'">
+            <app-mobile-graph [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+              [colors]="lineChartColors" [legend]="lineChartLegend" [section]="section" [filterVal]="filterVal"
+              [max]="max" [stepSize]="stepSize" [period]="period" [chartType]="lineChartType"
+              (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+
+            </app-mobile-graph>
+          </ng-container>
+
+        </div>
+
+
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="insight-bx cursor" (click)="addSection('exposure')"
+            [ngClass]="{'selected':currentSelectionVal==='exposure'}">
+            <p class="d-flex justify-content-between mb-2">
+              <span class="bx-ttl">EXPOSURE</span>
+              <a (click)="infoModal('exposure')" class="text-muted qt underline cursor">whats this?</a>
+            </p>
+            <span *ngIf="!checkSubscription" class="num">
+              <span class="dot">
+                <i class="fa fa-circle"></i>
+                <i class="fa fa-circle"></i>
+                <i class="fa fa-circle"></i>
+              </span>
+            </span>
+            <span *ngIf="checkSubscription" class="num">{{insights.exposure.value}}</span>
+
+            <span *ngIf="!checkSubscription" class="percentage text-success"> 0% vs last week</span>
+            <span *ngIf="checkSubscription" class="percentage"
+              [ngClass]="{'text-danger':insights.exposure.trending < 0,'text-success': insights.exposure.trending >= 0}">{{insights.exposure.trending}}
+              % vs last {{filterVal}}</span>
+          </div>
+
+          <ng-container *ngIf="mobile && currentSelectionVal==='exposure'">
+            <app-mobile-graph [max]="max" [stepSize]="stepSize" [datasets]="lineChartData" [labels]="lineChartLabels"
+              [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [section]="section"
+              [filterVal]="filterVal" [period]="period" [chartType]="lineChartType" (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)">
+
+            </app-mobile-graph>
+          </ng-container>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="insight-bx cursor" (click)="addSection('photo_views')"
+            [ngClass]="{'selected':currentSelectionVal==='photo_views'}">
+            <p class="d-flex justify-content-between mb-2">
+              <span class="bx-ttl">PHOTO VIEWS</span>
+              <a (click)="infoModal('photos_viewed')" class="text-muted qt underline cursor">whats this?</a>
+            </p>
+            <span *ngIf="!checkSubscription" class="num">
+              <span class="dot">
+                <i class="fa fa-circle"></i>
+                <i class="fa fa-circle"></i>
+                <i class="fa fa-circle"></i>
+              </span>
+            </span>
+            <span *ngIf="checkSubscription" class="num">{{insights.photo_views.value}}</span>
+
+            <span *ngIf="!checkSubscription" class="percentage text-success"> 0% vs last week</span>
+            <span *ngIf="checkSubscription" class="percentage"
+              [ngClass]="{'text-danger':insights.photo_views.trending < 0,'text-success': insights.photo_views.trending >= 0}">{{insights.photo_views.trending}}
+              % vs last {{filterVal}}</span>
+          </div>
+
+          <ng-container *ngIf="mobile && currentSelectionVal==='photo_views'">
+            <app-mobile-graph [max]="max" [stepSize]="stepSize" [datasets]="lineChartData" [labels]="lineChartLabels"
+              [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [section]="section"
+              [filterVal]="filterVal" [period]="period" [chartType]="lineChartType" (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)">
+
+            </app-mobile-graph>
+          </ng-container>
+
+        </div>
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="insight-bx cursor" (click)="addSection('profile_visits')"
+            [ngClass]="{'selected':currentSelectionVal==='profile_visits'}">
+            <p class="d-flex justify-content-between mb-2">
+              <span class="bx-ttl">PROFILE VISITS</span>
+              <a (click)="infoModal('profile_visits')" class="text-muted qt underline cursor">whats this?</a>
+            </p>
+            <span *ngIf="!checkSubscription" class="num">
+              <span class="dot">
+                <i class="fa fa-circle"></i>
+                <i class="fa fa-circle"></i>
+                <i class="fa fa-circle"></i>
+              </span>
+            </span>
+            <span *ngIf="checkSubscription" class="num">
+              {{insights.profile_visits.value}}
+            </span>
+
+            <span *ngIf="!checkSubscription" class="percentage text-success"> 0% vs last week</span>
+            <span *ngIf="checkSubscription" class="percentage"
+              [ngClass]="{'text-danger':insights.profile_visits.trending < 0,'text-success': insights.profile_visits.trending >= 0}">{{insights.profile_visits.trending}}
+              % vs last {{filterVal}}</span>
+          </div>
+
+          <ng-container *ngIf="mobile && currentSelectionVal==='profile_visits'">
+            <app-mobile-graph [max]="max" [stepSize]="stepSize" [datasets]="lineChartData" [labels]="lineChartLabels"
+              [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [section]="section"
+              [filterVal]="filterVal" [period]="period" [chartType]="lineChartType" (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)">
+
+            </app-mobile-graph>
+          </ng-container>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="insight-bx cursor" (click)="addSection('critique_given')"
+            [ngClass]="{'selected':currentSelectionVal==='critique_given'}">
+            <p class="d-flex justify-content-between mb-2">
+              <span class="bx-ttl">CRITIQUES GIVEN</span>
+              <a (click)="infoModal('critiques_given')" class="text-muted qt underline cursor">whats this?</a>
+            </p>
+            <span *ngIf="!checkSubscription" class="num">
+              <span class="dot">
+                <i class="fa fa-circle"></i>
+                <i class="fa fa-circle"></i>
+                <i class="fa fa-circle"></i>
+              </span>
+            </span>
+            <span *ngIf="checkSubscription" class="num">{{insights.critique_given.value}}</span>
+
+            <span *ngIf="!checkSubscription" class="percentage text-success"> 0% vs last week</span>
+            <span *ngIf="checkSubscription" class="percentage"
+              [ngClass]="{'text-danger':insights.critique_given.trending < 0,'text-success': insights.critique_given.trending >= 0}">{{insights.critique_given.trending}}
+              % vs last {{filterVal}}</span>
+          </div>
+
+          <ng-container *ngIf="mobile && currentSelectionVal==='critique_given'">
+            <app-mobile-graph [max]="max" [stepSize]="stepSize" [datasets]="lineChartData" [labels]="lineChartLabels"
+              [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [section]="section"
+              [filterVal]="filterVal" [period]="period" [chartType]="lineChartType" (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)">
+
+            </app-mobile-graph>
+          </ng-container>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="insight-bx cursor" [ngClass]="{'selected':currentSelectionVal==='critique_received'}"
+            (click)="addSection('critique_received')">
+            <p class="d-flex justify-content-between mb-2">
+              <span class="bx-ttl">CRITIQUES RECEIVED</span>
+              <a (click)="infoModal('critiques_recieved')" class="text-muted qt underline cursor">whats this?</a>
+            </p>
+            <span *ngIf="!checkSubscription" class="num">
+              <span class="dot">
+                <i class="fa fa-circle"></i>
+                <i class="fa fa-circle"></i>
+                <i class="fa fa-circle"></i>
+              </span>
+            </span>
+            <span *ngIf="checkSubscription" class="num">{{insights.critique_received.value}}</span>
+
+            <span *ngIf="!checkSubscription" class="percentage text-success"> 0% vs last week</span>
+            <span *ngIf="checkSubscription" class="percentage"
+              [ngClass]="{'text-danger':insights.critique_received.trending < 0,'text-success': insights.critique_received.trending >= 0}">{{insights.critique_received.trending}}
+              % vs last {{filterVal}}</span>
+          </div>
+
+
+          <ng-container *ngIf="mobile && currentSelectionVal==='critique_received'">
+            <app-mobile-graph [max]="max" [stepSize]="stepSize" [datasets]="lineChartData" [labels]="lineChartLabels"
+              [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [section]="section"
+              [filterVal]="filterVal" [period]="period" [chartType]="lineChartType" (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)">
+
+            </app-mobile-graph>
+          </ng-container>
+
+        </div>
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="insight-bx cursor" [ngClass]="{'selected':currentSelectionVal==='comments'}"
+            (click)="addSection('comments')">
+            <p class="d-flex justify-content-between mb-2">
+              <span class="bx-ttl">COMMENTS</span>
+              <a (click)="infoModal('comments')" class="text-muted qt underline cursor">whats this?</a>
+            </p>
+            <span *ngIf="!checkSubscription" class="num">
+              <span class="dot">
+                <i class="fa fa-circle"></i>
+                <i class="fa fa-circle"></i>
+                <i class="fa fa-circle"></i>
+              </span>
+            </span>
+            <span *ngIf="checkSubscription" class="num">{{insights.comments.value}}</span>
+
+            <span *ngIf="!checkSubscription" class="percentage text-success"> 0% vs last week</span>
+            <span *ngIf="checkSubscription" class="percentage"
+              [ngClass]="{'text-danger':insights.comments.trending < 0,'text-success': insights.comments.trending >= 0}">{{insights.comments.trending}}
+              % vs last {{filterVal}}</span>
+          </div>
+
+
+          <ng-container *ngIf="mobile && currentSelectionVal==='comments'">
+            <app-mobile-graph [max]="max" [stepSize]="stepSize" [datasets]="lineChartData" [labels]="lineChartLabels"
+              [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [section]="section"
+              [filterVal]="filterVal" [period]="period" [chartType]="lineChartType" (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)">
+
+            </app-mobile-graph>
+          </ng-container>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="insight-bx cursor" [ngClass]="{'selected':currentSelectionVal==='follows'}"
+            (click)="addSection('follows')">
+            <p class="d-flex justify-content-between mb-2">
+              <span class="bx-ttl">FOLLOWS</span>
+              <a (click)="infoModal('follows')" class="text-muted qt underline cursor">whats this?</a>
+            </p>
+            <span *ngIf="!checkSubscription" class="num">
+              <span class="dot">
+                <i class="fa fa-circle"></i>
+                <i class="fa fa-circle"></i>
+                <i class="fa fa-circle"></i>
+              </span>
+            </span>
+            <span *ngIf="checkSubscription" class="num">{{insights.follows.value}}</span>
+
+            <span *ngIf="!checkSubscription" class="percentage text-success"> 0% vs last week</span>
+            <span *ngIf="checkSubscription" class="percentage"
+              [ngClass]="{'text-danger':insights.follows.trending < 0,'text-success': insights.follows.trending >= 0}">
+              {{insights.follows.trending}} % vs last {{filterVal}}</span>
+          </div>
+
+
+
+          <ng-container *ngIf="mobile && currentSelectionVal==='follows'">
+            <app-mobile-graph [max]="max" [stepSize]="stepSize" [datasets]="lineChartData" [labels]="lineChartLabels"
+              [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [section]="section"
+              [filterVal]="filterVal" [period]="period" [chartType]="lineChartType" (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)">
+
+            </app-mobile-graph>
+          </ng-container>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="insight-bx cursor" [ngClass]="{'selected':currentSelectionVal==='likes'}" (click)="addSection('likes')">
+            <p class="d-flex justify-content-between mb-2">
+              <span class="bx-ttl">LIKES</span>
+              <a (click)="infoModal('photo_likes')" class="text-muted qt underline cursor">whats this?</a>
+            </p>
+            <span *ngIf="!checkSubscription" class="num">
+              <span class="dot">
+                <i class="fa fa-circle"></i>
+                <i class="fa fa-circle"></i>
+                <i class="fa fa-circle"></i>
+              </span>
+            </span>
+            <span *ngIf="checkSubscription" class="num">{{insights.likes.value}}</span>
+
+            <span *ngIf="!checkSubscription" class="percentage text-success"> 0% vs last week</span>
+            <span *ngIf="checkSubscription" class="percentage"
+              [ngClass]="{'text-danger':insights.likes.trending < 0,'text-success': insights.likes.trending >= 0}">{{insights.likes.trending}}
+              % vs last {{filterVal}}</span>
+          </div>
+
+
+
+          <ng-container *ngIf="mobile && currentSelectionVal==='likes'">
+            <app-mobile-graph [max]="max" [stepSize]="stepSize" [datasets]="lineChartData" [labels]="lineChartLabels"
+              [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [section]="section"
+              [filterVal]="filterVal" [period]="period" [chartType]="lineChartType" (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)">
+
+            </app-mobile-graph>
+          </ng-container>
+
+        </div>
+      </div>
+    </div>
+
+    <section class="graph-bx" *ngIf="!mobile">
+      <h6 class="ttl">{{section}} / {{period}}</h6>
+      <div>
+        <div style="display:block">
+          <canvas id="LineWithLine" baseChart [datasets]="lineChartData" [labels]="lineChartLabels"
+            [options]="lineChartOptions" [colors]="lineChartColors" [chartType]="lineChartType"
+            (chartHover)="mainchartHovered($event)" (chartClick)="chartClicked($event)">
+          </canvas>
+        </div>
+      </div>
+    </section>
+    <!-- <ngx-line-chart [dataSets]="myDataSets" [xLabelFunction]="formXAxisValue.bind(this)"></ngx-line-chart> -->
+
+  </div>
+
+</div>

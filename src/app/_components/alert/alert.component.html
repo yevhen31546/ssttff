@@ -1,0 +1,24 @@
+<div *ngIf="message && message!== 'updateCard'" [ngClass]="{ 'alert': type, 'success-alert': type === 'success', 'error-alert': type === 'error','warning-alert': type === 'warning','expiring-alert': type === 'info','notification':type==='notification' }"
+  class="cmn-alert">
+  <a class="close-alert" (click)="close()" aria-label="close">
+    <img src="assets/images/temp/ui-cross.svg">
+  </a>
+  <strong>{{ title }}</strong>
+  <div #myDiv [innerHTML]="message | sanitizeHtml"></div>
+  <!-- <alert-inner [inputData]="message"></alert-inner> -->
+</div>
+
+<div *ngIf="message && message== 'updateCard'" [ngClass]="{ 'alert': type, 'success-alert': type === 'success', 'error-alert': type === 'error','warning-alert': type === 'warning','expiring-alert': type === 'info','notification':type==='notification' }"
+class="cmn-alert">
+<a class="close-alert" (click)="triggerCardOnClose()" aria-label="close">
+  <img src="assets/images/temp/ui-cross.svg">
+</a>
+<strong>{{ title }}</strong>
+<div *ngIf="type === 'info'">
+  The card linked to your Shoot The Frame account is expiring soon. You can <b><a (click)="triggerUpdateCard()">update it now</a></b>. It only takes about 25 seconds.
+</div>
+<div *ngIf="type !== 'info'">
+  The card linked to your Shoot The Frame account has expired. You can <b><a (click)="triggerUpdateCard()">update it now</a></b>. It only takes about 25 seconds.
+</div>
+</div>
+<!-- {{message}}message -->

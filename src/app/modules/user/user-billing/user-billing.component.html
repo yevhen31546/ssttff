@@ -1,0 +1,45 @@
+
+<div>
+<p>You are currently a {{userType}} Member.</p>
+<div class="upgd-pro-details">
+  <ul>
+    <li>
+      <a  class="text-black underline mr-32" *ngIf="subscriptionPlan === 2" [routerLink]="['/subscription/plans']">Upgrade to Premium</a>
+      <a  (click)="downgrade()" class="text-black underline"  *ngIf="subscriptionPlan != 1">Downgrade</a>
+      <a href="#" class="text-black underline" [routerLink]="['/subscription/plans']"  *ngIf="subscriptionPlan == 1" >Upgrade to Pro or Premium, you’ll love it! 😀</a>
+    </li>
+    <li *ngIf="userDetail && userDetail.card_id"><strong>Current card on file with Stripe</strong></li>
+    <li  *ngIf="userDetail && userDetail.card_id">
+      <ul class="card-dtls-list" >
+        <li>{{cardDetails.brand}} ending in <span class="no">{{cardDetails.last4}}</span></li>
+        <li class="mb-32">Expires {{cardDetails.exp_month}}/{{cardDetails.exp_year}}</li>
+         <li>
+          <a   class="btn btn-secondary" (click)="updateCard()">Update card</a>
+        </li>
+       </ul>
+    </li>
+  </ul>
+</div>
+
+  <div class="oreder-history" *ngIf="orderHistory.length > 0">
+    <a (click)="showHistoryTab()" class="text-black underline">{{showHistory === true ? 'Hide' : 'Show'}} order history</a>
+    <ng-container *ngIf="showHistory === true">
+      <h3>ORDER HISTORY</h3>
+      <div class="table-responsive">
+        <table class="table table-borderless">
+          <tr>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Receipt</th>
+          </tr>
+
+          <tr *ngFor="let item of orderHistory">
+            <td>{{getDates(item.created_at)}}</td>
+            <td>{{item.type}}</td>
+            <td><a [routerLink]="['/user/account-settings/billing/receipt/'+item.invoice_id]" class="text-black underline">View</a></td>
+          </tr>
+        </table>
+      </div>
+    </ng-container>
+  </div>
+</div>

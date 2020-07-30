@@ -1,0 +1,70 @@
+<div class="content-cntr innerpage">
+  <section class="heading-top-cntr">
+    <h1 class="title">Search results</h1>
+    <h3 class="mb-4 mb-sm-5">You searched for: <strong>{{searchTermVal}}</strong></h3>
+
+    <div class="search-box">
+      <div class="search-field">
+        <span class="search-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20">
+            <g fill="none" fill-rule="nonzero">
+              <path fill="#2C2C2C" d="M.909 7.725A6.824 6.824 0 0 1 7.725.909a6.824 6.824 0 0 1 6.815 6.816c0 1.81-.713 3.453-1.868 4.675l-.273.273a6.785 6.785 0 0 1-4.674 1.868A6.824 6.824 0 0 1 .909 7.725zM20 18.765l-6.237-6.237a7.683 7.683 0 0 0 1.686-4.803C15.45 3.465 11.984 0 7.725 0 3.465 0 0 3.465 0 7.725s3.465 7.725 7.725 7.725a7.68 7.68 0 0 0 4.803-1.686L18.764 20 20 18.764z" />
+              <path fill="#FFF" d="M12.857 7.143a5.714 5.714 0 1 1-11.428 0 5.714 5.714 0 0 1 11.428 0" />
+            </g>
+          </svg>
+        </span>
+        <input type="text" class="form-control" value="" (keydown)="getFocusOnSearchBtn($event)" [(ngModel)]='searchTerm'
+          placeholder="Search">
+      </div>
+      <div class="search-submit d-none d-sm-block">
+        <input #focusableSubmit type="submit" class="btn btn-secondary" (click)="searchTermFn()" value="Search">
+      </div>
+    </div>
+  </section>
+  <ngb-tabset #tabs (tabChange)="tabChange($event)" class="common-tab profile-tab-area">
+    <ngb-tab title="PHOTOS">
+      <ng-template ngbTabContent>
+        <app-photos [userId]="userId" [searchTerm]="searchTermVal"></app-photos>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab title="PHOTO ESSAYS">
+      <ng-template ngbTabContent>
+        <app-photo-essay-list [userId]="userId" [searchTerm]="searchTermVal"></app-photo-essay-list>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab title="COLLECTIONS">
+      <ng-template ngbTabContent>
+        <app-collection-list [userId]="userId" [searchTerm]="searchTermVal"></app-collection-list>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab title="MEMBERS">
+      <ng-template ngbTabContent>
+        <app-member-list [userId]="userId" [searchTerm]="searchTermVal"></app-member-list>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab id="categories" title="CATEGORIES">
+      <ng-template ngbTabContent>
+        <section class="profile-cnt-area">
+          <div class="photo-eassays-cnt categaries" infiniteScroll [infiniteScrollDistance]="2"
+            [infiniteScrollThrottle]="50" (scrolled)="pageChanged()" [scrollWindow]="true">
+            <ul class="row">
+              <li class="col-md-4 img-box" *ngFor="let item of categoryList; let i=index;">
+                <div class="inner">
+                  <div class="main-img cursor" (click)="routeCategoryList(item)" [style.backgroundImage]="'url('+ item.photo_url +')'"></div>
+                  <div class="content">
+                    <a href="" class="category-name">{{item.category}}</a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+        <app-pagination-loader *ngIf="showPaginationLoader==true"></app-pagination-loader>
+        <div *ngIf="categoryList.length==0 && !showPaginationLoader" class="empty-msg text-center">
+          <p>Oops, no results in ‘categories’. 🙃</p>
+        </div>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+
+</div>

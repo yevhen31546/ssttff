@@ -1,0 +1,202 @@
+<div class="modal-dialog" role="document">
+  <div *ngIf="type=='insights'" class="modal-content">
+    <div class="inner-modal">
+      <div class="modal-header">
+        <h3 class="modal-title text-center">Insights</h3>
+        <button type="button" (click)="closeModal()" class="close" data-dismiss="modal" aria-label="Close">
+          <img src="assets/images/temp/ui-cross.svg" alt="">
+        </button>
+      </div>
+      <div class="modal-body text-center">
+
+        <p><span class="text-green">Pro</span> and <span class="text-green">Premium </span> members have access to
+          Insights. Understand the numbers around your account, profile and
+          photos. We also give you ideas and tips around how to grow your reach, audience and exposure.
+        </p>
+        <div class="btn-cntr text-center">
+          <a class="btn btn-secondary" (click)="closeModal()">Ok</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div   *ngIf="type=='photos_uploaded'" class="modal-content">
+    <div class="inner-modal">
+      <div class="modal-header">
+        <h3 class="modal-title text-center">Photos uploaded</h3>
+        <button type="button" (click)="closeModal()" class="close" data-dismiss="modal" aria-label="Close">
+          <img src="assets/images/temp/ui-cross.svg" alt="">
+        </button>
+      </div>
+      <div class="modal-body text-center">
+
+        <p><strong>Photos uploaded</strong> referes to the amount of photos you have uploaded to Shoot The Frame. The
+          more you upload,
+          the more chance you have of recieving critiques from other members of the community.
+        </p>
+        <div class="btn-cntr text-center">
+          <a class="btn btn-secondary" (click)="closeModal()">Ok</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div  *ngIf="type=='profile_visits'" class="modal-content">
+    <div class="inner-modal">
+      <div class="modal-header">
+        <h3 class="modal-title text-center">Profile visits</h3>
+        <button type="button" (click)="closeModal()" class="close" data-dismiss="modal" aria-label="Close">
+          <img src="assets/images/temp/ui-cross.svg" alt="">
+        </button>
+      </div>
+      <div class="modal-body text-center">
+
+        <p><strong>Profile visits</strong> refers to the amount of people who have visited your profile page within
+          Shoot The Frame.
+        </p>
+        <div class="btn-cntr text-center">
+          <a class="btn btn-secondary" (click)="closeModal()">Ok</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div  *ngIf="type=='photos_viewed'" class="modal-content">
+    <div class="inner-modal">
+      <div class="modal-header">
+        <h3 class="modal-title text-center">Photos viewed</h3>
+        <button type="button" (click)="closeModal()" class="close" data-dismiss="modal" aria-label="Close">
+          <img src="assets/images/temp/ui-cross.svg" alt="">
+        </button>
+      </div>
+      <div class="modal-body text-center">
+
+        <p><strong>Photos viewed</strong> refers to the amount of times someone has looked at one of your photos in the
+          large view.
+        </p>
+        <div class="btn-cntr text-center">
+          <a class="btn btn-secondary" (click)="closeModal()">Ok</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div  *ngIf="type=='exposure'" class="modal-content">
+    <div class="inner-modal">
+      <div class="modal-header">
+        <h3 class="modal-title text-center">Exposure</h3>
+        <button type="button" (click)="closeModal()" class="close" data-dismiss="modal" aria-label="Close">
+          <img src="assets/images/temp/ui-cross.svg" alt="">
+        </button>
+      </div>
+      <div class="modal-body text-center">
+
+        <p><strong>Exposure</strong> refers to the amount of times one of your photos has been shown in the grid view
+          of Shoot The
+          Frame. This may be in search results, daily feed, Shoot The Frame finalists or winners, or any other grid
+          view.
+        </p>
+        <div class="btn-cntr text-center">
+          <a class="btn btn-secondary" (click)="closeModal()">Ok</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div  *ngIf="type=='critiques_given'" class="modal-content">
+    <div class="inner-modal">
+      <div class="modal-header">
+        <h3 class="modal-title text-center">Critiques given</h3>
+        <button type="button" (click)="closeModal()" class="close" data-dismiss="modal" aria-label="Close">
+          <img src="assets/images/temp/ui-cross.svg" alt="">
+        </button>
+      </div>
+      <div class="modal-body text-center">
+
+        <p><strong>Critiques given</strong> refers to the amount of critiques you have given to other Shoot The Frame
+          member’s photos.
+          Typically there more critiques you give, the more you will receive.
+        </p>
+        <div class="btn-cntr text-center">
+          <a class="btn btn-secondary" (click)="closeModal()">Ok</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div  *ngIf="type=='critiques_recieved'" class="modal-content">
+    <div class="inner-modal">
+      <div class="modal-header">
+        <h3 class="modal-title text-center">Critiques received</h3>
+        <button type="button" (click)="closeModal()" class="close" data-dismiss="modal" aria-label="Close">
+          <img src="assets/images/temp/ui-cross.svg" alt="">
+        </button>
+      </div>
+      <div class="modal-body text-center">
+
+        <p><strong>Critiques received </strong> refers to the amount of critiques your photos have received from the
+          Shoot The Frame
+          community.
+        </p>
+        <div class="btn-cntr text-center">
+          <a class="btn btn-secondary" (click)="closeModal()">Ok</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="type=='photo_likes'" class="modal-content">
+    <div class="inner-modal">
+      <div class="modal-header">
+        <h3 class="modal-title text-center">Photo likes</h3>
+        <button type="button" (click)="closeModal()" class="close" data-dismiss="modal" aria-label="Close">
+          <img src="assets/images/temp/ui-cross.svg" alt="">
+        </button>
+      </div>
+      <div class="modal-body text-center">
+
+        <p><strong>Photo likes</strong> refers to the amount of likes your photos have received from the Shoot The
+          Frame community.
+        </p>
+        <div class="btn-cntr text-center">
+          <a class="btn btn-secondary" (click)="closeModal()">Ok</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="type=='comments'" class="modal-content">
+    <div class="inner-modal">
+      <div class="modal-header">
+        <h3 class="modal-title text-center">Comments</h3>
+        <button type="button" (click)="closeModal()" class="close" data-dismiss="modal" aria-label="Close">
+          <img src="assets/images/temp/ui-cross.svg" alt="">
+        </button>
+      </div>
+      <div class="modal-body text-center">
+
+        <p><strong>Comments</strong> refers to the amount of comments your photos have received from the Shoot The
+          Frame community.
+        </p>
+        <div class="btn-cntr text-center">
+          <a class="btn btn-secondary" (click)="closeModal()">Ok</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="type=='follows'" class="modal-content">
+    <div class="inner-modal">
+      <div class="modal-header">
+        <h3 class="modal-title text-center">Followers</h3>
+        <button type="button" (click)="closeModal()" class="close" data-dismiss="modal" aria-label="Close">
+          <img src="assets/images/temp/ui-cross.svg" alt="">
+        </button>
+      </div>
+      <div class="modal-body text-center">
+
+        <p><strong>Followers</strong> refers to the amount of followers your profile has received from the Shoot The
+          Frame community.
+          Your work shows up in the Daily Feed of members who are following you.</p>
+        <div class="btn-cntr text-center">
+          <a class="btn btn-secondary" (click)="closeModal()">Ok</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

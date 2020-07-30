@@ -1,0 +1,142 @@
+<app-loader></app-loader>
+<ng-container>
+  <ul class="story inner" *ngIf="stfAward==true">
+      <!-- <app-loader></app-loader> -->
+
+    <li class="image-cntr">
+      <figure><img #imageTag (load)="imageLoaded(event)" [src]="subjectImg" alt="Uploaded Image"></figure>
+    </li>
+    <li *ngIf="!success">
+
+      <div class="submit-info">
+        <div class="inner">
+          <h3><span>SUBMIT PHOTO:</span> SHOOT THE FRAME AWARDS (optional)</h3>
+          <p>
+            Every month we have the same three categories in the <br> STF Awards - Shoot The Face (portrait), Shoot The
+            Land
+            (landscape) and Shoot The Wild (wildlife).
+          </p>
+          <p>
+            <span><a class="underline-drk" href="https://about.shoottheframe.com/stf-awards/" target="_blank">Learn more about the awards, prizes, and past winners.</a></span>
+          </p>
+
+        </div>
+      </div>
+    </li>
+    <app-alert></app-alert>
+    <li class="time-left submit-awr-btn-cntr">
+      <div class="inner">
+        <h3>TIME LEFT TO SUBMIT ENTIRES INTO <span>{{this.current_month | uppercase}} {{this.current_year}}</span>
+          SHOOT THE
+          FRAME AWARDS
+        </h3>
+        <ul>
+          <li>{{_days}}<span>DAYS</span></li>
+          <li>{{_hours}}<span>HOURS</span></li>
+          <li>{{_minutes}}<span>MINUTES</span></li>
+        </ul>
+      </div>
+    </li>
+    <li>
+      <!-- <div class="whats-this cursor" (click)="stfInfoModal()">whats this?</div> -->
+    </li>
+    <li class="submit-awr-btn-cntr" *ngIf="!success && !stfAwardHtml">
+        <!-- <app-loader></app-loader> -->
+
+      <h3>WOULD YOU LIKE TO SUBMIT THIS PHOTO INTO THE STF AWARDS?</h3>
+      <a class="btn btn-outline-primary" [ngClass]="{'active': expanded}" (click)="expand(true)">Yes</a>
+      <a class="btn btn-outline-primary" [ngClass]="{'active':  expanded==false}" (click)="expand(false)">No</a>
+    </li>
+    <li class="submit-awr-btn-cntr" *ngIf="expanded && expanded == true">
+      <h3>STF AWARDS CATAGORY (select one)</h3>
+      <a *ngFor="let item of categories" disable class="btn btn-outline-primary " [ngClass]="{'active': category==item.id}"
+        (click)="setCategory(item.id)">{{item.category}}</a>
+      <!-- <a disable class="btn btn-outline-primary " (click)="setCategory('three')" [ngClass]="{'active': category.three}">Shoot The Land</a>
+      <a disable class="btn btn-outline-primary " (click)="setCategory('seven')" [ngClass]="{'active': category.seven}">Shoot The Wild</a> -->
+    </li>
+    <li *ngIf="expanded && expanded == true">
+      <div class="form-group sub-ava">
+        <label for="exampleInputEmail1">STF AWARDS SUBMISSIONS AVAILABLE : <span class="text-green">{{submissionLimit}}</span>
+        </label>
+      </div>
+    </li>
+
+    <li class="row align-items-center">
+      <div class="col-sm-6 text-left">
+        <a *ngIf="success" (click)="allowTemplate('success')"  class="text-black">Cancel Submission</a>
+
+      </div>
+      <div class="col-sm-6 text-right" *ngIf="submissionLimit > 0 && expanded && expanded==true">
+        <a class="btn btn-primary btnlg" *ngIf="editAward" [ngClass]="{'disabled': !continue}" (click)="awardSubmission()">Submit
+          Photo</a>
+        <a [ngClass]="{'disabled': isDisabled==true}" class="btn btn-primary btnlg" *ngIf="!editAward" [ngClass]="{'disabled': !continue}" (click)="awardSubmission()">Publish
+          and Submit
+          Photo</a>
+      </div>
+    </li>
+
+
+    <li class="btn-wrp" *ngIf="submissionLimit==0 &&  expanded==true">
+      <a class="btn btn-primary btnlg" (click)="allowTemplate('stf')" [ngClass]="{'disabled': !continue}">Continue</a>
+    </li>
+    <li class="btn-wrp" *ngIf="expanded==false">
+      <a [ngClass]="{'disabled': isDisabled==true}" (click)="publishPhoto()" class="btn btn-primary ">Publish Photo</a>
+    </li>
+    <li>
+      <div class="privacy">
+        <ng-container *ngIf="showTerms==true || showCondition">
+          By publishing this image, I confirm that I own the rights to this photo. I understand and agree to Shoot The
+          Frame
+          <a target="_blank" href="https://about.shoottheframe.com/privacy/">Privacy Statment</a> and <a target="_blank" href="https://about.shoottheframe.com/terms">Terms
+            and Conditions</a>.
+        </ng-container>
+        <br><br> We <span class="text-danger">♥</span> and respect your photos, the rights will always remain yours.
+
+      </div>
+    </li>
+  </ul>
+</ng-container>
+
+
+<ng-container *ngIf="stfCategory==true">
+  <ul>
+    <li>
+      <div class="purchace-info-top text-center">
+        <div class="inner">
+          <h3 class="sub-title text-center">SELECT NUMBER OF STF SUBMISSIONS YOU WOULD LIKE TO PURCHASE</h3>
+          <p>
+            (or <span class="underline"><a (click)="purchaseAwardSubmission('premium','13.99','monthly')">upgrade to
+                Premium</a></span> to
+            unlock 7 STF submissions per month - <span class="text-green">$13.99/m</span>)
+          </p>
+
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="form-group sub-ava text-center mb-64">
+        <label for="exampleInputEmail1">STF AWARDS SUBMISSIONS AVAILABLE : <span class="text-green">{{submissionLimit}}</span></label>
+      </div>
+    </li>
+  </ul>
+  <section class="purchace-cntr">
+    <ul class="row">
+      <li class="col-md-4 text-center" *ngFor="let plan of submissionPlans">
+        <div class="inner">
+          <h3 class="sub-title text-center"><span class="text-green">{{plan.submission_type | uppercase}}</span> STF
+            AWARDS SUBMISSION</h3>
+          <p>Allows you to enter {{plan.monthly_submission}} photo into the <strong>STF Awards</strong> this month.
+            Submissions expire at the end of every
+            month. </p>
+          <div class="price">$ {{plan.submission_price}}</div>
+          <a (click)="purchaseAwardSubmission(plan.monthly_submission,plan.submission_price,plan.submission_type)"
+            class="btn btn-primary">Purchase</a>
+          <div (click)="stfInfoModal()" class="whats-this underline cursor">what’s this?</div>
+        </div>
+      </li>
+    </ul>
+    <div class="purchace-cancel">
+      <a (click)="allowTemplate('cancel')">Cancel Submission</a>
+    </div>
+  </section>
+</ng-container>

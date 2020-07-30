@@ -1,0 +1,37 @@
+<app-loader></app-loader>
+<div class="inner-modal" *ngIf="!showCreateModal">
+  <div class="modal-header">
+    <h3 class="modal-title text-center">Report a member</h3>
+    <button type="button" class="close" (click)="closeButton()" data-dismiss="modal" aria-label="Close">
+      <img src="assets/images/temp/ui-cross.svg" alt="">
+    </button>
+  </div>
+  <div class="modal-body">
+    <p class="text-center">You can report a member of Shoot The Frame if you feel the photos are not within <span class='underline'>
+       <a class="text-black" href="https://about.shoottheframe.com/guidelines/" target="_blank"> our guidelines</a>.</span> </p>
+    <h6 class="left-cntr">REASON FOR REPORTING</h6>
+    <ul class="essay-collections chk-list list-unstyled">
+      <form [formGroup]="reportForm" (ngSubmit)="addReport()" novalidate>
+        <li formArrayName="report" *ngFor=" let item of reportList; let i=index;">
+          <input id="ec-{{i}}" type="checkbox" [formControlName]="i" [checked]="item.status=='1'?true:false" (change)="checkboxChange($event,item)">
+          <label for="ec-{{i}}">
+            <span>{{ item.content }}</span>
+            <span class="checkmark"></span>
+          </label>
+        </li>
+
+        <li class="text-center btn-wrp">
+          <div class="form-group">
+            <a (click)="closeButton()" class="btn btn-link text-black underline">Cancel</a>
+            <button type="submit" class="btn btn-secondary" [disabled]="reportForm.invalid || !buttonState" [ngClass]="{ disabled: reportForm.invalid }">
+              Report
+            </button>
+          </div>
+        </li>
+      </form>
+    </ul>
+  <div class="member-alert">
+    <app-alert></app-alert>
+  </div>
+  </div>
+</div>

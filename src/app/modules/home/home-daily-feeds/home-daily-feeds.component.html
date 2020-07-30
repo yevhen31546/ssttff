@@ -1,0 +1,45 @@
+<section class="daily-feed-box" *ngIf="!isAuthUser">
+  <h3 class="mb-4"><span class="text-primary">DAILY FEED</span> IS AVAILABLE TO ALL MEMBERS</h3>
+  <p class="mb-5">Sign up or sign in to create and view your daily feed of photos from the photographers you <span
+      class='text-danger'>♥</span>.</p>
+  <a class="btn btn-primary" [routerLink]='["/sign-up"]'>Join Free</a>
+</section>
+<section class="daily-feed-box" *ngIf="isAuthUser  && displayMembers==true &&  userData.follow_count == 0">
+  <h3 class="mb-4"><span>DAILY FEED</span></h3>
+  <p class="mb-5">Your daily feed will be populated with photos of the Shoot The Frame members you follow. There are a few
+    featured <br /> members below
+    to get you started, or you can explore all members. 😀</p>
+  <a class="btn btn-primary" [routerLink]='["/explore/members"]'>Members</a>
+</section>
+
+<section class="profile-cnt-area" *ngIf="isAuthUser && memberData && displayMembers &&  userData.follow_count == 0">
+  <div class="image-items" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="pageChanged()"
+    [scrollWindow]="true">
+    <div class="profile-followers-cnt">
+      <ul class="followers-list members-list row">
+        <li class="col-md-4" *ngFor="let memberinfo of memberData">
+          <div class=" box">
+            <div class="left">
+              <div class="img"><img src="{{ memberinfo.photo_url }}" alt=""></div>
+              <div class="txt">
+                <h6><a (click)="showProfile(memberinfo.username)">{{ memberinfo.name }}</a></h6>
+                {{ getLocation( memberinfo.location)}}
+                <!-- {{ memberinfo.location ? memberinfo.location : 'The World' }} -->
+              </div>
+            </div>
+            <div class="right">
+              <!-- <a class="btn btn-primary"> -->
+              <a *ngIf="memberinfo.is_follow==0" (click)="followUser(memberinfo)" class="btn btn-primary">Follow</a>
+              <a (click)="followUser(memberinfo)" *ngIf="memberinfo.is_follow==1" class="btn btn-secondary">Following</a>
+            </div>
+
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="profile-cnt-area" *ngIf="isAuthUser && userData.follow_count > 0">
+  <app-home-image-grid  [redirectUrl]="redirectUrl"  (isDisplay)=isDisplayNonMembers(event) [authUserDetails]="authUserDetails" [identifyType]="identifyType"></app-home-image-grid>
+</section>

@@ -1,0 +1,118 @@
+<div class="content-cntr innerpage">
+  <div [hidden]="!expire">
+    <app-alert></app-alert>
+  </div>
+  <h2 class="title">Account settings</h2>
+  <section class="ac-cnt-area">
+
+    <div class="row">
+      <div class="col-md-8 ">
+        <ngb-tabset #tabs (tabChange)="beforeChange($event)">
+          <ngb-tab title="PROFILE" id="profile">
+            <ng-template ngbTabContent>
+              <app-alert [hidden]='expire'></app-alert>
+              <app-user-profile [expire]='expire'></app-user-profile>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="PASSWORD" id="password">
+            <ng-template ngbTabContent>
+              <!-- <app-alert></app-alert> -->
+              <app-user-password></app-user-password>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="NOTIFICATIONS" id="notifications">
+            <ng-template ngbTabContent>
+              <!-- <app-alert></app-alert> -->
+              <app-user-notification></app-user-notification>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="BILLING" id="billing">
+            <ng-template ngbTabContent>
+              <app-alert [hidden]='expire'></app-alert>
+              <app-user-billing [userDetail]='profileInfo' [cardDetails]='cardDetails'></app-user-billing>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+      </div>
+
+      <!--=========================Right=========================-->
+      <div class="col-md-4" *ngIf="profileInfo">
+        <section class="ac-subscription-info">
+          <div class="pro-pic-cntr">
+            <figure><img width="48" src="{{userDetails.photo_url?userDetails.photo_url:'assets/images/temp/user-default-header.png'}}"
+                alt=""></figure>
+            <h4>
+              {{userDetails?userDetails.first_name+" "+userDetails.last_name:profileInfo.first_name+" "+profileInfo.last_name}}
+              <div class="location">{{profileInfo.location}}</div>
+            </h4>
+          </div>
+          <h4 *ngIf="profileInfo.subscription_plan === 3" class="mb-0"><span>STF AWARDS SUBMISSIONS</span> AVAILABLE :
+            {{profileInfo.submission_count}}</h4>
+          <ng-container *ngIf="profileInfo.subscription_plan === 1">
+            <h4><span>BASIC</span> SHOOT THE FRAME MEMBER</h4>
+            <ul class="basic-list">
+              <li>3 daily uploads to the community</li>
+              <li>Option to submit photos into STF Awards</li>
+              <li>Give and receive photo critiques</li>
+              <li>Collective Score / Master Collective Score</li>
+              <li>Create Collections</li>
+              <li>Create Photo Essays</li>
+              <li>Like photos</li>
+              <li>History of liked photos</li>
+              <li>Direct message members</li>
+              <li>Follow / unfollow</li>
+            </ul>
+            <h4><span>PRO</span> SHOOT THE FRAME MEMBER</h4>
+            <ul>
+              <li>Unlimited daily uploads</li>
+              <li>Access details of received critiqeus </li>
+              <li>Access Insights for profile and photos </li>
+              <li>Helping make ths community sustainable </li>
+            </ul>
+          </ng-container>
+          <ng-container *ngIf="profileInfo.subscription_plan === 2">
+            <h4><span>PRO</span> SHOOT THE FRAME MEMBER</h4>
+            <ul class="basic-list">
+              <li>Unlimited daily uploads</li>
+              <li>Option to submit photos into STF AWARDS</li>
+              <li>Current card on file with Stripe</li>
+              <li>Give and received photo critiques</li>
+              <li>Collective Score / Master Collective Score</li>
+              <li>Create Collections</li>
+              <li>Create Photo Essays</li>
+              <li>Like photos</li>
+              <li>History of liked photos</li>
+              <li>Direct message members</li>
+              <li>Follow / unfollow</li>
+              <li>Access details of received critiqeus </li>
+              <li>Access Insights for profile and photos </li>
+              <li>Helping make ths community sustainable </li>
+            </ul>
+          </ng-container>
+          <ng-container *ngIf="profileInfo.subscription_plan !== 3">
+            <h4><span>PREMIUM</span> SHOOT THE FRAME MEMBER</h4>
+            <ul>
+              <li>7 submissions every month into the International STF Awards</li>
+            </ul>
+            <a [routerLink]="['/subscription/plans']" class="btn btn-primary">Upgrade</a>
+          </ng-container>
+        </section>
+        <section class="uploads-count" *ngIf="profileInfo.subscription_plan !== 3">
+          <ul>
+            <li *ngIf="profileInfo.subscription_plan==1">
+              <span class="text-green">DAILY UPLOADS</span> REMAINING : {{profileInfo.dailyUploads}}
+            </li>
+            <li>
+              <span class="text-green">STF AWARDS SUBMISSIONS</span> AVAILABLE : {{profileInfo.submission_count}}
+            </li>
+          </ul>
+        </section>
+        <div class="text-right">
+          <a (click)="infoModal()"  class="text-muted qt underline cursor whats-this">whats this?</a>
+        </div>
+
+      </div>
+      <!--=========================End Right=========================-->
+    </div>
+  </section>
+</div>

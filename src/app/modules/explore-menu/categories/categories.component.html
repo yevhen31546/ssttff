@@ -1,0 +1,35 @@
+<div class="content-cntr innerpage">
+  <section class="heading-top-cntr">
+    <h2 class="title">Category</h2>
+    <h3>Discover imagery by category, all photos have been categorised by the photographer who shot the image.</h3>
+  </section>
+
+  <section class="profile-cnt-area">
+    <div class="photo-eassays-cnt categaries" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+      (scrolled)="pageChanged()" [scrollWindow]="true">
+      <ul class="row">
+        <li class="col-md-4 img-box" *ngFor="let item of categoryList; let i=index;">
+          <div class="inner cursor" (click)="routeCategoryList(item)">
+            <div class="main-img" 
+            [ngStyle]="item.localmedia!=null?
+            {'background-image':'url(&quot;' + item.localmedia + '--glide?w=360&fit=crop&q=80' +'&quot;)'}:{'background-image':
+          'url(&quot;&quot;)'
+          }"
+          ></div>
+            <div class="content ">
+              <a href="" class="category-name">{{item.category}}</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <app-pagination-loader *ngIf="showPaginationLoader"></app-pagination-loader>
+    <div *ngIf='categoryList.length==0 && !showPaginationLoader' class="photo-eassays-cnt">
+      <div class="empty-msg text-center">There aren’t any photos in this category yet.</div>
+    </div>
+    <div *ngIf="emptyStatus==true && !showPaginationLoader" class="empty-msg text-center">
+      <p>No more results 🙃</p>
+    </div>
+
+  </section>
+</div>
