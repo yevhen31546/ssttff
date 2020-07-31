@@ -91,11 +91,11 @@ export class InnerLayoutComponent implements OnInit {
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
-    this.notifyData = JSON.parse(this.localStorage.getItem("notify"));
-    this.sendForm = this.formBuilder.group({
-      email: ["", [Validators.required, Validators.email]],
-      first_name: ["", [Validators.required]]
-    });
+      this.notifyData = JSON.parse(this.localStorage.getItem("notify"));
+      this.sendForm = this.formBuilder.group({
+        email: ["", [Validators.required, Validators.email]],
+        first_name: ["", [Validators.required]]
+      });
       this.notificationService.currentMessage.subscribe(data => {
         //do what ever needs doing when data changes
         if (data) {

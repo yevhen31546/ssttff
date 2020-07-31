@@ -5,42 +5,88 @@
       <div class="col-sm-6 left">
         <div class="logo">
           <a [routerLink]="['/']">
-            <img src="assets/images/temp/logo-with-text.svg" class="logo-web">
+            <img src="assets/images/temp/logo-with-text.svg" class="logo-web" />
           </a>
         </div>
         <div class="header-nav">
           <ul class="clearfix">
-            <li [ngClass]="{'active': selectedItem === 'item1'}">
-              <a class="menu-icon" (click)="clickedInside($event,'item1')">Explore</a>
+            <li [ngClass]="{ active: selectedItem === 'item1' }">
+              <a class="menu-icon" (click)="clickedInside($event, 'item1')"
+                >Explore</a
+              >
               <ul class="drp-dwn-hdr">
                 <li><a [routerLink]="['/explore/photos']">Photos</a></li>
-                <li><a [routerLink]="['/explore/photo-essays']">Photo essays</a></li>
-                <li><a [routerLink]="['/explore/collections']">Collections</a></li>
-                <li><a [routerLink]="['/explore/categories']">Categories</a></li>
+                <li>
+                  <a [routerLink]="['/explore/photo-essays']">Photo essays</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/explore/collections']">Collections</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/explore/categories']">Categories</a>
+                </li>
                 <li><a [routerLink]="['/explore/members']">Members</a></li>
               </ul>
             </li>
-            <li [ngClass]="{'active': selectedItem === 'item2'}">
-              <a (click)="clickedInside($event,'item2')">STF Awards</a>
+            <li [ngClass]="{ active: selectedItem === 'item2' }">
+              <a (click)="clickedInside($event, 'item2')">STF Awards</a>
               <ul class="drp-dwn-hdr">
                 <li><a [routerLink]="['/']">Finalists and Winners</a></li>
-                <li><a target="_blank" href="https://about.shoottheframe.com/stf-awards">About STF Awards</a></li>
-                <li><a target="_blank" href="https://about.shoottheframe.com/prizes-and-partners/">Prizes and Partners</a></li>
-                <li><a target="_blank" href="https://about.shoottheframe.com/annual-book">The Annual Book</a></li>
-                <li><a target="_blank" href="https://about.shoottheframe.com/rules-and-faqs">Rules and FAQs</a></li>
+                <li>
+                  <a
+                    target="_blank"
+                    href="https://about.shoottheframe.com/stf-awards"
+                    >About STF Awards</a
+                  >
+                </li>
+                <li>
+                  <a
+                    target="_blank"
+                    href="https://about.shoottheframe.com/prizes-and-partners/"
+                    >Prizes and Partners</a
+                  >
+                </li>
+                <li>
+                  <a
+                    target="_blank"
+                    href="https://about.shoottheframe.com/annual-book"
+                    >The Annual Book</a
+                  >
+                </li>
+                <li>
+                  <a
+                    target="_blank"
+                    href="https://about.shoottheframe.com/rules-and-faqs"
+                    >Rules and FAQs</a
+                  >
+                </li>
               </ul>
             </li>
-            <li [ngClass]="{'active': selectedItem === 'item3'}">
-              <a (click)="clickedInside($event,'item3')" class="dots">
+            <li [ngClass]="{ active: selectedItem === 'item3' }">
+              <a (click)="clickedInside($event, 'item3')" class="dots">
                 <i class="fa fa-circle" aria-hidden="true"></i>
                 <i class="fa fa-circle" aria-hidden="true"></i>
                 <i class="fa fa-circle" aria-hidden="true"></i>
               </a>
               <ul class="drp-dwn-hdr">
-                <li><a target="_blank" href="https://about.shoottheframe.com/">About Shoot The Frame</a></li>
+                <li>
+                  <a target="_blank" href="https://about.shoottheframe.com/"
+                    >About Shoot The Frame</a
+                  >
+                </li>
                 <li><a [routerLink]="['/pricing']">Pricing</a></li>
-                <li><a target="_blank" href="https://help.shoottheframe.com/">Help</a></li>
-                <li><a target="_blank" href="https://about.shoottheframe.com/contact">Contact</a></li>
+                <li>
+                  <a target="_blank" href="https://help.shoottheframe.com/"
+                    >Help</a
+                  >
+                </li>
+                <li>
+                  <a
+                    target="_blank"
+                    href="https://about.shoottheframe.com/contact"
+                    >Contact</a
+                  >
+                </li>
                 <!-- <li><a href="https://about.shoottheframe.com/blog">Blog</a></li> -->
               </ul>
             </li>
@@ -48,53 +94,124 @@
         </div>
       </div>
       <div class="col-sm-6 right">
-        <div class="search-cntr" [ngClass]="{'focused': isFocused==true}">
+        <div class="search-cntr" [ngClass]="{ focused: isFocused == true }">
           <i></i>
-          <input type="text" class="form-control search-input" (click)="addFocus()" id="search-input"
-            [(ngModel)]='search' (keydown)="keyDownFunction($event)">
+          <input
+            type="text"
+            class="form-control search-input"
+            (click)="addFocus()"
+            id="search-input"
+            [(ngModel)]="search"
+            (keydown)="keyDownFunction($event)"
+          />
         </div>
         <div *ngIf="isLogin" class="login-cntr float-right">
           <ul class="clearfix">
-            <li class="notification-icn"><a (click)="readMessages()"><i class="fa fa-bell"
-                  [ngClass]="{'notification-active': isUnreadMsg}" aria-hidden="true"></i></a></li>
-            <li class="user-img" [ngClass]="{'active': selectedItem === 'item4'}">
-              <a (click)="clickedInside($event,'item4')"><img
-                  src="{{userDetails && userDetails.photo_url?userDetails.photo_url:'assets/images/temp/user-default-header.png'}}"></a>
+            <li class="notification-icn">
+              <a (click)="readMessages()"
+                ><i
+                  class="fa fa-bell"
+                  [ngClass]="{ 'notification-active': isUnreadMsg }"
+                  aria-hidden="true"
+                ></i
+              ></a>
+            </li>
+            <li
+              class="user-img"
+              [ngClass]="{ active: selectedItem === 'item4' }"
+            >
+              <a (click)="clickedInside($event, 'item4')"
+                ><img
+                  src="{{
+                    userDetails && userDetails.photo_url
+                      ? userDetails.photo_url
+                      : 'assets/images/temp/user-default-header.png'
+                  }}"
+              /></a>
+
               <ul class="drp-dwn-hdr">
                 <li><a (click)="showProfile()">Profile</a></li>
-                <li><a [routerLink]="['/user/account-settings/profile']">Account settings</a></li>
-                <li><a [routerLink]="['/stf-award-entries']">STF Awards Entries</a></li>
-                <li><a [routerLink]="['/messages']">Messages</a></li>
+                <li>
+                  <a [routerLink]="['/user/account-settings/profile']"
+                    >Account settings</a
+                  >
+                </li>
+                <li>
+                  <a [routerLink]="['/stf-award-entries']"
+                    >STF Awards Entries</a
+                  >
+                </li>
+                <!-- <li><a [routerLink]="['/messages']">Messages</a></li> -->
                 <li><a [routerLink]="['/insights']">Insights</a></li>
                 <li><a [routerLink]="['/likes']">Likes</a></li>
-                <li><a [routerLink]="['/critiques']">Critiques</a></li>
+                <!-- <li><a [routerLink]="['/critiques']">Critiques</a></li> -->
                 <li><a (click)="logout()">Sign out</a></li>
-                <li><a *ngIf="role=='admin_user'" [routerLink]="['/all-stf-entries']" class="upgrade">All STF
-                    Entries</a></li>
+                <li>
+                  <a
+                    *ngIf="role == 'admin_user'"
+                    [routerLink]="['/all-stf-entries']"
+                    class="upgrade"
+                    >All STF Entries</a
+                  >
+                </li>
                 <!-- <li><a *ngIf="role=='admin_user'" [routerLink]="['/all-stf-entries']" >Batch Upload</a></li> -->
-                <li><a *ngIf="role=='user'" [routerLink]="['/subscription/plans']" class="upgrade">Upgrade</a></li>
+                <li>
+                  <a
+                    *ngIf="role == 'user'"
+                    [routerLink]="['/subscription/plans']"
+                    class="upgrade"
+                    >Upgrade</a
+                  >
+                </li>
               </ul>
             </li>
             <li>
               <!-- <a (click)="goToUploadPhotos()" class="btn btn-primary">Upload Photo</a> -->
-              <div class="btn-group upload-button-grroup" role="group" aria-label="Upload Photo Button group with nested dropdown">
-                  <button (click)="goToUploadPhotos()" type="button" class="btn btn-primary">Upload Photo</button>
-                  <div class="btn-group" role="group">
-                    <button id="btnGroupDrop1" type="button" class="drop-arrow btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
-                      <a class="dropdown-item" (click)="createPhotoEssay()" >Create Photo Essay</a>
-                      <a class="dropdown-item" (click)="createCollection()" >Create Collection</a>
-                    </div>
+              <div
+                class="btn-group upload-button-grroup"
+                role="group"
+                aria-label="Upload Photo Button group with nested dropdown"
+              >
+                <button
+                  (click)="goToUploadPhotos()"
+                  type="button"
+                  class="btn btn-primary"
+                >
+                  Upload Photo
+                </button>
+                <div class="btn-group" role="group">
+                  <button
+                    id="btnGroupDrop1"
+                    type="button"
+                    class="drop-arrow btn btn-primary dropdown-toggle"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  ></button>
+                  <div
+                    class="dropdown-menu dropdown-menu-right"
+                    aria-labelledby="btnGroupDrop1"
+                  >
+                    <a class="dropdown-item" (click)="createPhotoEssay()"
+                      >Create Photo Essay</a
+                    >
+                    <a class="dropdown-item" (click)="createCollection()"
+                      >Create Collection</a
+                    >
                   </div>
-                  </div>
+                </div>
+              </div>
             </li>
           </ul>
         </div>
-        <div *ngIf="isLogin==false" class="login-cntr float-right">
+        <div *ngIf="isLogin == false" class="login-cntr float-right">
           <ul class="clearfix">
             <li><a [routerLink]="['/sign-in']">Sign in</a></li>
-            <li><a [routerLink]="['/sign-up']" class="btn btn-primary">Join Free</a></li>
+            <li>
+              <a [routerLink]="['/sign-up']" class="btn btn-primary"
+                >Join Free</a
+              >
+            </li>
           </ul>
         </div>
       </div>
@@ -103,8 +220,6 @@
   <!--============= End Header Web =============-->
   <app-common-mobile-header></app-common-mobile-header>
 </header>
-
-
 
 <ng-template #popUploadContent>
   <a (click)="uploadPopup()">Upload Photo</a>
@@ -118,7 +233,9 @@
 <footer class="footer w-100">
   <div class="content-cntr">
     <div class="logo-ftr">
-      <a href="#"><img src="assets/images/temp/logo-with-text.svg" width="174" alt=""></a>
+      <a href="#"
+        ><img src="assets/images/temp/logo-with-text.svg" width="174" alt=""
+      /></a>
       <ul class="social-link hide-mb">
         <li><a href="https://facebook.com/shoottheframe">Facebook</a></li>
         <li><a href="https://instagram.com/shoottheframe">Instagram</a></li>
@@ -127,75 +244,182 @@
     <div class="row">
       <div class="col-md-8">
         <ul class="ftr-menu">
-          <li><a target="_blank" href="https://about.shoottheframe.com/">About STF</a></li>
-          <li class="hide-mb"><a target="_blank" href="https://about.shoottheframe.com/prizes-and-partners/">Prizes and Partners</a></li>
-          <li class="hide-mb"><a target="_blank" href="https://about.shoottheframe.com/rules-and-faqs">Rules and FAQs</a></li>
-          <li class="hide-mb"><a target="_blank" href="https://about.shoottheframe.com/guidelines">Guidelines</a></li>
-          <li><a target="_blank" href="https://about.shoottheframe.com/stf-awards">About STF Awards</a></li>
-          <li class="hide-mb"><a target="_blank" href="https://about.shoottheframe.com/annual-book">The Annual Book</a></li>
-          <li class="hide-mb"><a target="_blank" href="https://about.shoottheframe.com/terms">Terms & Conditions</a></li>
-          <li class="hide-mb"><a target="_blank" href="https://about.shoottheframe.com/contact">Contact</a></li>
+          <li>
+            <a target="_blank" href="https://about.shoottheframe.com/"
+              >About STF</a
+            >
+          </li>
+          <li class="hide-mb">
+            <a
+              target="_blank"
+              href="https://about.shoottheframe.com/prizes-and-partners/"
+              >Prizes and Partners</a
+            >
+          </li>
+          <li class="hide-mb">
+            <a
+              target="_blank"
+              href="https://about.shoottheframe.com/rules-and-faqs"
+              >Rules and FAQs</a
+            >
+          </li>
+          <li class="hide-mb">
+            <a target="_blank" href="https://about.shoottheframe.com/guidelines"
+              >Guidelines</a
+            >
+          </li>
+          <li>
+            <a target="_blank" href="https://about.shoottheframe.com/stf-awards"
+              >About STF Awards</a
+            >
+          </li>
+          <li class="hide-mb">
+            <a
+              target="_blank"
+              href="https://about.shoottheframe.com/annual-book"
+              >The Annual Book</a
+            >
+          </li>
+          <li class="hide-mb">
+            <a target="_blank" href="https://about.shoottheframe.com/terms"
+              >Terms & Conditions</a
+            >
+          </li>
+          <li class="hide-mb">
+            <a target="_blank" href="https://about.shoottheframe.com/contact"
+              >Contact</a
+            >
+          </li>
           <li><a [routerLink]="['/pricing']">Pricing</a></li>
-          <li><a target="_blank" href="https://help.shoottheframe.com/">Help Center</a></li>
-          <li class="hide-mb"><a target="_blank" href="https://about.shoottheframe.com/privacy">Privacy</a></li>
+          <li>
+            <a target="_blank" href="https://help.shoottheframe.com/"
+              >Help Center</a
+            >
+          </li>
+          <li class="hide-mb">
+            <a target="_blank" href="https://about.shoottheframe.com/privacy"
+              >Privacy</a
+            >
+          </li>
           <!-- <li class="hide-mb"><a href="https://about.shoottheframe.com/blog">Blog</a></li> -->
-          <li class="hide-wb"><a target="_blank" href="https://facebook.com/shoottheframe">Facebook</a></li>
-          <li class="hide-wb"><a target="_blank" href="https://instagram.com/shoottheframe">Instagram</a></li>
+          <li class="hide-wb">
+            <a target="_blank" href="https://facebook.com/shoottheframe"
+              >Facebook</a
+            >
+          </li>
+          <li class="hide-wb">
+            <a target="_blank" href="https://instagram.com/shoottheframe"
+              >Instagram</a
+            >
+          </li>
         </ul>
       </div>
       <div class="col-md-4 hide-mb">
         <div class="abt-ftr">
-          Shoot The Frame is a collective of photographers from around the globe. Monthly awards, genuine feedback and
-          constructive critiques. We can’t wait to see your photos.
+          Shoot The Frame is a collective of photographers from around the
+          globe. Monthly awards, genuine feedback and constructive critiques. We
+          can’t wait to see your photos.
         </div>
-        <div class="join-ftr cursor" [routerLink]="['/sign-up']" *ngIf="isLogin==false">
+        <div
+          class="join-ftr cursor"
+          [routerLink]="['/sign-up']"
+          *ngIf="isLogin == false"
+        >
           Join free
         </div>
-        <div class="join-ftr" *ngIf="isLogin==true">
-          Give feedback <span><a target="_blank" href="https://shoottheframe.typeform.com/to/Upy2iI"> (we’d love to hear it).</a></span>
+        <div class="join-ftr" *ngIf="isLogin == true">
+          Give feedback
+          <span
+            ><a
+              target="_blank"
+              href="https://shoottheframe.typeform.com/to/Upy2iI"
+            >
+              (we’d love to hear it).</a
+            ></span
+          >
         </div>
       </div>
     </div>
   </div>
   <div class="copy-cntr">
     <div class="content-cntr">
-      Created with a tremendous amount of <span class="text-danger">♥</span> from all corners of the globe. © Shoot The Frame 2020
+      Created with a tremendous amount of
+      <span class="text-danger">♥</span> from all corners of the globe. © Shoot
+      The Frame 2020
     </div>
   </div>
-  <div class="who-win" *ngIf="isLogin==false">
+  <div class="who-win" *ngIf="isLogin == false">
     <div class="content-cntr">
       <div class="row">
-        <div class="col-md-4 txt" *ngIf="!submitSuccess">Find out who wins the STF Awards…</div>
-        <div class="col-md-8" *ngIf="submitSuccess==false">
+        <div class="col-md-4 txt" *ngIf="!submitSuccess">
+          Find out who wins the STF Awards…
+        </div>
+        <div class="col-md-8" *ngIf="submitSuccess == false">
           <form [formGroup]="sendForm" (ngSubmit)="sendWinnersInfo()">
             <ul class="clearfix">
               <li>
                 <div class="form-group">
-                  <input type="text" formControlName="first_name" class="form-control" id="exampleInputEmail1"
-                    aria-describedby="emailHelp" placeholder="First name"
-                    [ngClass]="{ 'is-invalid': submitted && f.first_name.errors,'text-valid':sendForm.value.first_name.length }"
-                    #first_name>
-                  <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
-                    <div *ngIf="f.first_name.errors.required">Please type first name</div>
-                    <div *ngIf="f.first_name.errors.pattern">Please type valid first name</div>
+                  <input
+                    type="text"
+                    formControlName="first_name"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder="First name"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.first_name.errors,
+                      'text-valid': sendForm.value.first_name.length
+                    }"
+                    #first_name
+                  />
+                  <div
+                    *ngIf="submitted && f.first_name.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.first_name.errors.required">
+                      Please type first name
+                    </div>
+                    <div *ngIf="f.first_name.errors.pattern">
+                      Please type valid first name
+                    </div>
                   </div>
                 </div>
               </li>
               <li>
                 <div class="form-group">
-                  <input type="email" autocomplete="off" class="form-control" formControlName="email"
-                    id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Which email address shall we use?"
-                    [ngClass]="{ 'is-invalid': submitted && f.email.errors,'text-valid':sendForm.value.email.length }"
-                    #email>
-                  <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                  <input
+                    type="email"
+                    autocomplete="off"
+                    class="form-control"
+                    formControlName="email"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder="Which email address shall we use?"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.email.errors,
+                      'text-valid': sendForm.value.email.length
+                    }"
+                    #email
+                  />
+                  <div
+                    *ngIf="submitted && f.email.errors"
+                    class="invalid-feedback"
+                  >
                     <div *ngIf="f.email.errors.required">Please type email</div>
-                    <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                    <div *ngIf="f.email.errors.email">
+                      Email must be a valid email address
+                    </div>
                   </div>
                 </div>
               </li>
               <li>
-                <button class="btn btn-primary" [disabled]="sendForm.invalid"
-                  [ngClass]="{'disabled': sendForm.invalid}">Absolutely!</button>
+                <button
+                  class="btn btn-primary"
+                  [disabled]="sendForm.invalid"
+                  [ngClass]="{ disabled: sendForm.invalid }"
+                >
+                  Absolutely!
+                </button>
               </li>
             </ul>
           </form>
@@ -204,10 +428,10 @@
     </div>
     <div class="content-cntr" *ngIf="submitSuccess">
       Sweet. We’ll let you know who wins!
-      <div class="close" (click)="resetForm()"> <img src="assets/images/temp/ui-cross.svg" alt=""></div>
+      <div class="close" (click)="resetForm()">
+        <img src="assets/images/temp/ui-cross.svg" alt="" />
+      </div>
     </div>
-
   </div>
-
 </footer>
 <!--============= end Footer Web =============-->

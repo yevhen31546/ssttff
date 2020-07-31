@@ -4,56 +4,79 @@
 </button> -->
 <section class="pophead">
   <div class="popclose" (click)="closeModal()">
-    <img src="assets/images/temp/close.svg" width="17" alt="">
+    <img src="assets/images/temp/close.svg" width="17" alt="" />
   </div>
   <div class="row">
     <div class="col">
       <div (click)="showProfile(data.username)" class="left">
         <div class="img">
-          <img src="{{ data.user_photo }}" alt="">
+          <img src="{{ data.user_photo }}" alt="" />
         </div>
         <div class="txt">
-          <h6><a>{{ data.name }}</a></h6>
+          <h6>
+            <a>{{ data.name }}</a>
+          </h6>
           @{{ data.username }}
         </div>
       </div>
     </div>
-    <div class="col right align-items-center text-right" [hidden]="addCritic || isAuthUser || data.critique_status > 0 ">
+    <!-- <div class="col right align-items-center text-right" [hidden]="addCritic || isAuthUser || data.critique_status > 0 ">
       <a (click)="crticPopup()" class="btn btn-primary">Critique Photo</a>
-    </div>
+    </div> -->
     <div class="col right align-items-center text-right" [hidden]="!isAuthUser">
-      <a (click)="shareImage(data,'critic')" class="btn btn-primary">Invite Critique</a>
+      <a (click)="shareImage(data, 'critic')" class="btn btn-primary"
+        >Invite Critique</a
+      >
     </div>
   </div>
 </section>
-
 
 <div #uploadMedia></div>
-<section class="popup-banner" [ngClass]="{'no-sticky': addCritic === false}">
+<section class="popup-banner" [ngClass]="{ 'no-sticky': addCritic === false }">
   <div class="popup-slider-nav left">
-    <a *ngIf="isShowPre && !addCritic" (click)="imagePreFn()" class="nav"><img src="assets/images/temp/prv-arw.svg" alt=""></a>
+    <a *ngIf="isShowPre && !addCritic" (click)="imagePreFn()" class="nav"
+      ><img src="assets/images/temp/prv-arw.svg" alt=""
+    /></a>
   </div>
   <div class="popup-slider-nav right">
-    <a *ngIf="isShowNext && !addCritic" (click)="imageNextFn()" class="nav"><img src="assets/images/temp/next-arw.svg"
-        alt=""></a>
+    <a *ngIf="isShowNext && !addCritic" (click)="imageNextFn()" class="nav"
+      ><img src="assets/images/temp/next-arw.svg" alt=""
+    /></a>
   </div>
-  <div [ngClass]="{'ad_cnt': data.adult_content=='1' && isAuthUser==false}">
-    <img (load)="showImageFunction(data)" *ngIf="data.id > lastIndex" src="{{ data.localmedia}}--glide?fit=crop&q=40&width={{data.width}}" alt="">
-    <img (load)="showImageFunction(data)" *ngIf="data.id < lastIndex" src="{{ data.media }}" alt="">
-    <button *ngIf="data.adult_content=='1' && isAuthUser==false" (click)="updateAdultContent(data)" class="btn btn-additional see-content">See
-      adult content</button>
+  <div [ngClass]="{ ad_cnt: data.adult_content == '1' && isAuthUser == false }">
+    <img
+      (load)="showImageFunction(data)"
+      *ngIf="data.id > lastIndex"
+      src="{{ data.localmedia }}--glide?fit=crop&q=40&width={{ data.width }}"
+      alt=""
+    />
+    <img
+      (load)="showImageFunction(data)"
+      *ngIf="data.id < lastIndex"
+      src="{{ data.media }}"
+      alt=""
+    />
+    <button
+      *ngIf="data.adult_content == '1' && isAuthUser == false"
+      (click)="updateAdultContent(data)"
+      class="btn btn-additional see-content"
+    >
+      See adult content
+    </button>
   </div>
   <div class="subtitle-cntr hide-wb" *ngIf="addCritic">
-    <h3>CRITIQUE PHOTO <a (click)="canDeactivate()" class="underline text-black cancel">Cancel</a></h3>
+    <h3>
+      CRITIQUE PHOTO
+      <a (click)="canDeactivate()" class="underline text-black cancel"
+        >Cancel</a
+      >
+    </h3>
   </div>
 </section>
-
-
-
 
 <section class="critique-score">
   <div class="row">
-    <div class="col-md-6 score-count-cntr">
+    <!-- <div class="col-md-6 score-count-cntr">
       <div *ngIf="!isAuthUser && data.collective_score_status!=0 || isAuthUser">
         <ngb-progressbar type="success" [value]="data.collective_score"></ngb-progressbar>
         <div class="count "><strong>Collective Score:</strong> {{ data.collective_score }}
@@ -64,29 +87,76 @@
       <div *ngIf="!isAuthUser && data.collective_score_status!=0 || isAuthUser">
         Critiques: {{ data.critiques }}
       </div>
-    </div>
-    <div class="col-md-6">
+    </div> -->
+    <div class="col-md-12">
       <ul class="info-bxs float-right">
-        <li class="menu" [hidden]="!isAuthUser" (click)="showDropDown()" [ngClass]="{'active': isShowDropDown==true}" container="body" tooltipClass="tooltip-custom"    [ngbTooltip]="moreOptions">
+        <li
+          class="menu"
+          [hidden]="!isAuthUser"
+          (click)="showDropDown()"
+          [ngClass]="{ active: isShowDropDown == true }"
+          container="body"
+          tooltipClass="tooltip-custom"
+          [ngbTooltip]="moreOptions"
+        >
           <a class="dots">
             <i class="fa fa-circle" aria-hidden="true"></i>
             <i class="fa fa-circle" aria-hidden="true"></i>
             <i class="fa fa-circle" aria-hidden="true"></i>
           </a>
           <ul class="drp-dwn">
-            <li><a (click)="submitStfAwards(data)">Submit into STF Awards</a></li>
+            <li>
+              <a (click)="submitStfAwards(data)">Submit into STF Awards</a>
+            </li>
             <li><a (click)="awardHistoryModal(data)">STF Awards history</a></li>
             <li><a (click)="addPhotoEssay(data)">Add to photo essay</a></li>
             <li><a (click)="editPhoto(data.id)">Edit photo</a></li>
-            <li><a (click)="deletePhoto(contentDelete)" class="delete">Delete photo</a></li>
+            <li>
+              <a (click)="deletePhoto(contentDelete)" class="delete"
+                >Delete photo</a
+              >
+            </li>
           </ul>
         </li>
-        <li [ngbTooltip]="infoModal" container="body" tooltipClass="tooltip-custom" (click)="openModal(contentCamDetails)"><img src="assets/images/temp/gen-information.svg" alt="" width="12px">
-          Info</li>
-        <li [ngbTooltip]="collection" container="body" tooltipClass="tooltip-custom" (click)="addCollections(data)"><a>Collect</a></li>
-        <li [ngbTooltip]="share" container="body" tooltipClass="tooltip-custom" (click)="shareImage(data,'photo')">Share</li>
-        <li class="likes" container="body" tooltipClass="tooltip-custom" [ngbTooltip]="data.like_status === 1 ? likeContent : unlikeContent" [ngClass]="data.like_status === 1 ? 'active' : ''"
-          (click)="likePhotos(data)"><i class="fa fa-heart" aria-hidden="true"></i>{{data.like_count}}</li>
+        <li
+          [ngbTooltip]="infoModal"
+          container="body"
+          tooltipClass="tooltip-custom"
+          (click)="openModal(contentCamDetails)"
+        >
+          <img
+            src="assets/images/temp/gen-information.svg"
+            alt=""
+            width="12px"
+          />
+          Info
+        </li>
+        <li
+          [ngbTooltip]="collection"
+          container="body"
+          tooltipClass="tooltip-custom"
+          (click)="addCollections(data)"
+        >
+          <a>Collect</a>
+        </li>
+        <li
+          [ngbTooltip]="share"
+          container="body"
+          tooltipClass="tooltip-custom"
+          (click)="shareImage(data, 'photo')"
+        >
+          Share
+        </li>
+        <li
+          class="likes"
+          container="body"
+          tooltipClass="tooltip-custom"
+          [ngbTooltip]="data.like_status === 1 ? likeContent : unlikeContent"
+          [ngClass]="data.like_status === 1 ? 'active' : ''"
+          (click)="likePhotos(data)"
+        >
+          <i class="fa fa-heart" aria-hidden="true"></i>{{ data.like_count }}
+        </li>
       </ul>
     </div>
   </div>
@@ -96,8 +166,13 @@
   <div class="inner-modal">
     <div class="modal-header">
       <h3 class="modal-title">Delete photo</h3>
-      <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
-        <img src="assets/images/temp/ui-cross.svg" alt="">
+      <button
+        type="button"
+        class="close"
+        aria-describedby="modal-title"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <img src="assets/images/temp/ui-cross.svg" alt="" />
       </button>
     </div>
     <div class="modal-body text-center">
@@ -106,7 +181,9 @@
       </p>
       <div class="btn-cntr text-center">
         <a class="cancel" (click)="modal.dismiss('Close click')">Cancel</a>
-        <a class="btn btn-danger" (click)="modal.close('Ok click')">Yes, delete</a>
+        <a class="btn btn-danger" (click)="modal.close('Ok click')"
+          >Yes, delete</a
+        >
       </div>
     </div>
   </div>
@@ -116,14 +193,20 @@
   <div class="modal-content">
     <div class="modal-header">
       <div class="user-cntr">
-        <div class="img"><img src="{{data.user_photo}}" alt=""></div>
+        <div class="img"><img src="{{ data.user_photo }}" alt="" /></div>
         <div class="txt">
           <h3 class="sub-title">{{ data.name }}</h3>
           @{{ data.username }}
         </div>
       </div>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <img src="assets/images/temp/ui-cross.svg" alt="">
+      <button
+        type="button"
+        class="close"
+        data-dismiss="modal"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <img src="assets/images/temp/ui-cross.svg" alt="" />
       </button>
     </div>
     <div class="modal-body">
@@ -135,7 +218,10 @@
               <h4>Published</h4>
               {{ getDates(data.created_at) }}
             </div>
-            <div   (click)="data.camera?routeSearch(data.camera,'camera'):''" class="col-md-4 col-6 mb-32 cursor">
+            <div
+              (click)="data.camera ? routeSearch(data.camera, 'camera') : ''"
+              class="col-md-4 col-6 mb-32 cursor"
+            >
               <h4>Camera</h4>
               {{ data.camera }}
             </div>
@@ -156,7 +242,12 @@
               {{ data.aperture }}
             </div>
           </li>
-          <li class="row cursor" (click)="data.location?routeSearch(data.location,'location'):''">
+          <li
+            class="row cursor"
+            (click)="
+              data.location ? routeSearch(data.location, 'location') : ''
+            "
+          >
             <div class="col-md-12">
               <h4>Location</h4>
               {{ data.location }}
@@ -166,7 +257,12 @@
             <div class="col-md-12">
               <h4>Color pallete</h4>
               <ul class="color-list">
-                <li *ngFor="let color of colorPalate" [style.background-color]="'rgb(' + color.r + ','+ color.g+','+ color.b+')'"></li>
+                <li
+                  *ngFor="let color of colorPalate"
+                  [style.background-color]="
+                    'rgb(' + color.r + ',' + color.g + ',' + color.b + ')'
+                  "
+                ></li>
               </ul>
             </div>
           </li>
@@ -174,13 +270,17 @@
             <div class="col-md-12">
               <h4>Tags</h4>
               <ul class="tags-list">
-                <li class="cursor" (click)="routeSearch(tag,'tags')" *ngFor="let tag of data.tags">
-                  {{ tag }}</li>
+                <li
+                  class="cursor"
+                  (click)="routeSearch(tag, 'tags')"
+                  *ngFor="let tag of data.tags"
+                >
+                  {{ tag }}
+                </li>
               </ul>
             </div>
           </li>
         </ul>
-
       </div>
     </div>
   </div>
@@ -195,19 +295,26 @@
   <div class="inner-modal">
     <div class="modal-header">
       <h3 class="modal-title text-center">Abandon photo critique</h3>
-      <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
-        <img src="assets/images/temp/ui-cross.svg" alt="">
+      <button
+        type="button"
+        class="close"
+        aria-describedby="modal-title"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <img src="assets/images/temp/ui-cross.svg" alt="" />
       </button>
     </div>
     <div class="modal-body text-center">
       <p>
-        Are you sure you want to abandon this photo critique? You will lose all of the information which you have added
-        so far.
+        Are you sure you want to abandon this photo critique? You will lose all
+        of the information which you have added so far.
       </p>
 
       <div class="btn-cntr text-center">
         <a class="cancel" (click)="modal.dismiss('Close click')">Stay</a>
-        <a class="btn btn-danger" (click)="modal.close('Ok click')">Yes, abandon</a>
+        <a class="btn btn-danger" (click)="modal.close('Ok click')"
+          >Yes, abandon</a
+        >
       </div>
     </div>
   </div>

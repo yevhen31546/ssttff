@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   // apiUrl: 'http://103.214.233.21:5400/api/',
-  // apiUrl: 'https://stf.cubettech.in/api/',
+  // apiUrl: "https://stf.cubettech.in/api/",
   apiUrl: "http://127.0.0.1:8000/api/",
   // apiUrl: 'http://192.168.1.32:8000/api/',
   // apiUrl: 'http://192.168.1.69:8000/api/',
@@ -22,7 +22,7 @@ export const environment = {
 
   pusher: {
     key: "2d555ce9d4329b4e47ff",
-    cluster: "us3",
+    cluster: "us3"
   },
 
   GLIDE_SIZE: 80,
@@ -35,7 +35,7 @@ export const environment = {
     databaseURL: "https://shoot-the-frame-a502a.firebaseio.com",
     projectId: "shoot-the-frame-a502a",
     storageBucket: "shoot-the-frame-a502a.appspot.com",
-    messagingSenderId: "116373090411",
+    messagingSenderId: "116373090411"
   },
 
   // firebase: {
@@ -48,7 +48,7 @@ export const environment = {
   // },
   randomSelectionCount: 50,
 
-  lastIndex: 989,
+  lastIndex: 989
 };
 
 /*
