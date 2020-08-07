@@ -5,18 +5,23 @@
     <section class="pricing-cnt-area">
       <h2 class="title">Simple Pricing</h2>
       <h3 class="sub-heading">
-        You can become a member of the STF community, and you can also purchase
-        individual <span class="underline cursor" (click)="scrollToElement(target)">STF Awards submissions</span> for
-        the
-        monthly STF Awards.
+        Portrait, landscape and wildlife photo contests every month.
       </h3>
       <section class="common-tab">
         <ul class="nav-tabs">
           <li>
-            <a [ngClass]="{ active: activetab === 'monthly' }" (click)="changeTab('monthly')">MONTHLY</a>
+            <a
+              [ngClass]="{ active: activetab === 'monthly' }"
+              (click)="changeTab('monthly')"
+              >MONTHLY</a
+            >
           </li>
           <li>
-            <a [ngClass]="{ active: activetab === 'yearly' }" (click)="changeTab('yearly')">YEARLY</a>
+            <a
+              [ngClass]="{ active: activetab === 'yearly' }"
+              (click)="changeTab('yearly')"
+              >YEARLY</a
+            >
           </li>
         </ul>
       </section>
@@ -25,141 +30,122 @@
           <!-- monthly basic -->
           <div class="col-md-4">
             <div class="plan-bx">
-              <h4 class="sub-title">
-                <span>BASIC</span> SHOOT THE FRAME MEMBER
-              </h4>
-              <div class="price">Free</div>
+              <div style="display: flex; flex-direction: row;">
+                <div class="suscriptionTitle">
+                  <h4 class="sub-title">
+                    <span>BASIC</span>
+                  </h4>
+                  <div class="price">
+                    <span class="subscription-kind">$0</span> / per month
+                  </div>
+                </div>
+                <div class="subscriptionImg">
+                  <img
+                    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTUiIGhlaWdodD0iMTQ4IiB2aWV3Qm94PSIwIDAgMTk1IDE0OCI+CiAgICA8ZyBmaWxsPSJub25lIiB0cmFuc2Zvcm09Im1hdHJpeCgtMSAwIDAgMSAxOTUgMCkiPgogICAgICAgIDxwYXRoIGZpbGw9IiNFNkU2RTYiIGQ9Ik0yNC4wOTEgMEgyNS4wOTFWNDEuMjI5SDI0LjA5MXoiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjRTZFNkU2IiBkPSJNLjI3IDIzLjI1N2MtLjE1IDAtLjI3LjEyMS0uMjcuMjcxdjM1LjQwMWMwIC4xNS4xMi4yNzEuMjcuMjcxaDQ5LjE0NmMuMTQ5IDAgLjI3LS4xMjEuMjctLjI3VjIzLjUyN2MwLS4xNS0uMTIxLS4yNy0uMjctLjI3SC4yN3oiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjRkZGIiBkPSJNNDYuNTE0IDI2LjAwNXYyNS4xNjJjMCAuMTY3LS4wNjUuMzI5LS4xODIuNDQ3LS4xMTcuMTItLjI3Ni4xODYtLjQ0Mi4xODZIMy43OTZjLS4wMyAwLS4wNi0uMDAyLS4wOS0uMDA3LS4zMDctLjA0NS0uNTM1LS4zMTItLjUzNS0uNjI2VjI2LjAwNWMwLS4zNS4yOC0uNjM0LjYyNC0uNjM0SDQ1Ljg5Yy4xNjUgMCAuMzI0LjA2Ny40NDEuMTg2LjExNy4xMTguMTgzLjI4LjE4My40NDd6Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iI0U2RTZFNiIgZD0iTTMwLjY1NyA1MS44SDMuMjc0Yy0uMDM1IDAtLjA2OS0uMDAyLS4xMDMtLjAwOGwxMi45NTItMjEuNzQ2Yy4xNi0uMjc2LjQ2Mi0uNDQ2Ljc4OS0uNDQ2cy42MjguMTcuNzg5LjQ0Nmw4LjY5MiAxNC41OTMuNDE2LjY5OSAzLjg0OCA2LjQ2MnoiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjMDAwIiBkPSJNMzAuNjU3IDUxLjhMMjEuMTQzIDUxLjggMjUuODEzIDQ1LjEyMiAyNi4xNSA0NC42NCAyNi4zMTggNDQuNCAyNi43NDEgNDUuMTIyeiIgb3BhY2l0eT0iLjIiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjRTZFNkU2IiBkPSJNNDUuNDU3IDUxLjhIMjIuMmw0LjUwNy02LjQ5LjMyNC0uNDY3IDUuODczLTguNDU2Yy4yMS0uMjYyLjUyMi0uNDIyLjg1OC0uNDQyLjMzNy0uMDIuNjY2LjEwMy45MDYuMzM3LjAzLjAzMy4wNTguMDY4LjA4NC4xMDVMNDUuNDU3IDUxLjh6Ii8+CiAgICAgICAgPGNpcmNsZSBjeD0iMjQuMzE0IiBjeT0iMjQuMzE0IiByPSIxLjA1NyIgZmlsbD0iI0ZGRiIvPgogICAgICAgIDxwYXRoIGZpbGw9IiNFNkU2RTYiIGQ9Ik05Ny4wMzQgMEg5OC4wMzRWNDEuMjI5SDk3LjAzNHoiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjRTZFNkU2IiBkPSJNNzIuMTU2IDIzLjI1N2MtLjE1IDAtLjI3LjEyMS0uMjcuMjcxdjM1LjQwMWMwIC4xNS4xMi4yNzEuMjcuMjcxaDQ5LjE0NmMuMTQ5IDAgLjI3LS4xMjEuMjctLjI3VjIzLjUyN2MwLS4xNS0uMTIxLS4yNy0uMjctLjI3SDcyLjE1NnoiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjRkZGIiBkPSJNMTE4LjQgMjYuMDA1djI1LjE2MmMwIC4xNjctLjA2Ni4zMjktLjE4My40NDctLjExNy4xMi0uMjc1LjE4Ni0uNDQuMTg2SDc1LjY4Yy0uMDMgMC0uMDYtLjAwMi0uMDg5LS4wMDctLjMwNy0uMDQ1LS41MzUtLjMxMi0uNTM1LS42MjZWMjYuMDA1YzAtLjM1LjI4LS42MzQuNjI0LS42MzRoNDIuMDk1Yy4xNjUgMCAuMzI0LjA2Ny40NDEuMTg2LjExNy4xMTguMTgzLjI4LjE4My40NDd6Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iIzQ3ODlGRiIgZD0iTTEwMy42IDUxLjhINzYuMjE3Yy0uMDM1IDAtLjA2OS0uMDAyLS4xMDMtLjAwOGwxMi45NTEtMjEuNzQ2Yy4xNjEtLjI3Ni40NjMtLjQ0Ni43OS0uNDQ2LjMyNiAwIC42MjguMTcuNzg5LjQ0Nmw4LjY5MiAxNC41OTMuNDE2LjY5OUwxMDMuNiA1MS44eiIvPgogICAgICAgIDxwYXRoIGZpbGw9IiMwMDAiIGQ9Ik0xMDMuNiA1MS44TDk0LjA4NiA1MS44IDk4Ljc1NiA0NS4xMjIgOTkuMDkyIDQ0LjY0IDk5LjI2MSA0NC40IDk5LjY4NCA0NS4xMjJ6IiBvcGFjaXR5PSIuMiIvPgogICAgICAgIDxwYXRoIGZpbGw9IiM0Nzg5RkYiIGQ9Ik0xMTguNCA1MS44SDk1LjE0M2w0LjUwNy02LjQ5LjMyNC0uNDY3IDUuODczLTguNDU2Yy4yMS0uMjYyLjUyMi0uNDIyLjg1OC0uNDQyLjMzNy0uMDIuNjY2LjEwMy45MDYuMzM3LjAzLjAzMy4wNTguMDY4LjA4NC4xMDVMMTE4LjQgNTEuOHoiLz4KICAgICAgICA8Y2lyY2xlIGN4PSI5Ny4yNTciIGN5PSIyNC4zMTQiIHI9IjEuMDU3IiBmaWxsPSIjRkZGIi8+CiAgICAgICAgPHBhdGggZmlsbD0iI0U2RTZFNiIgZD0iTTE2OC45MiAwSDE2OS45MlY0MS4yMjlIMTY4LjkyeiIvPgogICAgICAgIDxwYXRoIGZpbGw9IiNFNkU2RTYiIGQ9Ik0xNDUuMDk4IDIzLjI1N2MtLjE0OSAwLS4yNy4xMjEtLjI3LjI3MXYzNS40MDFjMCAuMTUuMTIxLjI3MS4yNy4yNzFoNDkuMTQ2Yy4xNSAwIC4yNy0uMTIxLjI3LS4yN1YyMy41MjdjMC0uMTUtLjEyLS4yNy0uMjctLjI3aC00OS4xNDZ6Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iI0ZGRiIgZD0iTTE5MS4zNDMgMjYuMDA1djI1LjE2MmMwIC4xNjctLjA2Ni4zMjktLjE4My40NDctLjExNy4xMi0uMjc2LjE4Ni0uNDQxLjE4NmgtNDIuMDk1Yy0uMDMgMC0uMDYtLjAwMi0uMDktLjAwNy0uMzA2LS4wNDUtLjUzNC0uMzEyLS41MzQtLjYyNlYyNi4wMDVjMC0uMzUuMjgtLjYzNC42MjQtLjYzNGg0Mi4wOTVjLjE2NSAwIC4zMjQuMDY3LjQ0LjE4Ni4xMTguMTE4LjE4NC4yOC4xODQuNDQ3eiIvPgogICAgICAgIDxwYXRoIGZpbGw9IiNFNkU2RTYiIGQ9Ik0xNzUuNDg2IDUxLjhoLTI3LjM4NGMtLjAzNCAwLS4wNjgtLjAwMi0uMTAyLS4wMDhsMTIuOTUxLTIxLjc0NmMuMTYxLS4yNzYuNDYzLS40NDYuNzktLjQ0Ni4zMjYgMCAuNjI4LjE3Ljc4OS40NDZsOC42OTEgMTQuNTkzLjQxNy42OTkgMy44NDggNi40NjJ6Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iIzAwMCIgZD0iTTE3NS40ODYgNTEuOEwxNjUuOTcxIDUxLjggMTcwLjY0MiA0NS4xMjIgMTcwLjk3OCA0NC42NCAxNzEuMTQ2IDQ0LjQgMTcxLjU3IDQ1LjEyMnoiIG9wYWNpdHk9Ii4yIi8+CiAgICAgICAgPHBhdGggZmlsbD0iI0U2RTZFNiIgZD0iTTE5MC4yODYgNTEuOGgtMjMuMjU3bDQuNTA2LTYuNDkuMzI1LS40NjcgNS44NzItOC40NTZjLjIxLS4yNjIuNTIyLS40MjIuODU5LS40NDIuMzM2LS4wMi42NjUuMTAzLjkwNS4zMzcuMDMuMDMzLjA1OS4wNjguMDg1LjEwNUwxOTAuMjg2IDUxLjh6Ii8+CiAgICAgICAgPGNpcmNsZSBjeD0iMTY5LjE0MyIgY3k9IjI0LjMxNCIgcj0iMS4wNTciIGZpbGw9IiNGRkYiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjQTA2MTZBIiBkPSJNMTUyLjY3MyA5Mi41MTRsLjQyNCAyLjg4MmMuMTE3Ljc5NC0uMTQ5IDEuNTk3LS43MTcgMi4xNjYtLjU2OS41NjktMS4zNzMuODM5LTIuMTcyLjcyOC0uNzc1LS4xMDgtMS40NTgtLjU2MS0xLjg1NC0xLjIzMi0uMzk3LS42NzEtLjQ2NC0xLjQ4NS0uMTgyLTIuMjExbDEuNDM5LTMuNzA0LS43NjYtMjQuOTgyIDQuNDQtMS42NzUtLjYxMiAyOC4wMjh6Ii8+CiAgICAgICAgPGNpcmNsZSBjeD0iMTQwLjA3MSIgY3k9IjQ0LjkyOSIgcj0iNS44MTQiIGZpbGw9IiNBMDYxNkEiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjQTA2MTZBIiBkPSJNMTQ4IDU3LjA4NmwtMTEuNjI5LS40NjJjMS4yOTEtMi43NjYgMS44MDQtNS40NDIgMS4yNTgtNy45OTVoNy43Yy0uNDA1IDIuNDA3LjcxMiA1LjI5OSAyLjY3MSA4LjQ1N3oiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjNDc4OUZGIiBkPSJNMTQ2LjE3MyA4MC4yMDVMMTI5LjYyNiA4MS40bC42MDEtOS4yYy0xLjkwNy00LjQ2NC0xLjYwMi03LjY4Ny42NDItOS44MjJsLjIwNC0zLjEwOWMuMTMzLTIuMDQgMS41NzMtMy43NyAzLjU4LTQuMjk5bDIuODY3LS43NTdjMy43MTMgMi4xNCA2LjY3MiAyLjExIDguODA1LS4yOTlsMy40MTMgMS43MmMxLjY5Mi44NTMgMi42NzIgMi42NDcgMi40NjIgNC41MDdsLTYuMDI3IDIwLjA2NHoiLz4KICAgICAgICA8ZWxsaXBzZSBjeD0iMTMwLjY4OSIgY3k9IjE0Mi40NTciIGZpbGw9IiNFNkU2RTYiIHJ4PSI0OC4wMjEiIHJ5PSI1LjA4MSIvPgogICAgICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE2MS42OSAxMzMuNzI5KSI+CiAgICAgICAgICAgIDxjaXJjbGUgY3g9Ii41MjkiIGN5PSIuNTI5IiByPSIxIiBmaWxsPSIjNDc4OUZGIi8+CiAgICAgICAgICAgIDxwYXRoIGZpbGw9IiMwMDAiIGQ9Ik0uNjkyIDBjLjIzMS4xODQuMjc1LjQ5LjEwMi43MThDLjYyLjk0Ni4yODMgMS4wMjggMCAuOTEzYy4xODQuMTQ3LjQ0OS4xODUuNjc3LjA5OC4yMjgtLjA4Ny4zNzctLjI4My4zOC0uNTAxQzEuMDYuMjkyLjkxNy4wOTIuNjkyIDB6IiBvcGFjaXR5PSIuMiIvPgogICAgICAgICAgICA8ZWxsaXBzZSBjeD0iMTIuNjg2IiBjeT0iMS41ODYiIGZpbGw9IiMzRjNENTYiIHJ4PSIxLjA1NyIgcnk9IjEiLz4KICAgICAgICAgICAgPHBhdGggZmlsbD0iIzAwMCIgZD0iTTEyLjc4MyAxLjA1N2MtLjAzMyAwLS4wNjUuMDAxLS4wOTcuMDAzLjQ4NC4wMjcuODYyLjI1Mi44NjIuNTI2IDAgLjI3My0uMzc4LjQ5OS0uODYyLjUyNmwuMDk3LjAwMmMuNTMgMCAuOTYtLjIzNi45Ni0uNTI4IDAtLjI5Mi0uNDMtLjUyOS0uOTYtLjUyOXoiIG9wYWNpdHk9Ii4yIi8+CiAgICAgICAgICAgIDxwYXRoIGZpbGw9IiMzRjNENTYiIGQ9Ik0xNC42ODYgMS43ODFIOS4wN3YtLjYxYzAtLjA2My0uMDUxLS4xMTQtLjExNC0uMTE0SDUuODQ0Yy0uMDMgMC0uMDU5LjAxMi0uMDguMDM0LS4wMjIuMDIxLS4wMzQuMDUtLjAzNC4wOHYuNjFIMi40NjdWMS40YzAtLjAzLS4wMTItLjA2LS4wMzQtLjA4LS4wMjEtLjAyMi0uMDUtLjAzNC0uMDgtLjAzNEguNjgzYy0uMDMgMC0uMDYuMDEyLS4wOC4wMzMtLjAyMi4wMjItLjAzNC4wNS0uMDM0LjA4MXYuMzgxSC4xMTRjLS4wMyAwLS4wNi4wMTItLjA4LjAzMy0uMDIyLjAyMi0uMDM0LjA1LS4wMzQuMDhWOS40YzAgLjAzLjAxMi4wNi4wMzMuMDguMDIxLjAyMi4wNS4wMzQuMDguMDM0aDE0LjU3M2MuMDYzIDAgLjExNC0uMDUuMTE0LS4xMTRWMS44OTVjMC0uMDYzLS4wNS0uMTE0LS4xMTQtLjExNHoiLz4KICAgICAgICAgICAgPHBhdGggZmlsbD0iIzQ3ODlGRiIgZD0iTTAgNC4yMjlIMTQuOFY1LjI4NkgweiIvPgogICAgICAgICAgICA8ZWxsaXBzZSBjeD0iNi44NzEiIGN5PSI1LjI4NiIgZmlsbD0iIzQ3ODlGRiIgcng9IjIuNjQzIiByeT0iMy4xNzEiLz4KICAgICAgICAgICAgPGNpcmNsZSBjeD0iNy40IiBjeT0iNS4yODYiIHI9IjIuMTE0IiBmaWxsPSIjM0YzRDU2Ii8+CiAgICAgICAgICAgIDxwYXRoIGZpbGw9IiNGRkYiIGQ9Ik04LjQ1NyA0Ljc1N2MwIC4yMTUtLjA0My40MjgtLjEyOC42MjYtLjA0Ni4xMDYtLjEwNC4yMDgtLjE3Mi4zMDEtLjM2Ny41MS0xIC43NTQtMS42MTMuNjI1LS42MTUtLjEzLTEuMDk0LS42MS0xLjIyNC0xLjIyNC0uMTMtLjYxNC4xMTUtMS4yNDcuNjI0LTEuNjE0LjA5NC0uMDY4LjE5NS0uMTI1LjMwMi0uMTcuNDktLjIxMSAxLjA1My0uMTYxIDEuNDk4LjEzMi40NDUuMjkzLjcxMy43OS43MTMgMS4zMjR6Ii8+CiAgICAgICAgPC9nPgogICAgICAgIDxwYXRoIGZpbGw9IiNBMDYxNkEiIGQ9Ik0xMjAuNjMgODAuODc4bC00LjYwNyAyLjQxYy0uODEuNDI0LTEuODA4LjI0LTIuNDE0LS40NDUtLjQ2Ny0uNTMtLjYxNy0xLjI2Ny0uMzkyLTEuOTM2LjIyNi0uNjY5Ljc5MS0xLjE2NyAxLjQ4NS0xLjMwOWwzLjIzMy0uNjU4IDEwLjAzMy0zLjg3OCAxLjY0Ny0xMS42MzMgNC42NDIgMS4xOTMtLjg5OCAxMy43MjEtMTIuNzI4IDIuNTM1eiIvPgogICAgICAgIDxwYXRoIGZpbGw9IiM0Nzg5RkYiIGQ9Ik0xNTMuMjg2IDY1LjYybC00Ljk5MiAzLjA5NEwxNDggNTYuMzM4bC44Ni0uMzFjMi40NDUgMCA0LjQyNiAyLjA4OCA0LjQyNiA0LjY2M3Y0LjkzeiIvPgogICAgICAgIDxwYXRoIGZpbGw9IiMyRjJFNDEiIGQ9Ik0xNDkuODM5IDEzOS41NDNsLTQuMzAyLS42ODJjLS44NjktMTQuOS0yLjYxOC0yOC44MDktNS43NDItNDEuMTc0LTcuMjIzIDkuNzAzLTEzLjI3OCAyNC4wMDMtMTguNDUgNDEuNzhsLTUuMDYtMS4zNTcgMTMuMjQzLTU4LjUyMyAxNS43NzMtLjMwMWM2LjQ1IDguOTUyIDQuNTYyIDM2LjYwMiA0LjUzOCA2MC4yNTd6Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iIzJGMkU0MSIgZD0iTTExOC45MDIgMTQzLjc1bC03LjY1OS0uOTg1Yy0uNDMtLjA1NS0uODEyLS4yNzctMS4wNTEtLjYxLS4yMzktLjMzMi0uMzEtLjc0My0uMTk2LTEuMTI3LjE1OC0uNTMzLjY0Ni0uOTI4IDEuMjQxLTEuMDA3bDEuMzYxLS4xOCA0LjMwMy0yLjQxMiAzLjU2Ljg3IDEuMDU2IDIuODZjLjE2NS42ODctLjA0OCAxLjQwNi0uNTcgMS45MjMtLjUyLjUxNi0xLjI4NS43NjYtMi4wNDUuNjY5ek0xNDguNTAyIDE0My43NWwtNy42NTktLjk4NWMtLjQzLS4wNTUtLjgxMi0uMjc3LTEuMDUxLS42MS0uMjM5LS4zMzItLjMxLS43NDMtLjE5Ni0xLjEyNy4xNTgtLjUzMy42NDYtLjkyOCAxLjI0MS0xLjAwN2wxLjM2MS0uMTggNC4zMDMtMi40MTIgMy41Ni44NyAxLjA1NiAyLjg2Yy4xNjUuNjg3LS4wNDggMS40MDYtLjU3IDEuOTIzLS41Mi41MTYtMS4yODUuNzY2LTIuMDQ1LjY2OXoiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjNDc4OUZGIiBkPSJNMTM1LjMxNCA2Ny42NTdjLTEuMzItMy4wMTgtMy41OTctNC4xODctNy40LTIuNDE2bC41MTMtMy45MzZjLjM5My0zLjAyIDIuNDcyLTUuNTA4IDUuMjkxLTYuMzM0bDEuNTk2IDEyLjY4NnoiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjMkYyRTQxIiBkPSJNMTMzLjIzNiA0Mi40NDNzLS45NC03LjM3NCA2LjczLTQuOTU2YzAgMCA1LjQ3Ni0xLjAxMyA3LjI3MiA1Ljg5M2wxLjgyIDcuMjQtLjg4Ny0uNDg2LS40MTMuOTEtMS40MzcuMzY3LS42MTQtMS4yMy0uMjk4IDEuNDk0LTExLjc2NCAxLjE4MnM1LjI3LTMuMTQxIDUuMzUzLTguNzcxbC0xLjAwNCAxLjA3LTQuNzU4LTIuNzEzeiIvPgogICAgICAgIDxjaXJjbGUgY3g9IjE0NS44ODYiIGN5PSIzNyIgcj0iMy4xNzEiIGZpbGw9IiMyRjJFNDEiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjMkYyRTQxIiBkPSJNMTQzLjA3MSAzNi44MjRjLjA5Ni0xLjY3MSAxLjMyOS0yLjk3IDIuODE1LTIuOTY2LS4wNTgtLjAwOC0uMTE2LS4wMTgtLjE3NS0uMDIzLTEuNTUyLS4xMTItMi44OTEgMS4yMTQtMi45OSAyLjk2My0uMSAxLjc1IDEuMDc3IDMuMjU4IDIuNjI4IDMuMzcuMDYuMDA1LjExOC4wMDMuMTc3LjAwMy0xLjQ3NS0uMjEtMi41NS0xLjY3Ni0yLjQ1NS0zLjM0N3oiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjRTZFNkU2IiBkPSJNMjcuNDg2IDY0LjYzOHY2LjAzOWMwIC4wNC0uMDE2LjA3OS0uMDQ1LjEwNy0uMDI4LjAyOS0uMDY3LjA0NS0uMTA3LjA0NUgxNy4wNjdjLS4wMDggMC0uMDE1IDAtLjAyMi0uMDAyLS4wNzUtLjAxLS4xMy0uMDc1LS4xMy0uMTV2LTYuMDRjMC0uMDQuMDE1LS4wNzguMDQ0LS4xMDcuMDI4LS4wMjguMDY3LS4wNDQuMTA3LS4wNDRoMTAuMjY3Yy4wNCAwIC4wOC4wMTYuMTA4LjA0NC4wMjkuMDI5LjA0NS4wNjcuMDQ1LjEwOHoiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjNDJDMjk5IiBkPSJNMTAyLjU0MyA2NC42Mzh2Ni4wMzljMCAuMDQtLjAxNi4wNzktLjA0NS4xMDctLjAyOC4wMjktLjA2Ny4wNDUtLjEwNy4wNDVIOTIuMTI0Yy0uMDA4IDAtLjAxNSAwLS4wMjItLjAwMi0uMDc1LS4wMS0uMTMtLjA3NS0uMTMtLjE1di02LjA0YzAtLjA0LjAxNS0uMDc4LjA0NC0uMTA3LjAyOS0uMDI4LjA2Ny0uMDQ0LjEwOC0uMDQ0aDEwLjI2N2MuMDQgMCAuMDc5LjAxNi4xMDcuMDQ0LjAyOS4wMjkuMDQ1LjA2Ny4wNDUuMTA4eiIvPgogICAgICAgIDxwYXRoIGZpbGw9IiNFNkU2RTYiIGQ9Ik0xNzUuNDg2IDY0LjYzOHY2LjAzOWMwIC4wNC0uMDE2LjA3OS0uMDQ1LjEwNy0uMDI4LjAyOS0uMDY3LjA0NS0uMTA3LjA0NWgtMTAuMjY3Yy0uMDA4IDAtLjAxNSAwLS4wMjItLjAwMi0uMDc1LS4wMS0uMTMtLjA3NS0uMTMtLjE1di02LjA0YzAtLjA0LjAxNS0uMDc4LjA0NC0uMTA3LjAyOC0uMDI4LjA2Ny0uMDQ0LjEwNy0uMDQ0aDEwLjI2N2MuMDQgMCAuMDguMDE2LjEwOC4wNDQuMDI5LjAyOS4wNDUuMDY3LjA0NS4xMDh6Ii8+CiAgICA8L2c+Cjwvc3ZnPgo="
+                  />
+                </div>
+              </div>
               <ul class="planlist">
-                <li>3 daily uploads to the community</li>
-                <li>Option to submit photos into STF Awards</li>
-                <li>Give and recieive photo critiques</li>
-                <li>Collective Score / Master Collective Score</li>
+                <li>
+                  <span class="cas-sub-basic">Casual Submissions</span> into the
+                  monthly STF Awards
+                  <span class="per-photo-basic">($3 per photo)</span>
+                </li>
+                <li>STF Profile</li>
                 <li>Create Collections</li>
                 <li>Create Photo Essays</li>
-                <li>Like photos</li>
-                <li>History of liked photos</li>
-                <li>Direct message members</li>
-                <li>Follow / unfollow</li>
+                <li>Daily Feed</li>
+                <li class="line-through">Insights</li>
               </ul>
-              <ul class="plansublist">
-                <li>Access details of received critiqeus</li>
-                <li>Access Insights for profile and photos</li>
-                <li>Helping make this community sustainable</li>
-                <li>
-                  7 submissions every month into the International STF Awards
-                  (valued at $19). Submit your photos into the portrait,
-                  landscape or wildlife categories.
-                  <span class="underline">Learn more about STF Awards past winners and prizes…</span>
-                </li>
-              </ul>
+
               <div class="btn-cntr" *ngIf="isLogin === false">
-                <button (click)="redirect('basic', 'monthly')" class="btn btn-primary">
+                <button
+                  (click)="redirect('basic', 'monthly')"
+                  class="btn btn-primary"
+                >
                   Sign up
                 </button>
               </div>
-              <div class="btn-cntr" *ngIf="isLogin === true && this.activePlan != 1">
-                <button *ngIf="isDownGrade && this.activePlan > 1" (click)="openModal(contentDelete,'basic', 'monthly')"
-                  class="btn btn-secondary">
+              <div
+                class="btn-cntr"
+                *ngIf="isLogin === true && this.activePlan != 1"
+              >
+                <button
+                  *ngIf="isDownGrade && this.activePlan > 1"
+                  (click)="openModal(contentDelete, 'basic', 'monthly')"
+                  class="btn btn-secondary"
+                >
                   Downgrade
                 </button>
-                <button *ngIf="this.activePlan < 1" (click)="upgradeStripeAccount('basic', 'monthly')"
-                  class="btn btn-primary">
+                <button
+                  *ngIf="this.activePlan < 1"
+                  (click)="upgradeStripeAccount('basic', 'monthly')"
+                  class="btn btn-primary"
+                >
                   Upgrade
                 </button>
               </div>
             </div>
           </div>
           <!-- monthly basic -->
-          <!-- monthly pro -->
-          <div class="col-md-4">
-            <div class="plan-bx">
-              <h4 class="sub-title"><span>PRO</span> SHOOT THE FRAME MEMBER</h4>
-              <div class="price">$ 2.99 <span>/ per month</span></div>
-              <ul class="planlist">
-                <li>
-                  <strong>Unlimited</strong> daily uploads to the community
-                </li>
-                <li>Option to submit photos into STF Awards</li>
-                <li>Give and recieive photo critiques</li>
-                <li>Collective Score / Master Collective Score</li>
-                <li>Create Collections</li>
-                <li>Create Photo Essays</li>
-                <li>Like photos</li>
-                <li>History of liked photos</li>
-                <li>Direct message members</li>
-                <li>Follow / unfollow</li>
-                <li>Access details of received critiqeus</li>
-                <li>Access Insights for profile and photos</li>
-                <li>Helping make this community sustainable</li>
-              </ul>
-              <ul class="plansublist">
-                <li>
-                  7 submissions every month into the International STF Awards
-                  (valued at $19). Submit your photos into the portrait,
-                  landscape or wildlife categories.
-                  <span class="underline">Learn more about STF Awards past winners and prizes…</span>
-                </li>
-              </ul>
-              <div class="btn-cntr" *ngIf="isLogin === false">
-                <button (click)="redirect('pro', 'monthly', '299.00')" class="btn btn-primary">
-                  Sign up
-                </button>
-              </div>
-              <div class="btn-cntr" *ngIf="isLogin === true && this.activePlan != 2">
-                <button *ngIf="isDownGrade && this.activePlan > 2"
-                  (click)="openModal(contentDelete,'pro', 'monthly', 299.0)" class="btn btn-secondary">
-                  Downgrade
-                </button>
-                <button *ngIf="this.activePlan < 2" (click)="upgradeStripeAccount('pro', 'monthly', 299.0)"
-                  class="btn btn-primary">
-                  Upgrade
-                </button>
-              </div>
-            </div>
-          </div>
-          <!-- monthly pro -->
           <!-- monthly premium -->
           <div class="col-md-4">
             <div class="plan-bx">
-              <h4 class="sub-title">
-                <span>PREMIUM</span> SHOOT THE FRAME MEMBER
-              </h4>
-              <div class="price">$ 13.99 <span>/ per month</span></div>
+              <div style="display: flex; flex-direction: row;">
+                <div class="suscriptionTitlePremium">
+                  <h4 class="sub-title">
+                    <span>Premium</span>
+                  </h4>
+                  <div class="price">
+                    <span class="subscription-kind">$7</span> / per month
+                  </div>
+                </div>
+                <div class="subscriptionImgPro">
+                  <img
+                    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxODAiIGhlaWdodD0iMTI4IiB2aWV3Qm94PSIwIDAgMTgwIDEyOCI+CiAgICA8ZyBmaWxsPSJub25lIj4KICAgICAgICA8ZWxsaXBzZSBjeD0iMjkuNjczIiBjeT0iMTIyLjgyNyIgZmlsbD0iI0U2RTZFNiIgcng9IjI0LjA0OCIgcnk9IjQuNzAyIi8+CiAgICAgICAgPHBhdGggZmlsbD0iIzQ0NDA1MyIgZD0iTTE1LjU0NCA1My40NjhjLTMuMzk3IDIuNzY5IDIuMTYyIDI3LjA3IDIuMTYyIDI3LjA3czEuMjM1IDM3LjA2NSAzLjg2IDM4Ljc1N2MyLjYyNSAxLjY5MiA4LjQ5Mi0uMTU0IDEwLjgwOC0uNDYxIDIuMzE2LS4zMDguMzA5LTIzLjIyNC0zLjA4OC0zMS42ODMtMy4zOTctOC40Ni0uNzcyLTIwLjc2My0uNzcyLTIwLjc2M2wxOC4zNzQgMy41MzdTMzUuNzcgNzkuMzA3IDM2LjIzNCA4MS4zMDZjLjQ2MyAyIDEyLjM1MiA4Ljc2NyAxNC41MTQgOS4wNzUgMi4xNjIuMzA3IDYuMzMtMTIuMzA0IDEwLjAzNi0yMC45MTcgMy43MDYtOC42MTMtMjUuMzIyLTE0LjE1LTI1LjMyMi0xNC4xNWwtNC4wMTQtNy41MzZTMTguOTQgNTAuNyAxNS41NDQgNTMuNDY4eiIvPgogICAgICAgIDxwYXRoIGZpbGw9IiMyQzJDMkMiIGQ9Ik0yNS45OTEgMTE5Ljk0OHMtLjk4IDMuNzE2IDAgMy43MTYgMi43NzcgMS4wNjIgNS41NTMuNzA4YzIuNzc3LS4zNTQgMS45Ni00LjA3IDAtNC42LTEuOTYtLjUzMi0xLjQ3LTQuNzc5LTEuNDctNC43NzktLjY1My0xLjQxNS0zLjc1Ni4zNTQtMy43NTYuMzU0bC0uMzI3IDQuNjAxek00MS4wMiA4OC40MzJzLTEuNjg0IDMuNjU0LS43MjUgMy44OTRjLjk2LjI0IDIuNTEgMS43OTMgNS4yOTYgMi4xMDIgMi43ODUuMzA5IDIuNzEtMy43ODUuODk2LTQuODIyLTEuODE0LTEuMDM2LS41MDctNS4zNjYtLjUwNy01LjM2Ni0uMzY0LTEuNjQ0LTMuNzQ1LS41NS0zLjc0NS0uNTVsLTEuMjE2IDQuNzQyeiIvPgogICAgICAgIDxwYXRoIGZpbGw9IiNGRkI5QjkiIGQ9Ik0xNy44MDcgMjIuMzVjLjMyNi41OC0xLjE0IDcuODQtMS4xNCA3Ljg0bDEuMzAzIDIuMDMyczcuNDk3LTIuNjEzIDYuMzU2LTMuMDQ5Yy0xLjE0LS40MzUtLjk3OC01LjgwNy0uOTc4LTUuODA3cy01Ljg2Ni0xLjU5Ny01LjU0LTEuMDE3eiIvPgogICAgICAgIDxjaXJjbGUgY3g9IjIwLjU1NiIgY3k9IjEzLjg4OSIgcj0iOS40NDQiIGZpbGw9IiMyQzJDMkMiLz4KICAgICAgICA8Y2lyY2xlIGN4PSIyMC41NTYiIGN5PSI1IiByPSIzLjg4OSIgZmlsbD0iIzJDMkMyQyIvPgogICAgICAgIDxwYXRoIGZpbGw9IiMyQzJDMkMiIGQ9Ik0yMi4yMjIgNy43NTdjLjE0LjAxNC4yOC4wMi40Mi4wMiAyLjIyMyAwIDQuMDI1LTEuNzQgNC4wMjUtMy44ODhDMjYuNjY3IDEuNzQgMjQuODY1IDAgMjIuNjQyIDBjLS4xNCAwLS4yOC4wMDctLjQyLjAyMSAyLjA1LjIwNyAzLjYwNiAxLjg3NyAzLjYwNiAzLjg2OCAwIDEuOTktMS41NTYgMy42Ni0zLjYwNiAzLjg2OHoiLz4KICAgICAgICA8Y2lyY2xlIGN4PSIyMC41NTYiIGN5PSIxOS40NDQiIHI9IjYuMTExIiBmaWxsPSIjRkZCOUI5Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iI0U2RTZFNiIgZD0iTTExLjgxMSAyOS41OThjLTEuOTEuNDQ2LTUuMTQ0IDUuMTk4LTUuMTQ0IDUuMTk4bDUuMTQ0IDUuMTk4czMuNjc1IDEzLjk2IDQuMTE2IDE0LjU1NWMyLjg5IDMuODkxIDE1Ljg3NS00Ljc1MyAxNS44NzUtNC43NTNzLS41MTQtNC4yMzItLjIyLTYuMzEyYy4yODMtMi0xLjEwMy02LjAxNC0xLjEwMy02LjAxNHM0Ljg1MS0yLjA4IDMuODIyLTQuMTU5Yy0xLjAyOS0yLjA3OS03LjM1LTYuODMxLTkuOTk1LTUuMTk4LTIuNjQ2IDEuNjM0LTcuOTM4IDAtNy45MzggMHMtMi42NDYgMS4wNC00LjU1NyAxLjQ4NXoiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjRkZCOUI5IiBkPSJNNTAgNTkuNzUyczguNjg4IDcuMDQ4IDEwLjgyMiA1LjYxYzIuMTM0LTEuNDM5LTguMjMtNi40NzMtOC4yMy02LjQ3M0w1MCA1OS43NTJ6TTExLjQ4NSA1Ni4zNTRjMS4yMTEgMS4zNzQgNi45NjUtMi4xMzYgNi4yMjgtMy42OTUtLjczOC0xLjU2LTUuMzIgMS41NTktNS4zMiAxLjU1OXMtMi4xMi43NjMtLjkwOCAyLjEzNnoiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjRTZFNkU2IiBkPSJNMTIuMzgyIDM3LjA3bC02LjU1IDExLjY1NnM3LjQ4NiA1Ljk3OCA4LjQyMSA2LjEyOGMuOTM2LjE1LTEuODcgNC4wMzUtMS44NyA0LjAzNVMzLjk2IDUzLjIwOS42ODUgNTAuMzdjLTMuMjc1LTIuODQgNi4yMzgtMTUuMzkzIDYuMjM4LTE1LjM5M2wyLjgwNy0xLjY0NCAyLjY1MSAzLjczN3pNMzAgMzYuMTY0bDcuMzMgMTEuNTIyczExLjIxNyAxMi43MzUgMTIuNzEzIDEzLjM0MWMxLjQ5NS42MDcgMy4yOS0yLjI3NCAzLjI5LTIuMjc0TDM5Ljg3MiA0Mi4yMjhsLTUuMDg2LTkuMjQ4LTEuOTQ0LS43NThMMzAgMzYuMTY0eiIvPgogICAgICAgIDxlbGxpcHNlIGN4PSIyMC41NTYiIGN5PSIxMS42NjciIGZpbGw9IiMyQzJDMkMiIHJ4PSI2LjExMSIgcnk9IjMuODg5Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iI0U2RTZFNiIgZD0iTTM4LjU2NyA5NC40NDRjLS40MzYuMDAxLS43OS4zNDUtLjc5Ljc3djI2LjIzOWMwIC40MjUuMzU0Ljc2OS43OS43N2g5MS43NTVjLjQzNi0uMDAxLjc5LS4zNDUuNzktLjc3di0yNi4yNGMwLS40MjQtLjM1NC0uNzY4LS43OS0uNzY5SDM4LjU2N3oiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjRkZGIiBkPSJNMzguODc1IDEyMS40MTdMMTMwIDEyMS40MTcgMTMwIDk1LjU0MiAzOC44NzUgOTUuNTQyeiIvPgogICAgICAgIDxwYXRoIGZpbGw9IiM0MkMyOTkiIGQ9Ik0xMTkuMDc1IDExNi42NjdjLS40NjMgMC0uODkxLjIxLTEuMTIzLjU1NS0uMjMyLjM0NC0uMjMyLjc2OCAwIDEuMTEyLjIzMi4zNDQuNjYuNTU1IDEuMTIzLjU1NWg1LjE4NWMuNzE1IDAgMS4yOTYtLjQ5OCAxLjI5Ni0xLjExMSAwLS42MTQtLjU4LTEuMTExLTEuMjk2LTEuMTExaC01LjE4NXoiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjRTZFNkU2IiBkPSJNNjQuNDQ0IDExMi4yMjJIMTI1LjU1NVYxMTMuMzMzSDY0LjQ0NHoiLz4KICAgICAgICA8Y2lyY2xlIGN4PSI1MS4xMTEiIGN5PSIxMDguODg5IiByPSI3Ljc3OCIgZmlsbD0iIzQ3ODlGRiIvPgogICAgICAgIDxwYXRoIGZpbGw9IiMzRjNENTYiIGQ9Ik02NC42MzcgMTExLjExMUw2NC40NDQgMTEwLjgzNSA3MC43NzMgMTA2Ljc5NiA3NS4xMTIgMTA4Ljc5IDgxLjM1NCAxMDQuOTcyIDkzLjc3MSAxMTAuMDQzIDEwMy42NTkgMTA1LjM5MyAxMTMuMjYxIDEwOS4xMTkgMTI1LjMyNSA5OC44ODkgMTI1LjU1NiA5OS4xMzggMTEzLjMzIDEwOS41MDUgMTAzLjY3MyAxMDUuNzU2IDkzLjc4MSAxMTAuNDA4IDgxLjM4NyAxMDUuMzQ2IDc1LjEzNiAxMDkuMTY5IDcwLjgwMSAxMDcuMTc3eiIvPgogICAgICAgIDxwYXRoIGZpbGw9IiNFNkU2RTYiIGQ9Ik02NC40OTQgMTE2LjY2N2MtLjQxNSAwLS43OTguMjEtMS4wMDUuNTU1LS4yMDguMzQ0LS4yMDguNzY4IDAgMS4xMTIuMjA3LjM0NC41OS41NTUgMS4wMDUuNTU1SDc2LjYyYy42NCAwIDEuMTU4LS40OTggMS4xNTgtMS4xMTFzLS41MTgtMS4xMS0xLjE1OC0xLjExMUg2NC40OTR6TTUwLjc4OSA5LjY2N2MtLjQzNiAwLS43ODkuMzM1LS43ODkuNzQ3VjM1LjkyYzAgLjQxMy4zNTMuNzQ3Ljc4OS43NDhoOTEuNzU1Yy40MzYgMCAuNzktLjMzNS43OS0uNzQ4VjEwLjQxNGMwLS40MTItLjM1NC0uNzQ3LS43OS0uNzQ3SDUwLjc5eiIvPgogICAgICAgIDxwYXRoIGZpbGw9IiNGRkYiIGQ9Ik01MS4wOTcgMzUuODc1TDE0Mi4yMjIgMzUuODc1IDE0Mi4yMjIgMTEuMTI1IDUxLjA5NyAxMS4xMjV6Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iIzQyQzI5OSIgZD0iTTEzMC4xODUgMzBjLS43MTYgMC0xLjI5Ni40OTctMS4yOTYgMS4xMTFzLjU4IDEuMTExIDEuMjk2IDEuMTExaDUuMTg1Yy43MTYgMCAxLjI5Ny0uNDk3IDEuMjk3LTEuMTEgMC0uNjE1LS41OC0xLjExMi0xLjI5Ny0xLjExMmgtNS4xODV6Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iI0U2RTZFNiIgZD0iTTc1LjU1NiAyNi42NjdIMTM2LjY2N1YyNy43NzgwMDAwMDAwMDAwMDJINzUuNTU2eiIvPgogICAgICAgIDxjaXJjbGUgY3g9IjY0LjQ0NCIgY3k9IjIyLjIyMiIgcj0iNy43NzgiIGZpbGw9IiM0Nzg5RkYiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjM0YzRDU2IiBkPSJNNzUuNzQ4IDI0LjQ0NEw3NS41NTYgMjQuMTY4IDgxLjg4NCAyMC4xMjkgODYuMjIzIDIyLjEyMyA5Mi40NjUgMTguMzA1IDkyLjU1IDE4LjM0IDEwNC44ODIgMjMuMzc2IDExNC43NyAxOC43MjYgMTI0LjM3MiAyMi40NTMgMTM2LjQzNyAxMi4yMjIgMTM2LjY2NyAxMi40NzEgMTI0LjQ0MSAyMi44MzggMTE0Ljc4NCAxOS4wOSAxMDQuODkyIDIzLjc0MiA5Mi40OTggMTguNjggODYuMjQ4IDIyLjUwMyA4MS45MTIgMjAuNTF6Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iI0U2RTZFNiIgZD0iTTc2LjcxMyAzMGMtLjY0IDAtMS4xNTcuNDk4LTEuMTU3IDEuMTExcy41MTggMS4xMSAxLjE1NyAxLjExMWgxMi4xMjhjLjY0IDAgMS4xNTktLjQ5NyAxLjE1OS0xLjExIDAtLjYxNS0uNTE5LTEuMTEyLTEuMTYtMS4xMTJINzYuNzE0ek04Ny40NTYgNTEuODg5Yy0uNDM2IDAtLjc5LjMzNS0uNzkuNzQ4Vjc4LjE0YzAgLjQxMy4zNTQuNzQ3Ljc5Ljc0OGg5MS43NTVjLjQzNiAwIC43ODktLjMzNS43ODktLjc0OFY1Mi42MzdjMC0uNDEzLS4zNTMtLjc0OC0uNzg5LS43NDhIODcuNDU2eiIvPgogICAgICAgIDxwYXRoIGZpbGw9IiNGRkYiIGQ9Ik04Ny43NzggNzguMDgzTDE3OC45MDMgNzguMDgzIDE3OC45MDMgNTMuMzMzIDg3Ljc3OCA1My4zMzN6Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iIzQyQzI5OSIgZD0iTTE2NS43NCA3My4zMzNjLS43MTUgMC0xLjI5Ni40OTgtMS4yOTYgMS4xMTEgMCAuNjE0LjU4IDEuMTEyIDEuMjk3IDEuMTEyaDUuMTg1Yy43MTYgMCAxLjI5Ni0uNDk4IDEuMjk2LTEuMTEyIDAtLjYxMy0uNTgtMS4xMS0xLjI5Ni0xLjExaC01LjE4NXoiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjRTZFNkU2IiBkPSJNMTEyLjIyMiA3MEgxNzMuMzMzVjcxLjExMUgxMTIuMjIyeiIvPgogICAgICAgIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjY1LjU1NiIgcj0iNy43NzgiIGZpbGw9IiM0Nzg5RkYiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjM0YzRDU2IiBkPSJNMTEyLjQxNSA2Ny43NzhMMTEyLjIyMiA2Ny41MDEgMTE4LjU1MSA2My40NjIgMTIyLjg5IDY1LjQ1NyAxMjkuMTMyIDYxLjYzOSAxMjkuMjE3IDYxLjY3MyAxNDEuNTQ5IDY2LjcxIDE1MS40MzcgNjIuMDU5IDE2MS4wMzggNjUuNzg2IDE3My4xMDMgNTUuNTU2IDE3My4zMzMgNTUuODA0IDE2MS4xMDggNjYuMTcxIDE1MS40NSA2Mi40MjMgMTQxLjU1OSA2Ny4wNzUgMTI5LjE2NSA2Mi4wMTMgMTIyLjkxNCA2NS44MzYgMTE4LjU3OSA2My44NDR6Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iI0U2RTZFNiIgZD0iTTExNC40OTIgNzIuMjIyYy0uNjQgMC0xLjE1OS40OTgtMS4xNTkgMS4xMTEgMCAuNjE0LjUyIDEuMTExIDEuMTYgMS4xMTFoMTIuMTI2Yy42NCAwIDEuMTU5LS40OTcgMS4xNTktMS4xMSAwLS42MTQtLjUyLTEuMTEyLTEuMTYtMS4xMTJoLTEyLjEyNnoiLz4KICAgIDwvZz4KPC9zdmc+Cg=="
+                  />
+                </div>
+              </div>
+
               <ul class="planlist">
                 <li>
-                  <strong>Unlimited</strong> daily uploads to the community
+                  <span class="unlimited-sub-monthly"
+                    >Unlimited Submissions</span
+                  >
+                  into the monthly STF Awards. 🙂
                 </li>
-                <li>Option to submit photos into STF Awards</li>
-                <li>Give and recieive photo critiques</li>
-                <li>Collective Score / Master Collective Score</li>
+                <li>STF Profile</li>
                 <li>Create Collections</li>
                 <li>Create Photo Essays</li>
-                <li>Like photos</li>
-                <li>History of liked photos</li>
-                <li>Direct message members</li>
-                <li>Follow / unfollow</li>
-                <li>Access details of received critiqeus</li>
-                <li>Access Insights for profile and photos</li>
-                <li>Helping make this community sustainable</li>
-                <li>
-                  7 submissions every month into the International STF Awards
-                  (valued at $19). Submit your photos into the portrait,
-                  landscape or wildlife categories.
-                  <span class="underline">Learn more about STF Awards past winners and prizes…</span>
-                </li>
+                <li>Daily Feed</li>
+                <li>Insights</li>
               </ul>
               <div class="btn-cntr" *ngIf="isLogin === false">
-                <button (click)="redirect('premium', 'monthly', '1399.00')" class="btn btn-primary">
+                <button
+                  (click)="redirect('premium', 'monthly', '700.00')"
+                  class="btn btn-primary"
+                >
                   Sign up
                 </button>
               </div>
-              <div class="btn-cntr" *ngIf="isLogin === true && this.activePlan != 3">
-                <button *ngIf="isDownGrade && this.activePlan > 3"
-                  (click)="openModal(contentDelete,'premium', 'monthly', 1399.0)" class="btn btn-secondary">
+              <div
+                class="btn-cntr"
+                *ngIf="isLogin === true && this.activePlan != 2"
+              >
+                <button
+                  *ngIf="isDownGrade && this.activePlan > 2"
+                  (click)="
+                    openModal(contentDelete, 'premium', 'monthly', 700.0)
+                  "
+                  class="btn btn-secondary"
+                >
                   Downgrade
                 </button>
-                <button *ngIf="this.activePlan < 3" (click)="upgradeStripeAccount('premium', 'monthly', 1399.0)"
-                  class="btn btn-primary">
+                <button
+                  *ngIf="this.activePlan < 2"
+                  (click)="upgradeStripeAccount('premium', 'monthly', 700.0)"
+                  class="btn btn-primary"
+                >
                   Upgrade
                 </button>
               </div>
@@ -169,160 +155,141 @@
         </section>
 
         <section class="row" *ngIf="activetab == 'yearly'">
-          <!-- yearly basic -->
+          <!-- monthly basic -->
           <div class="col-md-4">
             <div class="plan-bx">
-              <h4 class="sub-title">
-                <span>BASIC</span> SHOOT THE FRAME MEMBER
-              </h4>
-              <div class="price">Free</div>
+              <div style="display: flex; flex-direction: row;">
+                <div class="suscriptionTitle">
+                  <h4 class="sub-title">
+                    <span>BASIC</span>
+                  </h4>
+                  <div class="price">
+                    <span class="subscription-kind">$0</span> / per month
+                  </div>
+                </div>
+                <div class="subscriptionImg">
+                  <img
+                    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTUiIGhlaWdodD0iMTQ4IiB2aWV3Qm94PSIwIDAgMTk1IDE0OCI+CiAgICA8ZyBmaWxsPSJub25lIiB0cmFuc2Zvcm09Im1hdHJpeCgtMSAwIDAgMSAxOTUgMCkiPgogICAgICAgIDxwYXRoIGZpbGw9IiNFNkU2RTYiIGQ9Ik0yNC4wOTEgMEgyNS4wOTFWNDEuMjI5SDI0LjA5MXoiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjRTZFNkU2IiBkPSJNLjI3IDIzLjI1N2MtLjE1IDAtLjI3LjEyMS0uMjcuMjcxdjM1LjQwMWMwIC4xNS4xMi4yNzEuMjcuMjcxaDQ5LjE0NmMuMTQ5IDAgLjI3LS4xMjEuMjctLjI3VjIzLjUyN2MwLS4xNS0uMTIxLS4yNy0uMjctLjI3SC4yN3oiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjRkZGIiBkPSJNNDYuNTE0IDI2LjAwNXYyNS4xNjJjMCAuMTY3LS4wNjUuMzI5LS4xODIuNDQ3LS4xMTcuMTItLjI3Ni4xODYtLjQ0Mi4xODZIMy43OTZjLS4wMyAwLS4wNi0uMDAyLS4wOS0uMDA3LS4zMDctLjA0NS0uNTM1LS4zMTItLjUzNS0uNjI2VjI2LjAwNWMwLS4zNS4yOC0uNjM0LjYyNC0uNjM0SDQ1Ljg5Yy4xNjUgMCAuMzI0LjA2Ny40NDEuMTg2LjExNy4xMTguMTgzLjI4LjE4My40NDd6Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iI0U2RTZFNiIgZD0iTTMwLjY1NyA1MS44SDMuMjc0Yy0uMDM1IDAtLjA2OS0uMDAyLS4xMDMtLjAwOGwxMi45NTItMjEuNzQ2Yy4xNi0uMjc2LjQ2Mi0uNDQ2Ljc4OS0uNDQ2cy42MjguMTcuNzg5LjQ0Nmw4LjY5MiAxNC41OTMuNDE2LjY5OSAzLjg0OCA2LjQ2MnoiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjMDAwIiBkPSJNMzAuNjU3IDUxLjhMMjEuMTQzIDUxLjggMjUuODEzIDQ1LjEyMiAyNi4xNSA0NC42NCAyNi4zMTggNDQuNCAyNi43NDEgNDUuMTIyeiIgb3BhY2l0eT0iLjIiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjRTZFNkU2IiBkPSJNNDUuNDU3IDUxLjhIMjIuMmw0LjUwNy02LjQ5LjMyNC0uNDY3IDUuODczLTguNDU2Yy4yMS0uMjYyLjUyMi0uNDIyLjg1OC0uNDQyLjMzNy0uMDIuNjY2LjEwMy45MDYuMzM3LjAzLjAzMy4wNTguMDY4LjA4NC4xMDVMNDUuNDU3IDUxLjh6Ii8+CiAgICAgICAgPGNpcmNsZSBjeD0iMjQuMzE0IiBjeT0iMjQuMzE0IiByPSIxLjA1NyIgZmlsbD0iI0ZGRiIvPgogICAgICAgIDxwYXRoIGZpbGw9IiNFNkU2RTYiIGQ9Ik05Ny4wMzQgMEg5OC4wMzRWNDEuMjI5SDk3LjAzNHoiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjRTZFNkU2IiBkPSJNNzIuMTU2IDIzLjI1N2MtLjE1IDAtLjI3LjEyMS0uMjcuMjcxdjM1LjQwMWMwIC4xNS4xMi4yNzEuMjcuMjcxaDQ5LjE0NmMuMTQ5IDAgLjI3LS4xMjEuMjctLjI3VjIzLjUyN2MwLS4xNS0uMTIxLS4yNy0uMjctLjI3SDcyLjE1NnoiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjRkZGIiBkPSJNMTE4LjQgMjYuMDA1djI1LjE2MmMwIC4xNjctLjA2Ni4zMjktLjE4My40NDctLjExNy4xMi0uMjc1LjE4Ni0uNDQuMTg2SDc1LjY4Yy0uMDMgMC0uMDYtLjAwMi0uMDg5LS4wMDctLjMwNy0uMDQ1LS41MzUtLjMxMi0uNTM1LS42MjZWMjYuMDA1YzAtLjM1LjI4LS42MzQuNjI0LS42MzRoNDIuMDk1Yy4xNjUgMCAuMzI0LjA2Ny40NDEuMTg2LjExNy4xMTguMTgzLjI4LjE4My40NDd6Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iIzQ3ODlGRiIgZD0iTTEwMy42IDUxLjhINzYuMjE3Yy0uMDM1IDAtLjA2OS0uMDAyLS4xMDMtLjAwOGwxMi45NTEtMjEuNzQ2Yy4xNjEtLjI3Ni40NjMtLjQ0Ni43OS0uNDQ2LjMyNiAwIC42MjguMTcuNzg5LjQ0Nmw4LjY5MiAxNC41OTMuNDE2LjY5OUwxMDMuNiA1MS44eiIvPgogICAgICAgIDxwYXRoIGZpbGw9IiMwMDAiIGQ9Ik0xMDMuNiA1MS44TDk0LjA4NiA1MS44IDk4Ljc1NiA0NS4xMjIgOTkuMDkyIDQ0LjY0IDk5LjI2MSA0NC40IDk5LjY4NCA0NS4xMjJ6IiBvcGFjaXR5PSIuMiIvPgogICAgICAgIDxwYXRoIGZpbGw9IiM0Nzg5RkYiIGQ9Ik0xMTguNCA1MS44SDk1LjE0M2w0LjUwNy02LjQ5LjMyNC0uNDY3IDUuODczLTguNDU2Yy4yMS0uMjYyLjUyMi0uNDIyLjg1OC0uNDQyLjMzNy0uMDIuNjY2LjEwMy45MDYuMzM3LjAzLjAzMy4wNTguMDY4LjA4NC4xMDVMMTE4LjQgNTEuOHoiLz4KICAgICAgICA8Y2lyY2xlIGN4PSI5Ny4yNTciIGN5PSIyNC4zMTQiIHI9IjEuMDU3IiBmaWxsPSIjRkZGIi8+CiAgICAgICAgPHBhdGggZmlsbD0iI0U2RTZFNiIgZD0iTTE2OC45MiAwSDE2OS45MlY0MS4yMjlIMTY4LjkyeiIvPgogICAgICAgIDxwYXRoIGZpbGw9IiNFNkU2RTYiIGQ9Ik0xNDUuMDk4IDIzLjI1N2MtLjE0OSAwLS4yNy4xMjEtLjI3LjI3MXYzNS40MDFjMCAuMTUuMTIxLjI3MS4yNy4yNzFoNDkuMTQ2Yy4xNSAwIC4yNy0uMTIxLjI3LS4yN1YyMy41MjdjMC0uMTUtLjEyLS4yNy0uMjctLjI3aC00OS4xNDZ6Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iI0ZGRiIgZD0iTTE5MS4zNDMgMjYuMDA1djI1LjE2MmMwIC4xNjctLjA2Ni4zMjktLjE4My40NDctLjExNy4xMi0uMjc2LjE4Ni0uNDQxLjE4NmgtNDIuMDk1Yy0uMDMgMC0uMDYtLjAwMi0uMDktLjAwNy0uMzA2LS4wNDUtLjUzNC0uMzEyLS41MzQtLjYyNlYyNi4wMDVjMC0uMzUuMjgtLjYzNC42MjQtLjYzNGg0Mi4wOTVjLjE2NSAwIC4zMjQuMDY3LjQ0LjE4Ni4xMTguMTE4LjE4NC4yOC4xODQuNDQ3eiIvPgogICAgICAgIDxwYXRoIGZpbGw9IiNFNkU2RTYiIGQ9Ik0xNzUuNDg2IDUxLjhoLTI3LjM4NGMtLjAzNCAwLS4wNjgtLjAwMi0uMTAyLS4wMDhsMTIuOTUxLTIxLjc0NmMuMTYxLS4yNzYuNDYzLS40NDYuNzktLjQ0Ni4zMjYgMCAuNjI4LjE3Ljc4OS40NDZsOC42OTEgMTQuNTkzLjQxNy42OTkgMy44NDggNi40NjJ6Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iIzAwMCIgZD0iTTE3NS40ODYgNTEuOEwxNjUuOTcxIDUxLjggMTcwLjY0MiA0NS4xMjIgMTcwLjk3OCA0NC42NCAxNzEuMTQ2IDQ0LjQgMTcxLjU3IDQ1LjEyMnoiIG9wYWNpdHk9Ii4yIi8+CiAgICAgICAgPHBhdGggZmlsbD0iI0U2RTZFNiIgZD0iTTE5MC4yODYgNTEuOGgtMjMuMjU3bDQuNTA2LTYuNDkuMzI1LS40NjcgNS44NzItOC40NTZjLjIxLS4yNjIuNTIyLS40MjIuODU5LS40NDIuMzM2LS4wMi42NjUuMTAzLjkwNS4zMzcuMDMuMDMzLjA1OS4wNjguMDg1LjEwNUwxOTAuMjg2IDUxLjh6Ii8+CiAgICAgICAgPGNpcmNsZSBjeD0iMTY5LjE0MyIgY3k9IjI0LjMxNCIgcj0iMS4wNTciIGZpbGw9IiNGRkYiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjQTA2MTZBIiBkPSJNMTUyLjY3MyA5Mi41MTRsLjQyNCAyLjg4MmMuMTE3Ljc5NC0uMTQ5IDEuNTk3LS43MTcgMi4xNjYtLjU2OS41NjktMS4zNzMuODM5LTIuMTcyLjcyOC0uNzc1LS4xMDgtMS40NTgtLjU2MS0xLjg1NC0xLjIzMi0uMzk3LS42NzEtLjQ2NC0xLjQ4NS0uMTgyLTIuMjExbDEuNDM5LTMuNzA0LS43NjYtMjQuOTgyIDQuNDQtMS42NzUtLjYxMiAyOC4wMjh6Ii8+CiAgICAgICAgPGNpcmNsZSBjeD0iMTQwLjA3MSIgY3k9IjQ0LjkyOSIgcj0iNS44MTQiIGZpbGw9IiNBMDYxNkEiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjQTA2MTZBIiBkPSJNMTQ4IDU3LjA4NmwtMTEuNjI5LS40NjJjMS4yOTEtMi43NjYgMS44MDQtNS40NDIgMS4yNTgtNy45OTVoNy43Yy0uNDA1IDIuNDA3LjcxMiA1LjI5OSAyLjY3MSA4LjQ1N3oiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjNDc4OUZGIiBkPSJNMTQ2LjE3MyA4MC4yMDVMMTI5LjYyNiA4MS40bC42MDEtOS4yYy0xLjkwNy00LjQ2NC0xLjYwMi03LjY4Ny42NDItOS44MjJsLjIwNC0zLjEwOWMuMTMzLTIuMDQgMS41NzMtMy43NyAzLjU4LTQuMjk5bDIuODY3LS43NTdjMy43MTMgMi4xNCA2LjY3MiAyLjExIDguODA1LS4yOTlsMy40MTMgMS43MmMxLjY5Mi44NTMgMi42NzIgMi42NDcgMi40NjIgNC41MDdsLTYuMDI3IDIwLjA2NHoiLz4KICAgICAgICA8ZWxsaXBzZSBjeD0iMTMwLjY4OSIgY3k9IjE0Mi40NTciIGZpbGw9IiNFNkU2RTYiIHJ4PSI0OC4wMjEiIHJ5PSI1LjA4MSIvPgogICAgICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE2MS42OSAxMzMuNzI5KSI+CiAgICAgICAgICAgIDxjaXJjbGUgY3g9Ii41MjkiIGN5PSIuNTI5IiByPSIxIiBmaWxsPSIjNDc4OUZGIi8+CiAgICAgICAgICAgIDxwYXRoIGZpbGw9IiMwMDAiIGQ9Ik0uNjkyIDBjLjIzMS4xODQuMjc1LjQ5LjEwMi43MThDLjYyLjk0Ni4yODMgMS4wMjggMCAuOTEzYy4xODQuMTQ3LjQ0OS4xODUuNjc3LjA5OC4yMjgtLjA4Ny4zNzctLjI4My4zOC0uNTAxQzEuMDYuMjkyLjkxNy4wOTIuNjkyIDB6IiBvcGFjaXR5PSIuMiIvPgogICAgICAgICAgICA8ZWxsaXBzZSBjeD0iMTIuNjg2IiBjeT0iMS41ODYiIGZpbGw9IiMzRjNENTYiIHJ4PSIxLjA1NyIgcnk9IjEiLz4KICAgICAgICAgICAgPHBhdGggZmlsbD0iIzAwMCIgZD0iTTEyLjc4MyAxLjA1N2MtLjAzMyAwLS4wNjUuMDAxLS4wOTcuMDAzLjQ4NC4wMjcuODYyLjI1Mi44NjIuNTI2IDAgLjI3My0uMzc4LjQ5OS0uODYyLjUyNmwuMDk3LjAwMmMuNTMgMCAuOTYtLjIzNi45Ni0uNTI4IDAtLjI5Mi0uNDMtLjUyOS0uOTYtLjUyOXoiIG9wYWNpdHk9Ii4yIi8+CiAgICAgICAgICAgIDxwYXRoIGZpbGw9IiMzRjNENTYiIGQ9Ik0xNC42ODYgMS43ODFIOS4wN3YtLjYxYzAtLjA2My0uMDUxLS4xMTQtLjExNC0uMTE0SDUuODQ0Yy0uMDMgMC0uMDU5LjAxMi0uMDguMDM0LS4wMjIuMDIxLS4wMzQuMDUtLjAzNC4wOHYuNjFIMi40NjdWMS40YzAtLjAzLS4wMTItLjA2LS4wMzQtLjA4LS4wMjEtLjAyMi0uMDUtLjAzNC0uMDgtLjAzNEguNjgzYy0uMDMgMC0uMDYuMDEyLS4wOC4wMzMtLjAyMi4wMjItLjAzNC4wNS0uMDM0LjA4MXYuMzgxSC4xMTRjLS4wMyAwLS4wNi4wMTItLjA4LjAzMy0uMDIyLjAyMi0uMDM0LjA1LS4wMzQuMDhWOS40YzAgLjAzLjAxMi4wNi4wMzMuMDguMDIxLjAyMi4wNS4wMzQuMDguMDM0aDE0LjU3M2MuMDYzIDAgLjExNC0uMDUuMTE0LS4xMTRWMS44OTVjMC0uMDYzLS4wNS0uMTE0LS4xMTQtLjExNHoiLz4KICAgICAgICAgICAgPHBhdGggZmlsbD0iIzQ3ODlGRiIgZD0iTTAgNC4yMjlIMTQuOFY1LjI4NkgweiIvPgogICAgICAgICAgICA8ZWxsaXBzZSBjeD0iNi44NzEiIGN5PSI1LjI4NiIgZmlsbD0iIzQ3ODlGRiIgcng9IjIuNjQzIiByeT0iMy4xNzEiLz4KICAgICAgICAgICAgPGNpcmNsZSBjeD0iNy40IiBjeT0iNS4yODYiIHI9IjIuMTE0IiBmaWxsPSIjM0YzRDU2Ii8+CiAgICAgICAgICAgIDxwYXRoIGZpbGw9IiNGRkYiIGQ9Ik04LjQ1NyA0Ljc1N2MwIC4yMTUtLjA0My40MjgtLjEyOC42MjYtLjA0Ni4xMDYtLjEwNC4yMDgtLjE3Mi4zMDEtLjM2Ny41MS0xIC43NTQtMS42MTMuNjI1LS42MTUtLjEzLTEuMDk0LS42MS0xLjIyNC0xLjIyNC0uMTMtLjYxNC4xMTUtMS4yNDcuNjI0LTEuNjE0LjA5NC0uMDY4LjE5NS0uMTI1LjMwMi0uMTcuNDktLjIxMSAxLjA1My0uMTYxIDEuNDk4LjEzMi40NDUuMjkzLjcxMy43OS43MTMgMS4zMjR6Ii8+CiAgICAgICAgPC9nPgogICAgICAgIDxwYXRoIGZpbGw9IiNBMDYxNkEiIGQ9Ik0xMjAuNjMgODAuODc4bC00LjYwNyAyLjQxYy0uODEuNDI0LTEuODA4LjI0LTIuNDE0LS40NDUtLjQ2Ny0uNTMtLjYxNy0xLjI2Ny0uMzkyLTEuOTM2LjIyNi0uNjY5Ljc5MS0xLjE2NyAxLjQ4NS0xLjMwOWwzLjIzMy0uNjU4IDEwLjAzMy0zLjg3OCAxLjY0Ny0xMS42MzMgNC42NDIgMS4xOTMtLjg5OCAxMy43MjEtMTIuNzI4IDIuNTM1eiIvPgogICAgICAgIDxwYXRoIGZpbGw9IiM0Nzg5RkYiIGQ9Ik0xNTMuMjg2IDY1LjYybC00Ljk5MiAzLjA5NEwxNDggNTYuMzM4bC44Ni0uMzFjMi40NDUgMCA0LjQyNiAyLjA4OCA0LjQyNiA0LjY2M3Y0LjkzeiIvPgogICAgICAgIDxwYXRoIGZpbGw9IiMyRjJFNDEiIGQ9Ik0xNDkuODM5IDEzOS41NDNsLTQuMzAyLS42ODJjLS44NjktMTQuOS0yLjYxOC0yOC44MDktNS43NDItNDEuMTc0LTcuMjIzIDkuNzAzLTEzLjI3OCAyNC4wMDMtMTguNDUgNDEuNzhsLTUuMDYtMS4zNTcgMTMuMjQzLTU4LjUyMyAxNS43NzMtLjMwMWM2LjQ1IDguOTUyIDQuNTYyIDM2LjYwMiA0LjUzOCA2MC4yNTd6Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iIzJGMkU0MSIgZD0iTTExOC45MDIgMTQzLjc1bC03LjY1OS0uOTg1Yy0uNDMtLjA1NS0uODEyLS4yNzctMS4wNTEtLjYxLS4yMzktLjMzMi0uMzEtLjc0My0uMTk2LTEuMTI3LjE1OC0uNTMzLjY0Ni0uOTI4IDEuMjQxLTEuMDA3bDEuMzYxLS4xOCA0LjMwMy0yLjQxMiAzLjU2Ljg3IDEuMDU2IDIuODZjLjE2NS42ODctLjA0OCAxLjQwNi0uNTcgMS45MjMtLjUyLjUxNi0xLjI4NS43NjYtMi4wNDUuNjY5ek0xNDguNTAyIDE0My43NWwtNy42NTktLjk4NWMtLjQzLS4wNTUtLjgxMi0uMjc3LTEuMDUxLS42MS0uMjM5LS4zMzItLjMxLS43NDMtLjE5Ni0xLjEyNy4xNTgtLjUzMy42NDYtLjkyOCAxLjI0MS0xLjAwN2wxLjM2MS0uMTggNC4zMDMtMi40MTIgMy41Ni44NyAxLjA1NiAyLjg2Yy4xNjUuNjg3LS4wNDggMS40MDYtLjU3IDEuOTIzLS41Mi41MTYtMS4yODUuNzY2LTIuMDQ1LjY2OXoiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjNDc4OUZGIiBkPSJNMTM1LjMxNCA2Ny42NTdjLTEuMzItMy4wMTgtMy41OTctNC4xODctNy40LTIuNDE2bC41MTMtMy45MzZjLjM5My0zLjAyIDIuNDcyLTUuNTA4IDUuMjkxLTYuMzM0bDEuNTk2IDEyLjY4NnoiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjMkYyRTQxIiBkPSJNMTMzLjIzNiA0Mi40NDNzLS45NC03LjM3NCA2LjczLTQuOTU2YzAgMCA1LjQ3Ni0xLjAxMyA3LjI3MiA1Ljg5M2wxLjgyIDcuMjQtLjg4Ny0uNDg2LS40MTMuOTEtMS40MzcuMzY3LS42MTQtMS4yMy0uMjk4IDEuNDk0LTExLjc2NCAxLjE4MnM1LjI3LTMuMTQxIDUuMzUzLTguNzcxbC0xLjAwNCAxLjA3LTQuNzU4LTIuNzEzeiIvPgogICAgICAgIDxjaXJjbGUgY3g9IjE0NS44ODYiIGN5PSIzNyIgcj0iMy4xNzEiIGZpbGw9IiMyRjJFNDEiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjMkYyRTQxIiBkPSJNMTQzLjA3MSAzNi44MjRjLjA5Ni0xLjY3MSAxLjMyOS0yLjk3IDIuODE1LTIuOTY2LS4wNTgtLjAwOC0uMTE2LS4wMTgtLjE3NS0uMDIzLTEuNTUyLS4xMTItMi44OTEgMS4yMTQtMi45OSAyLjk2My0uMSAxLjc1IDEuMDc3IDMuMjU4IDIuNjI4IDMuMzcuMDYuMDA1LjExOC4wMDMuMTc3LjAwMy0xLjQ3NS0uMjEtMi41NS0xLjY3Ni0yLjQ1NS0zLjM0N3oiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjRTZFNkU2IiBkPSJNMjcuNDg2IDY0LjYzOHY2LjAzOWMwIC4wNC0uMDE2LjA3OS0uMDQ1LjEwNy0uMDI4LjAyOS0uMDY3LjA0NS0uMTA3LjA0NUgxNy4wNjdjLS4wMDggMC0uMDE1IDAtLjAyMi0uMDAyLS4wNzUtLjAxLS4xMy0uMDc1LS4xMy0uMTV2LTYuMDRjMC0uMDQuMDE1LS4wNzguMDQ0LS4xMDcuMDI4LS4wMjguMDY3LS4wNDQuMTA3LS4wNDRoMTAuMjY3Yy4wNCAwIC4wOC4wMTYuMTA4LjA0NC4wMjkuMDI5LjA0NS4wNjcuMDQ1LjEwOHoiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjNDJDMjk5IiBkPSJNMTAyLjU0MyA2NC42Mzh2Ni4wMzljMCAuMDQtLjAxNi4wNzktLjA0NS4xMDctLjAyOC4wMjktLjA2Ny4wNDUtLjEwNy4wNDVIOTIuMTI0Yy0uMDA4IDAtLjAxNSAwLS4wMjItLjAwMi0uMDc1LS4wMS0uMTMtLjA3NS0uMTMtLjE1di02LjA0YzAtLjA0LjAxNS0uMDc4LjA0NC0uMTA3LjAyOS0uMDI4LjA2Ny0uMDQ0LjEwOC0uMDQ0aDEwLjI2N2MuMDQgMCAuMDc5LjAxNi4xMDcuMDQ0LjAyOS4wMjkuMDQ1LjA2Ny4wNDUuMTA4eiIvPgogICAgICAgIDxwYXRoIGZpbGw9IiNFNkU2RTYiIGQ9Ik0xNzUuNDg2IDY0LjYzOHY2LjAzOWMwIC4wNC0uMDE2LjA3OS0uMDQ1LjEwNy0uMDI4LjAyOS0uMDY3LjA0NS0uMTA3LjA0NWgtMTAuMjY3Yy0uMDA4IDAtLjAxNSAwLS4wMjItLjAwMi0uMDc1LS4wMS0uMTMtLjA3NS0uMTMtLjE1di02LjA0YzAtLjA0LjAxNS0uMDc4LjA0NC0uMTA3LjAyOC0uMDI4LjA2Ny0uMDQ0LjEwNy0uMDQ0aDEwLjI2N2MuMDQgMCAuMDguMDE2LjEwOC4wNDQuMDI5LjAyOS4wNDUuMDY3LjA0NS4xMDh6Ii8+CiAgICA8L2c+Cjwvc3ZnPgo="
+                  />
+                </div>
+              </div>
               <ul class="planlist">
-                <li>3 daily uploads to the community</li>
-                <li>Option to submit photos into STF Awards</li>
-                <li>Give and recieive photo critiques</li>
-                <li>Collective Score / Master Collective Score</li>
+                <li>
+                  <span class="cas-sub">Casual Submissions</span> into the
+                  monthly STF Awards
+                  <span class="per-photo">($3 per photo)</span>
+                </li>
+                <li>STF Profile</li>
                 <li>Create Collections</li>
                 <li>Create Photo Essays</li>
-                <li>Like photos</li>
-                <li>History of liked photos</li>
-                <li>Direct message members</li>
-                <li>Follow / unfollow</li>
+                <li>Daily Feed</li>
+                <li>Insights</li>
               </ul>
-              <ul class="plansublist">
-                <li>Access details of received critiqeus</li>
-                <li>Access Insights for profile and photos</li>
-                <li>Helping make this community sustainable</li>
-                <li>
-                  7 submissions every month into the International STF Awards
-                  (valued at $19). Submit your photos into the portrait,
-                  landscape or wildlife categories.
-                  <span class="underline">Learn more about STF Awards past winners and prizes…</span>
-                </li>
-              </ul>
+              <div class="btn-cntr" *ngIf="isLogin === false">
+                <button
+                  (click)="redirect('basic', 'monthly')"
+                  class="btn btn-primary"
+                >
+                  Sign up
+                </button>
+              </div>
+              <div
+                class="btn-cntr"
+                *ngIf="isLogin === true && this.activePlan != 1"
+              >
+                <button
+                  *ngIf="isDownGrade && this.activePlan > 1"
+                  (click)="openModal(contentDelete, 'basic', 'monthly')"
+                  class="btn btn-secondary"
+                >
+                  Downgrade
+                </button>
+                <button
+                  *ngIf="this.activePlan < 1"
+                  (click)="upgradeStripeAccount('basic', 'monthly')"
+                  class="btn btn-primary"
+                >
+                  Upgrade
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- monthly basic -->
+          <!-- monthly premium -->
+          <div class="col-md-4">
+            <div class="plan-bx">
+              <div style="display: flex; flex-direction: row;">
+                <div class="suscriptionTitlePremium">
+                  <h4 class="sub-title">
+                    <span>Premium</span>
+                  </h4>
+                  <div class="price">
+                    <span class="subscription-kind">$69</span> / per year (save
+                    $15)
+                  </div>
+                </div>
+                <div class="subscriptionImgPro">
+                  <img
+                    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxODAiIGhlaWdodD0iMTI4IiB2aWV3Qm94PSIwIDAgMTgwIDEyOCI+CiAgICA8ZyBmaWxsPSJub25lIj4KICAgICAgICA8ZWxsaXBzZSBjeD0iMjkuNjczIiBjeT0iMTIyLjgyNyIgZmlsbD0iI0U2RTZFNiIgcng9IjI0LjA0OCIgcnk9IjQuNzAyIi8+CiAgICAgICAgPHBhdGggZmlsbD0iIzQ0NDA1MyIgZD0iTTE1LjU0NCA1My40NjhjLTMuMzk3IDIuNzY5IDIuMTYyIDI3LjA3IDIuMTYyIDI3LjA3czEuMjM1IDM3LjA2NSAzLjg2IDM4Ljc1N2MyLjYyNSAxLjY5MiA4LjQ5Mi0uMTU0IDEwLjgwOC0uNDYxIDIuMzE2LS4zMDguMzA5LTIzLjIyNC0zLjA4OC0zMS42ODMtMy4zOTctOC40Ni0uNzcyLTIwLjc2My0uNzcyLTIwLjc2M2wxOC4zNzQgMy41MzdTMzUuNzcgNzkuMzA3IDM2LjIzNCA4MS4zMDZjLjQ2MyAyIDEyLjM1MiA4Ljc2NyAxNC41MTQgOS4wNzUgMi4xNjIuMzA3IDYuMzMtMTIuMzA0IDEwLjAzNi0yMC45MTcgMy43MDYtOC42MTMtMjUuMzIyLTE0LjE1LTI1LjMyMi0xNC4xNWwtNC4wMTQtNy41MzZTMTguOTQgNTAuNyAxNS41NDQgNTMuNDY4eiIvPgogICAgICAgIDxwYXRoIGZpbGw9IiMyQzJDMkMiIGQ9Ik0yNS45OTEgMTE5Ljk0OHMtLjk4IDMuNzE2IDAgMy43MTYgMi43NzcgMS4wNjIgNS41NTMuNzA4YzIuNzc3LS4zNTQgMS45Ni00LjA3IDAtNC42LTEuOTYtLjUzMi0xLjQ3LTQuNzc5LTEuNDctNC43NzktLjY1My0xLjQxNS0zLjc1Ni4zNTQtMy43NTYuMzU0bC0uMzI3IDQuNjAxek00MS4wMiA4OC40MzJzLTEuNjg0IDMuNjU0LS43MjUgMy44OTRjLjk2LjI0IDIuNTEgMS43OTMgNS4yOTYgMi4xMDIgMi43ODUuMzA5IDIuNzEtMy43ODUuODk2LTQuODIyLTEuODE0LTEuMDM2LS41MDctNS4zNjYtLjUwNy01LjM2Ni0uMzY0LTEuNjQ0LTMuNzQ1LS41NS0zLjc0NS0uNTVsLTEuMjE2IDQuNzQyeiIvPgogICAgICAgIDxwYXRoIGZpbGw9IiNGRkI5QjkiIGQ9Ik0xNy44MDcgMjIuMzVjLjMyNi41OC0xLjE0IDcuODQtMS4xNCA3Ljg0bDEuMzAzIDIuMDMyczcuNDk3LTIuNjEzIDYuMzU2LTMuMDQ5Yy0xLjE0LS40MzUtLjk3OC01LjgwNy0uOTc4LTUuODA3cy01Ljg2Ni0xLjU5Ny01LjU0LTEuMDE3eiIvPgogICAgICAgIDxjaXJjbGUgY3g9IjIwLjU1NiIgY3k9IjEzLjg4OSIgcj0iOS40NDQiIGZpbGw9IiMyQzJDMkMiLz4KICAgICAgICA8Y2lyY2xlIGN4PSIyMC41NTYiIGN5PSI1IiByPSIzLjg4OSIgZmlsbD0iIzJDMkMyQyIvPgogICAgICAgIDxwYXRoIGZpbGw9IiMyQzJDMkMiIGQ9Ik0yMi4yMjIgNy43NTdjLjE0LjAxNC4yOC4wMi40Mi4wMiAyLjIyMyAwIDQuMDI1LTEuNzQgNC4wMjUtMy44ODhDMjYuNjY3IDEuNzQgMjQuODY1IDAgMjIuNjQyIDBjLS4xNCAwLS4yOC4wMDctLjQyLjAyMSAyLjA1LjIwNyAzLjYwNiAxLjg3NyAzLjYwNiAzLjg2OCAwIDEuOTktMS41NTYgMy42Ni0zLjYwNiAzLjg2OHoiLz4KICAgICAgICA8Y2lyY2xlIGN4PSIyMC41NTYiIGN5PSIxOS40NDQiIHI9IjYuMTExIiBmaWxsPSIjRkZCOUI5Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iI0U2RTZFNiIgZD0iTTExLjgxMSAyOS41OThjLTEuOTEuNDQ2LTUuMTQ0IDUuMTk4LTUuMTQ0IDUuMTk4bDUuMTQ0IDUuMTk4czMuNjc1IDEzLjk2IDQuMTE2IDE0LjU1NWMyLjg5IDMuODkxIDE1Ljg3NS00Ljc1MyAxNS44NzUtNC43NTNzLS41MTQtNC4yMzItLjIyLTYuMzEyYy4yODMtMi0xLjEwMy02LjAxNC0xLjEwMy02LjAxNHM0Ljg1MS0yLjA4IDMuODIyLTQuMTU5Yy0xLjAyOS0yLjA3OS03LjM1LTYuODMxLTkuOTk1LTUuMTk4LTIuNjQ2IDEuNjM0LTcuOTM4IDAtNy45MzggMHMtMi42NDYgMS4wNC00LjU1NyAxLjQ4NXoiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjRkZCOUI5IiBkPSJNNTAgNTkuNzUyczguNjg4IDcuMDQ4IDEwLjgyMiA1LjYxYzIuMTM0LTEuNDM5LTguMjMtNi40NzMtOC4yMy02LjQ3M0w1MCA1OS43NTJ6TTExLjQ4NSA1Ni4zNTRjMS4yMTEgMS4zNzQgNi45NjUtMi4xMzYgNi4yMjgtMy42OTUtLjczOC0xLjU2LTUuMzIgMS41NTktNS4zMiAxLjU1OXMtMi4xMi43NjMtLjkwOCAyLjEzNnoiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjRTZFNkU2IiBkPSJNMTIuMzgyIDM3LjA3bC02LjU1IDExLjY1NnM3LjQ4NiA1Ljk3OCA4LjQyMSA2LjEyOGMuOTM2LjE1LTEuODcgNC4wMzUtMS44NyA0LjAzNVMzLjk2IDUzLjIwOS42ODUgNTAuMzdjLTMuMjc1LTIuODQgNi4yMzgtMTUuMzkzIDYuMjM4LTE1LjM5M2wyLjgwNy0xLjY0NCAyLjY1MSAzLjczN3pNMzAgMzYuMTY0bDcuMzMgMTEuNTIyczExLjIxNyAxMi43MzUgMTIuNzEzIDEzLjM0MWMxLjQ5NS42MDcgMy4yOS0yLjI3NCAzLjI5LTIuMjc0TDM5Ljg3MiA0Mi4yMjhsLTUuMDg2LTkuMjQ4LTEuOTQ0LS43NThMMzAgMzYuMTY0eiIvPgogICAgICAgIDxlbGxpcHNlIGN4PSIyMC41NTYiIGN5PSIxMS42NjciIGZpbGw9IiMyQzJDMkMiIHJ4PSI2LjExMSIgcnk9IjMuODg5Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iI0U2RTZFNiIgZD0iTTM4LjU2NyA5NC40NDRjLS40MzYuMDAxLS43OS4zNDUtLjc5Ljc3djI2LjIzOWMwIC40MjUuMzU0Ljc2OS43OS43N2g5MS43NTVjLjQzNi0uMDAxLjc5LS4zNDUuNzktLjc3di0yNi4yNGMwLS40MjQtLjM1NC0uNzY4LS43OS0uNzY5SDM4LjU2N3oiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjRkZGIiBkPSJNMzguODc1IDEyMS40MTdMMTMwIDEyMS40MTcgMTMwIDk1LjU0MiAzOC44NzUgOTUuNTQyeiIvPgogICAgICAgIDxwYXRoIGZpbGw9IiM0MkMyOTkiIGQ9Ik0xMTkuMDc1IDExNi42NjdjLS40NjMgMC0uODkxLjIxLTEuMTIzLjU1NS0uMjMyLjM0NC0uMjMyLjc2OCAwIDEuMTEyLjIzMi4zNDQuNjYuNTU1IDEuMTIzLjU1NWg1LjE4NWMuNzE1IDAgMS4yOTYtLjQ5OCAxLjI5Ni0xLjExMSAwLS42MTQtLjU4LTEuMTExLTEuMjk2LTEuMTExaC01LjE4NXoiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjRTZFNkU2IiBkPSJNNjQuNDQ0IDExMi4yMjJIMTI1LjU1NVYxMTMuMzMzSDY0LjQ0NHoiLz4KICAgICAgICA8Y2lyY2xlIGN4PSI1MS4xMTEiIGN5PSIxMDguODg5IiByPSI3Ljc3OCIgZmlsbD0iIzQ3ODlGRiIvPgogICAgICAgIDxwYXRoIGZpbGw9IiMzRjNENTYiIGQ9Ik02NC42MzcgMTExLjExMUw2NC40NDQgMTEwLjgzNSA3MC43NzMgMTA2Ljc5NiA3NS4xMTIgMTA4Ljc5IDgxLjM1NCAxMDQuOTcyIDkzLjc3MSAxMTAuMDQzIDEwMy42NTkgMTA1LjM5MyAxMTMuMjYxIDEwOS4xMTkgMTI1LjMyNSA5OC44ODkgMTI1LjU1NiA5OS4xMzggMTEzLjMzIDEwOS41MDUgMTAzLjY3MyAxMDUuNzU2IDkzLjc4MSAxMTAuNDA4IDgxLjM4NyAxMDUuMzQ2IDc1LjEzNiAxMDkuMTY5IDcwLjgwMSAxMDcuMTc3eiIvPgogICAgICAgIDxwYXRoIGZpbGw9IiNFNkU2RTYiIGQ9Ik02NC40OTQgMTE2LjY2N2MtLjQxNSAwLS43OTguMjEtMS4wMDUuNTU1LS4yMDguMzQ0LS4yMDguNzY4IDAgMS4xMTIuMjA3LjM0NC41OS41NTUgMS4wMDUuNTU1SDc2LjYyYy42NCAwIDEuMTU4LS40OTggMS4xNTgtMS4xMTFzLS41MTgtMS4xMS0xLjE1OC0xLjExMUg2NC40OTR6TTUwLjc4OSA5LjY2N2MtLjQzNiAwLS43ODkuMzM1LS43ODkuNzQ3VjM1LjkyYzAgLjQxMy4zNTMuNzQ3Ljc4OS43NDhoOTEuNzU1Yy40MzYgMCAuNzktLjMzNS43OS0uNzQ4VjEwLjQxNGMwLS40MTItLjM1NC0uNzQ3LS43OS0uNzQ3SDUwLjc5eiIvPgogICAgICAgIDxwYXRoIGZpbGw9IiNGRkYiIGQ9Ik01MS4wOTcgMzUuODc1TDE0Mi4yMjIgMzUuODc1IDE0Mi4yMjIgMTEuMTI1IDUxLjA5NyAxMS4xMjV6Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iIzQyQzI5OSIgZD0iTTEzMC4xODUgMzBjLS43MTYgMC0xLjI5Ni40OTctMS4yOTYgMS4xMTFzLjU4IDEuMTExIDEuMjk2IDEuMTExaDUuMTg1Yy43MTYgMCAxLjI5Ny0uNDk3IDEuMjk3LTEuMTEgMC0uNjE1LS41OC0xLjExMi0xLjI5Ny0xLjExMmgtNS4xODV6Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iI0U2RTZFNiIgZD0iTTc1LjU1NiAyNi42NjdIMTM2LjY2N1YyNy43NzgwMDAwMDAwMDAwMDJINzUuNTU2eiIvPgogICAgICAgIDxjaXJjbGUgY3g9IjY0LjQ0NCIgY3k9IjIyLjIyMiIgcj0iNy43NzgiIGZpbGw9IiM0Nzg5RkYiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjM0YzRDU2IiBkPSJNNzUuNzQ4IDI0LjQ0NEw3NS41NTYgMjQuMTY4IDgxLjg4NCAyMC4xMjkgODYuMjIzIDIyLjEyMyA5Mi40NjUgMTguMzA1IDkyLjU1IDE4LjM0IDEwNC44ODIgMjMuMzc2IDExNC43NyAxOC43MjYgMTI0LjM3MiAyMi40NTMgMTM2LjQzNyAxMi4yMjIgMTM2LjY2NyAxMi40NzEgMTI0LjQ0MSAyMi44MzggMTE0Ljc4NCAxOS4wOSAxMDQuODkyIDIzLjc0MiA5Mi40OTggMTguNjggODYuMjQ4IDIyLjUwMyA4MS45MTIgMjAuNTF6Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iI0U2RTZFNiIgZD0iTTc2LjcxMyAzMGMtLjY0IDAtMS4xNTcuNDk4LTEuMTU3IDEuMTExcy41MTggMS4xMSAxLjE1NyAxLjExMWgxMi4xMjhjLjY0IDAgMS4xNTktLjQ5NyAxLjE1OS0xLjExIDAtLjYxNS0uNTE5LTEuMTEyLTEuMTYtMS4xMTJINzYuNzE0ek04Ny40NTYgNTEuODg5Yy0uNDM2IDAtLjc5LjMzNS0uNzkuNzQ4Vjc4LjE0YzAgLjQxMy4zNTQuNzQ3Ljc5Ljc0OGg5MS43NTVjLjQzNiAwIC43ODktLjMzNS43ODktLjc0OFY1Mi42MzdjMC0uNDEzLS4zNTMtLjc0OC0uNzg5LS43NDhIODcuNDU2eiIvPgogICAgICAgIDxwYXRoIGZpbGw9IiNGRkYiIGQ9Ik04Ny43NzggNzguMDgzTDE3OC45MDMgNzguMDgzIDE3OC45MDMgNTMuMzMzIDg3Ljc3OCA1My4zMzN6Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iIzQyQzI5OSIgZD0iTTE2NS43NCA3My4zMzNjLS43MTUgMC0xLjI5Ni40OTgtMS4yOTYgMS4xMTEgMCAuNjE0LjU4IDEuMTEyIDEuMjk3IDEuMTEyaDUuMTg1Yy43MTYgMCAxLjI5Ni0uNDk4IDEuMjk2LTEuMTEyIDAtLjYxMy0uNTgtMS4xMS0xLjI5Ni0xLjExaC01LjE4NXoiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjRTZFNkU2IiBkPSJNMTEyLjIyMiA3MEgxNzMuMzMzVjcxLjExMUgxMTIuMjIyeiIvPgogICAgICAgIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjY1LjU1NiIgcj0iNy43NzgiIGZpbGw9IiM0Nzg5RkYiLz4KICAgICAgICA8cGF0aCBmaWxsPSIjM0YzRDU2IiBkPSJNMTEyLjQxNSA2Ny43NzhMMTEyLjIyMiA2Ny41MDEgMTE4LjU1MSA2My40NjIgMTIyLjg5IDY1LjQ1NyAxMjkuMTMyIDYxLjYzOSAxMjkuMjE3IDYxLjY3MyAxNDEuNTQ5IDY2LjcxIDE1MS40MzcgNjIuMDU5IDE2MS4wMzggNjUuNzg2IDE3My4xMDMgNTUuNTU2IDE3My4zMzMgNTUuODA0IDE2MS4xMDggNjYuMTcxIDE1MS40NSA2Mi40MjMgMTQxLjU1OSA2Ny4wNzUgMTI5LjE2NSA2Mi4wMTMgMTIyLjkxNCA2NS44MzYgMTE4LjU3OSA2My44NDR6Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iI0U2RTZFNiIgZD0iTTExNC40OTIgNzIuMjIyYy0uNjQgMC0xLjE1OS40OTgtMS4xNTkgMS4xMTEgMCAuNjE0LjUyIDEuMTExIDEuMTYgMS4xMTFoMTIuMTI2Yy42NCAwIDEuMTU5LS40OTcgMS4xNTktMS4xMSAwLS42MTQtLjUyLTEuMTEyLTEuMTYtMS4xMTJoLTEyLjEyNnoiLz4KICAgIDwvZz4KPC9zdmc+Cg=="
+                  />
+                </div>
+              </div>
 
-              <div class="btn-cntr" *ngIf="isLogin === false">
-                <button (click)="redirect('basic', 'yearly')" class="btn btn-primary">
-                  Sign up
-                </button>
-              </div>
-              <div class="btn-cntr" *ngIf="isLogin === true && this.activePlan != 1">
-                <button *ngIf="isDownGrade && this.activePlan > 1" (click)="openModal(contentDelete,'basic', 'yearly')"
-                  class="btn btn-secondary">
-                  Downgrade
-                </button>
-                <button *ngIf="this.activePlan < 1" (click)="upgradeStripeAccount('basic', 'yearly')"
-                  class="btn btn-primary">
-                  Upgrade
-                </button>
-              </div>
-            </div>
-          </div>
-          <!-- yearly basic -->
-          <!-- yearly pro -->
-
-          <div class="col-md-4">
-            <div class="plan-bx">
-              <h4 class="sub-title"><span>PRO</span> SHOOT THE FRAME MEMBER</h4>
-              <div class="price">$ 27 <span>/ per year</span></div>
               <ul class="planlist">
                 <li>
-                  <strong>Unlimited</strong> daily uploads to the community
+                  <strong>Unlimited Submissions</strong> into the monthly STF
+                  Awards. 🙂
                 </li>
-                <li>Option to submit photos into STF Awards</li>
-                <li>Give and recieive photo critiques</li>
-                <li>Collective Score / Master Collective Score</li>
+                <li>STF Profile</li>
                 <li>Create Collections</li>
                 <li>Create Photo Essays</li>
-                <li>Like photos</li>
-                <li>History of liked photos</li>
-                <li>Direct message members</li>
-                <li>Follow / unfollow</li>
-                <li>Access details of received critiqeus</li>
-                <li>Access Insights for profile and photos</li>
-                <li>Helping make this community sustainable</li>
-              </ul>
-              <ul class="plansublist">
-                <li>
-                  7 submissions every month into the International STF Awards
-                  (valued at $19). Submit your photos into the portrait,
-                  landscape or wildlife categories.
-                  <span class="underline">Learn more about STF Awards past winners and prizes…</span>
-                </li>
+                <li>Daily Feed</li>
+                <li>Insights</li>
               </ul>
               <div class="btn-cntr" *ngIf="isLogin === false">
-                <button (click)="redirect('pro', 'yearly', 2700)" class="btn btn-primary">
+                <button
+                  (click)="redirect('premium', 'yearly', '6900.00')"
+                  class="btn btn-primary"
+                >
                   Sign up
                 </button>
               </div>
-              <div class="btn-cntr" *ngIf="isLogin === true && this.activePlan != 5">
-                <button *ngIf="isDownGrade && this.activePlan > 5"
-                  (click)="openModal(contentDelete,'pro', 'yearly', 2700)" class="btn btn-secondary">
+              <div
+                class="btn-cntr"
+                *ngIf="isLogin === true && this.activePlan != 2"
+              >
+                <button
+                  *ngIf="isDownGrade && this.activePlan > 2"
+                  (click)="
+                    openModal(contentDelete, 'premium', 'yearly', 6900.0)
+                  "
+                  class="btn btn-secondary"
+                >
                   Downgrade
                 </button>
-                <button *ngIf="this.activePlan < 5" (click)="upgradeStripeAccount('pro', 'yearly', 2700)"
-                  class="btn btn-primary">
+                <button
+                  *ngIf="this.activePlan < 2"
+                  (click)="upgradeStripeAccount('premium', 'yearly', 6900.0)"
+                  class="btn btn-primary"
+                >
                   Upgrade
                 </button>
               </div>
             </div>
           </div>
-          <!-- yearly pro -->
-          <!-- yearly premium -->
-          <div class="col-md-4">
-            <div class="plan-bx">
-              <h4 class="sub-title">
-                <span>PREMIUM</span> SHOOT THE FRAME MEMBER
-              </h4>
-              <div class="price">$ 135 <span>/ per year</span></div>
-              <ul class="planlist">
-                <li>
-                  <strong>Unlimited</strong> daily uploads to the community
-                </li>
-                <li>Option to submit photos into STF Awards</li>
-                <li>Give and recieive photo critiques</li>
-                <li>Collective Score / Master Collective Score</li>
-                <li>Create Collections</li>
-                <li>Create Photo Essays</li>
-                <li>Like photos</li>
-                <li>History of liked photos</li>
-                <li>Direct message members</li>
-                <li>Follow / unfollow</li>
-                <li>Access details of received critiqeus</li>
-                <li>Access Insights for profile and photos</li>
-                <li>Helping make this community sustainable</li>
-                <li>
-                  7 submissions every month into the International STF Awards
-                  (valued at $19). Submit your photos into the portrait,
-                  landscape or wildlife categories.
-                  <span class="underline">Learn more about STF Awards past winners and prizes…</span>
-                </li>
-              </ul>
-              <div class="btn-cntr" *ngIf="isLogin === false">
-                <button (click)="redirect('premium', 'yearly', 13500)" class="btn btn-primary">
-                  Sign up
-                </button>
-              </div>
-              <div class="btn-cntr" *ngIf="isLogin === true && this.activePlan != 6">
-                <button *ngIf="isDownGrade && this.activePlan > 6"
-                  (click)="openModal(contentDelete,'premium', 'yearly', 13500)" class="btn btn-secondary">
-                  Downgrade
-                </button>
-                <button *ngIf="this.activePlan < 6" (click)="upgradeStripeAccount('premium', 'yearly', 13500)"
-                  class="btn btn-primary">
-                  Upgrade
-                </button>
-              </div>
-            </div>
-          </div>
-          <!-- yearly premium -->
+          <!-- monthly premium -->
         </section>
 
-        <section class="award-submission-details" #target>
+        <!-- <section class="award-submission-details" #target>
           <h2 class="title">STF Awards submissions</h2>
           <h3 class="sub-heading">
             Submit your photos into our monthly international photography
-            awards. <span class="underline cursor" (click)="stfModal()">The STF Awards</span> have the same
-            3 categories every month; portrait, landscape and wildlife.
+            awards.
+            <span class="underline cursor" (click)="stfModal()"
+              >The STF Awards</span
+            >
+            have the same 3 categories every month; portrait, landscape and
+            wildlife.
           </h3>
           <div class="purchace-cntr">
             <ul class="row">
@@ -338,14 +305,26 @@
                   </p>
                   <div class="price">$ 10</div>
                   <div class="btn-cntr" *ngIf="isLogin === false">
-                    <button (click)="redirect('one', '', 1000)" class="btn btn-primary">
+                    <button
+                      (click)="redirect('one', '', 1000)"
+                      class="btn btn-primary"
+                    >
                       Purchase
                     </button>
                   </div>
                   <div class="btn-cntr" *ngIf="isLogin === true">
-                    <a (click)="purchaseAwardSubmission('one', 1000)" class="btn btn-primary">Purchase</a>
+                    <a
+                      (click)="purchaseAwardSubmission('one', 1000)"
+                      class="btn btn-primary"
+                      >Purchase</a
+                    >
                   </div>
-                  <div (click)="infoModal()" class="whats-this underline cursor">what’s this?</div>
+                  <div
+                    (click)="infoModal()"
+                    class="whats-this underline cursor"
+                  >
+                    what’s this?
+                  </div>
                 </div>
               </li>
               <li class="col-md-4 text-center">
@@ -360,14 +339,26 @@
                   </p>
                   <div class="price">$ 15</div>
                   <div class="btn-cntr" *ngIf="isLogin === false">
-                    <button (click)="redirect('three', '', 1500)" class="btn btn-primary">
+                    <button
+                      (click)="redirect('three', '', 1500)"
+                      class="btn btn-primary"
+                    >
                       Purchase
                     </button>
                   </div>
                   <div class="btn-cntr" *ngIf="isLogin === true">
-                    <a (click)="purchaseAwardSubmission('three', 1500)" class="btn btn-primary">Purchase</a>
+                    <a
+                      (click)="purchaseAwardSubmission('three', 1500)"
+                      class="btn btn-primary"
+                      >Purchase</a
+                    >
                   </div>
-                  <div (click)="infoModal()" class="whats-this underline cursor">what’s this?</div>
+                  <div
+                    (click)="infoModal()"
+                    class="whats-this underline cursor"
+                  >
+                    what’s this?
+                  </div>
                 </div>
               </li>
               <li class="col-md-4 text-center">
@@ -382,31 +373,52 @@
                   </p>
                   <div class="price">$ 19</div>
                   <div class="btn-cntr" *ngIf="isLogin === false">
-                    <button (click)="redirect('seven', '', 1900)" class="btn btn-primary">
+                    <button
+                      (click)="redirect('seven', '', 1900)"
+                      class="btn btn-primary"
+                    >
                       Purchase
                     </button>
                   </div>
                   <div class="btn-cntr" *ngIf="isLogin === true">
-                    <a (click)="purchaseAwardSubmission('seven', 1900)" class="btn btn-primary">Purchase</a>
+                    <a
+                      (click)="purchaseAwardSubmission('seven', 1900)"
+                      class="btn btn-primary"
+                      >Purchase</a
+                    >
                   </div>
-                  <div (click)="infoModal()" class="whats-this underline cursor">what’s this?</div>
+                  <div
+                    (click)="infoModal()"
+                    class="whats-this underline cursor"
+                  >
+                    what’s this?
+                  </div>
                 </div>
               </li>
             </ul>
           </div>
-        </section>
+        </section> -->
         <section class="have-question">
           <h3 class="sub-heading">
             <span class="text-green">Have a question?</span> Hopefully we have
             answered it below, if not,
-            <span class="underline"><a class="text-black" target="_blank" href="https://about.shoottheframe.com/contact/">get in
-                touch with us.</a>
+            <span class="underline"
+              ><a
+                class="text-black"
+                target="_blank"
+                href="https://about.shoottheframe.com/contact/"
+                >get in touch with us.</a
+              >
             </span>
           </h3>
           <div class="question-list row">
             <div class="col-md-4">
               <ul class="clearfix">
-                <li (click)="showActive('que1')" class="box" [ngClass]="{ active: selectedItem === 'que1' }">
+                <li
+                  (click)="showActive('que1')"
+                  class="box"
+                  [ngClass]="{ active: selectedItem === 'que1' }"
+                >
                   <h5>
                     Why does this cost money?
                   </h5>
@@ -426,25 +438,43 @@
                     membership option is completely free.
                   </p>
                 </li>
-                <li (click)="showActive('que2')" class="box" [ngClass]="{ active: selectedItem === 'que2' }">
+                <li
+                  (click)="showActive('que2')"
+                  class="box"
+                  [ngClass]="{ active: selectedItem === 'que2' }"
+                >
                   <h5>
                     Do I need a STF membership to submit photos into STF Awards?
                   </h5>
                   <p>
-                    Yes. At the very least, you need to be a Basic STF member to submit entires into the STF Awards.
+                    Yes. At the very least, you need to be a Basic STF member to
+                    submit entires into the STF Awards.
                   </p>
                 </li>
-                <li (click)="showActive('que3')" class="box" [ngClass]="{ active: selectedItem === 'que3' }">
+                <li
+                  (click)="showActive('que3')"
+                  class="box"
+                  [ngClass]="{ active: selectedItem === 'que3' }"
+                >
                   <h5>
                     What are the prizes for the STF Awards?
                   </h5>
                   <p>
                     You can read all about the STF Awards prizes and our amazing
-                    partners <a href="https://about.shoottheframe.com/prizes-and-partners/" target="_blank"
-                      class="underline">here</a>.
+                    partners
+                    <a
+                      href="https://about.shoottheframe.com/prizes-and-partners/"
+                      target="_blank"
+                      class="underline"
+                      >here</a
+                    >.
                   </p>
                 </li>
-                <li (click)="showActive('que5')" class="box" [ngClass]="{ active: selectedItem === 'que5' }">
+                <li
+                  (click)="showActive('que5')"
+                  class="box"
+                  [ngClass]="{ active: selectedItem === 'que5' }"
+                >
                   <h5>
                     How do I submit a photo into the STF Awards?
                   </h5>
@@ -459,7 +489,11 @@
                     Photo’ button.
                   </p>
                 </li>
-                <li (click)="showActive('que6')" class="box" [ngClass]="{ active: selectedItem === 'que6' }">
+                <li
+                  (click)="showActive('que6')"
+                  class="box"
+                  [ngClass]="{ active: selectedItem === 'que6' }"
+                >
                   <h5>
                     Can I use my STF submissions across the 3 STF Awards
                     categories?
@@ -475,7 +509,11 @@
             </div>
             <div class="col-md-4">
               <ul class="clearfix">
-                <li (click)="showActive('que7')" class="box" [ngClass]="{ active: selectedItem === 'que7' }">
+                <li
+                  (click)="showActive('que7')"
+                  class="box"
+                  [ngClass]="{ active: selectedItem === 'que7' }"
+                >
                   <h5>
                     Do I need a STF membership to receive feedback and critiques
                     on my photos?
@@ -487,7 +525,11 @@
                     have received from the community.
                   </p>
                 </li>
-                <li (click)="showActive('que8')" class="box" [ngClass]="{ active: selectedItem === 'que8' }">
+                <li
+                  (click)="showActive('que8')"
+                  class="box"
+                  [ngClass]="{ active: selectedItem === 'que8' }"
+                >
                   <h5>
                     Can I upload as many photos as I like?
                   </h5>
@@ -498,17 +540,27 @@
                     community clean and beautiful.
                   </p>
                 </li>
-                <li (click)="showActive('que9')" class="box" [ngClass]="{ active: selectedItem === 'que9' }">
+                <li
+                  (click)="showActive('que9')"
+                  class="box"
+                  [ngClass]="{ active: selectedItem === 'que9' }"
+                >
                   <h5>
                     Do my STF submissions expire?
                   </h5>
                   <p>
-                    They do. All purchased or available STF submissions expire at the end of each month. This is the
-                    case for Basic, Pro and Premium members. If you are a Premium member, your available STF
-                    submissions will reset to 7 at the start of every month.
+                    They do. All purchased or available STF submissions expire
+                    at the end of each month. This is the case for Basic, Pro
+                    and Premium members. If you are a Premium member, your
+                    available STF submissions will reset to 7 at the start of
+                    every month.
                   </p>
                 </li>
-                <li (click)="showActive('que10')" class="box" [ngClass]="{ active: selectedItem === 'que10' }">
+                <li
+                  (click)="showActive('que10')"
+                  class="box"
+                  [ngClass]="{ active: selectedItem === 'que10' }"
+                >
                   <h5>
                     Whats the difference between daily uploads, and STF
                     submissions?
@@ -534,7 +586,11 @@
                     accommodate the STF submissions available.
                   </p>
                 </li>
-                <li (click)="showActive('que11')" class="box" [ngClass]="{ active: selectedItem === 'que11' }">
+                <li
+                  (click)="showActive('que11')"
+                  class="box"
+                  [ngClass]="{ active: selectedItem === 'que11' }"
+                >
                   <h5>
                     I’m a Basic member, what happens to daily upoads limit if I
                     purchase STF submissions?
@@ -551,7 +607,11 @@
             </div>
             <div class="col-md-4">
               <ul class="clearfix">
-                <li (click)="showActive('que12')" class="box" [ngClass]="{ active: selectedItem === 'que12' }">
+                <li
+                  (click)="showActive('que12')"
+                  class="box"
+                  [ngClass]="{ active: selectedItem === 'que12' }"
+                >
                   <h5>
                     Can I submit photos which I uploaded to Shoot The Frame a
                     long time ago?
@@ -563,7 +623,11 @@
                     STF Awards during the upload process.
                   </p>
                 </li>
-                <li (click)="showActive('que13')" class="box" [ngClass]="{ active: selectedItem === 'que13' }">
+                <li
+                  (click)="showActive('que13')"
+                  class="box"
+                  [ngClass]="{ active: selectedItem === 'que13' }"
+                >
                   <h5>
                     Can I resubmit a photo into the STF Awards?
                   </h5>
@@ -574,19 +638,34 @@
                     it, it cannot be resubmitted.
                   </p>
                 </li>
-                <li (click)="showActive('que14')" class="box" [ngClass]="{ active: selectedItem === 'que14' }">
+                <li
+                  (click)="showActive('que14')"
+                  class="box"
+                  [ngClass]="{ active: selectedItem === 'que14' }"
+                >
                   <h5>
                     I have some feedback for Shoot The Frame, where do I send
                     it?
                   </h5>
                   <p>
-                    Amazing, we love hearing your feedback. Please fill out <span class="underline"> 
-                      <a  rel="noopener noreferrer" class="text-black" target="_blank" href="https://shoottheframe.typeform.com/to/Upy2iI">this
-                    form</a></span>, we read every one. We are creating this community for
+                    Amazing, we love hearing your feedback. Please fill out
+                    <span class="underline">
+                      <a
+                        rel="noopener noreferrer"
+                        class="text-black"
+                        target="_blank"
+                        href="https://shoottheframe.typeform.com/to/Upy2iI"
+                        >this form</a
+                      ></span
+                    >, we read every one. We are creating this community for
                     you, so tell us what you need.
                   </p>
                 </li>
-                <li (click)="showActive('que15')" class="box" [ngClass]="{ active: selectedItem === 'que15' }">
+                <li
+                  (click)="showActive('que15')"
+                  class="box"
+                  [ngClass]="{ active: selectedItem === 'que15' }"
+                >
                   <h5>
                     Can I cancel my subscription?
                   </h5>
@@ -607,18 +686,25 @@
 <ng-template #contentDelete class="change-email" let-modal>
   <div class="inner-modal">
     <div class="modal-header">
-      <h3 class="modal-title text-danger">{{modalTitle}}</h3>
-      <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
-        <img src="assets/images/temp/ui-cross.svg" alt="">
+      <h3 class="modal-title text-danger">{{ modalTitle }}</h3>
+      <button
+        type="button"
+        class="close"
+        aria-describedby="modal-title"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <img src="assets/images/temp/ui-cross.svg" alt="" />
       </button>
     </div>
     <div class="modal-body text-center">
       <p>
-        {{modalBody}}
+        {{ modalBody }}
       </p>
       <div class="btn-cntr text-center">
         <a class="cancel" (click)="modal.dismiss('Close click')">Cancel</a>
-        <a class="btn btn-danger" (click)="modal.close('Ok click')">Yes, downgrade</a>
+        <a class="btn btn-danger" (click)="modal.close('Ok click')"
+          >Yes, downgrade</a
+        >
       </div>
     </div>
   </div>

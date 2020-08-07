@@ -1,0 +1,110 @@
+.pricing-cnt-area {
+  .title {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .sub-heading {
+    text-align: center;
+    margin: auto;
+  }
+  .common-tab {
+    margin-top: 53px;
+    .nav-tabs {
+      justify-content: center;
+    }
+  }
+}
+
+.plan-details {
+  section {
+    justify-content: center;
+  }
+}
+
+.sub-title {
+  span {
+    font-size: 36px;
+    font-weight: bold;
+  }
+  font-family: "Nunito";
+}
+
+.plan-details .plan-bx {
+  .planlist li {
+    background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNiIgaGVpZ2h0PSIyNiIgdmlld0JveD0iMCAwIDI2IDI2Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCIgc3Ryb2tlPSIjNDJDMjk5IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxIDEpIj4KICAgICAgICA8cGF0aCBmaWxsPSIjNDJDMjk5IiBmaWxsLXJ1bGU9Im5vbnplcm8iIHN0cm9rZS13aWR0aD0iLjc1IiBkPSJNOS43ODMgMTUuNmMtLjA2IDAtLjEyLS4wMjMtLjE2NS0uMDY3bC0yLjgtMi43NTdjLS4wOS0uMDktLjA5LS4yMzUgMC0uMzI0LjA5Mi0uMDkuMjQtLjA5LjMzIDBsMi42MzUgMi41OTQgNi44MzUtNi43MjljLjA5Mi0uMDkuMjQtLjA5LjMzIDAgLjA5Mi4wOS4wOTIuMjM1IDAgLjMyNWwtNyA2Ljg5Yy0uMDQ1LjA0NS0uMTA1LjA2OC0uMTY1LjA2OCIvPgogICAgICAgIDxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEyIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogICAgPC9nPgo8L3N2Zz4K")
+      left 4px no-repeat;
+    padding: 6px 0px 6px 34px;
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+
+  .planlist {
+    padding-left: 32px;
+    padding-right: 32px;
+    margin-top: 38px;
+
+    .cas-sub {
+      color: black;
+      font-weight: bold;
+    }
+    .per-photo {
+      color: black;
+      font-weight: bold;
+    }
+
+    .cas-sub-basic,
+    .unlimited-sub-monthly {
+      color: #4789ff;
+      font-weight: bold;
+    }
+    .per-photo-basic {
+      color: #4789ff;
+      font-weight: bold;
+    }
+    .line-through {
+      -webkit-text-decoration-line: line-through; /* Safari */
+      text-decoration-line: line-through;
+      opacity: 0.3;
+    }
+  }
+
+  .price {
+    span.subscription-kind {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    font-size: 12px;
+    padding: 0;
+  }
+
+  padding: 0;
+
+  .sub-title {
+    padding: 0;
+  }
+
+  .suscriptionTitle {
+    padding-left: 32px;
+    padding-top: 63px;
+    width: 133px;
+  }
+  .suscriptionTitlePremium {
+    padding-left: 32px;
+    padding-top: 63px;
+    width: 222px;
+  }
+
+  .subscriptionImg {
+    padding-right: 32px;
+  }
+  .subscriptionImgPro {
+    margin-top: 16px;
+  }
+
+  .btn-cntr {
+    justify-content: center;
+    display: flex;
+    margin: 32px 0 32px 0;
+  }
+}

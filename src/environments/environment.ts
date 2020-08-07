@@ -13,8 +13,8 @@ export const environment = {
   GOOGLE_SIGN_IN_KEY:
     "1011922714439-s6abs87dcvpngdj5en6knu5ieqqrj8q9.apps.googleusercontent.com",
   FACEBOOK_SIGN_IN_KEY: "560772111023478",
-  STRIPE_PUBLISH_KEY: "pk_test_4Nkpnov9pEfpomSpZ0Zl2cp3",
-  // STRIPE_PUBLISH_KEY: 'pk_test_OfvlmHP8Cb5nLJLWnBoVGh8r00VWYFz20u',
+  STRIPE_PUBLISH_KEY: "pk_test_TkUK1TM4VqcncPVWmL6zS3X600BeQhsuhR",
+  // STRIPE_PUBLISH_KEY: "pk_test_OfvlmHP8Cb5nLJLWnBoVGh8r00VWYFz20u",
   // pusher: {
   //   key: 'd570e1d2dec0636aedaa',
   //   cluster: 'ap2'
