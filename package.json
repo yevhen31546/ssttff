@@ -60,7 +60,7 @@
     "core-js": "^2.5.7",
     "cors": "~2.8.4",
     "croppie": "^2.6.4",
-    "dexie": "^2.0.4",
+    "dexie": "^3.2.2",
     "firebase": "^5.11.1",
     "fvi-angular-mentions": "^1.1.1",
     "html2canvas": "^1.0.0-rc.5",
